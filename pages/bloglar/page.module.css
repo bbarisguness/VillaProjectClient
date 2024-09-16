@@ -1,0 +1,292 @@
+section.contentDetail {
+    width: 100%;
+    padding: 120px 0;
+}
+
+.container {
+    width: 1600px;
+    margin: 0 auto;
+}
+
+section.villasDetail {
+    padding: 60px 0 120px 0;
+    background: #F9F9FB;
+}
+
+section.villasDetail .villas {
+    width: 100%;
+    position: relative;
+}
+
+section.villasDetail .villas .box {
+    width: 100%;
+}
+
+section.villasDetail .villas .box .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+section.villasDetail .villas .box .top .titleBox {
+    width: 50%;
+}
+
+section.villasDetail .villas .box .top .titleBox .title {
+    text-align: left;
+}
+
+section.villasDetail .villas .box .top .titleBox .subTitle {
+    text-align: left;
+}
+
+section.villasDetail .villas .box .bottom {
+    width: 100%;
+}
+
+section.villasDetail .villas .box .bottom .row {
+    margin: 0 -15px;
+    position: relative;
+}
+
+section.villasDetail .villas .box .bottom ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section.villasDetail .villas .box .bottom ul li {
+    width: 25%;
+    padding: 0 15px;
+    margin: 0 0 30px 0;
+}
+
+section.villasDetail .villas .box .bottom ul li .column {
+    background: #FFFFFF;
+    box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all .4s ease-in-out;
+}
+
+section.villasDetail .villas .box .bottom ul li .column:hover {
+    box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.4);
+}
+
+section.villasDetail .villas .box .bottom ul li .column .imgBox {
+    width: 100%;
+    position: relative;
+}
+
+section.villasDetail .villas .box .bottom ul li .column .imgBox .carouselBox {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+section.villasDetail .villas .box .bottom ul li .column .imgBox .carouselBox::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /*background: linear-gradient(180deg, rgba(2, 4, 74, 0) 0%, #02044A 100%);*/
+    opacity: 0.5;
+}
+
+section.villasDetail .villas .box .bottom ul li .column .imgBox .carouselBox .bgImage {
+    width: 100%;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    background-size: cover;
+}
+
+section.villasDetail .villas .box .bottom ul li .column .imgBox .navButtons {
+    width: 100%;
+    position: absolute;
+    top: calc(50% - 12px);
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+section.villasDetail .villas .box .bottom ul li .column .imgBox .navButtons button {
+    width: 24px;
+    height: 24px;
+    background: none;
+    background-image: url(/images/arrowLeft.png);
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+section.villasDetail .villas .box .bottom ul li .column .imgBox .navButtons button.next {
+    transform: rotate(180deg);
+}
+
+section.villasDetail .villas .box .bottom ul li .column .textBox {
+    width: 100%;
+    min-height: 215px;
+    padding: 20px 30px;
+}
+
+section.villasDetail .villas .box .bottom ul li .column .textBox .title {
+    width: 100%;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    color: #02044A;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+section.villasDetail .villas .box .bottom ul li .column .textBox .desc {
+    width: 100%;
+    font-size: 15px;
+    line-height: 26px;
+    color: #525265;
+    height: 130px;
+    overflow: hidden;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    word-break: break-word;
+}
+
+.titleBox {
+    width: 100%;
+    margin: 0 0 60px 0;
+}
+
+.titleBox .title {
+    width: 100%;
+    color: #02044A;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 55px;
+    text-align: center;
+}
+
+.titleBox .subTitle {
+    width: 100%;
+    margin: 10px 0 0 0;
+    color: #525265;
+    font-size: 15px;
+    line-height: 26px;
+    text-align: center;
+}
+
+@media screen and (max-width: 1699px) {
+    .container {
+        width: 1400px;
+    }
+
+    section.contentDetail .villas .box .bottom ul li .column .imgBox .carouselBox .bgImage {
+        height: 240px;
+    }
+}
+
+@media screen and (max-width: 1499px) {
+    .container {
+        width: 1170px;
+    }
+
+    section.contentDetail .villas .box .bottom ul li .column .imgBox .carouselBox .bgImage {
+        height: 199px;
+    }
+
+    section.contentDetail .villas .box .bottom ul li .column .imgBox .navButons {
+        padding: 0 15px;
+    }
+
+    section.contentDetail .villas .box .bottom ul li .column .textBox {
+        padding: 15px 15px;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .container {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .titleBox {
+        margin: 0 0 45px 0;
+    }
+
+    section.contentDetail .villas .box .top ul li .title {
+        font-size: 14px;
+    }
+
+    section.contentDetail .villas .box .bottom ul li {
+        width: 33.33%;
+    }
+
+    section.contentDetail .villas .box .bottom ul li .column .imgBox .carouselBox .bgImage {
+        height: 223px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    section.contentDetail .villas .box .top {
+        margin: 0 0 45px 0;
+    }
+
+    section.contentDetail .villas .box .top ul li .title {
+        font-size: 12px;
+    }
+
+    section.contentDetail .villas .box .bottom ul li {
+        width: 50%;
+    }
+
+    section.contentDetail .villas .box .bottom ul li .column .imgBox .carouselBox .bgImage {
+        height: 264px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .titleBox {
+        margin: 0 0 30px 0;
+    }
+
+    .titleBox .title {
+        font-size: 32px;
+        line-height: 42px;
+    }
+
+    section.contentDetail .villas .box .top {
+        margin: 0 0 15px 0;
+        flex-direction: column;
+    }
+
+    section.contentDetail .villas .box .top .titleBox {
+        width: 100%;
+    }
+
+    section.contentDetail .villas .box .top ul {
+        flex-wrap: wrap;
+    }
+
+    section.contentDetail .villas .box .top ul li {
+        padding: 0 0 5px 0;
+        width: calc(100% / 3);
+        margin: 0 0 15px 0;
+    }
+
+    section.contentDetail .villas .box .bottom ul li {
+        width: 100%;
+    }
+
+    section.contentDetail .villas .box .bottom ul li .column .imgBox .carouselBox .bgImage {
+        height: 257px;
+    }
+}
