@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const qs = require('qs');
 
 
-export default function VillaTab({ categories, activeTabIndex, setActiveTabIndex, setActiveCategory }) {
+export default function VillaTab({ categories, activeTabIndex, setActiveTabIndex, setActiveCategorySlug, setActiveCategoryId }) {
     const router = useRouter()
     //console.log(categories);
     const changeIndex = (index) => {
@@ -24,11 +24,11 @@ export default function VillaTab({ categories, activeTabIndex, setActiveTabIndex
                 {
                     categories.data.map((item, i) => (
                         <li id={styles.villaTabLi} className={activeTabIndex == i ? styles.active : null} key={item.id}>
-                            <span onClick={() => { changeIndex(i), setActiveCategory(item?.attributes?.slug) }}>
+                            <span onClick={() => { changeIndex(i); setActiveCategoryId(item?.id); setActiveCategorySlug(item?.slug) }}>
                                 <div className={styles.iconBox}>
-                                    <i style={{ backgroundImage: `url(https://labirentfethiye.com/assets/img/${item?.attributes?.icon}.png)` }}></i>
+                                    <i style={{ backgroundImage: `url(https://labirentfethiye.com/assets/img/${item?.icon})` }}></i>
                                 </div>
-                                <div className={styles.title}>{item.attributes.name}</div>
+                                <div className={styles.title}>{item?.categoryDetails[0]?.name}</div>
                             </span>
                         </li>
 

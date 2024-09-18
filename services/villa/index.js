@@ -2,54 +2,40 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 const qs = require('qs');
 
-async function getVillas(size = 12, page = 1) {
-    const response = await fetch(`${apiUrl}/villas?sort[0]=line:asc&filters[isRent][$eq]=true&populate[0]=photos.photo&populate[1]=price_tables&populate[2]=categories&pagination[page]=${page}&pagination[pageSize]=${size}`, {
+async function getVillas() {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Size=20`, {
         cache: 'no-store'
     })
     const data = await response.json()
     return data
 }
 
-async function getVillasForSale(size = 12, page = 1) {
-    const response = await fetch(`${apiUrl}/villas?sort[0]=line:asc&filters[isSale][$eq]=true&populate[0]=photos.photo&populate[1]=price_tables&populate[2]=categories&pagination[page]=${page}&pagination[pageSize]=${size}`, {
+async function getAllVillaByCategoryId(categoryId) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategoryId?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&CategoryId=${categoryId}`, {
         cache: 'no-store'
     })
     const data = await response.json()
     return data
 }
 
-async function getVillasHome(size = 8, page = 1, category) {
-    const response = await fetch(`${apiUrl}/villas?sort[0]=line:asc&filters[isRent][$eq]=true&populate[0]=photos.photo&populate[1]=price_tables&populate[2]=categories&filters[categories][slug][$eq]=${category}&pagination[page]=${page}&pagination[pageSize]=${size}`, {
+async function getVillasForSale() {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Size=20`, {
         cache: 'no-store'
     })
     const data = await response.json()
     return data
 }
 
-async function getVilla({ slug }) {
-    const query = qs.stringify({
-        fields: '*',
-        populate: [
-            "price_dates",
-            "price_tables",
-            "categories",
-            "distance_rulers",
-            "photos",
-            "reservations",
-            "photos.photo"
-        ],
-        filters: {
-            slug: {
-                $eqi: `${slug}`,
-            },
-            isRent: {
-                $eq: true
-            },
-        },
-    }, {
-        encodeValuesOnly: true,
-    });
-    const response = await fetch(`${apiUrl}/villas?${query}`, {
+async function getVillasHome(size = 8, page = 1, categoryId) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategoryId?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&CategoryId=${categoryId}&Size=${size}`, {
+        cache: 'no-store'
+    })
+    const data = await response.json()
+    return data
+}
+
+async function getVilla(villaId) {
+    const response = await fetch(`${apiUrl}/Clients/GetVilla?Id=${villaId}&Language=tr`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -168,30 +154,8 @@ async function getRandomFourVilla(data) {
     }
 }
 
-async function getNearVillas({ slug, nSlug }) {
-    const query = qs.stringify({
-        fields: '*',
-        populate: ['photos.photo', 'categories', 'price_tables'],
-        sort: ['line:asc'],
-        // pagination: {
-        //     page: 1,
-        //     pageSize: 4,
-        // },
-        filters: {
-            region: {
-                $eqi: `${slug}`,
-            },
-            slug: {
-                $nei: `${nSlug}`,
-            },
-            isRent: {
-                $eq: true
-            },
-        },
-    }, {
-        encodeValuesOnly: true,
-    });
-    const response = await fetch(`${apiUrl}/villas?${query}`, {
+async function getNearVillas() {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Size=4`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -321,4 +285,4 @@ async function getVillasName({ name }) {
     return data
 }
 
-export { getVillas, getVillaCategory, getVilla, getNewVillas, getNearVillas, getVillasFilter, getVillasName, getVillasHome, getVillasForSale, getVillaSale }
+export { getVillas, getVillaCategory, getVilla, getNewVillas, getNearVillas, getVillasFilter, getVillasName, getVillasHome, getVillasForSale, getVillaSale, getAllVillaByCategoryId }

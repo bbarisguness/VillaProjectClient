@@ -1,12 +1,12 @@
 import VillaCard from "@/components/index/villa/card/villaCard";
 import {
-  getVillaCategory,
+  getAllVillaByCategoryId,
   getVilla,
   getNearVillas,
   getVillas,
 } from "@/services/villa";
 import "@/styles/styles.css";
-import { getCategorySlug } from "@/services/category";
+import { getCategories } from "@/services/category";
 import { useRouter } from "next/router";
 
 // villa detay
@@ -31,11 +31,12 @@ import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 
 export default function List({
   villa,
-  category,
   villaDetail,
   nearVillas,
   imgs,
   totalPage,
+  allCategories,
+  category
 }) {
   const router = useRouter();
   const slug = router?.query?.slug;
@@ -97,8 +98,8 @@ export default function List({
     return (
       <>
         <Seo
-          pageTitle={category?.data[0]?.attributes?.metaTitle}
-          pageDesc={category?.data[0]?.attributes?.metaDescription}
+          pageTitle={category}
+          pageDesc={"merhaba 1"}
         />
         <section className="listPage_contentDetail listPage_villasDetail">
           <div className="villas">
@@ -107,7 +108,7 @@ export default function List({
                 <div className="top">
                   <div className="titleBox">
                     <div className="title">
-                      {category?.data[0]?.attributes?.name}
+                      {"merhaba 2"}
                     </div>
                     <div className="subTitle">
                       Toplam {villa?.meta?.pagination?.total} adet tesis
@@ -123,7 +124,7 @@ export default function List({
                           listPage={true}
                           key={index}
                           data={villa}
-                          photos={villa.attributes.photos.data}
+                          photos={imgs}
                         />
                       ))}
                     </ul>
@@ -141,7 +142,7 @@ export default function List({
         </section>
       </>
     );
-  } else if (slug.length == 2 && villaDetail?.data?.length > 0) {
+  } else if (slug.length == 1 && villaDetail?.data) {
     return (
       <>
         <Seo
@@ -157,13 +158,7 @@ export default function List({
                 </li>
                 <li className={styles.breadCrumbItem}>
                   <Link
-                    href={`/villalar/${villaDetail?.data[0]?.attributes?.categories?.data[0]?.attributes?.slug}`}
-                  >
-                    {
-                      villaDetail?.data[0]?.attributes?.categories?.data[0]
-                        ?.attributes?.name
-                    }
-                  </Link>
+                    href={`/villalar/${slug[0]}`}>{category}</Link>
                 </li>
               </ul>
             </div>
@@ -185,30 +180,30 @@ export default function List({
               <div className={styles.box}>
                 <div className={styles.left}>
                   <div className={styles.detailTitle}>
-                    {villaDetail?.data[0]?.attributes?.name}
+                    {villaDetail?.data?.villaDetails[0]?.name}
                   </div>
                   <div className={styles.villaInformation}>
                     <div className={styles.features}>
                       <div className={styles.colon}>
                         <i className={styles.pin_icon}></i>
-                        <span>{villaDetail?.data[0]?.attributes?.region}</span>
+                        <span>{villaDetail?.data?.town?.district?.name} / {villaDetail?.data?.town?.name}</span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.person_icon}></i>
                         <span>
-                          {villaDetail?.data[0]?.attributes?.person} Kişi
+                        {villaDetail?.data?.person} Kişi
                         </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.room_icon}></i>
                         <span>
-                          {villaDetail?.data[0]?.attributes?.person} Oda
+                        {villaDetail?.data?.room} Oda
                         </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.bath_icon}></i>
                         <span>
-                          {villaDetail?.data[0]?.attributes?.bath} Banyo
+                        {villaDetail?.data?.bath} Banyo
                         </span>
                       </div>
                     </div>
@@ -218,21 +213,25 @@ export default function List({
                   <div className={styles.priceType}>Gecelik En Düşük</div>
                   <div className={styles.price}>
                     {" "}
+
                     {Math.min(
-                      ...villaDetail?.data[0]?.attributes?.price_tables?.data.map(
-                        (o) => o.attributes.price
+                      ...villaDetail?.data?.priceTables?.map(
+                        (o) => o.price
                       )
                     )
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                      
+                      {" "}
                     TL -{" "}
                     {Math.max(
-                      ...villaDetail?.data[0]?.attributes?.price_tables?.data.map(
-                        (o) => o.attributes.price
+                      ...villaDetail?.data?.priceTables?.map(
+                        (o) => o.price
                       )
                     )
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                      {" "}
                     TL
                   </div>
                 </div>
@@ -287,11 +286,11 @@ export default function List({
                   </div>
                   <DistanceRuler
                     data={
-                      villaDetail?.data[0]?.attributes?.distance_rulers?.data
+                      villaDetail?.data?.distanceRulers
                     }
                   />
                   <PriceTable
-                    data={villaDetail?.data[0]?.attributes?.price_tables?.data}
+                    data={villaDetail?.data?.priceTables}
                   />
                   <Calendar
                     ready={ready}
@@ -918,7 +917,7 @@ export default function List({
                       listPage={true}
                       key={index}
                       data={data}
-                      photos={data.attributes.photos.data}
+                      photos={data?.photos}
                     />
                   ))}
                 </ul>
@@ -937,21 +936,13 @@ export default function List({
 
 export async function getServerSideProps({ params, query }) {
   const slug = params?.slug;
-  const villa = await getVillaCategory({
-    category: slug,
-    page: parseInt(query?.p) || 1,
-    size: 12,
-  });
-  const totalPage = villa?.meta?.pagination?.pageCount;
-  const category = await getCategorySlug({ slug: slug });
-  const villaDetail = await getVilla({ slug: slug[1] });
-  const nearVillaSlug = await villaDetail?.data[0]?.attributes?.region;
-  const nearVillas = await getNearVillas({
-    slug: nearVillaSlug,
-    nSlug: slug[1],
-  });
-  const imgs = await getPhotosVilla({ slug: slug[1] });
+  const allCategories = await getCategories()
+  const villa = await getAllVillaByCategoryId(allCategories?.data?.find(item=> item?.slug == slug[0])?.id) || []
+  const totalPage = 1;
+  const villaDetail = await getVilla(slug[0]);
+  const nearVillas = await getNearVillas();
+  const imgs = villaDetail?.data?.photos || []
   return {
-    props: { villa, category, villaDetail, nearVillas, imgs, totalPage },
+    props: { villa, villaDetail, nearVillas, imgs, totalPage, allCategories, category: allCategories?.data?.find(item=> item?.slug == slug[0])?.categoryDetails[0]?.name || "category yok"},
   };
 }

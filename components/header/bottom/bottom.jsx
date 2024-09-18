@@ -81,8 +81,8 @@ export default function HeaderBottom({ from }) {
                                                 category.map((item, i) => {
                                                     return (
                                                         <li key={i} className={styles.openMenu_li}>
-                                                            <Link href={`/villalar/${item?.attributes?.slug}`} className={styles.openMenu_Link}>
-                                                                <span>{item?.attributes?.name}</span>
+                                                            <Link href={`/villalar/${item?.slug}`} className={styles.openMenu_Link}>
+                                                                <span>{item?.categoryDetails[0]?.name}</span>
                                                             </Link>
                                                         </li>
                                                     )

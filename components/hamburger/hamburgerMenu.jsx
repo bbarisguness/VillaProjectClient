@@ -37,7 +37,7 @@ export default function HamburgerMenu() {
                         </li>
                         <li onClick={() => setMenu1(!menu1)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu1 ? styles["open"] : ""}`}>
                             <Link href="#" onClick={e=> e.preventDefault()} className={styles.hmMenuLink}>KİRALIK VİLLALAR</Link>
-                            <ul style={{ marginTop: menu1 && '24px' }}>
+                            <ul style={{ marginTop: menu1 ? '24px' : 0 }}>
                                 {/* <li><Link href="villalar/balayi-villalari">Balayı Villaları</Link></li>
                                 <li><Link href="#">Popüler Villalar</Link></li>
                                 <li><Link href="#">Çocuk Havuzlu Villalar</Link></li>
@@ -48,7 +48,7 @@ export default function HamburgerMenu() {
                                 {
                                     category.map((item, i) => {
                                         return (
-                                            <li key={i}><Link onClick={closeMenu} href={`/villalar/${item?.attributes?.slug}`}>{item?.attributes?.name}</Link></li>
+                                            <li key={i}><Link onClick={closeMenu} href={`/villalar/${item?.slug}`}>{item?.categoryDetails[0]?.name}</Link></li>
                                         )
                                     })
                                 }

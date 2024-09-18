@@ -11,16 +11,16 @@ export default function DistanceRuler({ data }) {
                         <div className={styles.row}>
                             <ul>
                                 {
-                                    data.map((data, index) => (
+                                    data?.map((data, index) => (
                                         <li key={index}>
                                             <div className={styles.column}>
                                                 <Link href="#">
                                                     <div className={styles.iconBox}>
-                                                        <i style={{ backgroundImage: `url(/images/${data?.attributes?.icon}.png)` }}></i>
-                                                        <i className={styles.two_i} style={{ backgroundImage: `url(/images/${data?.attributes?.icon}-hover.png)` }}></i>
+                                                        <i style={{ backgroundImage: `url(/images/${data?.icon}.png)` }}></i>
+                                                        <i className={styles.two_i} style={{ backgroundImage: `url(/images/${data?.icon}-hover.png)` }}></i>
                                                     </div>
-                                                    <div className={styles.title}>{data?.attributes?.name}</div>
-                                                    <div className={styles.distance}>{data?.attributes?.value}</div>
+                                                    <div className={styles.title}>{data?.distanceRulerDetails[0]?.name}</div>
+                                                    <div className={styles.distance}>{data?.distanceRulerDetails[0]?.value}</div>
                                                 </Link>
                                             </div>
                                         </li>

@@ -25,23 +25,23 @@ export default function Home({ villa, categories, regions, blogs, newVillas, tes
             <section id="contentContainer">
                 <TreeStep />
                 <Villa category={categories} villas={villa} />
-                <Regions homePage={true} regions={regions} />
+                {/* <Regions homePage={true} regions={regions} /> */}
                 <Apart />
                 <Service />
-                <NewVillas villas={newVillas} />
-                <Testimonial testimonials={testimonials} />
-                <Blog blog={blogs} />
+                {/* <NewVillas villas={newVillas} /> */}
+                {/* <Testimonial testimonials={testimonials} /> */}
+                {/* <Blog blog={blogs} /> */}
                 <VillaRent />
             </section>
         </>
     )
 }
 export async function getServerSideProps() {
-    const villa = await getVillasHome(8, 1, 'balayi-villalari')
     const categories = await getCategoriesHome()
-    const regions = await getRegions()
-    const blogs = await getBlogs()
-    const newVillas = await getNewVillas()
-    const testimonials = await getTestimonials()
-    return { props: { villa, categories, regions, blogs, newVillas, testimonials } }
+    const villa = await getVillasHome(8, 1, categories?.data[0]?.id)
+    //const regions = await getRegions()
+    //const blogs = await getBlogs()
+    //const newVillas = await getNewVillas()
+    //const testimonials = await getTestimonials()
+    return { props: { villa, categories } }
 }

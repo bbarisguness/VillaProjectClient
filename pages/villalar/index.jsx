@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 
-export default function List({ villas, totalPage }) {
+export default function List({ villas }) {
   const router = useRouter();
   const activePage = parseInt(router?.query?.p) || 1
 
@@ -26,7 +26,7 @@ export default function List({ villas, totalPage }) {
                 <div className="titleBox">
                   <div className="title">Kiralık Villalar</div>
                   <div className="subTitle">
-                    Toplam {villas?.meta?.pagination?.total} adet tesis bulunmaktadır.
+                    Toplam {villas?.data?.length} adet tesis bulunmaktadır.
                   </div>
                 </div>
               </div>
@@ -34,7 +34,7 @@ export default function List({ villas, totalPage }) {
                 <div className="row">
                   <ul>
                     {villas?.data.map((villa, index) => (
-                      <VillaCard listPage={true} key={index} data={villa} photos={villa.attributes.photos.data} />
+                      <VillaCard listPage={true} key={index} data={villa} photos={villa?.photos} />
                     ))}
                   </ul>
                 </div>
@@ -42,7 +42,7 @@ export default function List({ villas, totalPage }) {
               <Pagination
                 //setNewActivePage={setNewActivePage}
                 newActivePage={activePage}
-                pageCount={totalPage}
+                pageCount={2}
               />
             </div>
           </div>
@@ -53,7 +53,6 @@ export default function List({ villas, totalPage }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const villas = await getVillas(12, parseInt(query.p) || 1);
-  const totalPage = villas?.meta?.pagination?.pageCount;
-  return { props: { villas, totalPage } };
+  const villas = await getVillas();
+  return { props: { villas } };
 }

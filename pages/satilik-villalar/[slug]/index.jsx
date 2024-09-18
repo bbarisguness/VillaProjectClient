@@ -1,7 +1,7 @@
 import Seo from '@/components/seo';
 import Gallery from '@/components/villaDetail/leftBar/gallery/gallery';
 import { getPhotosVilla } from '@/services/photo';
-import { getNearVillas, getVillaSale } from '@/services/villa';
+import { getNearVillas, getVillaSale, getVilla } from '@/services/villa';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.css'
@@ -12,11 +12,11 @@ import { useRouter } from 'next/router';
 export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
     const router = useRouter();
     const [isDescOpen, setIsDescOpen] = useState(false);
-    if (villaDetail?.data?.length > 0) {
+    if (villaDetail?.data) {
         return (
             <>
                 <Seo
-                    pageTitle={villaDetail?.data[0]?.attributes?.metaTitle}
+                    pageTitle={villaDetail?.data?.villaDetails[0]?.name}
                     pageDesc={villaDetail?.data[0]?.attributes?.metaDescription}
                 />
                 <section className={styles.breadCrumb}>
@@ -45,30 +45,30 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                             <div className={styles.box}>
                                 <div className={styles.left}>
                                     <div className={styles.detailTitle}>
-                                        {villaDetail?.data[0]?.attributes?.name}
+                                        {villaDetail?.data?.villaDetails[0]?.name}
                                     </div>
                                     <div className={styles.villaInformation}>
                                         <div className={styles.features}>
                                             <div className={styles.colon}>
                                                 <i className={styles.pin_icon}></i>
-                                                <span>{villaDetail?.data[0]?.attributes?.region}</span>
+                                                <span>{villaDetail?.data?.town?.district?.name} / {villaDetail?.data?.town?.name}</span>
                                             </div>
                                             <div className={styles.colon}>
                                                 <i className={styles.person_icon}></i>
                                                 <span>
-                                                    {villaDetail?.data[0]?.attributes?.person} Kişi
+                                                    {villaDetail?.data?.person} Kişi
                                                 </span>
                                             </div>
                                             <div className={styles.colon}>
                                                 <i className={styles.room_icon}></i>
                                                 <span>
-                                                    {villaDetail?.data[0]?.attributes?.person} Oda
+                                                    {villaDetail?.data?.room} Oda
                                                 </span>
                                             </div>
                                             <div className={styles.colon}>
                                                 <i className={styles.bath_icon}></i>
                                                 <span>
-                                                    {villaDetail?.data[0]?.attributes?.bath} Banyo
+                                                    {villaDetail?.data?.bath} Banyo
                                                 </span>
                                             </div>
                                         </div>
@@ -126,7 +126,7 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                                     </div>
                                     <DistanceRuler
                                         data={
-                                            villaDetail?.data[0]?.attributes?.distance_rulers?.data
+                                            villaDetail?.data?.distanceRulers
                                         }
                                     />
                                     {/* <PriceTable
@@ -739,7 +739,7 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                                             listPage={true}
                                             key={index}
                                             data={data}
-                                            photos={data.attributes.photos.data}
+                                            photos={data?.photos}
                                         />
                                     ))}
                                 </ul>
@@ -757,12 +757,8 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
 }
 export async function getServerSideProps({ params }) {
     const slug = params?.slug;
-    const villaDetail = await getVillaSale({ slug: slug });
-    const nearVillaSlug = await villaDetail?.data[0]?.attributes?.region;
-    const nearVillas = await getNearVillas({
-        slug: nearVillaSlug,
-        nSlug: slug,
-    });
-    const imgs = await getPhotosVilla({ slug: slug });
+    const villaDetail = await getVilla(slug);
+    const nearVillas = await getNearVillas();
+    const imgs = villaDetail?.data?.photos;
     return { props: { villaDetail, nearVillas, imgs } };
 }

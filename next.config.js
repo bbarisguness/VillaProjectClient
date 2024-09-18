@@ -493,16 +493,16 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    // remotePatterns: [
-    //   {
-    //     protocol: 'http',
-    //     hostname: 'https://labirentfethiyes3.s3.eu-central-1.amazonaws.com',
-    //     port: '',
-    //     pathname: '/**',
-    //   },
-    // ],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'villaapi.testgrande.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
     domains: [
-      'labirentfethiyes3.s3.eu-central-1.amazonaws.com'
+      'villaapi.testgrande.com'
     ],
   },
   async redirects() {

@@ -3,21 +3,24 @@ import styles from "./villa.module.css"
 import VillaCard from "./card/villaCard"
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { getVillasHome } from "@/services/villa"
+import { getAllVillaByCategoryId } from "@/services/villa"
 const qs = require('qs');
 
 export default function Villa({ villas, category }) {
     const [activeTabIndex, setActiveTabIndex] = useState(0)
-    const [activeCategory, setActiveCategory] = useState('balayi-villalari')
+    const [activeCategoryId, setActiveCategoryId] = useState(category?.data[0]?.id)
+    const [activeCategorySlug, setActiveCategorySlug] = useState(category?.data[0]?.slug || "balayi-villalari")
     const [villasData, setVillasData] = useState(villas)
+    const [homeVillasActiveImage, setHomeVillasActiveImage] = useState(0)
 
     useEffect(()=> {
         async function getHomeVillas(){
-            const data = await getVillasHome(8,1,activeCategory)
+            const data = await getAllVillaByCategoryId(activeCategoryId)
             setVillasData(data)
+            setHomeVillasActiveImage(0)
         }
         getHomeVillas()
-    }, [activeCategory])
+    }, [activeCategoryId])
 
     return (
         <div className={styles.villas}>
@@ -29,17 +32,17 @@ export default function Villa({ villas, category }) {
                     </div>
                     <div className={styles.top}>
                         <ul>
-                            <VillaTab setActiveCategory={setActiveCategory} activeTabIndex={activeTabIndex} setActiveTabIndex={setActiveTabIndex} categories={category} />
+                            <VillaTab setActiveCategorySlug={setActiveCategorySlug} setActiveCategoryId={setActiveCategoryId} activeTabIndex={activeTabIndex} setActiveTabIndex={setActiveTabIndex} categories={category} />
                         </ul>
                     </div>
                     <div className={styles.bottom}>
                         <div className={styles.row}>
                             <ul>
                                 {
-                                    villasData?.data.map((villa, index) => <VillaCard activeCategory={activeCategory} key={index} data={villa} type="villa" photos={villa.attributes.photos.data} />)
+                                    villasData?.data?.map((villa, index) => <VillaCard homeVillasActiveImage={homeVillasActiveImage} setHomeVillasActiveImage={setHomeVillasActiveImage} categories={category} activeCategorySlug={activeCategorySlug} activeCategoryId={activeCategoryId} key={index} data={villa} type="villa" photos={villa?.photos} />)
                                 }
                                 <div className={styles.linkBox}>
-                                    <Link className={styles.blueButton2} href={`/villalar/${activeCategory}`}>
+                                    <Link className={styles.blueButton2} href={`/villalar/${activeCategorySlug}`}>
                                         <span>Tümünü Görüntüle</span>
                                     </Link>
                                 </div>

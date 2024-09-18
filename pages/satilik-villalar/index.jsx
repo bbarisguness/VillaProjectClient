@@ -24,7 +24,7 @@ export default function SalesList({ villasForSale, totalPage }) {
                 <div className="titleBox">
                   <div className="title">Satılık Villalar</div>
                   <div className="subTitle">
-                    Toplam {villasForSale?.meta?.pagination?.total} adet tesis bulunmaktadır.
+                    Toplam {totalPage} adet tesis bulunmaktadır.
                   </div>
                 </div>
               </div>
@@ -36,7 +36,7 @@ export default function SalesList({ villasForSale, totalPage }) {
                         salePage={true}
                         key={index}
                         data={villa}
-                        photos={villa.attributes.photos.data}
+                        photos={villa?.photos}
                       />
                     ))}
                   </ul>
@@ -44,7 +44,7 @@ export default function SalesList({ villasForSale, totalPage }) {
               </div>
               <Pagination
                 newActivePage={activePage}
-                pageCount={totalPage}
+                pageCount={2}
               />
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function SalesList({ villasForSale, totalPage }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const villasForSale = await getVillasForSale(12, parseInt(query.p) || 1);
-  const totalPage = villasForSale?.meta?.pagination?.pageCount;
+  const villasForSale = await getVillasForSale();
+  const totalPage = villasForSale?.totalCount || 0;
   return { props: { villasForSale, totalPage } };
 }

@@ -4,15 +4,13 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 //import { getPhotosVilla } from "@/services/photo"
 
-export default function VillaCard({ data, type, from, activeCategory, listPage, photos, salePage }) {
+export default function VillaCard({ data, type, from, activeCategorySlug, listPage, photos, salePage, activeCategoryId, categories, homeVillasActiveImage, setHomeVillasActiveImage }) {
     const router = useRouter()
 
     // const a = Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price))
-    const fotolar = photos.sort((a, b) => a.attributes.line > b.attributes.line ? 1 : -1)
     const [imageIndex, setImageIndex] = useState(0)
     const [image, setImage] = useState()
-    const [images, setImages] = useState(data.attributes.photos.data)
-    //console.log(data.attributes.photos.data);
+    const [images, setImages] = useState(data?.attributes?.photos?.data)
     const [activeImage, setActiveImage] = useState(0)
 
     // useEffect(() => {
@@ -22,8 +20,7 @@ export default function VillaCard({ data, type, from, activeCategory, listPage, 
     // }, [])
 
     function checkVillaCategory() {
-        const categories = data?.attributes?.categories?.data
-        const found = categories?.find((element) => element.attributes.slug == activeCategory);
+        const found = categories?.data?.find((element) => element?.id == activeCategoryId);
         if (found) {
             return true
         }
@@ -42,6 +39,20 @@ export default function VillaCard({ data, type, from, activeCategory, listPage, 
 
     const imageHandler = (e, operation) => {
         e.preventDefault();
+
+        //Anasayfadaki villalar listesi için(tab değişince tüm villaCardların photosu aynı oluyordu bu eklendi)
+        if(homeVillasActiveImage != undefined){
+            if (operation == "next") {
+                if (homeVillasActiveImage == 2) { setHomeVillasActiveImage(0) }
+                else { setHomeVillasActiveImage(homeVillasActiveImage + 1) }
+            }
+            else {
+                if (homeVillasActiveImage == 0) { setHomeVillasActiveImage(2) }
+                else { setHomeVillasActiveImage(homeVillasActiveImage - 1) }
+            }
+            return;
+        }
+
         if (operation == "next") {
             if (activeImage == 2) { setActiveImage(0) }
             else { setActiveImage(activeImage + 1) }
@@ -53,14 +64,14 @@ export default function VillaCard({ data, type, from, activeCategory, listPage, 
     }
 
     if (from == "newest" && !listPage) {
-        if (data.attributes) {
+        if (data) {
             return (
                 <div className={styles.testimonialItemContainer}>
                     <div className={styles.column}>
                         <Link href={`/villalar/${data?.attributes?.categories?.data[0]?.attributes?.slug}/${data?.attributes?.slug}`}>
                             <div className={styles.imgBox}>
                                 <div className={styles.carouselBox}>
-                                    <div className={styles.bgImage} style={{ backgroundImage: `url(${fotolar[activeImage]?.attributes?.photo?.data?.attributes?.url})` }}>
+                                    <div className={styles.bgImage} style={{ backgroundImage: photos[activeImage]?.image != undefined ? `url(${process.env.NEXT_PUBLIC_APIPHOTOS_URL+'k_'+photos[activeImage]?.image})` : "none"}}>
                                         <div className={styles.imgNav}>
                                             <button onClick={(e) => imageHandler(e, "prev")}></button>
                                             <button style={{ transform: "rotate(180deg)" }} onClick={(e) => imageHandler(e, "next")}></button>
@@ -102,41 +113,41 @@ export default function VillaCard({ data, type, from, activeCategory, listPage, 
     }
     else if (listPage) {
         //kiralık villalar sayfası
-        if (data.attributes) {
+        if (data) {
             return (
                 <li id={styles.cardContainer}>
                     <div className={styles.column}>
-                        <Link href={`/villalar/${data?.attributes?.categories?.data[0]?.attributes?.slug}/${data?.attributes?.slug}`}>
+                        <Link href={`/villalar/${data?.id}`}>
                             <div className={styles.imgBox}>
                                 <div className={styles.carouselBox}>
-                                    <div className={styles.bgImage} style={{ backgroundImage: `url(${fotolar[activeImage]?.attributes?.photo?.data?.attributes?.url})` }}>
+                                    <div className={styles.bgImage} style={{ backgroundImage: photos[activeImage]?.image != undefined ? `url(${process.env.NEXT_PUBLIC_APIPHOTOS_URL+'k_'+photos[activeImage]?.image})` : "none"}}>
                                         <div className={styles.imgNav}>
                                             <button onClick={(e) => imageHandler(e, "prev")}></button>
                                             <button style={{ transform: "rotate(180deg)" }} onClick={(e) => imageHandler(e, "next")}></button>
                                         </div>
                                     </div>
                                 </div>
-                                {data.attributes.featureTextBlue != null && <div className={styles.cardFeatures}>{data.attributes.featureTextBlue}</div>}
-                                {data.attributes.featureTextRed != null && <div className={styles.cardFeatures2}>{data.attributes.featureTextRed}</div>}
-                                {data.attributes.featureTextWhite != null && <div className={styles.cardFeatures3}>{data.attributes.featureTextWhite}</div>}
+                                {data?.attributes?.featureTextBlue != null && <div className={styles.cardFeatures}>{data.attributes.featureTextBlue}</div>}
+                                {data?.attributes?.featureTextRed != null && <div className={styles.cardFeatures2}>{data.attributes.featureTextRed}</div>}
+                                {data?.attributes?.featureTextWhite != null && <div className={styles.cardFeatures3}>{data.attributes.featureTextWhite}</div>}
                             </div>
                             <div className={styles.textBox}>
-                                <div className={styles.title}>{data.attributes.name}</div>
+                                <div className={styles.title}>{data.villaDetails[0].name}</div>
                                 {data?.attributes?.region ? <div className={styles.location}>{data?.attributes?.region}</div> : <></>}
                                 <div className={styles.priceTitle}>{type == "villa" ? "Günlük Fiyat Aralığı" : "Haftalık Fiyat Aralığı"}</div>
                                 {data?.attributes?.price_tables?.data ? <div className={styles.price}>{Math.min(...data.attributes.price_tables.data.map(o => o.attributes.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}
                                 <div className={styles.features}>
                                     <div className={styles.colon}>
                                         <i className={styles.person_icon}></i>
-                                        <span>{data.attributes.person} Kişi</span>
+                                        <span>{data.person} Kişi</span>
                                     </div>
                                     <div className={styles.colon}>
                                         <i className={styles.room_icon}></i>
-                                        <span>{data.attributes.room} Oda</span>
+                                        <span>{data.room} Oda</span>
                                     </div>
                                     <div className={styles.colon}>
                                         <i className={styles.bath_icon}></i>
-                                        <span>{data.attributes.bath} Banyo</span>
+                                        <span>{data.bath} Banyo</span>
                                     </div>
                                 </div>
                             </div>
@@ -147,39 +158,39 @@ export default function VillaCard({ data, type, from, activeCategory, listPage, 
         }
     }
     else if (salePage) {
-        if (data.attributes) {
+        if (data) {
             return (
                 <li id={styles.cardContainer}>
                     <div className={styles.column}>
-                        <Link href={`/satilik-villalar/${data?.attributes?.slug}`}>
+                        <Link href={`/satilik-villalar/${data?.id}`}>
                             <div className={styles.imgBox}>
                                 <div className={styles.carouselBox}>
-                                    <div className={styles.bgImage} style={{ backgroundImage: `url(${fotolar[activeImage]?.attributes?.photo?.data?.attributes?.url})` }}>
+                                    <div className={styles.bgImage} style={{ backgroundImage: photos[activeImage]?.image != undefined ? `url(${process.env.NEXT_PUBLIC_APIPHOTOS_URL+'k_'+photos[activeImage]?.image})` : "none"}}>
                                         <div className={styles.imgNav}>
                                             <button onClick={(e) => imageHandler(e, "prev")}></button>
                                             <button style={{ transform: "rotate(180deg)" }} onClick={(e) => imageHandler(e, "next")}></button>
                                         </div>
                                     </div>
                                 </div>
-                                {data.attributes.featureTextBlue != null && <div className={styles.cardFeatures}>{data.attributes.featureTextBlue}</div>}
-                                {data.attributes.featureTextRed != null && <div className={styles.cardFeatures2}>{data.attributes.featureTextRed}</div>}
-                                {data.attributes.featureTextWhite != null && <div className={styles.cardFeatures3}>{data.attributes.featureTextWhite}</div>}
+                                {data?.attributes?.featureTextBlue != null && <div className={styles.cardFeatures}>{data.attributes.featureTextBlue}</div>}
+                                {data?.attributes?.featureTextRed != null && <div className={styles.cardFeatures2}>{data.attributes.featureTextRed}</div>}
+                                {data?.attributes?.featureTextWhite != null && <div className={styles.cardFeatures3}>{data.attributes.featureTextWhite}</div>}
                             </div>
                             <div className={styles.textBox}>
-                                <div className={styles.title}>{data.attributes.name}</div>
+                                <div className={styles.title}>{data?.villaDetails[0]?.name}</div>
                                 {data?.attributes?.region ? <div className={styles.location}>{data?.attributes?.region}</div> : <></>}
                                 <div style={{ marginTop: '5rem' }} className={styles.features}>
                                     <div className={styles.colon}>
                                         <i className={styles.person_icon}></i>
-                                        <span>{data.attributes.person} Kişi</span>
+                                        <span>{data?.person} Kişi</span>
                                     </div>
                                     <div className={styles.colon}>
                                         <i className={styles.room_icon}></i>
-                                        <span>{data.attributes.room} Oda</span>
+                                        <span>{data?.room} Oda</span>
                                     </div>
                                     <div className={styles.colon}>
                                         <i className={styles.bath_icon}></i>
-                                        <span>{data.attributes.bath} Banyo</span>
+                                        <span>{data?.bath} Banyo</span>
                                     </div>
                                 </div>
                             </div>
@@ -191,42 +202,42 @@ export default function VillaCard({ data, type, from, activeCategory, listPage, 
     }
     else {
         //anasayfadaki liste
-        if (data.attributes && !listPage) {
+        if (data && !listPage) {
             return (
                 <li style={{ display: checkVillaCategory() ? 'block' : 'none' }} id={styles.cardContainer}>
                     <div className={styles.column}>
-                        <Link href={`/villalar/${data?.attributes?.categories?.data[0]?.attributes?.slug}/${data?.attributes?.slug}`}>
+                        <Link href={`/villalar/${data?.id}`}>
                             <div className={styles.imgBox}>
                                 <div className={styles.carouselBox}>
-                                    <div className={styles.bgImage} style={{ backgroundImage: `url(${fotolar[activeImage]?.attributes?.photo?.data?.attributes?.url})` }}>
+                                    <div className={styles.bgImage} style={{ backgroundImage: photos[homeVillasActiveImage]?.image != undefined ? `url(${process.env.NEXT_PUBLIC_APIPHOTOS_URL+'k_'+photos[homeVillasActiveImage]?.image})` : "none"}}>
                                         <div className={styles.imgNav}>
                                             <button onClick={(e) => imageHandler(e, "prev")}></button>
                                             <button style={{ transform: "rotate(180deg)" }} onClick={(e) => imageHandler(e, "next")}></button>
                                         </div>
                                     </div>
                                 </div>
-                                {data.attributes.featureTextBlue != null && <div className={styles.cardFeatures}>{data.attributes.featureTextBlue}</div>}
-                                {data.attributes.featureTextRed != null && <div className={styles.cardFeatures2}>{data.attributes.featureTextRed}</div>}
-                                {data.attributes.featureTextWhite != null && <div className={styles.cardFeatures3}>{data.attributes.featureTextWhite}</div>}
+                                {data.villaDetails[0].featureTextBlue != null && <div className={styles.cardFeatures}>{data.villaDetails[0].featureTextBlue}</div>}
+                                {data.villaDetails[0].featureTextRed != null && <div className={styles.cardFeatures2}>{data.villaDetails[0].featureTextRed}</div>}
+                                {data.villaDetails[0].featureTextWhite != null && <div className={styles.cardFeatures3}>{data.villaDetails[0].featureTextWhite}</div>}
                             </div>
                             <div className={styles.textBox}>
-                                <div className={styles.title}>{data.attributes.name}</div>
-                                {data?.attributes?.region ? <div className={styles.location}>{data?.attributes?.region}</div> : <></>}
+                                <div className={styles.title}>{data.villaDetails[0].name}</div>
+                                {true ? <div className={styles.location}>{"asd"}</div> : <></>}
                                 <div className={styles.priceTitle}>{type == "villa" ? "Günlük Fiyat Aralığı" : "Haftalık Fiyat Aralığı"}</div>
                                 {/* {data.attributes.price_tables.data ? <div className={styles.price}>{data.attributes.price_tables?.data[0]?.attributes?.price} TL - {data.attributes.price_tables?.data[(data.attributes.price_tables.data.length - 1)]?.attributes?.price} TL</div> : <></>} */}
-                                {data?.attributes?.price_tables?.data ? <div className={styles.price}>{Math.min(...data.attributes.price_tables.data.map(o => o.attributes.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}
+                                {data?.priceTables?.length > 0 ? <div className={styles.price}>{Math.min(...data?.priceTables?.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data?.priceTables?.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}
                                 <div className={styles.features}>
                                     <div className={styles.colon}>
                                         <i className={styles.person_icon}></i>
-                                        <span>{data.attributes.person} Kişi</span>
+                                        <span>{data.person} Kişi</span>
                                     </div>
                                     <div className={styles.colon}>
                                         <i className={styles.room_icon}></i>
-                                        <span>{data.attributes.room} Oda</span>
+                                        <span>{data.room} Oda</span>
                                     </div>
                                     <div className={styles.colon}>
                                         <i className={styles.bath_icon}></i>
-                                        <span>{data.attributes.bath} Banyo</span>
+                                        <span>{data.bath} Banyo</span>
                                     </div>
                                 </div>
                             </div>

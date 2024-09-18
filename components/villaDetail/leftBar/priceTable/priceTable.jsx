@@ -59,7 +59,7 @@ export default function PriceTable({ data }) {
                 <ul>
 
                     {
-                        data.map((data, index) => (
+                        data?.map((data, index) => (
                             <li key={index}>
                                 <div className={styles.box}>
                                     <div className={styles.leftBox}>
@@ -67,12 +67,12 @@ export default function PriceTable({ data }) {
                                     </div>
                                     <div className={styles.rightBox}>
                                         <div className={styles.name}>
-                                            {data.attributes.name}
+                                            {data?.priceTableDetails[0]?.title}
                                         </div>
-                                        <div className={styles.desc}>{data.attributes.description}</div>
+                                        <div className={styles.desc}>{data?.priceTableDetails[0]?.description}</div>
                                         <div className={styles.price}>
                                             {
-                                                (priceTableActiveIndex === 1 ? ((data.attributes.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") / usd) + " " + priceType()) : priceTableActiveIndex === 2 ? ((data.attributes.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") / eur) + " " + priceType()) : priceTableActiveIndex === 3 ? ((data.attributes.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") / gbp) + " " + priceType()) : (data.attributes.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " " + priceType()))
+                                                (priceTableActiveIndex === 1 ? ((data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") / usd) + " " + priceType()) : priceTableActiveIndex === 2 ? ((data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") / eur) + " " + priceType()) : priceTableActiveIndex === 3 ? ((data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") / gbp) + " " + priceType()) : (data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " " + priceType()))
                                             }
                                         </div>
                                     </div>

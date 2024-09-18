@@ -6,15 +6,15 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
     const twoDifferentYearsWillBeListed = 6-currentMounth
     
     let oldDates = dates
-    dates.sort((a, b) => new Date(a.attributes.checkIn) - new Date(b.attributes.checkIn))
-    dates = dates.filter(item => item.attributes.reservationStatus != 110)
+    dates?.sort((a, b) => new Date(a.attributes.checkIn) - new Date(b.attributes.checkIn))
+    dates = dates?.filter(item => item.attributes.reservationStatus != 110)
 
     //reservationDates = ["2022/11/25-2023/0/3", "2023/0/29-2023/1/5", "2023/1/5-2023/1/7", "2023/1/25-2023/5/21", "2023/6/5-2023/6/10", "2023/6/10-2023/6/15", "2023/11/9-2023/11/12"]
     //let datesString = []
 
     let reservationDates = []
     let reservationDatesStatus = []
-    dates.map((date) => {
+    dates?.map((date) => {
         //console.log(date.attributes.checkIn.split("-")[0] + "/" + date.attributes.checkIn.split("-")[1] + "/" + date.attributes.checkIn.split("-")[2]+"-"+date.attributes.checkOut.split("-")[0] + "/" + date.attributes.checkOut.split("-")[1] + "/" + date.attributes.checkOut.split("-")[2]);
         reservationDates.push(date.attributes.checkIn.split("-")[0] + "/" + (date.attributes.checkIn.split("-")[1] - 1) + "/" + date.attributes.checkIn.split("-")[2] + "-" + date.attributes.checkOut.split("-")[0] + "/" + (date.attributes.checkOut.split("-")[1] - 1) + "/" + date.attributes.checkOut.split("-")[2])
         reservationDatesStatus.push(parseInt(date.attributes.reservationStatus))
@@ -32,9 +32,9 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
     let reservationIndex = 0
 
     //müsaitlik takviminde yıl değiştirildği zaman geçen yıldan devam eden rezervasyon var mı yok mu o belirleniyor
-    let reservationContinuingFromBeforeYearDates = dates.filter(item => (item.attributes.checkIn.split('-')[0] == (year-1)) && (item.attributes.checkOut.split('-')[0] == year))
+    let reservationContinuingFromBeforeYearDates = dates?.filter(item => (item.attributes.checkIn.split('-')[0] == (year-1)) && (item.attributes.checkOut.split('-')[0] == year))
     
-    if(reservationContinuingFromBeforeYearDates.length > 0){
+    if(reservationContinuingFromBeforeYearDates?.length > 0){
         reservationIndex = dates.findIndex(item => item.id == reservationContinuingFromBeforeYearDates[0].id)+1
     }
     else if(year - nowYear == 2){
@@ -109,7 +109,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
 
         //start-end-continue background stillerini koşullara göre döndüren fonksiyon
         const backgroundColor = () => {
-            if(reservationContinuingFromBeforeYearDates.length >= 1){
+            if(reservationContinuingFromBeforeYearDates?.length >= 1){
                 if(stringToDate2(reservationContinuingFromBeforeYearDates[0].attributes.checkOut).getTime() == currentDate.getTime()){
                     isEndResarvation = true;
 
@@ -183,7 +183,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
             }
 
 
-            if (reservationDates2.length == 2) {
+            if (reservationDates2?.length == 2) {
                 if (currentDate.getTime() == reservationDates2[0].getTime()) { isStartResarvation = true } else { isStartResarvation = false }
                 if (currentDate.getTime() > reservationDates2[0].getTime() && currentDate.getTime() < reservationDates2[1].getTime()) {
                     isReservationContiniung = true
@@ -193,7 +193,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                 if (currentDate.getTime() == reservationDates2[1].getTime()) {
                     isEndResarvation = true;
                     reservationIndex++;
-                    if ((reservationIndex < reservationDates.length) && reservationIndex != reservationDates.length) {
+                    if ((reservationIndex < reservationDates?.length) && reservationIndex != reservationDates?.length) {
                         reservationDateStrings = reservationDates[reservationIndex].split('-');
                         reservationDateStrings.map((item, index) => {
                             reservationDates2[index] = stringToDate(item)
@@ -211,7 +211,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
             }
 
 
-            if (reservationIndex > 0 && reservationIndex < reservationDates.length) {
+            if (reservationIndex > 0 && reservationIndex < reservationDates?.length) {
                 if (reservationDates[reservationIndex - 1].split('-')[1] == reservationDates[reservationIndex].split('-')[0]) {
                     // isReservationContiniung = true
 
@@ -348,7 +348,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
         /*getDayCountOfMMonth(2023, 3)*/
         return (
             <div className={`${styles['months-container']}`} style={{ opacity: 1, display: "flex" }}>
-                {monthsTurkish.slice(currentMounth, monthsTurkish.length).map((item, index) => (
+                {monthsTurkish.slice(currentMounth, monthsTurkish?.length).map((item, index) => (
                     <div key={item + index} className={`${styles['month-container']} ${styles['month-']}`}>
                         <div className={styles.month}>
                             <div className={styles.mainTitleContainer}>
