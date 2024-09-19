@@ -38,6 +38,7 @@ export default function List({
   allCategories,
   category
 }) {
+  console.log(villa)
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(item => item?.categoryDetails[0]?.name == villaDetail?.data?.categories[0]?.categoryDetails[0]?.name)?.slug
@@ -109,10 +110,10 @@ export default function List({
                 <div className="top">
                   <div className="titleBox">
                     <div className="title">
-                      {"merhaba 2"}
+                      {category?.categoryDetails[0]?.name}
                     </div>
                     <div className="subTitle">
-                      Toplam {villa?.meta?.pagination?.total} adet tesis
+                      Toplam {villa?.totalCount} adet tesis
                       bulunmaktadır.
                     </div>
                   </div>
