@@ -3,7 +3,7 @@ import styles from "./villa.module.css"
 import VillaCard from "./card/villaCard"
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { getAllVillaByCategoryId } from "@/services/villa"
+import { getAllVillaByCategoryId, getVillasHome } from "@/services/villa"
 const qs = require('qs');
 
 export default function Villa({ villas, category }) {
@@ -12,14 +12,17 @@ export default function Villa({ villas, category }) {
     const [activeCategorySlug, setActiveCategorySlug] = useState(category?.data[0]?.slug || "balayi-villalari")
     const [villasData, setVillasData] = useState(villas)
     const [homeVillasActiveImage, setHomeVillasActiveImage] = useState(0)
+    const [isTabChanged, setTabIsChanged] = useState(false)
 
     useEffect(()=> {
         async function getHomeVillas(){
-            const data = await getAllVillaByCategoryId(activeCategoryId)
+            const data = await getVillasHome(8, 0, activeCategoryId)
             setVillasData(data)
             setHomeVillasActiveImage(0)
         }
-        getHomeVillas()
+        if(isTabChanged){
+            getHomeVillas()
+        }
     }, [activeCategoryId])
 
     return (
@@ -32,7 +35,7 @@ export default function Villa({ villas, category }) {
                     </div>
                     <div className={styles.top}>
                         <ul>
-                            <VillaTab setActiveCategorySlug={setActiveCategorySlug} setActiveCategoryId={setActiveCategoryId} activeTabIndex={activeTabIndex} setActiveTabIndex={setActiveTabIndex} categories={category} />
+                            <VillaTab setTabIsChanged={setTabIsChanged} setActiveCategorySlug={setActiveCategorySlug} setActiveCategoryId={setActiveCategoryId} activeTabIndex={activeTabIndex} setActiveTabIndex={setActiveTabIndex} categories={category} />
                         </ul>
                     </div>
                     <div className={styles.bottom}>

@@ -2,8 +2,8 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 const qs = require('qs');
 
-async function getVillas() {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Size=20`, {
+async function getVillas(page=1) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Size=20&Page=${page}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -26,8 +26,8 @@ async function getVillasForSale() {
     return data
 }
 
-async function getVillasHome(size = 8, page = 1, categoryId) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategoryId?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&CategoryId=${categoryId}&Size=${size}`, {
+async function getVillasHome(size = 8, page = 0, categoryId) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategoryId?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&CategoryId=${categoryId}&Size=${size}&Page=${page}`, {
         cache: 'no-store'
     })
     const data = await response.json()

@@ -5,11 +5,12 @@ import { useRouter } from "next/router";
 const qs = require('qs');
 
 
-export default function VillaTab({ categories, activeTabIndex, setActiveTabIndex, setActiveCategorySlug, setActiveCategoryId }) {
+export default function VillaTab({ categories, activeTabIndex, setActiveTabIndex, setActiveCategorySlug, setActiveCategoryId, setTabIsChanged }) {
     const router = useRouter()
     //console.log(categories);
     const changeIndex = (index) => {
         setActiveTabIndex(index)
+        setTabIsChanged(true)
     }
 
     const [error, setError] = useState(null);

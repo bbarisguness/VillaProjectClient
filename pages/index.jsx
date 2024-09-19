@@ -38,7 +38,7 @@ export default function Home({ villa, categories, regions, blogs, newVillas, tes
 }
 export async function getServerSideProps() {
     const categories = await getCategoriesHome()
-    const villa = await getVillasHome(8, 1, categories?.data[0]?.id)
+    const villa = await getVillasHome(8, 0, categories?.data[0]?.id)
     //const regions = await getRegions()
     //const blogs = await getBlogs()
     //const newVillas = await getNewVillas()

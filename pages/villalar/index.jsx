@@ -26,7 +26,7 @@ export default function List({ villas }) {
                 <div className="titleBox">
                   <div className="title">Kiralık Villalar</div>
                   <div className="subTitle">
-                    Toplam {villas?.data?.length} adet tesis bulunmaktadır.
+                    Toplam {villas?.totalCount} adet tesis bulunmaktadır.
                   </div>
                 </div>
               </div>
@@ -53,6 +53,6 @@ export default function List({ villas }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const villas = await getVillas();
+  const villas = await getVillas(query?.p ? query?.p-1 : 0);
   return { props: { villas } };
 }
