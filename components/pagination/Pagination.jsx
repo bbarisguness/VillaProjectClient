@@ -114,7 +114,7 @@ export default function Pagination({
             return (
               <li
                 key={"paginationItem" + index}
-                onClick={(e) => { e.target.innerHTML !== '...' && handleClickItem(e, index) }}
+                onClick={(e) => { e.target.innerHTML !== '...' && newActivePage != item && handleClickItem(e, index) }}
                 className={
                   //   activeListItemIndex == index ? "listItemActive" : null
                   newActivePage == item ? "listItemActive" : null

@@ -42,7 +42,7 @@ export default function List({ villas }) {
               <Pagination
                 //setNewActivePage={setNewActivePage}
                 newActivePage={activePage}
-                pageCount={2}
+                pageCount={Math.ceil(villas?.totalCount / 20)}
               />
             </div>
           </div>

@@ -38,7 +38,6 @@ export default function List({
   allCategories,
   category
 }) {
-  console.log(villa)
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(item => item?.categoryDetails[0]?.name == villaDetail?.data?.categories[0]?.categoryDetails[0]?.name)?.slug
@@ -50,7 +49,7 @@ export default function List({
   const activePage = parseInt(router.query.p) || 1;
 
   function NewPagination() {
-    return <Pagination newActivePage={activePage} pageCount={totalPage} />;
+    return <Pagination newActivePage={activePage} pageCount={Math.ceil(villa?.totalCount / 20)} />;
   }
 
   const observeElementVisibility = function (
