@@ -133,9 +133,9 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                             </div>
                             <div className={styles.textBox}>
                                 <div className={styles.title}>{data.villaDetails[0].name}</div>
-                                {data?.attributes?.region ? <div className={styles.location}>{data?.attributes?.region}</div> : <></>}
+                                {data?.town ? <div className={styles.location}>{data?.town?.district?.name} / {data?.town?.name}</div> : <></>}
                                 <div className={styles.priceTitle}>{type == "villa" ? "Günlük Fiyat Aralığı" : "Haftalık Fiyat Aralığı"}</div>
-                                {data?.attributes?.price_tables?.data ? <div className={styles.price}>{Math.min(...data.attributes.price_tables.data.map(o => o.attributes.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}
+                                {data?.priceTables?.length > 0 ? <div className={styles.price}>{Math.min(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}
                                 <div className={styles.features}>
                                     <div className={styles.colon}>
                                         <i className={styles.person_icon}></i>
@@ -178,7 +178,7 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                             </div>
                             <div className={styles.textBox}>
                                 <div className={styles.title}>{data?.villaDetails[0]?.name}</div>
-                                {data?.attributes?.region ? <div className={styles.location}>{data?.attributes?.region}</div> : <></>}
+                                {data?.town ? <div className={styles.location}>{data?.town?.district?.name} / {data?.town?.name}</div> : <></>}
                                 <div style={{ marginTop: '5rem' }} className={styles.features}>
                                     <div className={styles.colon}>
                                         <i className={styles.person_icon}></i>
@@ -222,7 +222,7 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                             </div>
                             <div className={styles.textBox}>
                                 <div className={styles.title}>{data.villaDetails[0].name}</div>
-                                {true ? <div className={styles.location}>{"asd"}</div> : <></>}
+                                {true ? <div className={styles.location}>{data?.town?.district?.name} / {data?.town?.name}</div> : <></>}
                                 <div className={styles.priceTitle}>{type == "villa" ? "Günlük Fiyat Aralığı" : "Haftalık Fiyat Aralığı"}</div>
                                 {/* {data.attributes.price_tables.data ? <div className={styles.price}>{data.attributes.price_tables?.data[0]?.attributes?.price} TL - {data.attributes.price_tables?.data[(data.attributes.price_tables.data.length - 1)]?.attributes?.price} TL</div> : <></>} */}
                                 {data?.priceTables?.length > 0 ? <div className={styles.price}>{Math.min(...data?.priceTables?.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data?.priceTables?.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}

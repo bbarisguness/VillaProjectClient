@@ -40,6 +40,7 @@ export default function List({
 }) {
   const router = useRouter();
   const slug = router?.query?.slug;
+  const categorySlug = allCategories?.data?.find(item => item?.categoryDetails[0]?.name == villaDetail?.data?.categories[0]?.categoryDetails[0]?.name)?.slug
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
@@ -98,7 +99,7 @@ export default function List({
     return (
       <>
         <Seo
-          pageTitle={category}
+          pageTitle={category?.categoryDetails[0]?.name}
           pageDesc={"merhaba 1"}
         />
         <section className="listPage_contentDetail listPage_villasDetail">
@@ -146,7 +147,7 @@ export default function List({
     return (
       <>
         <Seo
-          pageTitle={villaDetail?.data[0]?.attributes?.metaTitle}
+          pageTitle={villaDetail?.data?.villaDetails[0]?.name}
           pageDesc={villaDetail?.data[0]?.attributes?.metaDescription}
         />
         <section className={styles.breadCrumb}>
@@ -156,10 +157,10 @@ export default function List({
                 <li className={styles.breadCrumbItem}>
                   <Link href="/">Anasayfa</Link>
                 </li>
-                <li className={styles.breadCrumbItem}>
+                {villaDetail?.data?.categories[0] && (<li className={styles.breadCrumbItem}>
                   <Link
-                    href={`/villalar/${slug[0]}`}>{category}</Link>
-                </li>
+                    href={`/villalar/${categorySlug}`}>{villaDetail?.data?.categories[0]?.categoryDetails[0]?.name}</Link>
+                </li>)}
               </ul>
             </div>
           </div>
@@ -937,12 +938,13 @@ export default function List({
 export async function getServerSideProps({ params, query }) {
   const slug = params?.slug;
   const allCategories = await getCategories()
+  const willGetVillaDetail = allCategories?.data?.find(item => item?.slug == slug[0]) || true
   const villa = await getAllVillaByCategoryId(allCategories?.data?.find(item=> item?.slug == slug[0])?.id) || []
   const totalPage = 1;
-  const villaDetail = await getVilla(slug[0]);
+  const villaDetail = willGetVillaDetail == true ? await getVilla(slug[0]) : null;
   const nearVillas = await getNearVillas();
   const imgs = villaDetail?.data?.photos || []
   return {
-    props: { villa, villaDetail, nearVillas, imgs, totalPage, allCategories, category: allCategories?.data?.find(item=> item?.slug == slug[0])?.categoryDetails[0]?.name || "category yok"},
+    props: { villa, villaDetail, nearVillas, imgs, totalPage, allCategories, category: villaDetail == null ? allCategories?.data?.find(item=> item?.slug == slug[0]) : "yok"},
   };
 }
