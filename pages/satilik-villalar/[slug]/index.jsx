@@ -724,7 +724,7 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.apartments}>
+                    {nearVillas?.data?.length > 0 && (<div className={styles.apartments}>
                         <div className={styles.container}>
                             <div className={styles.box}>
                                 <div className={styles.titleBox}>
@@ -745,7 +745,7 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div>)}
                 </section>
             </>
         );
@@ -758,7 +758,7 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
 export async function getServerSideProps({ params }) {
     const slug = params?.slug;
     const villaDetail = await getVilla(slug);
-    const nearVillas = await getNearVillas();
+    const nearVillas = await getNearVillas(villaDetail?.data?.town?.id);
     const imgs = villaDetail?.data?.photos;
     return { props: { villaDetail, nearVillas, imgs } };
 }

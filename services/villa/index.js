@@ -2,7 +2,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 const qs = require('qs');
 
-async function getVillas(page=1) {
+async function getVillas(page = 1) {
     const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Size=20&Page=${page}`, {
         cache: 'no-store'
     })
@@ -35,7 +35,6 @@ async function getVillasHome(size = 8, page = 0, categoryId) {
 }
 
 async function getVilla(villaId) {
-    console.log(villaId)
     const response = await fetch(`${apiUrl}/Clients/GetVilla?Id=${villaId}&Language=tr`, {
         cache: 'no-store'
     })
@@ -135,28 +134,28 @@ async function getNewVillas() {
 }
 
 async function getRandomFourVilla(data) {
-    if (data.data.length < 4) {
+    console.log(data)
+    if (data?.data?.length < 4) {
         return data
     }
 
-
     let villas = data
     let randomFourVilla = []
-    let randomIds = []
 
-    for (let index = 0; index < 4; index++) {
-        let randomIndex = Math.floor(Math.random() * villas.data.length)
-        randomFourVilla.push(villas.data[randomIndex])
-        villas.data.splice(randomIndex, 1)
-    }
+    // for (let index = 0; index < 4; index++) {
+    //     let randomIndex = Math.floor(Math.random() * villas.data.length)
+    //     randomFourVilla.push(villas.data[randomIndex])
+    //     villas.data.splice(randomIndex, 1)
+    // }
 
     return {
         data: randomFourVilla
     }
 }
 
-async function getNearVillas() {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Size=4`, {
+async function getNearVillas(townId) {
+    console.log("townIn ",townId)
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaNearby?CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Language=tr&TownId=${townId}&Size=4`, {
         cache: 'no-store'
     })
     const data = await response.json()

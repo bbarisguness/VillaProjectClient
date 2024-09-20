@@ -903,7 +903,7 @@ export default function List({
               </div>
             </div>
           </div>
-          <div className={styles.apartments}>
+          {nearVillas?.data?.length > 0 && (<div className={styles.apartments}>
             <div className={styles.container}>
               <div className={styles.box}>
                 <div className={styles.titleBox}>
@@ -913,7 +913,7 @@ export default function List({
                   </div>
                 </div>
                 <ul>
-                  {nearVillas.data.map((data, index) => (
+                  {nearVillas?.data?.map((data, index) => (
                     <VillaCard
                       listPage={true}
                       key={index}
@@ -924,7 +924,7 @@ export default function List({
                 </ul>
               </div>
             </div>
-          </div>
+          </div>)}
         </section>
       </>
     );
@@ -942,7 +942,7 @@ export async function getServerSideProps({ params, query }) {
   const villa = await getAllVillaByCategoryId(allCategories?.data?.find(item=> item?.slug == slug[0])?.id) || []
   const totalPage = 1;
   const villaDetail = willGetVillaDetail == true ? await getVilla(slug[0]) : null;
-  const nearVillas = await getNearVillas();
+  const nearVillas = willGetVillaDetail == true ? await getNearVillas(villaDetail?.data?.town?.id) : [];
   const imgs = villaDetail?.data?.photos || []
   return {
     props: { villa, villaDetail, nearVillas, imgs, totalPage, allCategories, category: villaDetail == null ? allCategories?.data?.find(item=> item?.slug == slug[0]) : "yok"},
