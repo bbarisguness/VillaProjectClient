@@ -5,7 +5,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { getVillasName } from "@/services/villa";
+import { getVillasByFilter } from "@/services/villa";
 //import MyCalendar from "./MyCalendar";
 import tr from "date-fns/locale/tr";
 import DatePicker from "react-datepicker";
@@ -48,7 +48,7 @@ export default function ReservationBox() {
   useEffect(() => {
     if (filterText.length >= 4) {
       setVillaNameMenu(true);
-      getVillasName({ name: filterText }).then((res) => {
+      getVillasByFilter({ villaSearchText: filterText }).then((res) => {
         setFilterVillas(res);
       });
     } else {
@@ -341,10 +341,10 @@ export default function ReservationBox() {
                   <li key={index} style={{ display: "block" }}>
                     <Link
                       className={styles.villaLink}
-                      href={`/villalar/${item?.attributes?.categories?.data[0]?.attributes?.slug}/${item?.attributes?.slug}`}
+                      href={`/villalar/${item?.id}`}
                     >
                       <div className={styles.title}>
-                        {item?.attributes?.name}
+                        {item?.villaDetails[0]?.name}
                       </div>
                     </Link>
                   </li>
