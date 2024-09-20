@@ -154,7 +154,7 @@ async function getRandomFourVilla(data) {
 }
 
 async function getNearVillas(townId) {
-    console.log("townIn ",townId)
+    console.log("townIn ", townId)
     const response = await fetch(`${apiUrl}/Clients/GetAllVillaNearby?CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Language=tr&TownId=${townId}&Size=4`, {
         cache: 'no-store'
     })
@@ -234,55 +234,14 @@ async function getVillasFilter({ checkIn, checkOut, name, person, page, size }) 
     return data1
 }
 
-async function getVillasName({ name }) {
-    const query = qs.stringify({
-        fields: '*',
-        populate: '*',
-        filters: {
-            $and: [
-                {
-                    name: {
-                        $containsi: name,
-                    }
-                },
-                {
-                    $or: [
-                        {
-                            $and: [
-                                {
-                                    isSale: { $eq: true }
-                                },
-                                {
-                                    isRent: { $eq: true }
-                                },
-                            ]
-                        },
-                        {
-                            $and: [
-                                {
-                                    isSale: { $eq: false }
-                                },
-                                {
-                                    isRent: { $eq: true }
-                                },
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        // pagination: {
-        //     pageSize: 9,
-        //     page: page,
-        // },
-    }, {
-        encodeValuesOnly: true,
-    });
-    const response = await fetch(`${apiUrl}/villas?${query}`, {
+async function getVillasByFilter({villaSearchText = "", checkIn = "", checkOut = "", person = 1, page, size}) {
+    console.log(checkIn)
+    console.log(checkOut)
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch?CompanyId=BAE26799-0439-4230-4957-08DCD26FC147&Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}&Person=${person}&Page=${page}&Size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
     return data
 }
 
-export { getVillas, getVillaCategory, getVilla, getNewVillas, getNearVillas, getVillasFilter, getVillasName, getVillasHome, getVillasForSale, getVillaSale, getAllVillaByCategoryId }
+export { getVillas, getVillaCategory, getVilla, getNewVillas, getNearVillas, getVillasFilter, getVillasByFilter, getVillasHome, getVillasForSale, getVillaSale, getAllVillaByCategoryId }
