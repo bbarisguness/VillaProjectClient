@@ -35,6 +35,7 @@ async function getVillasHome(size = 8, page = 0, categoryId) {
 }
 
 async function getVilla(villaId) {
+    console.log(villaId)
     const response = await fetch(`${apiUrl}/Clients/GetVilla?Id=${villaId}&Language=tr`, {
         cache: 'no-store'
     })

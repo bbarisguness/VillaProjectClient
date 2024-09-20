@@ -125,7 +125,7 @@ export default function List({
                           listPage={true}
                           key={index}
                           data={villa}
-                          photos={imgs}
+                          photos={villa?.photos}
                         />
                       ))}
                     </ul>
