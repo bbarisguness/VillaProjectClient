@@ -369,18 +369,7 @@ async function createReservation(
 }
 
 async function searchReservation({ reservationNumber }) {
-  const query = qs.stringify({
-    fields: '*',
-    populate: '*',
-    filters: {
-      reservationNumber: {
-        $eq: `${reservationNumber}`,
-      },
-    },
-  }, {
-    encodeValuesOnly: true,
-  });
-  const response = await fetch(`${apiUrl}/reservations?${query}`, {
+  const response = await fetch(`${apiUrl}/Clients/GetReservation/?Language=tr&ReservationNumber=${reservationNumber}`, {
     cache: 'no-store'
   })
   const data = await response.json()

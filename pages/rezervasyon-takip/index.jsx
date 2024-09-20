@@ -6,6 +6,7 @@ import * as Yup from "yup"
 import Seo from '@/components/seo'
 import { searchReservation } from '@/services/reservation'
 import { getCoverPhotoVilla } from '@/services/photo'
+import { timeStringToDate } from '@/utils/date'
 
 export default function RezervasyonTakip() {
     const [step, setStep] = useState(0)
@@ -28,30 +29,30 @@ export default function RezervasyonTakip() {
 
     function searchHandle(values) {
         searchReservation({ reservationNumber: values?.reservationNumber }).then((res) => {
-            if (res?.data[0]?.attributes) {
+            if (res?.data != null) {
+
+                console.log(res)
                 setStep(1)
-                res?.data[0]?.attributes?.reservation_infos?.data.map((item) => {
-                    if (item?.attributes.owner) {
+                res?.data?.reservationInfos?.map((reservationInfo) => {
+                    if (reservationInfo?.owner) {
                         setOwnerInfo({
-                            email: item?.attributes.email,
-                            phone: item?.attributes.phone,
-                            name: item?.attributes.name,
-                            surname: item?.attributes.surname
+                            email: reservationInfo?.email,
+                            phone: reservationInfo?.phone,
+                            name: reservationInfo?.name,
+                            surname: reservationInfo?.surname
                         })
                     }
                 })
                 setVillaDetail({
-                    name: res?.data[0]?.attributes?.villa?.data?.attributes?.name,
-                    region: res?.data[0]?.attributes?.villa?.data?.attributes?.region
+                    name: res?.data?.villa?.name,
+                    region: res?.data?.villa?.district+" / "+res?.data?.villa?.town
                 })
                 setReservationDetail({
-                    checkIn: res?.data[0]?.attributes?.checkIn,
-                    checkOut: res?.data[0]?.attributes?.checkOut,
-                    reservationNumber: res?.data[0]?.attributes?.reservationNumber,
+                    checkIn: timeStringToDate(res?.data?.checkIn),
+                    checkOut: timeStringToDate(res?.data?.checkOut),
+                    reservationNumber: res?.data?.reservationNumber || 1223,
                 })
-                getCoverPhotoVilla({ id: res?.data[0]?.attributes?.villa?.data?.id }).then((img) => {
-                    setVillaCoverPhoto(img?.data[0]?.attributes?.photo?.data?.attributes?.url)
-                })
+                setVillaCoverPhoto(process.env.NEXT_PUBLIC_APIPHOTOS_URL+'k_'+res?.data?.villa?.photo)
             } else {
                 alert('Rezervasyon numarası hatalı !')
             }
