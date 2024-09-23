@@ -55,7 +55,7 @@ export async function getServerSideProps({ query }) {
     const checkInFormat = `${sliceCheckInDate[2]}-${sliceCheckOutDate[1] <= 9 ? '0' : ''}${sliceCheckInDate[1]}-${sliceCheckInDate[0]}`
     const checkOutFormat = `${sliceCheckOutDate[2]}-${sliceCheckOutDate[1] <= 9 ? '0' : ''}${sliceCheckOutDate[1]}-${sliceCheckOutDate[0]}`
 
-    const getFilterVillas = await getVillasByFilter({ checkIn: checkIn != '' ? checkInFormat : "", checkOut: checkOut != '' ? checkOutFormat : "", villaSearchText: name, person: person, size: 12, page: parseInt(query?.p) || 1 })
+    const getFilterVillas = await getVillasByFilter({ checkIn: checkIn != '' ? checkInFormat : "", checkOut: checkOut != '' ? checkOutFormat : "", villaSearchText: name, person: person, size: 12, page: parseInt(query?.p -1 ) || 0 })
     const totalPage = Math.ceil(getFilterVillas?.totalCount / 12);
     return { props: { getFilterVillas, name, person, totalPage } }
 }
