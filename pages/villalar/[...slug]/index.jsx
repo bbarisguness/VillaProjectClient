@@ -295,7 +295,7 @@ export default function List({
                   />
                   <Calendar
                     ready={ready}
-                    dates={villaDetail?.data[0]?.attributes?.reservations?.data}
+                    dates={villaDetail?.data?.reservationCalendars || []}
                   />
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>

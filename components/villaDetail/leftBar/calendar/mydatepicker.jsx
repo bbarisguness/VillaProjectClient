@@ -4,6 +4,25 @@ import styles from "./mydatepicker.module.css"
 //reservasyon tarihleri düşük aydan yükselen aya doğru gelmesi lazım
 export default function MyDatePicker({ year = 2023, dates, nowYear, currentMounth }) {
     const twoDifferentYearsWillBeListed = 6-currentMounth
+
+    dates = [
+        {
+            id: 1,
+            attributes: {
+                checkIn: "2024-09-24",
+                checkOut: "2024-09-30",
+                reservationStatus: "100",
+            }
+        },
+        {
+            id: 2,
+            attributes: {
+                checkIn: "2024-10-01",
+                checkOut: "2024-10-06",
+                reservationStatus: "130",
+            }
+        }
+    ]
     
     let oldDates = dates
     dates?.sort((a, b) => new Date(a.attributes.checkIn) - new Date(b.attributes.checkIn))
@@ -258,14 +277,17 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                 }
             }
             else if (isEndResarvation && reservationDatesStatus[reservationIndex-1] != 110) {
+                // console.log(reservationDatesStatus)
+                // console.log(reservationDates)
                 if(reservationDatesStatus[reservationIndex-1] == 100){
+                    return styles["day-endOrange"]
 
-                    if(reservationDatesStatus[reservationIndex-1] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140){
-                        return styles["day-starRedToOrange"]
-                    }
-                    else {
-                        return styles["day-endOrange"]
-                    }
+                    // if(reservationDatesStatus[reservationIndex-1] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140){
+                    //     return styles["day-starRedToOrange"]
+                    // }
+                    // else {
+                    //     return styles["day-endOrange"]
+                    // }
                 }
                 else {
                     if(reservationDatesStatus[reservationIndex] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140){
