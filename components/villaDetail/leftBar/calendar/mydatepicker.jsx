@@ -5,28 +5,16 @@ import styles from "./mydatepicker.module.css"
 export default function MyDatePicker({ year = 2023, dates, nowYear, currentMounth }) {
     const twoDifferentYearsWillBeListed = 6-currentMounth
 
-    dates = [
-        {
-            id: 1,
-            attributes: {
-                checkIn: "2024-09-24",
-                checkOut: "2024-09-30",
-                reservationStatus: "100",
-            }
-        },
-        {
-            id: 2,
-            attributes: {
-                checkIn: "2024-10-01",
-                checkOut: "2024-10-06",
-                reservationStatus: "130",
-            }
-        }
-    ]
-    
-    let oldDates = dates
-    dates?.sort((a, b) => new Date(a.attributes.checkIn) - new Date(b.attributes.checkIn))
-    dates = dates?.filter(item => item.attributes.reservationStatus != 110)
+
+    dates = dates.map(reservation => ({
+        id: reservation.id,
+        checkIn: reservation.checkIn.split('T')[0], // 'T' ifadesinden öncesini al
+        checkOut: reservation.checkOut.split('T')[0], // 'T' ifadesinden öncesini al
+        reservationStatusType: reservation.reservationStatusType
+    }));
+
+
+    dates?.sort((a, b) => new Date(a.checkIn) - new Date(b.checkIn))
 
     //reservationDates = ["2022/11/25-2023/0/3", "2023/0/29-2023/1/5", "2023/1/5-2023/1/7", "2023/1/25-2023/5/21", "2023/6/5-2023/6/10", "2023/6/10-2023/6/15", "2023/11/9-2023/11/12"]
     //let datesString = []
@@ -34,9 +22,8 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
     let reservationDates = []
     let reservationDatesStatus = []
     dates?.map((date) => {
-        //console.log(date.attributes.checkIn.split("-")[0] + "/" + date.attributes.checkIn.split("-")[1] + "/" + date.attributes.checkIn.split("-")[2]+"-"+date.attributes.checkOut.split("-")[0] + "/" + date.attributes.checkOut.split("-")[1] + "/" + date.attributes.checkOut.split("-")[2]);
-        reservationDates.push(date.attributes.checkIn.split("-")[0] + "/" + (date.attributes.checkIn.split("-")[1] - 1) + "/" + date.attributes.checkIn.split("-")[2] + "-" + date.attributes.checkOut.split("-")[0] + "/" + (date.attributes.checkOut.split("-")[1] - 1) + "/" + date.attributes.checkOut.split("-")[2])
-        reservationDatesStatus.push(parseInt(date.attributes.reservationStatus))
+        reservationDates.push(date.checkIn.split("-")[0] + "/" + (date.checkIn.split("-")[1] - 1) + "/" + date.checkIn.split("-")[2] + "-" + date.checkOut.split("-")[0] + "/" + (date.checkOut.split("-")[1] - 1) + "/" + date.checkOut.split("-")[2])
+        reservationDatesStatus.push(parseInt(date.reservationStatusType))
     })
     //console.log("statuses ",reservationDatesStatus);
 
@@ -51,21 +38,16 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
     let reservationIndex = 0
 
     //müsaitlik takviminde yıl değiştirildği zaman geçen yıldan devam eden rezervasyon var mı yok mu o belirleniyor
-    let reservationContinuingFromBeforeYearDates = dates?.filter(item => (item.attributes.checkIn.split('-')[0] == (year-1)) && (item.attributes.checkOut.split('-')[0] == year))
+    let reservationContinuingFromBeforeYearDates = dates?.filter(item => (item.checkIn.split('-')[0] == (year-1)) && (item.checkOut.split('-')[0] == year))
     
     if(reservationContinuingFromBeforeYearDates?.length > 0){
         reservationIndex = dates.findIndex(item => item.id == reservationContinuingFromBeforeYearDates[0].id)+1
     }
     else if(year - nowYear == 2){
-        reservationIndex = dates.findIndex(item => item.attributes.checkIn.split('-')[0] == year || item.attributes.checkOut.split('-')[0] == year)
+        reservationIndex = dates.findIndex(item => item.checkIn.split('-')[0] == year || item.checkOut.split('-')[0] == year)
     }
     else {
-        if(year == nowYear+1){
-            reservationIndex = oldDates.findIndex(item => item.attributes.reservationStatus == 110)
-        }
-        else {
-            reservationIndex = 0
-        }
+        reservationIndex = 0
     }
 
     useEffect(() => {
@@ -129,18 +111,18 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
         //start-end-continue background stillerini koşullara göre döndüren fonksiyon
         const backgroundColor = () => {
             if(reservationContinuingFromBeforeYearDates?.length >= 1){
-                if(stringToDate2(reservationContinuingFromBeforeYearDates[0].attributes.checkOut).getTime() == currentDate.getTime()){
+                if(stringToDate2(reservationContinuingFromBeforeYearDates[0].checkOut).getTime() == currentDate.getTime()){
                     isEndResarvation = true;
 
-                    if(reservationContinuingFromBeforeYearDates[0].attributes.reservationStatus == 100) {
+                    if(reservationContinuingFromBeforeYearDates[0].reservationStatusType == 1) {
                         reservationContinuingFromBeforeYearDates= []
-                        if(reservationDatesStatus[reservationIndex] == 100) {
-                            if(reservationDatesStatus[reservationIndex] == 100) {
+                        if(reservationDatesStatus[reservationIndex] == 1) {
+                            if(reservationDatesStatus[reservationIndex] == 1) {
                                 if(stringToDate2(reservationDates[reservationIndex-1].split('-')[1]).getTime() == stringToDate2(reservationDates[reservationIndex].split('-')[0]).getTime()){
                                     return styles["day-continueOrange"]
                                 }
                                 else {
-                                    if(reservationDatesStatus[reservationIndex] == 100){
+                                    if(reservationDatesStatus[reservationIndex] == 1){
                                         if(reservationDates[reservationIndex-1].split('-')[1] == reservationDates[reservationIndex].split('-')[0]){
                                             return styles["day-continueOrange"]
                                         }
@@ -154,7 +136,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                                 }
                             }
                         }
-                        else if (reservationDatesStatus[reservationIndex] == 110 && reservationDatesStatus[reservationIndex-1] == 100 && (reservationDatesStatus[reservationIndex] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140)){
+                        else if (reservationDatesStatus[reservationIndex-1] == 1 && (reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2)){
                             return styles["day-starRedToOrange"]
                         }
                         else {
@@ -166,13 +148,13 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                             }
                         }
                     }
-                    else if(reservationContinuingFromBeforeYearDates[0].attributes.reservationStatus == 120 || reservationContinuingFromBeforeYearDates[0].attributes.reservationStatus == 130 || reservationContinuingFromBeforeYearDates[0].attributes.reservationStatus == 140) {
+                    else if(reservationContinuingFromBeforeYearDates[0].reservationStatusType == 2 || reservationContinuingFromBeforeYearDates[0].reservationStatusType == 2 || reservationContinuingFromBeforeYearDates[0].reservationStatusType == 2) {
                         //kırmızı
                         reservationContinuingFromBeforeYearDates= []
-                        if(reservationDatesStatus[reservationIndex] == 100){
+                        if(reservationDatesStatus[reservationIndex] == 1){
                             return styles["day-starOrangeToRed"]
                         }
-                        else if(reservationDatesStatus[reservationIndex] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140){
+                        else if(reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2){
                             if(reservationDates[reservationIndex-1].split('-')[1] == reservationDates[reservationIndex].split('-')[0]){
                                 return styles["day-continueRed"]
                             }
@@ -190,10 +172,10 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                     }
                 }
 
-                if(reservationContinuingFromBeforeYearDates[0].attributes.reservationStatus == 100) {
+                if(reservationContinuingFromBeforeYearDates[0].reservationStatusType == 1) {
                     return styles["day-continueOrange"]
                 }
-                else if(reservationContinuingFromBeforeYearDates[0].attributes.reservationStatus == 120 || reservationContinuingFromBeforeYearDates[0].attributes.reservationStatus == 130 || reservationContinuingFromBeforeYearDates[0].attributes.reservationStatus == 140) {
+                else if(reservationContinuingFromBeforeYearDates[0].reservationStatusType == 2 || reservationContinuingFromBeforeYearDates[0].reservationStatusType == 2 || reservationContinuingFromBeforeYearDates[0].reservationStatusType == 2) {
                     return styles["day-continueRed"]
                 }
                 else {
@@ -235,14 +217,14 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                     // isReservationContiniung = true
 
                     if(currentDate.getTime() == stringToDate(reservationDates[reservationIndex].split('-')[0]).getTime()){
-                        if( reservationDatesStatus[reservationIndex-1] == 100 && (reservationDatesStatus[reservationIndex] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140) ){
+                        if( reservationDatesStatus[reservationIndex-1] == 1 && (reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2) ){
                             return styles["day-starRedToOrange"]
                         }
-                        else if(reservationDatesStatus[reservationIndex] == 100 && (reservationDatesStatus[reservationIndex-1] == 120 || reservationDatesStatus[reservationIndex-1] == 130 || reservationDatesStatus[reservationIndex-1] == 140)){
+                        else if(reservationDatesStatus[reservationIndex] == 1 && (reservationDatesStatus[reservationIndex-1] == 2 || reservationDatesStatus[reservationIndex-1] == 2 || reservationDatesStatus[reservationIndex-1] == 2)){
                             return styles["day-starOrangeToRed"]
                         }
                         else {
-                            if(reservationIndex > 0 && reservationDatesStatus[reservationIndex] == 100){
+                            if(reservationIndex > 0 && reservationDatesStatus[reservationIndex] == 1){
                                 return styles["day-continueOrange"]
                             }
                         }
@@ -253,8 +235,8 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
 
 
 
-            if (isStartResarvation && reservationDatesStatus[reservationIndex] != 110) {
-                if(reservationDatesStatus[reservationIndex] != 100 && (reservationDatesStatus[reservationIndex] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140))
+            if (isStartResarvation) {
+                if(reservationDatesStatus[reservationIndex] != 1 && (reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2))
                 {
                     return styles["day-startRed"]
                 }
@@ -263,23 +245,19 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
             }
             else if (isReservationContiniung) {
                 isReservationContiniung = false
-                if(reservationDatesStatus[reservationIndex] != 100 && (reservationDatesStatus[reservationIndex] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140))
+                if(reservationDatesStatus[reservationIndex] != 1 && (reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2))
                 {
-                    if(reservationDatesStatus[reservationIndex] != 110){
-                        return styles["day-continueRed"]
-                    }
+                    return styles["day-continueRed"]
                 }
                 else
                 {
-                    if(reservationDatesStatus[reservationIndex] != 110){
-                        return styles["day-continueOrange"]
-                    }
+                    return styles["day-continueOrange"]
                 }
             }
-            else if (isEndResarvation && reservationDatesStatus[reservationIndex-1] != 110) {
+            else if (isEndResarvation) {
                 // console.log(reservationDatesStatus)
                 // console.log(reservationDates)
-                if(reservationDatesStatus[reservationIndex-1] == 100){
+                if(reservationDatesStatus[reservationIndex-1] == 1){
                     return styles["day-endOrange"]
 
                     // if(reservationDatesStatus[reservationIndex-1] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140){
@@ -290,7 +268,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                     // }
                 }
                 else {
-                    if(reservationDatesStatus[reservationIndex] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140){
+                    if(reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2){
                         if(stringToDate(reservationDates[reservationIndex].split('-')[0]).getTime() == stringToDate(reservationDates[reservationIndex-1].split('-')[1]).getTime()){
                             return styles["day-continueRed"]
                         }
