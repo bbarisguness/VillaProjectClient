@@ -1,9 +1,10 @@
 const apiUrl = process.env.NEXT_PUBLIC_API_URL
+const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
 
 const qs = require('qs');
 
 async function getCategories() {
-    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=tr&CompanyId=${companyId}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -11,7 +12,7 @@ async function getCategories() {
 }
 
 async function getCategoriesHome() {
-    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=tr&CompanyId=BAE26799-0439-4230-4957-08DCD26FC147`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=tr&CompanyId=${companyId}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -45,4 +46,4 @@ async function getCategorySlug({ slug }) {
     return data
 }
 
-export { getCategories, getCategory, getCategorySlug,getCategoriesHome }
+export { getCategories, getCategory, getCategorySlug, getCategoriesHome }
