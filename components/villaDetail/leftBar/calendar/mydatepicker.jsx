@@ -3,8 +3,7 @@ import styles from "./mydatepicker.module.css"
 
 //reservasyon tarihleri düşük aydan yükselen aya doğru gelmesi lazım
 export default function MyDatePicker({ year = 2023, dates, nowYear, currentMounth }) {
-    console.log(dates)
-    const twoDifferentYearsWillBeListed = 6-currentMounth
+    const twoDifferentYearsWillBeListed = 0-(currentMounth+1)
 
 
     dates = dates.map(reservation => ({
