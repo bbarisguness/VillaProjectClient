@@ -40,19 +40,6 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
     const imageHandler = (e, operation) => {
         e.preventDefault();
 
-        //Anasayfadaki villalar listesi için(tab değişince tüm villaCardların photosu aynı oluyordu bu eklendi)
-        if(homeVillasActiveImage != undefined){
-            if (operation == "next") {
-                if (homeVillasActiveImage == 2) { setHomeVillasActiveImage(0) }
-                else { setHomeVillasActiveImage(homeVillasActiveImage + 1) }
-            }
-            else {
-                if (homeVillasActiveImage == 0) { setHomeVillasActiveImage(2) }
-                else { setHomeVillasActiveImage(homeVillasActiveImage - 1) }
-            }
-            return;
-        }
-
         if (operation == "next") {
             if (activeImage == 2) { setActiveImage(0) }
             else { setActiveImage(activeImage + 1) }
@@ -209,7 +196,7 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                         <Link href={`/villalar/${data?.id}`}>
                             <div className={styles.imgBox}>
                                 <div className={styles.carouselBox}>
-                                    <div className={styles.bgImage} style={{ backgroundImage: photos[homeVillasActiveImage]?.image != undefined ? `url(${process.env.NEXT_PUBLIC_APIPHOTOS_URL+'k_'+photos[homeVillasActiveImage]?.image})` : "none"}}>
+                                    <div className={styles.bgImage} style={{ backgroundImage: photos[activeImage]?.image != undefined ? `url(${process.env.NEXT_PUBLIC_APIPHOTOS_URL+'k_'+photos[activeImage]?.image})` : "none"}}>
                                         <div className={styles.imgNav}>
                                             <button onClick={(e) => imageHandler(e, "prev")}></button>
                                             <button style={{ transform: "rotate(180deg)" }} onClick={(e) => imageHandler(e, "next")}></button>
