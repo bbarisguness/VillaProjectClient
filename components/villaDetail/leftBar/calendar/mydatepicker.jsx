@@ -3,6 +3,7 @@ import styles from "./mydatepicker.module.css"
 
 //reservasyon tarihleri düşük aydan yükselen aya doğru gelmesi lazım
 export default function MyDatePicker({ year = 2023, dates, nowYear, currentMounth }) {
+    console.log(dates)
     const twoDifferentYearsWillBeListed = 6-currentMounth
 
 
@@ -218,14 +219,14 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
 
                     if(currentDate.getTime() == stringToDate(reservationDates[reservationIndex].split('-')[0]).getTime()){
                         if( reservationDatesStatus[reservationIndex-1] == 1 && (reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2) ){
-                            return styles["day-starRedToOrange"]
+                            return styles["day-starOrangeToRed"]
                         }
                         else if(reservationDatesStatus[reservationIndex] == 1 && (reservationDatesStatus[reservationIndex-1] == 2 || reservationDatesStatus[reservationIndex-1] == 2 || reservationDatesStatus[reservationIndex-1] == 2)){
-                            return styles["day-starOrangeToRed"]
+                            return styles["day-starRedToOrange"]
                         }
                         else {
                             if(reservationIndex > 0 && reservationDatesStatus[reservationIndex] == 1){
-                                return styles["day-continueOrange"]
+                                return styles["day-continueRed"]
                             }
                         }
                     }
@@ -238,27 +239,27 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
             if (isStartResarvation) {
                 if(reservationDatesStatus[reservationIndex] != 1 && (reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2))
                 {
-                    return styles["day-startRed"]
+                    return styles["day-startOrange"]
                 }
                 else
-                    return styles["day-startOrange"]
+                    return styles["day-startRed"]
             }
             else if (isReservationContiniung) {
                 isReservationContiniung = false
                 if(reservationDatesStatus[reservationIndex] != 1 && (reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2))
                 {
-                    return styles["day-continueRed"]
+                    return styles["day-continueOrange"]
                 }
                 else
                 {
-                    return styles["day-continueOrange"]
+                    return styles["day-continueRed"]
                 }
             }
             else if (isEndResarvation) {
                 // console.log(reservationDatesStatus)
                 // console.log(reservationDates)
                 if(reservationDatesStatus[reservationIndex-1] == 1){
-                    return styles["day-endOrange"]
+                    return styles["day-endRed"]
 
                     // if(reservationDatesStatus[reservationIndex-1] == 120 || reservationDatesStatus[reservationIndex] == 130 || reservationDatesStatus[reservationIndex] == 140){
                     //     return styles["day-starRedToOrange"]
@@ -270,14 +271,14 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                 else {
                     if(reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2 || reservationDatesStatus[reservationIndex] == 2){
                         if(stringToDate(reservationDates[reservationIndex].split('-')[0]).getTime() == stringToDate(reservationDates[reservationIndex-1].split('-')[1]).getTime()){
-                            return styles["day-continueRed"]
+                            return styles["day-continueOrange"]
                         }
                         else {
-                            return styles["day-endRed"]
+                            return styles["day-endOrange"]
                         }
                     }
                     else {
-                        return styles["day-endRed"]
+                        return styles["day-endOrange"]
                     }
                 }
             }
