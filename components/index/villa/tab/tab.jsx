@@ -27,7 +27,7 @@ export default function VillaTab({ categories, activeTabIndex, setActiveTabIndex
                         <li id={styles.villaTabLi} className={activeTabIndex == i ? styles.active : null} key={item.id}>
                             <span onClick={() => { changeIndex(i); setActiveCategoryId(item?.id); setActiveCategorySlug(item?.slug) }}>
                                 <div className={styles.iconBox}>
-                                    <i style={{ backgroundImage: `url(https://labirentfethiye.com/assets/img/${item?.icon})` }}></i>
+                                    <i style={{ backgroundImage: `url(/images/${item?.icon})` }}></i>
                                 </div>
                                 <div className={styles.title}>{item?.categoryDetails[0]?.name}</div>
                             </span>
