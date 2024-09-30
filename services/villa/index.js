@@ -235,7 +235,7 @@ async function getVillasFilter({ checkIn, checkOut, name, person, page, size }) 
     return data1
 }
 
-async function getVillasByFilter({ villaSearchText = "", checkIn = "", checkOut = "", person = 1, page, size }) {
+async function getVillasByFilter({ villaSearchText = "", checkIn = "", checkOut = "", person = 1, page=0, size=10 }) {
     const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch?CompanyId=${companyId}&Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}&Person=${person}&Pagination.page=${page}&Pagination.size=${size}`, {
         cache: 'no-store'
     })
