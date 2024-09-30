@@ -52,11 +52,11 @@ const Gallery = memo(function Gallery({ photos }) {
                       <div
                         className={styles.img}
                         style={{
-                          backgroundImage: `url(${data?.attributes?.photo?.data?.attributes?.url})`,
+                          backgroundImage: `url(${process.env.NEXT_PUBLIC_APIPHOTOS_URL+'k_'+data?.image})`,
                         }}
                       ></div>
                     </div>
-                    <span>+{photos.data.length - 10}</span>
+                    <span>{photos.length - 10 > 0 ? `+${photos.length - 10}` : "+"}</span>
                   </div>
                   <Image
                     alt=""
