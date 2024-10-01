@@ -79,39 +79,27 @@
 }
 
 .month-container .month .day.day-startRed {
-    background-color: transparent !important;
-    background-image: url(/images/dateLeft.png);
-    background-size: cover;
+    background: linear-gradient(to top left, #e8543e 50%, white 50%);
 }
 
 .month-container .month .day.day-startOrange {
-    background-color: transparent !important;
-    background-image: url(/images/dateLeftOrange.png);
-    background-size: cover;
+    background: linear-gradient(to top left, #ff7f27 50%, white 50%);
 }
 
 .month-container .month .day.day-starRedToOrange {
-    background-color: transparent !important;
-    background-image: url(/images/redAndOrange1.png);
-    background-size: cover;
+    background: linear-gradient(to bottom right, #ff7f27 50%, #e8543e 50%);
 }
 
 .month-container .month .day.day-starOrangeToRed {
-    background-color: transparent !important;
-    background-image: url(/images/redAndOrange2.png);
-    background-size: cover;
+    background: linear-gradient(to top left, #ff7f27 50%, #e8543e 50%);
 }
 
 .month-container .month .day.day-endRed {
-    background-color: transparent !important;
-    background-image: url(/images/dateRight.png);
-    background-size: cover;
+    background: linear-gradient(to bottom right, #e8543e 50%, white 50%);
 }
 
 .month-container .month .day.day-endOrange {
-    background-color: transparent !important;
-    background-image: url(/images/dateRightOrange.png);
-    background-size: cover;
+    background: linear-gradient(to bottom right, #ff7f27 50%, white 50%);
 }
 
 .month-container .month .day.day-continueRed {

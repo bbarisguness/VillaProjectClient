@@ -25,7 +25,6 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
         reservationDates.push(date.checkIn.split("-")[0] + "/" + (date.checkIn.split("-")[1] - 1) + "/" + date.checkIn.split("-")[2] + "-" + date.checkOut.split("-")[0] + "/" + (date.checkOut.split("-")[1] - 1) + "/" + date.checkOut.split("-")[2])
         reservationDatesStatus.push(parseInt(date.reservationStatusType))
     })
-    //console.log("statuses ",reservationDatesStatus);
 
     const [ready, setReady] = useState(false)
     let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -34,7 +33,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
     let isStartResarvation = false
     let isEndResarvation = false
     let isReservationContiniung = false
-    let currentDate = new Date(year, 0, 1)
+    let currentDate = new Date(year, currentMounth, 1)
     let reservationIndex = 0
 
     //müsaitlik takviminde yıl değiştirildği zaman geçen yıldan devam eden rezervasyon var mı yok mu o belirleniyor
@@ -76,9 +75,6 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
     const getFirstDayOfMonth = (year, month) => {
         const date = new Date(year, month, 1)
         return (days[date.getDay()])
-        /*for (let index = 0; index < 5; index++) {
-            console.log(index + 1)
-        }*/
     }
 
     //Belirtilen tarihin gün sayısını döndürür
@@ -185,6 +181,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
 
 
             if (reservationDates2?.length == 2) {
+                console.log(currentDate)
                 if (currentDate.getTime() == reservationDates2[0].getTime()) { isStartResarvation = true } else { isStartResarvation = false }
                 if (currentDate.getTime() > reservationDates2[0].getTime() && currentDate.getTime() < reservationDates2[1].getTime()) {
                     isReservationContiniung = true
@@ -255,8 +252,6 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                 }
             }
             else if (isEndResarvation) {
-                // console.log(reservationDatesStatus)
-                // console.log(reservationDates)
                 if(reservationDatesStatus[reservationIndex-1] == 1){
                     return styles["day-endRed"]
 
@@ -287,7 +282,7 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
         }
 
         const addDay = () => {
-            currentDate = new Date(_getRowsYear, month, day + 1)
+            currentDate = new Date(_getRowsYear, month, day+1)
             return day++
         }
 
