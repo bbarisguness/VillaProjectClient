@@ -181,7 +181,6 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
 
 
             if (reservationDates2?.length == 2) {
-                console.log(currentDate)
                 if (currentDate.getTime() == reservationDates2[0].getTime()) { isStartResarvation = true } else { isStartResarvation = false }
                 if (currentDate.getTime() > reservationDates2[0].getTime() && currentDate.getTime() < reservationDates2[1].getTime()) {
                     isReservationContiniung = true

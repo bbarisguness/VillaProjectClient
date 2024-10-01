@@ -257,7 +257,7 @@ export default function List({
                     <div
                       dangerouslySetInnerHTML={{
                         __html:
-                          villaDetail?.data[0]?.attributes?.descriptionLong,
+                          villaDetail?.data?.villaDetails[0]?.descriptionLong,
                       }}
                       style={{ whiteSpace: "pre-line" }}
                       className={`${styles["desc"]} ${
