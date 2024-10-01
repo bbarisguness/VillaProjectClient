@@ -6,7 +6,6 @@ import { useRouter } from "next/router"
 
 export default function VillaCard({ data, type, from, activeCategorySlug, listPage, photos, salePage, activeCategoryId, categories, homeVillasActiveImage, setHomeVillasActiveImage }) {
     const router = useRouter()
-    console.log(data)
 
     // const a = Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price))
     const [imageIndex, setImageIndex] = useState(0)

@@ -74,8 +74,13 @@
 .month-container .month .day .day-content {
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.month-container .month .day .day-content .dayPrice {
+    color: #1b1d78;
+    font-size: 12px;
 }
 
 .month-container .month .day.day-startRed {
@@ -114,17 +119,44 @@
     .months-container .month-container.month- {
         width: 33.33333%;
     }
+    .month-container .month .day .day-content .dayPrice {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .month-container .month .day .day-content .dayPrice {
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 991px) {
     .months-container .month-container.month- {
         width: 33.33333%;
     }
+    .month-container .month .day .day-content .dayPrice {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .month-container .month .day .day-content .dayPrice {
+        font-size: 8px;
+    }
 }
 
 @media screen and (max-width: 767px) {
     .months-container .month-container.month- {
         width: 50%;
+    }
+    .month-container .month .day .day-content .dayPrice {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .month-container .month .day .day-content .dayPrice {
+        font-size: 8px;
     }
 }
 
@@ -138,5 +170,9 @@
     .month-container .month {
         margin: 0;
         width: 100%;
+    }
+
+    .month-container .month .day .day-content .dayPrice {
+        font-size: 12px;
     }
 }

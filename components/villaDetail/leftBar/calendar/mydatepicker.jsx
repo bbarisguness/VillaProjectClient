@@ -293,7 +293,10 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                     row.push(
                         <div key={monthsTurkish[month] + "firshRowItem" + index} className={`${styles['day']} ${!(index >= dayStartingIndex) ? styles['old'] : ''} ${index >= dayStartingIndex ? backgroundColor() : ''}`}>
                             {
-                                index >= dayStartingIndex ? <div className={`${styles['day-content']}`}>{addDay()}</div>
+                                index >= dayStartingIndex ? <div className={`${styles['day-content']}`}>
+                                    <span>{addDay()}</span>
+                                    <span className={styles.dayPrice}>4000₺</span>
+                                </div>
                                     : undefined
                             }
                         </div>
@@ -316,7 +319,10 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                     else{
                         row.push(
                             <div key={monthsTurkish[month] + "notFirstRow" + index} className={`${styles['day']} ${backgroundColor()}`}>
-                                <div className={`${styles['day-content']}`}>{addDay()}</div>
+                                <div className={`${styles['day-content']}`}>
+                                    <span>{addDay()}</span>
+                                    <span className={styles.dayPrice}>4800₺</span>
+                                </div>
                             </div>
                         )
                     }
