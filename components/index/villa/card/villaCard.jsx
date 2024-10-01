@@ -65,9 +65,9 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                                         </div>
                                     </div>
                                 </div>
-                                {data?.villaDetails[0].featureTextBlue != null && <div className={styles.cardFeatures}>{data?.villaDetails[0].featureTextBlue}</div>}
-                                {data?.villaDetails[0].featureTextRed != null && <div className={styles.cardFeatures2}>{data?.villaDetails[0].featureTextRed}</div>}
-                                {data?.villaDetails[0].featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.villaDetails[0].featureTextWhite}</div>}
+                                {data?.villaDetails[0]?.featureTextBlue != null && <div className={styles.cardFeatures}>{data?.villaDetails[0].featureTextBlue}</div>}
+                                {data?.villaDetails[0]?.featureTextRed != null && <div className={styles.cardFeatures2}>{data?.villaDetails[0].featureTextRed}</div>}
+                                {data?.villaDetails[0]?.featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.villaDetails[0].featureTextWhite}</div>}
                             </div>
                             <div className={styles.textBox}>
                                 <div className={styles.title}>{data.attributes.name}</div>
@@ -114,15 +114,16 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                                         </div>
                                     </div>
                                 </div>
-                                {data?.villaDetails[0].featureTextBlue != null && <div className={styles.cardFeatures}>{data?.villaDetails[0].featureTextBlue}</div>}
-                                {data?.villaDetails[0].featureTextRed != null && <div className={styles.cardFeatures2}>{data?.villaDetails[0].featureTextRed}</div>}
-                                {data?.villaDetails[0].featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.villaDetails[0].featureTextWhite}</div>}
+                                {data?.villaDetails[0]?.featureTextBlue != null && <div className={styles.cardFeatures}>{data?.villaDetails[0].featureTextBlue}</div>}
+                                {data?.villaDetails[0]?.featureTextRed != null && <div className={styles.cardFeatures2}>{data?.villaDetails[0].featureTextRed}</div>}
+                                {data?.villaDetails[0]?.featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.villaDetails[0].featureTextWhite}</div>}
                             </div>
                             <div className={styles.textBox}>
-                                <div className={styles.title}>{data.villaDetails[0].name}</div>
+                                <div className={styles.title}>{data.villaDetails[0]?.name}</div>
                                 {data?.town ? <div className={styles.location}>{data?.town?.district?.name} / {data?.town?.name}</div> : <></>}
                                 <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
                                 {data?.priceTables?.length > 0 ? <div className={styles.price}>{Math.min(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}
+                                {data?.price != "-" && data?.price ? <div className={styles.price}>{Math.floor(data?.price?.replace(',', '.'))}₺</div> : <></>}
                                 <div className={styles.features}>
                                     <div className={styles.colon}>
                                         <i className={styles.person_icon}></i>
@@ -159,9 +160,9 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                                         </div>
                                     </div>
                                 </div>
-                                {data?.villaDetails[0].featureTextBlue != null && <div className={styles.cardFeatures}>{data?.villaDetails[0].featureTextBlue}</div>}
-                                {data?.villaDetails[0].featureTextRed != null && <div className={styles.cardFeatures2}>{data?.villaDetails[0].featureTextRed}</div>}
-                                {data?.villaDetails[0].featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.villaDetails[0].featureTextWhite}</div>}
+                                {data?.villaDetails[0]?.featureTextBlue != null && <div className={styles.cardFeatures}>{data?.villaDetails[0].featureTextBlue}</div>}
+                                {data?.villaDetails[0]?.featureTextRed != null && <div className={styles.cardFeatures2}>{data?.villaDetails[0].featureTextRed}</div>}
+                                {data?.villaDetails[0]?.featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.villaDetails[0].featureTextWhite}</div>}
                             </div>
                             <div className={styles.textBox}>
                                 <div className={styles.title}>{data?.villaDetails[0]?.name}</div>
@@ -203,12 +204,12 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                                         </div>
                                     </div>
                                 </div>
-                                {data?.villaDetails[0].featureTextBlue != null && <div className={styles.cardFeatures}>{data?.villaDetails[0].featureTextBlue}</div>}
-                                {data?.villaDetails[0].featureTextRed != null && <div className={styles.cardFeatures2}>{data?.villaDetails[0].featureTextRed}</div>}
-                                {data?.villaDetails[0].featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.villaDetails[0].featureTextWhite}</div>}
+                                {data?.villaDetails[0]?.featureTextBlue != null && <div className={styles.cardFeatures}>{data?.villaDetails[0].featureTextBlue}</div>}
+                                {data?.villaDetails[0]?.featureTextRed != null && <div className={styles.cardFeatures2}>{data?.villaDetails[0].featureTextRed}</div>}
+                                {data?.villaDetails[0]?.featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.villaDetails[0].featureTextWhite}</div>}
                             </div>
                             <div className={styles.textBox}>
-                                <div className={styles.title}>{data.villaDetails[0].name}</div>
+                                <div className={styles.title}>{data.villaDetails[0]?.name}</div>
                                 {true ? <div className={styles.location}>{data?.town?.district?.name} / {data?.town?.name}</div> : <></>}
                                 <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
                                 {/* {data.attributes.price_tables.data ? <div className={styles.price}>{data.attributes.price_tables?.data[0]?.attributes?.price} TL - {data.attributes.price_tables?.data[(data.attributes.price_tables.data.length - 1)]?.attributes?.price} TL</div> : <></>} */}
