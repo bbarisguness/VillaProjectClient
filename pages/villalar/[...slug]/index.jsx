@@ -303,7 +303,7 @@ export default function List({
                     <div className={styles.general}>
                       <Reservation
                         villaId={villaDetail?.data[0]?.id}
-                        prices={villaDetail?.data[0]?.attributes?.price_tables}
+                        prices={villaDetail?.data?.priceTables}
                       />
                       {/* <FoodPackage /> */}
                     </div>

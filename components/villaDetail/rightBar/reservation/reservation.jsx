@@ -300,10 +300,9 @@ export default function Reservation({ villaId, prices }) {
         <div className={styles.reservationTitleText}>
           <div className={styles.textTop}>
             <div className={styles.price}>
-              {/* {Math.min(...prices?.data.map((o) => o.attributes.price))
+              {Math.min(...prices?.map((o) => o.price))
                 .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")} */}
-                {Math.min(100)}
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                 {" "}
               TL
             </div>
