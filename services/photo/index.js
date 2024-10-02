@@ -10,28 +10,6 @@ async function getPhotos() {
     return data
 }
 
-async function getPhotosVilla({ slug }) {
-    const query = qs.stringify({
-        fields: '*',
-        populate: '*',
-        sort: ["line:asc"],
-        filters: {
-            villa: {
-                slug: {
-                    $eq: `${slug}`,
-                }
-            },
-        },
-    }, {
-        encodeValuesOnly: true,
-    });
-    const response = await fetch(`${apiUrl}/photos?${query}`, {
-        cache: 'no-store'
-    })
-    const data = await response.json()
-    return data
-}
-
 async function getCoverPhotoVilla({ id }) {
     const query = qs.stringify({
         fields: '*',

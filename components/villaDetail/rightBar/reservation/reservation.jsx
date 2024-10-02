@@ -8,13 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeDate, changeNumberOfPeople } from "@/store/globalState";
 import Image from "next/image";
 import moment from "moment";
-import { getPrice } from "@/services/reservation";
+import { isVillaAvailable } from "@/services/reservation";
 const qs = require("qs");
 import tr from "date-fns/locale/tr";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function Reservation({ villaId, prices }) {
+export default function Reservation({
+  villaId,
+  prices,
+  villaName,
+  villaFirstPhoto,
+  region,
+}) {
   const router = useRouter();
 
   //console.log('villaId: ' + villaId);
@@ -171,105 +177,49 @@ export default function Reservation({ villaId, prices }) {
 
   async function handleClick() {
     if (dateRange[1] != null) {
-      getPrice({
-        adult: numberOfAdults1,
-        villaId: villaId,
-        checkIn: moment(dateRange[0]).format("YYYY-MM-DD").toString(),
-        checkOut: moment(dateRange[1]).format("YYYY-MM-DD").toString(),
-      }).then((res) => {
-        if (!res) {
-          alert("Seçtiğiniz Tarihler Tesisimiz Müsait Değildir");
-        } else {
-          localStorage.setItem("reservation", JSON.stringify(res));
-          router.push("/rezervasyon");
-        }
-      });
-      // alert(moment(reservationDate.startDate).format('YYYY-MM-DD').toString())
-      // alert(villaId)
-
-      // const query = qs.stringify(
-      //   {
-      //     filters: {
-      //       $or: [
-
-      //         {
-      //           $and: [
-      //             {
-      //               checkIn: {
-      //                 $lte: giris,
-      //               },
-      //             },
-      //             {
-      //               checkOut: {
-      //                 $gt: giris,
-      //               },
-      //             },
-      //           ]
-      //         },
-      //         {
-      //           $and: [
-      //             {
-      //               checkIn: {
-      //                 $lt: cikis,
-      //               },
-      //             },
-      //             {
-      //               checkOut: {
-      //                 $gte: cikis,
-      //               },
-      //             },
-      //           ]
-      //         },
-      //         {
-      //           $and: [
-      //             {
-      //               checkIn: {
-      //                 $gt: giris,
-      //               },
-      //             },
-      //             {
-      //               checkIn: {
-      //                 $lt: cikis,
-      //               },
-      //             },
-      //           ]
-      //         }]
-
-      //     },
-      //   },
-      //   {
-      //     encodeValuesOnly: true, // prettify URL
+      // getPrice({
+      //   adult: numberOfAdults1,
+      //   villaId: villaId,
+      //   checkIn: moment(dateRange[0]).format("YYYY-MM-DD").toString(),
+      //   checkOut: moment(dateRange[1]).format("YYYY-MM-DD").toString(),
+      // }).then((res) => {
+      //   if (!res) {
+      //     alert("Seçtiğiniz Tarihler Tesisimiz Müsait Değildir");
+      //   } else {
+      //     localStorage.setItem("reservation", JSON.stringify(res));
+      //     router.push("/rezervasyon");
       //   }
-      // );
-
-      // await fetch(`http://3.127.136.179:1337/api/reservations?${query}`)
-      //   .then(res => res.json())
-      //   .then(
-      //     (result) => {
-      //       //debugger
-      //       //console.log(result.data);
-      //       if (result.data.length < 1) {
-      //         dispatch(changeDate({ start: giris, end: cikis }))
-      //         dispatch(changeNumberOfPeople({ adult: numberOfAdults1, child: numberOfChild1, baby: numberOfBabies1 }))
-      //         router.push('/rezervasyon')
-      //       }
-      //       else {
-      //         //Seçilen tarihlerde rezervasyon var ise uyarı modalın açılması için
-      //         setAvailible(true)
-      //       }
-      //     },
-      //     (error) => {
-
-      //     }
-      //   )
-
-      //console.log('musaitmi : ' + availible);
-
-      // if (availible) {
-      //     //villaId, giris, cikis, person, child, bebek
-      //     dispatch(changeDate({ start: giris, end: cikis }))
-      //     router.push('/rezervasyon')
-      // }
+      // });
+      if (
+        (await isVillaAvailable(
+          villaId,
+          moment(dateRange[0]).format("YYYY-MM-DD").toString(),
+          moment(dateRange[1]).format("YYYY-MM-DD").toString()
+        )) == false
+      ) {
+        //Villa müsait
+        const villaReservationLocalData = {
+          checkIn: moment(dateRange[0]).format("YYYY-MM-DD").toString(),
+          checkOut: moment(dateRange[1]).format("YYYY-MM-DD").toString(),
+          villaId,
+          villaName,
+          totalPrice: 50000,
+          reservationItems: [],
+          adult: 1,
+          child: 0,
+          baby: 0,
+          expiryDate: Math.floor(new Date().getTime() / 1000),
+          villaFirstPhoto,
+          region,
+        };
+        localStorage.setItem(
+          "reservation",
+          JSON.stringify(villaReservationLocalData)
+        );
+        router.push("/rezervasyon");
+      } else {
+        alert("Seçtiğiniz Tarihler Tesisimiz Müsait Değildir");
+      }
     } else {
       console.log("Tarih seçin");
     }
@@ -302,8 +252,7 @@ export default function Reservation({ villaId, prices }) {
             <div className={styles.price}>
               {Math.min(...prices?.map((o) => o.price))
                 .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                {" "}
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
               TL
             </div>
           </div>

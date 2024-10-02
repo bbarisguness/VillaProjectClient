@@ -3,7 +3,6 @@ import {
   getAllVillaByCategoryId,
   getVilla,
   getNearVillas,
-  getVillas,
 } from "@/services/villa";
 import "@/styles/styles.css";
 import { getCategories } from "@/services/category";
@@ -24,7 +23,6 @@ import LightGallery from "lightgallery/react";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";
 import { useEffect, useState } from "react";
-import { getPhotosVilla } from "@/services/photo";
 import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
 import VideoWithComment from "@/components/villaDetail/VideoWithComment";
@@ -36,11 +34,17 @@ export default function List({
   imgs,
   totalPage,
   allCategories,
-  category
+  category,
+  villaId,
+  villaName,
 }) {
   const router = useRouter();
   const slug = router?.query?.slug;
-  const categorySlug = allCategories?.data?.find(item => item?.categoryDetails[0]?.name == villaDetail?.data?.categories[0]?.categoryDetails[0]?.name)?.slug
+  const categorySlug = allCategories?.data?.find(
+    (item) =>
+      item?.categoryDetails[0]?.name ==
+      villaDetail?.data?.categories[0]?.categoryDetails[0]?.name
+  )?.slug;
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
@@ -49,7 +53,12 @@ export default function List({
   const activePage = parseInt(router.query.p) || 1;
 
   function NewPagination() {
-    return <Pagination newActivePage={activePage} pageCount={Math.ceil(villa?.totalCount / 20)} />;
+    return (
+      <Pagination
+        newActivePage={activePage}
+        pageCount={Math.ceil(villa?.totalCount / 20)}
+      />
+    );
   }
 
   const observeElementVisibility = function (
@@ -112,8 +121,7 @@ export default function List({
                       {category?.categoryDetails[0]?.name}
                     </div>
                     <div className="subTitle">
-                      Toplam {villa?.totalCount} adet tesis
-                      bulunmaktadır.
+                      Toplam {villa?.totalCount} adet tesis bulunmaktadır.
                     </div>
                   </div>
                 </div>
@@ -157,10 +165,16 @@ export default function List({
                 <li className={styles.breadCrumbItem}>
                   <Link href="/">Anasayfa</Link>
                 </li>
-                {villaDetail?.data?.categories[0] && (<li className={styles.breadCrumbItem}>
-                  <Link
-                    href={`/villalar/${categorySlug}`}>{villaDetail?.data?.categories[0]?.categoryDetails[0]?.name}</Link>
-                </li>)}
+                {villaDetail?.data?.categories[0] && (
+                  <li className={styles.breadCrumbItem}>
+                    <Link href={`/villalar/${categorySlug}`}>
+                      {
+                        villaDetail?.data?.categories[0]?.categoryDetails[0]
+                          ?.name
+                      }
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -187,25 +201,22 @@ export default function List({
                     <div className={styles.features}>
                       <div className={styles.colon}>
                         <i className={styles.pin_icon}></i>
-                        <span>{villaDetail?.data?.town?.district?.name} / {villaDetail?.data?.town?.name}</span>
+                        <span>
+                          {villaDetail?.data?.town?.district?.name} /{" "}
+                          {villaDetail?.data?.town?.name}
+                        </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.person_icon}></i>
-                        <span>
-                        {villaDetail?.data?.person} Kişi
-                        </span>
+                        <span>{villaDetail?.data?.person} Kişi</span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.room_icon}></i>
-                        <span>
-                        {villaDetail?.data?.room} Oda
-                        </span>
+                        <span>{villaDetail?.data?.room} Oda</span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.bath_icon}></i>
-                        <span>
-                        {villaDetail?.data?.bath} Banyo
-                        </span>
+                        <span>{villaDetail?.data?.bath} Banyo</span>
                       </div>
                     </div>
                   </div>
@@ -214,25 +225,17 @@ export default function List({
                   <div className={styles.priceType}>Gecelik En Düşük</div>
                   <div className={styles.price}>
                     {" "}
-
                     {Math.min(
-                      ...villaDetail?.data?.priceTables?.map(
-                        (o) => o.price
-                      )
+                      ...villaDetail?.data?.priceTables?.map((o) => o.price)
                     )
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                      
-                      {" "}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                     TL -{" "}
                     {Math.max(
-                      ...villaDetail?.data?.priceTables?.map(
-                        (o) => o.price
-                      )
+                      ...villaDetail?.data?.priceTables?.map((o) => o.price)
                     )
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                      {" "}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                     TL
                   </div>
                 </div>
@@ -285,14 +288,8 @@ export default function List({
                       </div>
                     </div>
                   </div>
-                  <DistanceRuler
-                    data={
-                      villaDetail?.data?.distanceRulers
-                    }
-                  />
-                  <PriceTable
-                    data={villaDetail?.data?.priceTables}
-                  />
+                  <DistanceRuler data={villaDetail?.data?.distanceRulers} />
+                  <PriceTable data={villaDetail?.data?.priceTables} />
                   <Calendar
                     ready={ready}
                     dates={villaDetail?.data?.reservationCalendars || []}
@@ -302,8 +299,17 @@ export default function List({
                   <div className={styles.right}>
                     <div className={styles.general}>
                       <Reservation
-                        villaId={villaDetail?.data[0]?.id}
+                        villaId={villaId}
+                        villaName={villaName}
                         prices={villaDetail?.data?.priceTables}
+                        villaFirstPhoto={
+                          villaDetail?.data?.photos[0]?.image || null
+                        }
+                        region={
+                          villaDetail?.data?.town?.district?.name +
+                          " / " +
+                          villaDetail?.data?.town?.name
+                        }
                       />
                       {/* <FoodPackage /> */}
                     </div>
@@ -903,28 +909,31 @@ export default function List({
               </div>
             </div>
           </div>
-          {nearVillas?.data?.length > 0 && (<div className={styles.apartments}>
-            <div className={styles.container}>
-              <div className={styles.box}>
-                <div className={styles.titleBox}>
-                  <div className={styles.title}>Yakınındaki Villalar</div>
-                  <div className={styles.subTitle}>
-                    Villalarımız arasından en seçkinlerini sizler için derledik.
+          {nearVillas?.data?.length > 0 && (
+            <div className={styles.apartments}>
+              <div className={styles.container}>
+                <div className={styles.box}>
+                  <div className={styles.titleBox}>
+                    <div className={styles.title}>Yakınındaki Villalar</div>
+                    <div className={styles.subTitle}>
+                      Villalarımız arasından en seçkinlerini sizler için
+                      derledik.
+                    </div>
                   </div>
+                  <ul>
+                    {nearVillas?.data?.map((data, index) => (
+                      <VillaCard
+                        listPage={true}
+                        key={index}
+                        data={data}
+                        photos={data?.photos}
+                      />
+                    ))}
+                  </ul>
                 </div>
-                <ul>
-                  {nearVillas?.data?.map((data, index) => (
-                    <VillaCard
-                      listPage={true}
-                      key={index}
-                      data={data}
-                      photos={data?.photos}
-                    />
-                  ))}
-                </ul>
               </div>
             </div>
-          </div>)}
+          )}
         </section>
       </>
     );
@@ -937,14 +946,35 @@ export default function List({
 
 export async function getServerSideProps({ params, query }) {
   const slug = params?.slug;
-  const allCategories = await getCategories()
-  const willGetVillaDetail = allCategories?.data?.find(item => item?.slug == slug[0]) || true
-  const villa = await getAllVillaByCategoryId(allCategories?.data?.find(item=> item?.slug == slug[0])?.id) || []
+  const allCategories = await getCategories();
+  const willGetVillaDetail =
+    allCategories?.data?.find((item) => item?.slug == slug[0]) || true;
+  const villa =
+    (await getAllVillaByCategoryId(
+      allCategories?.data?.find((item) => item?.slug == slug[0])?.id
+    )) || [];
   const totalPage = 1;
-  const villaDetail = willGetVillaDetail == true ? await getVilla(slug[0]) : null;
-  const nearVillas = willGetVillaDetail == true ? await getNearVillas(villaDetail?.data?.town?.id) : [];
-  const imgs = villaDetail?.data?.photos || []
+  const villaDetail =
+    willGetVillaDetail == true ? await getVilla(slug[0]) : null;
+  const nearVillas =
+    willGetVillaDetail == true
+      ? await getNearVillas(villaDetail?.data?.town?.id)
+      : [];
+  const imgs = villaDetail?.data?.photos || [];
   return {
-    props: { villa, villaDetail, nearVillas, imgs, totalPage, allCategories, category: villaDetail == null ? allCategories?.data?.find(item=> item?.slug == slug[0]) : "yok"},
+    props: {
+      villaId: slug[0],
+      villaName: villaDetail?.data?.villaDetails[0]?.name,
+      villa,
+      villaDetail,
+      nearVillas,
+      imgs,
+      totalPage,
+      allCategories,
+      category:
+        villaDetail == null
+          ? allCategories?.data?.find((item) => item?.slug == slug[0])
+          : "yok",
+    },
   };
 }

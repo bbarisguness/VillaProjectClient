@@ -4,9 +4,19 @@ import { SendMail } from "@/utils/sendMail";
 import { dateToDotFormat } from "@/utils/date";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL
+const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
 
 const qs = require("qs");
 var async = require("async");
+
+//sonuc false dönerse villa müsait demek oluyor, true dönerse müsait değil
+async function isVillaAvailable(villaId, checkInDate, checkOutDate) {
+  const response = await fetch(`${apiUrl}/Clients/ReservationIsAvailible?VillaId=${villaId}&CheckIn=${checkInDate}&CheckOut=${checkOutDate}`, {
+    cache: "no-store",
+  });
+  const data = await response.json();
+  return data
+}
 
 async function getPrice({ villaId, checkIn, checkOut, adult, child, baby }) {
   var result = null;
@@ -246,124 +256,50 @@ async function createReservation1(person) {
 async function createReservation(
   reservationData,
   personData,
-  reservationItems,
-  transferType,
   villaName
 ) {
-  const customerTransferType = await transferType === 1 ? '110' : '100'
   // ReservationCreate.Begin
+
   const reservation = {
-    checkIn: reservationData.checkIn,
-    checkOut: reservationData.checkOut,
-    amount: reservationData.totalPrice,
-    total: reservationData.totalPrice,
-    customerPaymentType: customerTransferType,
-    villa: {
-      connect: [reservationData.villaId],
-    },
-    homeOwner: false
+    CompanyId: companyId,
+    VillaId: reservationData.villaId,
+    CheckIn: reservationData.checkIn,
+    CheckOut: reservationData.checkOut,
+    Discount: 2000,
+    IdNo: personData.idNo,
+    Name: personData.name,
+    Surname: personData.surname,
+    Phone: personData.phone,
+    Email: personData.email
   };
 
-  const response = await fetch(`${apiUrl}/reservations`, {
-    method: "POST",
-    body: JSON.stringify({
-      data: reservation,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const formData = new FormData();
+
+  Object.entries(reservation).forEach(([key, value]) => {
+    formData.append(key, value);
   });
-  // console.log("response", response);
+
+  const response = await fetch(`${apiUrl}/Clients/ReservationCreate`, {
+    method: "POST",
+    body: formData,
+  });
+
+  // const response = await fetch(`${apiUrl}/Clients/ReservationCreate`, {
+  //   method: "POST",
+  //   body: JSON.stringify({
+  //     ...reservation
+  //   }),
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+
   if (!response.ok) {
-    return false;
+    return response.json()
   }
 
-  //console.log(reservationData);
-  //console.log(personData);
-  //console.log(villaName);
-
-  const mailResult = await SendMail('template_n90pb1d', { villaName: villaName, nameAndSurname: personData.data.name + ' ' + personData.data.surname, email: personData.data.email, phone: personData.data.phone, startDate: dateToDotFormat(reservationData.checkIn), endDate: dateToDotFormat(reservationData.checkOut), to_email: "tevfikk.durmus@gmail.com" })
-
-  const reservationResult = await response.json();
-
+  const mailResult = await SendMail('template_n90pb1d', { villaName: villaName, nameAndSurname: personData.name + ' ' + personData.surname, email: personData.email, phone: personData.phone, startDate: dateToDotFormat(reservationData.checkIn), endDate: dateToDotFormat(reservationData.checkOut), to_email: "tevfikk.durmus@gmail.com" })
   // ReservationCreate.End
-
-  // ReservationInfo.Begin
-  const reservationInfo = {
-    name: personData.data.name,
-    surname: personData.data.surname,
-    idNo: personData.data.idNo,
-    phone: personData.data.phone,
-    email: personData.data.email,
-    owner: true,
-    peopleType: "Adult",
-    reservation: {
-      connect: [reservationResult.data.id],
-    },
-  };
-
-  const responseReservationInfo = await fetch(`${apiUrl}/reservation-infos`, {
-    method: "POST",
-    body: JSON.stringify({
-      data: reservationInfo,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (!responseReservationInfo.ok) {
-    await fetch(`${apiUrl}/reservations/${reservationResult.data.id}`, {
-      method: "DELETE",
-    });
-    return false;
-  }
-  const dataReservationInfo = await responseReservationInfo.json();
-  // ReservationInfo.End
-
-  reservationItems.map(async (item) => {
-    await fetch(`${apiUrl}/reservation-items`, {
-      method: "POST",
-      body: JSON.stringify({
-        data: {
-          day: item.day,
-          price: item.price,
-          reservation: {
-            connect: [reservationResult.data.id],
-          },
-        },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  });
-
-  // var reservationItems = []
-  // const localstr = JSON.parse(localStorage.getItem('reservation'))
-
-  // reservationItems = localstr.reservationItems
-  // reservationItems.map((item, i) => {
-  //     reservationItems[i] = {
-  //         day: item.day,
-  //         price: item.price,
-  //         reservation: {
-  //             connect: [data.data.id]
-  //         }
-  //     }
-  // })
-
-  // const responseReservationItem = await fetch(`${apiUrl}/reservation-items`, {
-  //     method: 'POST',
-  //     body: {
-  //         data: reservationItems
-  //     },
-  //     headers: {
-  //         'Content-Type': 'application/json'
-  //     }
-  // })
-  // const dataReservationItem = await responseReservationItem.json()
-
-  // console.log(dataReservationInfo?.data?.id);
 
   return true;
 }
@@ -376,4 +312,4 @@ async function searchReservation({ reservationNumber }) {
   return data
 }
 
-export { getPrice, createReservation, searchReservation };
+export { getPrice, createReservation, searchReservation, isVillaAvailable };
