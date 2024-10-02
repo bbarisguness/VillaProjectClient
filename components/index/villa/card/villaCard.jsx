@@ -122,7 +122,7 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                                 <div className={styles.title}>{data.villaDetails[0]?.name}</div>
                                 {data?.town ? <div className={styles.location}>{data?.town?.district?.name} / {data?.town?.name}</div> : <></>}
                                 <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
-                                {data?.priceTables?.length > 0 ? <div className={styles.price}>{Math.min(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}
+                                {data?.priceTables?.length > 0 && (data?.price == "-" || data?.price == null) ? <div className={styles.price}>{Math.min(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}
                                 {data?.price != "-" && data?.price ? <div className={styles.price}>{Math.floor(data?.price?.replace(',', '.'))}₺</div> : <></>}
                                 <div className={styles.features}>
                                     <div className={styles.colon}>

@@ -5,6 +5,7 @@ import Pagination from '@/components/pagination/Pagination';
 import { useRouter } from 'next/router';
 
 export default function Searchs({ getFilterVillas, totalPage }) {
+    console.log(getFilterVillas)
     const router = useRouter()
     const activePage = parseInt(router?.query?.p) || 1
 
