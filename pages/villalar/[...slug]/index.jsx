@@ -964,7 +964,7 @@ export async function getServerSideProps({ params, query }) {
   return {
     props: {
       villaId: slug[0],
-      villaName: villaDetail?.data?.villaDetails[0]?.name,
+      villaName: villaDetail?.data?.villaDetails[0]?.name || null,
       villa,
       villaDetail,
       nearVillas,
