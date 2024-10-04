@@ -1,12 +1,11 @@
 import VillaCard from "@/components/index/villa/card/villaCard";
 import "@/styles/styles.css";
 import Seo from "@/components/seo";
-import { getVillas } from "@/services/villa";
+import { getHotels } from "@/services/villa";
 import Pagination from "@/components/pagination/Pagination";
 import { useRouter } from "next/router";
 
-export default function List({ villas }) {
-  console.log(villas);
+export default function List({ hotels }) {
   const router = useRouter();
   const activePage = parseInt(router?.query?.p) || 1;
 
@@ -24,19 +23,19 @@ export default function List({ villas }) {
                 <div className="titleBox">
                   <div className="title">Kiralık Apartlar</div>
                   <div className="subTitle">
-                    Toplam {villas?.totalCount} adet tesis bulunmaktadır.
+                    Toplam {hotels?.totalCount} adet tesis bulunmaktadır.
                   </div>
                 </div>
               </div>
               <div className="bottom">
                 <div className="row">
                   <ul>
-                    {villas?.data.map((villa, index) => (
+                    {hotels?.data.map((hotel, index) => (
                       <VillaCard
                         listPage={true}
                         key={index}
-                        data={villa}
-                        photos={villa?.photos}
+                        data={hotel}
+                        photos={hotel?.photos}
                         from={"hotels"}
                       />
                     ))}
@@ -45,7 +44,7 @@ export default function List({ villas }) {
               </div>
               <Pagination
                 newActivePage={activePage}
-                pageCount={Math.ceil(villas?.totalCount / 20)}
+                pageCount={Math.ceil(hotels?.totalCount / 20)}
               />
             </div>
           </div>
@@ -56,6 +55,6 @@ export default function List({ villas }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const villas = await getVillas(query?.p ? query?.p - 1 : 0);
-  return { props: { villas } };
+  const hotels = await getHotels(query?.p ? query?.p - 1 : 0);
+  return { props: { hotels } };
 }

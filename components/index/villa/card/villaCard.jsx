@@ -107,19 +107,19 @@ export default function VillaCard({ data, type, from, activeCategorySlug, listPa
                         <Link href={`/apartlar/${data?.id}`}>
                             <div className={styles.imgBox}>
                                 <div className={styles.carouselBox}>
-                                    <div className={styles.bgImage} style={{ backgroundImage: photos[activeImage]?.image != undefined ? `url(${process.env.NEXT_PUBLIC_APIPHOTOS_URL+'k_'+photos[activeImage]?.image})` : "none"}}>
+                                    <div className={styles.bgImage} style={{ backgroundImage: photos[activeImage]?.image != undefined ? `url(https://villaapi.testgrande.com/uploads/hotelphotos/${'k_'+photos[activeImage]?.image})` : "none"}}>
                                         <div className={styles.imgNav}>
                                             <button onClick={(e) => imageHandler(e, "prev")}></button>
                                             <button style={{ transform: "rotate(180deg)" }} onClick={(e) => imageHandler(e, "next")}></button>
                                         </div>
                                     </div>
                                 </div>
-                                {data?.villaDetails[0]?.featureTextBlue != null && <div className={styles.cardFeatures}>{data?.villaDetails[0].featureTextBlue}</div>}
-                                {data?.villaDetails[0]?.featureTextRed != null && <div className={styles.cardFeatures2}>{data?.villaDetails[0].featureTextRed}</div>}
-                                {data?.villaDetails[0]?.featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.villaDetails[0].featureTextWhite}</div>}
+                                {data?.hotelDetails[0]?.featureTextBlue != null && <div className={styles.cardFeatures}>{data?.hotelDetails[0].featureTextBlue}</div>}
+                                {data?.hotelDetails[0]?.featureTextRed != null && <div className={styles.cardFeatures2}>{data?.hotelDetails[0].featureTextRed}</div>}
+                                {data?.hotelDetails[0]?.featureTextWhite != null && <div className={styles.cardFeatures3}>{data?.hotelDetails[0].featureTextWhite}</div>}
                             </div>
                             <div className={styles.textBox}>
-                                <div className={styles.title}>{data.villaDetails[0]?.name}</div>
+                                <div className={styles.title}>{data.hotelDetails[0]?.name}</div>
                                 {data?.town ? <div className={styles.location}>{data?.town?.district?.name} / {data?.town?.name}</div> : <></>}
                                 <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
                                 {data?.priceTables?.length > 0 && (data?.price == "-" || data?.price == null) ? <div className={styles.price}>{Math.min(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL - {Math.max(...data.priceTables.map(o => o.price)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} TL</div> : <></>}
