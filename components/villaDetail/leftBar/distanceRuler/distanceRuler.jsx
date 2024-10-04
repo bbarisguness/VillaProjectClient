@@ -2,6 +2,7 @@ import styles from "./distanceRuler.module.css"
 import Link from "next/link"
 
 export default function DistanceRuler({ data }) {
+    console.log(data)
     return (
         <>
             <div className={styles.villaDetailTitle}>Mesafe Cetveli</div>

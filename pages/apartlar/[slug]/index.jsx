@@ -3,6 +3,7 @@ import {
   getAllVillaByCategoryId,
   getVilla,
   getNearVillas,
+  getHotel,
 } from "@/services/villa";
 import "@/styles/styles.css";
 import { getCategories } from "@/services/category";
@@ -38,6 +39,7 @@ export default function List({
   villaId,
   villaName,
 }) {
+  console.log(imgs);
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(
@@ -108,10 +110,10 @@ export default function List({
     return (
       <>
         <Seo
-          pageTitle={villaDetail?.data?.villaDetails[0]?.name}
-          pageDesc={villaDetail?.data[0]?.attributes?.metaDescription}
+          pageTitle={villaDetail?.data?.hotelDetails[0]?.name}
+          pageDesc={"yok"}
         />
-        <section className={styles.breadCrumb}>
+        {/* <section className={styles.breadCrumb}>
           <div className={styles.container}>
             <div className={styles.breadCrumbBox}>
               <ul className={styles.breadCrumbList}>
@@ -131,7 +133,7 @@ export default function List({
               </ul>
             </div>
           </div>
-        </section>
+        </section> */}
         {!ismakeReservationButtonHidden && (
           <div
             onClick={() => scrolltoHash("makeReservation")}
@@ -148,7 +150,7 @@ export default function List({
               <div className={styles.box}>
                 <div className={styles.left}>
                   <div className={styles.detailTitle}>
-                    {villaDetail?.data?.villaDetails[0]?.name}
+                    {villaDetail?.data?.hotelDetails[0]?.name}
                   </div>
                   <div className={styles.villaInformation}>
                     <div className={styles.features}>
@@ -178,15 +180,11 @@ export default function List({
                   <div className={styles.priceType}>Gecelik En Düşük</div>
                   <div className={styles.price}>
                     {" "}
-                    {Math.min(
-                      ...villaDetail?.data?.priceTables?.map((o) => o.price)
-                    )
+                    {Math.min(1000)
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                     TL -{" "}
-                    {Math.max(
-                      ...villaDetail?.data?.priceTables?.map((o) => o.price)
-                    )
+                    {Math.max(2000)
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                     TL
@@ -199,7 +197,7 @@ export default function List({
             <div className={styles.container}>
               <div className={styles.productImages}>
                 <div className={styles.row}>
-                  <Gallery photos={imgs} />
+                  <Gallery photos={imgs} from="hotelList" />
                 </div>
               </div>
             </div>
@@ -213,7 +211,7 @@ export default function List({
                     <div
                       dangerouslySetInnerHTML={{
                         __html:
-                          villaDetail?.data?.villaDetails[0]?.descriptionLong,
+                          villaDetail?.data?.hotelDetails[0]?.descriptionLong,
                       }}
                       style={{ whiteSpace: "pre-line" }}
                       className={`${styles["desc"]} ${
@@ -243,12 +241,12 @@ export default function List({
                   </div>
                   <DistanceRuler data={villaDetail?.data?.distanceRulers} />
                   <PriceTable data={villaDetail?.data?.priceTables} />
-                  <Calendar
+                  {/* <Calendar
                     ready={ready}
                     dates={villaDetail?.data?.reservationCalendars || []}
-                  />
+                  /> */}
                 </div>
-                <div id="makeReservation" style={{ paddingTop: 20 }}>
+                {/* <div id="makeReservation" style={{ paddingTop: 20 }}>
                   <div className={styles.right}>
                     <div className={styles.general}>
                       <Reservation
@@ -264,10 +262,10 @@ export default function List({
                           villaDetail?.data?.town?.name
                         }
                       />
-                      {/* <FoodPackage /> */}
+                      <FoodPackage />
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -311,7 +309,7 @@ export default function List({
               </div>
             </div>
           </div>
-          <div className={styles.customerCommentsBox}>
+          {/* <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
                 <div className={styles.title}>4,91 · 11 değerlendirme</div>
@@ -425,7 +423,7 @@ export default function List({
                       </div>
                     </li>
                     <li>
-                      {/* <LightGallery
+                      <LightGallery
                           plugins={[lgZoom, lgVideo]}
                           elementClassNames={styles.videoContainer}
                         >
@@ -439,7 +437,7 @@ export default function List({
                               ></div>
                             </div>
                           </a>
-                        </LightGallery> */}
+                        </LightGallery>
 
                       <div className={styles.imageBox}>
                         <div className={styles.img}>
@@ -861,7 +859,7 @@ export default function List({
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {nearVillas?.data?.length > 0 && (
             <div className={styles.apartments}>
               <div className={styles.container}>
@@ -900,12 +898,12 @@ export default function List({
 export async function getServerSideProps({ params, query }) {
   const slug = params?.slug;
   const totalPage = 1;
-  const villaDetail = await getVilla(slug);
+  const villaDetail = await getHotel(slug);
   const imgs = villaDetail?.data?.photos || [];
   return {
     props: {
       villaId: slug,
-      villaName: villaDetail?.data?.villaDetails[0]?.name || null,
+      villaName: villaDetail?.data?.hotelDetails[0]?.name || null,
       villaDetail,
       imgs,
       totalPage,

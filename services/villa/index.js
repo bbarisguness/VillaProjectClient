@@ -19,6 +19,14 @@ async function getHotels(page = 0) {
     return data
 }
 
+async function getHotel(hotelId) {
+    const response = await fetch(`${apiUrl}/Clients/GetHotel?Id=${hotelId}&Language=tr`, {
+        cache: 'no-store'
+    })
+    const data = await response.json()
+    return data
+}
+
 async function getAllVillaByCategoryId(categoryId) {
     const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategoryId?Language=tr&CompanyId=${companyId}&CategoryId=${categoryId}`, {
         cache: 'no-store'
@@ -251,4 +259,4 @@ async function getVillasByFilter({ villaSearchText = "", checkIn = "", checkOut 
     return data
 }
 
-export { getVillas, getVillaCategory, getVilla, getNewVillas, getNearVillas, getVillasFilter, getVillasByFilter, getVillasHome, getVillasForSale, getVillaSale, getAllVillaByCategoryId, getHotels }
+export { getVillas, getVillaCategory, getVilla, getNewVillas, getNearVillas, getVillasFilter, getVillasByFilter, getVillasHome, getVillasForSale, getVillaSale, getAllVillaByCategoryId, getHotels, getHotel }
