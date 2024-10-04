@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import styles from "./mydatepicker.module.css"
+import { timeStringToDate } from "@/utils/date";
+import moment from "moment";
 
 //reservasyon tarihleri düşük aydan yükselen aya doğru gelmesi lazım
-export default function MyDatePicker({ year = 2023, dates, nowYear, currentMounth }) {
+export default function MyDatePicker({ year = 2023, dates, nowYear, currentMounth, calendarPrices }) {
     const twoDifferentYearsWillBeListed = 0-(currentMounth+1)
 
 
@@ -285,6 +287,15 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
             return day++
         }
 
+        const getCalendarPrice = () => {
+            const willPrintPrice = calendarPrices.findIndex(range => {
+                const start = new Date(range.startDate);
+                const end = new Date(range.endDate);
+                return currentDate >= start && currentDate <= end;
+              });
+            return willPrintPrice != -1 ? calendarPrices[willPrintPrice].price : ""
+        }
+
         const getRow = () => {
             let row = []
             if (!isFirstRowInEnded) {
@@ -294,8 +305,8 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                         <div key={monthsTurkish[month] + "firshRowItem" + index} className={`${styles['day']} ${!(index >= dayStartingIndex) ? styles['old'] : ''} ${index >= dayStartingIndex ? backgroundColor() : ''}`}>
                             {
                                 index >= dayStartingIndex ? <div className={`${styles['day-content']}`}>
+                                    <span className={styles.dayPrice}>{getCalendarPrice()}</span>
                                     <span>{addDay()}</span>
-                                    <span className={styles.dayPrice}>4000₺</span>
                                 </div>
                                     : undefined
                             }
@@ -320,8 +331,8 @@ export default function MyDatePicker({ year = 2023, dates, nowYear, currentMount
                         row.push(
                             <div key={monthsTurkish[month] + "notFirstRow" + index} className={`${styles['day']} ${backgroundColor()}`}>
                                 <div className={`${styles['day-content']}`}>
+                                    <span className={styles.dayPrice}>{getCalendarPrice()}</span>
                                     <span>{addDay()}</span>
-                                    <span className={styles.dayPrice}>4800₺</span>
                                 </div>
                             </div>
                         )

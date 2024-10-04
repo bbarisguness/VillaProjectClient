@@ -75,7 +75,7 @@
     height: 100%;
     display: flex;
     justify-content: space-around;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 
 .month-container .month .day .day-content .dayPrice {
@@ -87,16 +87,32 @@
     background: linear-gradient(to top left, #e8543e 50%, white 50%);
 }
 
+.month-container .month .day.day-startRed .day-content .dayPrice {
+    opacity: 0
+}
+
 .month-container .month .day.day-startOrange {
     background: linear-gradient(to top left, #ff7f27 50%, white 50%);
+}
+
+.month-container .month .day.day-startOrange .day-content .dayPrice {
+    opacity: 0
 }
 
 .month-container .month .day.day-starRedToOrange {
     background: linear-gradient(to bottom right, #ff7f27 50%, #e8543e 50%);
 }
 
+.month-container .month .day.day-starRedToOrange .day-content .dayPrice {
+    opacity: 0
+}
+
 .month-container .month .day.day-starOrangeToRed {
     background: linear-gradient(to top left, #ff7f27 50%, #e8543e 50%);
+}
+
+.month-container .month .day.day-starOrangeToRed .day-content .dayPrice {
+    opacity: 0
 }
 
 .month-container .month .day.day-endRed {
@@ -111,8 +127,16 @@
     background-color: rgb(232, 84, 62);
 }
 
+.month-container .month .day.day-continueRed .day-content .dayPrice {
+    opacity: 0
+}
+
 .month-container .month .day.day-continueOrange {
     background-color: #ff7f27;
+}
+
+.month-container .month .day.day-continueOrange .day-content .dayPrice {
+    opacity: 0
 }
 
 @media screen and (max-width: 1499px) {

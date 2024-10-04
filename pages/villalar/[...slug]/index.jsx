@@ -293,6 +293,7 @@ export default function List({
                   <Calendar
                     ready={ready}
                     dates={villaDetail?.data?.reservationCalendars || []}
+                    calendarPrices={villaDetail?.data?.prices || []}
                   />
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
