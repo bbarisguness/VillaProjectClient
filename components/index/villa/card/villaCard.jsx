@@ -275,6 +275,105 @@ export default function VillaCard({
         </li>
       );
     }
+  } else if (listPage && from == "room") {
+    //apart detay room list
+    if (data) {
+      return (
+        <li id={styles.cardContainer}>
+          <div className={styles.column}>
+            <Link href={`/odalar/${data?.id}`}>
+              <div className={styles.imgBox}>
+                <div className={styles.carouselBox}>
+                  <div
+                    className={styles.bgImage}
+                    style={{
+                      backgroundImage:
+                        photos[activeImage]?.image != undefined
+                          ? `url(${
+                              process.env.NEXT_PUBLIC_APIROOMPHOTOS_URL +
+                              "k_" +
+                              photos[activeImage]?.image
+                            })`
+                          : "none",
+                    }}
+                  >
+                    <div className={styles.imgNav}>
+                      <button onClick={(e) => imageHandler(e, "prev")}></button>
+                      <button
+                        style={{ transform: "rotate(180deg)" }}
+                        onClick={(e) => imageHandler(e, "next")}
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+                {data?.roomDetails[0]?.featureTextBlue != null && (
+                  <div className={styles.cardFeatures}>
+                    {data?.roomDetails[0].featureTextBlue}
+                  </div>
+                )}
+                {data?.roomDetails[0]?.featureTextRed != null && (
+                  <div className={styles.cardFeatures2}>
+                    {data?.roomDetails[0].featureTextRed}
+                  </div>
+                )}
+                {data?.roomDetails[0]?.featureTextWhite != null && (
+                  <div className={styles.cardFeatures3}>
+                    {data?.roomDetails[0].featureTextWhite}
+                  </div>
+                )}
+              </div>
+              <div className={styles.textBox}>
+                <div className={styles.title}>{data.roomDetails[0]?.name}</div>
+                {data?.town ? (
+                  <div className={styles.location}>
+                    {data?.town?.district?.name} / {data?.town?.name}
+                  </div>
+                ) : (
+                  <></>
+                )}
+                <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
+                {data?.priceTables?.length > 0 &&
+                (data?.price == "-" || data?.price == null) ? (
+                  <div className={styles.price}>
+                    {Math.min(...data.priceTables.map((o) => o.price))
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                    TL -{" "}
+                    {Math.max(...data.priceTables.map((o) => o.price))
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                    TL
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {data?.price != "-" && data?.price ? (
+                  <div className={styles.price}>
+                    {Math.floor(data?.price?.replace(",", "."))}₺
+                  </div>
+                ) : (
+                  <></>
+                )}
+                <div className={styles.features}>
+                  <div className={styles.colon}>
+                    <i className={styles.person_icon}></i>
+                    <span>{data.person} Kişi</span>
+                  </div>
+                  <div className={styles.colon}>
+                    <i className={styles.room_icon}></i>
+                    <span>{data.room} Oda</span>
+                  </div>
+                  <div className={styles.colon}>
+                    <i className={styles.bath_icon}></i>
+                    <span>{data.bath} Banyo</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </li>
+      );
+    }
   } else if (listPage) {
     //kiralık villalar sayfası
     if (data) {

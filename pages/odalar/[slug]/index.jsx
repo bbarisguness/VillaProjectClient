@@ -1,5 +1,5 @@
 import VillaCard from "@/components/index/villa/card/villaCard";
-import { getHotel } from "@/services/villa";
+import { getRoom } from "@/services/villa";
 import "@/styles/styles.css";
 import { useRouter } from "next/router";
 
@@ -19,41 +19,22 @@ import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";
 import { useEffect, useState } from "react";
 import Seo from "@/components/seo";
-import Pagination from "@/components/pagination/Pagination";
 import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 
 export default function List({
-  villa,
-  villaDetail,
+  roomDetail,
   nearVillas,
   imgs,
   totalPage,
-  allCategories,
-  villaId,
+  roomId,
   villaName,
 }) {
+  console.log(roomDetail);
   const router = useRouter();
-  const slug = router?.query?.slug;
-  const categorySlug = allCategories?.data?.find(
-    (item) =>
-      item?.categoryDetails[0]?.name ==
-      villaDetail?.data?.categories[0]?.categoryDetails[0]?.name
-  )?.slug;
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
     useState(false);
-
-  const activePage = parseInt(router.query.p) || 1;
-
-  function NewPagination() {
-    return (
-      <Pagination
-        newActivePage={activePage}
-        pageCount={Math.ceil(villa?.totalCount / 20)}
-      />
-    );
-  }
 
   const observeElementVisibility = function (
     element_id,
@@ -98,12 +79,12 @@ export default function List({
     );
   };
 
-  if (villaDetail) {
+  if (roomDetail?.data) {
     return (
       <>
         <Seo
-          pageTitle={villaDetail?.data?.hotelDetails[0]?.name}
-          pageDesc={"yok"}
+          pageTitle={roomDetail?.data?.roomDetails[0]?.name}
+          pageDesc={roomDetail?.data[0]?.attributes?.metaDescription}
         />
         {/* <section className={styles.breadCrumb}>
           <div className={styles.container}>
@@ -112,11 +93,11 @@ export default function List({
                 <li className={styles.breadCrumbItem}>
                   <Link href="/">Anasayfa</Link>
                 </li>
-                {villaDetail?.data?.categories[0] && (
+                {roomDetail?.data?.categories[0] && (
                   <li className={styles.breadCrumbItem}>
                     <Link href={`/villalar/${categorySlug}`}>
                       {
-                        villaDetail?.data?.categories[0]?.categoryDetails[0]
+                        roomDetail?.data?.categories[0]?.categoryDetails[0]
                           ?.name
                       }
                     </Link>
@@ -142,28 +123,28 @@ export default function List({
               <div className={styles.box}>
                 <div className={styles.left}>
                   <div className={styles.detailTitle}>
-                    {villaDetail?.data?.hotelDetails[0]?.name}
+                    {roomDetail?.data?.roomDetails[0]?.name}
                   </div>
                   <div className={styles.villaInformation}>
                     <div className={styles.features}>
                       <div className={styles.colon}>
                         <i className={styles.pin_icon}></i>
                         <span>
-                          {villaDetail?.data?.town?.district?.name} /{" "}
-                          {villaDetail?.data?.town?.name}
+                          {roomDetail?.data?.town?.district?.name} /{" "}
+                          {roomDetail?.data?.town?.name}
                         </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.person_icon}></i>
-                        <span>{villaDetail?.data?.person} Kişi</span>
+                        <span>{roomDetail?.data?.person} Kişi</span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.room_icon}></i>
-                        <span>{villaDetail?.data?.room} Oda</span>
+                        <span>{roomDetail?.data?.room} Oda</span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.bath_icon}></i>
-                        <span>{villaDetail?.data?.bath} Banyo</span>
+                        <span>{roomDetail?.data?.bath} Banyo</span>
                       </div>
                     </div>
                   </div>
@@ -172,11 +153,15 @@ export default function List({
                   <div className={styles.priceType}>Gecelik En Düşük</div>
                   <div className={styles.price}>
                     {" "}
-                    {Math.min(1000)
+                    {Math.min(
+                      ...roomDetail?.data?.priceTables?.map((o) => o.price)
+                    )
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                     TL -{" "}
-                    {Math.max(2000)
+                    {Math.max(
+                      ...roomDetail?.data?.priceTables?.map((o) => o.price)
+                    )
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                     TL
@@ -189,7 +174,7 @@ export default function List({
             <div className={styles.container}>
               <div className={styles.productImages}>
                 <div className={styles.row}>
-                  <Gallery photos={imgs} from="hotelList" />
+                  <Gallery photos={imgs} from={"roomDetail"} />
                 </div>
               </div>
             </div>
@@ -203,7 +188,7 @@ export default function List({
                     <div
                       dangerouslySetInnerHTML={{
                         __html:
-                          villaDetail?.data?.hotelDetails[0]?.descriptionLong,
+                          roomDetail?.data?.roomDetails[0]?.descriptionLong,
                       }}
                       style={{ whiteSpace: "pre-line" }}
                       className={`${styles["desc"]} ${
@@ -231,33 +216,34 @@ export default function List({
                       </div>
                     </div>
                   </div>
-                  <DistanceRuler data={villaDetail?.data?.distanceRulers} />
-                  <PriceTable data={villaDetail?.data?.priceTables} />
-                  {/* <Calendar
+                  <DistanceRuler data={roomDetail?.data?.distanceRulers} />
+                  <PriceTable data={roomDetail?.data?.priceTables} />
+                  <Calendar
                     ready={ready}
-                    dates={villaDetail?.data?.reservationCalendars || []}
-                  /> */}
+                    dates={roomDetail?.data?.reservationCalendars || []}
+                    calendarPrices={roomDetail?.data?.prices || []}
+                  />
                 </div>
-                {/* <div id="makeReservation" style={{ paddingTop: 20 }}>
+                <div id="makeReservation" style={{ paddingTop: 20 }}>
                   <div className={styles.right}>
                     <div className={styles.general}>
                       <Reservation
-                        villaId={villaId}
+                        villaId={roomId}
                         villaName={villaName}
-                        prices={villaDetail?.data?.priceTables}
+                        prices={roomDetail?.data?.priceTables}
                         villaFirstPhoto={
-                          villaDetail?.data?.photos[0]?.image || null
+                          roomDetail?.data?.photos[0]?.image || null
                         }
                         region={
-                          villaDetail?.data?.town?.district?.name +
+                          roomDetail?.data?.town?.district?.name +
                           " / " +
-                          villaDetail?.data?.town?.name
+                          roomDetail?.data?.town?.name
                         }
                       />
-                      <FoodPackage />
+                      {/* <FoodPackage /> */}
                     </div>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
@@ -275,7 +261,7 @@ export default function List({
                                             </div>
                                         </div>
                                     </li> */}
-                  {villaDetail?.data[0]?.attributes?.video && (
+                  {roomDetail?.data[0]?.attributes?.video && (
                     <li className={styles.popupImage}>
                       <div className={styles.title}>Tanıtım Videosu</div>
                       <div className={styles.box}>
@@ -301,7 +287,7 @@ export default function List({
               </div>
             </div>
           </div>
-          {/* <div className={styles.customerCommentsBox}>
+          <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
                 <div className={styles.title}>4,91 · 11 değerlendirme</div>
@@ -415,7 +401,7 @@ export default function List({
                       </div>
                     </li>
                     <li>
-                      <LightGallery
+                      {/* <LightGallery
                           plugins={[lgZoom, lgVideo]}
                           elementClassNames={styles.videoContainer}
                         >
@@ -429,7 +415,7 @@ export default function List({
                               ></div>
                             </div>
                           </a>
-                        </LightGallery>
+                        </LightGallery> */}
 
                       <div className={styles.imageBox}>
                         <div className={styles.img}>
@@ -851,23 +837,25 @@ export default function List({
                 </div>
               </div>
             </div>
-          </div> */}
-          {villaDetail?.data?.rooms?.length > 0 && (
+          </div>
+          {nearVillas?.data?.length > 0 && (
             <div className={styles.apartments}>
               <div className={styles.container}>
                 <div className={styles.box}>
                   <div className={styles.titleBox}>
-                    <div className={styles.title}>Odalar</div>
-                    <div className={styles.subTitle}>Apartımızın odaları</div>
+                    <div className={styles.title}>Yakınındaki Villalar</div>
+                    <div className={styles.subTitle}>
+                      Villalarımız arasından en seçkinlerini sizler için
+                      derledik.
+                    </div>
                   </div>
                   <ul>
-                    {villaDetail?.data?.rooms.map((data, index) => (
+                    {nearVillas?.data?.map((data, index) => (
                       <VillaCard
                         listPage={true}
-                        key={"room" + index}
+                        key={index}
                         data={data}
                         photos={data?.photos}
-                        from={"room"}
                       />
                     ))}
                   </ul>
@@ -888,13 +876,13 @@ export default function List({
 export async function getServerSideProps({ params, query }) {
   const slug = params?.slug;
   const totalPage = 1;
-  const villaDetail = await getHotel(slug);
-  const imgs = villaDetail?.data?.photos || [];
+  const roomDetail = await getRoom(slug);
+  const imgs = roomDetail?.data?.photos || [];
   return {
     props: {
-      villaId: slug,
-      villaName: villaDetail?.data?.hotelDetails[0]?.name || null,
-      villaDetail,
+      roomId: slug,
+      villaName: roomDetail?.data?.roomDetails[0]?.name,
+      roomDetail,
       imgs,
       totalPage,
     },
