@@ -228,7 +228,7 @@ export default function List({
                   <div className={styles.right}>
                     <div className={styles.general}>
                       <Reservation
-                        villaId={roomId}
+                        roomId={roomId}
                         villaName={villaName}
                         prices={roomDetail?.data?.priceTables}
                         villaFirstPhoto={

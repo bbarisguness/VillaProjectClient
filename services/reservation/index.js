@@ -10,8 +10,9 @@ const qs = require("qs");
 var async = require("async");
 
 //sonuc false dönerse villa müsait demek oluyor, true dönerse müsait değil
-async function isVillaAvailable(villaId, checkInDate, checkOutDate) {
-  const response = await fetch(`${apiUrl}/Clients/ReservationIsAvailible?VillaId=${villaId}&CheckIn=${checkInDate}&CheckOut=${checkOutDate}`, {
+//type 0 ise villa, 1 ise apart
+async function isVillaAvailable(type = 0, villaId, checkInDate, checkOutDate) {
+  const response = await fetch(`${apiUrl}/Clients/ReservationIsAvailible?${type == 0 ? 'VillaId' : 'RoomId'}=${villaId}&CheckIn=${checkInDate}&CheckOut=${checkOutDate}`, {
     cache: "no-store",
   });
   const data = await response.json();
@@ -253,7 +254,8 @@ async function createReservation1(person) {
   return data;
 }
 
-async function createReservation(
+//type 0 ise villa, 1 ise apart
+async function createReservation(type = 0,
   reservationData,
   personData,
   villaName
@@ -262,7 +264,7 @@ async function createReservation(
 
   const reservation = {
     CompanyId: companyId,
-    VillaId: reservationData.villaId,
+    [type == 0 ? 'VillaId' : 'RoomId']: type == 0 ? reservationData?.villaId : reservationData?.roomId,
     CheckIn: reservationData.checkIn,
     CheckOut: reservationData.checkOut,
     Discount: 2000,

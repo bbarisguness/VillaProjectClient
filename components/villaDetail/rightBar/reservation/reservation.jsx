@@ -16,6 +16,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function Reservation({
   villaId,
+  roomId,
   prices,
   villaName,
   villaFirstPhoto,
@@ -56,7 +57,7 @@ export default function Reservation({
 
       const items = [
         {
-          villaId,
+          villaId: villaId || roomId,
           startDate: reservationStartDate,
           endDate: reservationEndDate,
           numberOfAdults,
@@ -192,7 +193,8 @@ export default function Reservation({
       // });
       if (
         (await isVillaAvailable(
-          villaId,
+          villaId ? 0 : 1,
+          villaId || roomId,
           moment(dateRange[0]).format("YYYY-MM-DD").toString(),
           moment(dateRange[1]).format("YYYY-MM-DD").toString()
         )) == false
@@ -202,6 +204,7 @@ export default function Reservation({
           checkIn: moment(dateRange[0]).format("YYYY-MM-DD").toString(),
           checkOut: moment(dateRange[1]).format("YYYY-MM-DD").toString(),
           villaId,
+          roomId,
           villaName,
           totalPrice: 50000,
           reservationItems: [],

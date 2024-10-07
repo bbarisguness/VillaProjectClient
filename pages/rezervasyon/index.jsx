@@ -170,7 +170,6 @@ export default function Reservation() {
     var day = new Date(firstDay);
 
     while (day <= new Date(lastDay)) {
-      await console.log("Day : " + format(day, "MM/dd/yyyy"));
       day.setDate(day.getDate() + 1);
 
       // burada oluşturulan günlerin price bilgileri apiden çekilecek
@@ -225,40 +224,16 @@ export default function Reservation() {
     const reservationData = JSON.parse(localStorage.getItem("reservation"));
 
     if (transferType == 1) {
-      // rezervasyonu oluştur
-
-      // getPrice({
-      //   adult: reservationData.adult,
-      //   villaId: reservationData.villaId,
-      //   checkIn: reservationData.checkIn,
-      //   checkOut: reservationData.checkOut,
-      // }).then((res) => {
-      //   if (!res) {
-      //     alert("Seçtiğiniz Tarihler Tesisimiz Müsait Değildir..");
-      //     router.back();
-      //   } else {
-      //     createReservation(
-      //       reservationData,
-      //       personData,
-      //       reservationItems.reservationItems,
-      //       transferType,
-      //       villa?.attributes?.name
-      //     ).then((res) => {
-      //       if (res) setActiveStep(2);
-      //       else setActiveStep(0);
-      //     });
-      //   }
-      // });
-
       if (
         (await isVillaAvailable(
-          values.villaId,
+          reservationData?.villaId ? 0 : 1,
+          values?.villaId ? values?.villaId : values?.roomId,
           values.checkIn,
           values.checkOut
         )) == false
       ) {
-        //Villa müsait
         const createResponse = await createReservation(
+          reservationData?.villaId ? 0 : 1,
           reservationData,
           personData?.data,
           values.villaName
