@@ -126,6 +126,37 @@ async function getVillaCategory({ category, page, size }) {
     return data
 }
 
+//type 0 ise VillaId, 1 ise HotelId
+async function createComment(type = 0,
+    data
+) {
+    // ReservationCreate.Begin
+
+    const reservation = {
+        [type == 0 ? 'VillaId' : 'HotelId']: data?.id,
+        Title: "",
+        CommentText: "",
+        Rating: "4,5",
+        Name: "name",
+        Surname: "surname",
+        Phone: "phone",
+        Email: "email"
+    };
+
+    const formData = new FormData();
+
+    Object.entries(reservation).forEach(([key, value]) => {
+        formData.append(key, value);
+    });
+
+    const response = await fetch(`${apiUrl}/Clients/CreateComment`, {
+        method: "POST",
+        body: formData,
+    });
+    return response.json()
+    // ReservationCreate.End
+}
+
 async function getNewVillas() {
     const today = new Date()
     const isoDate = today.toISOString()
@@ -265,4 +296,4 @@ async function getVillasByFilter({ villaSearchText = "", checkIn = "", checkOut 
     return data
 }
 
-export { getVillas, getVillaCategory, getVilla, getNewVillas, getNearVillas, getVillasFilter, getVillasByFilter, getVillasHome, getVillasForSale, getVillaSale, getAllVillaByCategoryId, getHotels, getHotel, getRoom }
+export { getVillas, getVillaCategory, getVilla, getNewVillas, getNearVillas, getVillasFilter, getVillasByFilter, getVillasHome, getVillasForSale, getVillaSale, getAllVillaByCategoryId, getHotels, getHotel, getRoom, createComment }

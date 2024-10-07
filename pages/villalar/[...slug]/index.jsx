@@ -3,6 +3,7 @@ import {
   getAllVillaByCategoryId,
   getVilla,
   getNearVillas,
+  createComment
 } from "@/services/villa";
 import "@/styles/styles.css";
 import { getCategories } from "@/services/category";
@@ -60,6 +61,11 @@ export default function List({
       />
     );
   }
+
+  const handleSendComment = async (e) => {
+    e.preventDefault();
+    const response = await createComment()
+  };
 
   const observeElementVisibility = function (
     element_id,
@@ -900,7 +906,9 @@ export default function List({
                   <div className={styles.linkBox}>
                     <a
                       href="#"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={(e) => {
+                        handleSendComment(e);
+                      }}
                       className={`${styles["blueButtonArrow"]} ${styles["sendCommentForm"]}`}
                     >
                       <span>Yorumu Gönder</span>
