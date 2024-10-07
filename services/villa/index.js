@@ -158,19 +158,18 @@ async function getNewVillas() {
     return data
 }
 
-async function getRandomFourVilla(data) {
-    console.log("getRandomFourVilla function", data)
-    if (data?.data?.length <= 4) {
-        return data
+async function getRandomFourVilla(data, currentVillaId) {
+    let withoutCurrentVillaData = data.data.filter(item => item.id != currentVillaId)
+    if (withoutCurrentVillaData.length <= 4) {
+        return withoutCurrentVillaData
     }
 
-    let villas = data
     let randomFourVilla = []
 
     for (let index = 0; index < 4; index++) {
-        let randomIndex = Math.floor(Math.random() * villas.data.length)
-        randomFourVilla.push(villas.data[randomIndex])
-        villas.data.splice(randomIndex, 1)
+        let randomIndex = Math.floor(Math.random() * withoutCurrentVillaData.length)
+        randomFourVilla.push(withoutCurrentVillaData[randomIndex])
+        withoutCurrentVillaData.splice(randomIndex, 1)
     }
 
     return {
@@ -178,13 +177,12 @@ async function getRandomFourVilla(data) {
     }
 }
 
-async function getNearVillas(townId) {
-    console.log(townId)
+async function getNearVillas(townId, currentVillaId) {
     const response = await fetch(`${apiUrl}/Clients/GetAllVillaNearby?CompanyId=${companyId}&Language=tr&TownId=${townId}&Size=4`, {
         cache: 'no-store'
     })
     const data = await response.json()
-    return await getRandomFourVilla(data)
+    return await getRandomFourVilla(data, currentVillaId)
 }
 
 

@@ -38,7 +38,6 @@ export default function List({
   villaId,
   villaName,
 }) {
-  console.log(nearVillas);
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(
@@ -911,7 +910,7 @@ export default function List({
               </div>
             </div>
           </div>
-          {nearVillas?.data?.length > 0 && (
+          {nearVillas?.length > 0 && (
             <div className={styles.apartments}>
               <div className={styles.container}>
                 <div className={styles.box}>
@@ -923,7 +922,7 @@ export default function List({
                     </div>
                   </div>
                   <ul>
-                    {nearVillas?.data?.map((data, index) => (
+                    {nearVillas?.map((data, index) => (
                       <VillaCard
                         listPage={true}
                         key={index}
@@ -960,7 +959,7 @@ export async function getServerSideProps({ params, query }) {
     willGetVillaDetail == true ? await getVilla(slug[0]) : null;
   const nearVillas =
     willGetVillaDetail == true
-      ? await getNearVillas(villaDetail?.data?.town?.id)
+      ? await getNearVillas(villaDetail?.data?.town?.id, slug[0])
       : [];
   const imgs = villaDetail?.data?.photos || [];
   return {
