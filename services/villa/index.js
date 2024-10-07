@@ -159,19 +159,19 @@ async function getNewVillas() {
 }
 
 async function getRandomFourVilla(data) {
-    console.log(data)
-    if (data?.data?.length < 4) {
+    console.log("getRandomFourVilla function", data)
+    if (data?.data?.length <= 4) {
         return data
     }
 
     let villas = data
     let randomFourVilla = []
 
-    // for (let index = 0; index < 4; index++) {
-    //     let randomIndex = Math.floor(Math.random() * villas.data.length)
-    //     randomFourVilla.push(villas.data[randomIndex])
-    //     villas.data.splice(randomIndex, 1)
-    // }
+    for (let index = 0; index < 4; index++) {
+        let randomIndex = Math.floor(Math.random() * villas.data.length)
+        randomFourVilla.push(villas.data[randomIndex])
+        villas.data.splice(randomIndex, 1)
+    }
 
     return {
         data: randomFourVilla
@@ -179,7 +179,7 @@ async function getRandomFourVilla(data) {
 }
 
 async function getNearVillas(townId) {
-    console.log("townIn ", townId)
+    console.log(townId)
     const response = await fetch(`${apiUrl}/Clients/GetAllVillaNearby?CompanyId=${companyId}&Language=tr&TownId=${townId}&Size=4`, {
         cache: 'no-store'
     })

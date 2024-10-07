@@ -38,6 +38,7 @@ export default function List({
   villaId,
   villaName,
 }) {
+  console.log(nearVillas);
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(
