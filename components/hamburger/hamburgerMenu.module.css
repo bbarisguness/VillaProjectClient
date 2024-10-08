@@ -1,4 +1,4 @@
-.hamburgerMenu {
+/* .hamburgerMenu {
     width: 100%;
     height: 100vh;
     background: rgba(2, 4, 74, 0.45);
@@ -8,9 +8,37 @@
     z-index: 99;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     opacity: 0;
     visibility: hidden;
     transition: all .4s ease-in-out;
+} */
+
+
+.openMenuDark {
+    background: #0006;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.hamburgerMenu {
+    width: 412px;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* font-family: "Poppins", sans-serif; */
+    /* left: -100%; */
+    transition: all .4s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .hamburgerMenu.active {
@@ -22,14 +50,25 @@
     right: 0;
 }
 
-.hamburgerMenu .hamburgerMenuBox {
+/* .hamburgerMenu .hamburgerMenuBox {
     width: 410px;
-    height: 100%;
+    height: 95%;
     background: #ffffff;
     padding: 30px 60px;
     display: flex;
     flex-direction: column;
     position: relative;
+} */
+
+.hamburgerMenu .hamburgerMenuBox {
+    width: 95%;
+    height: 95%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px 60px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .hamburgerMenu .hamburgerMenuBox .menuCloseBox {
@@ -146,8 +185,12 @@
 }
 
 @media screen and (max-width: 767px) {
+    .hamburgerMenu {
+        width: 95%;
+    }
+
     .hamburgerMenu .hamburgerMenuBox {
-        width: 100%;
+        width: 95%;
         padding: 30px 30px;
     }
 

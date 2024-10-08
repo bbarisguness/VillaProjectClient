@@ -25,55 +25,58 @@ export default function HamburgerMenu() {
         })
     }, [])
     return (
-        <section className={`${styles["hamburgerMenu"]} ${isHamburgerMenuActive ? styles["active"] : ""}`}>
-            <div className={styles.hamburgerMenuBox}>
-                <div className={styles.menuCloseBox}>
-                    <div onClick={closeMenu} className={styles.menuClose}></div>
-                </div>
-                <div className={styles.hmMenu}>
-                    <ul className={styles.hmMenuUl}>
-                        <li className={styles.hmMenuLi}>
-                            <Link onClick={closeMenu} href="/" className={styles.hmMenuLink}>ANASAYFA</Link>
-                        </li>
-                        <li onClick={() => setMenu1(!menu1)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu1 ? styles["open"] : ""}`}>
-                            <Link href="#" onClick={e=> e.preventDefault()} className={styles.hmMenuLink}>KİRALIK VİLLALAR</Link>
-                            <ul style={{ marginTop: menu1 ? '24px' : 0 }}>
-                                {/* <li><Link href="villalar/balayi-villalari">Balayı Villaları</Link></li>
+        <>
+            <div className={`${(isHamburgerMenuActive) && styles.openMenuDark}`}></div>
+            <section className={`${styles["hamburgerMenu"]} ${isHamburgerMenuActive ? styles["active"] : ""}`}>
+                <div className={styles.hamburgerMenuBox}>
+                    <div className={styles.menuCloseBox}>
+                        <div onClick={closeMenu} className={styles.menuClose}></div>
+                    </div>
+                    <div className={styles.hmMenu}>
+                        <ul className={styles.hmMenuUl}>
+                            <li className={styles.hmMenuLi}>
+                                <Link onClick={closeMenu} href="/" className={styles.hmMenuLink}>ANASAYFA</Link>
+                            </li>
+                            <li onClick={() => setMenu1(!menu1)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu1 ? styles["open"] : ""}`}>
+                                <Link href="#" onClick={e => e.preventDefault()} className={styles.hmMenuLink}>KİRALIK VİLLALAR</Link>
+                                <ul style={{ marginTop: menu1 ? '24px' : 0 }}>
+                                    {/* <li><Link href="villalar/balayi-villalari">Balayı Villaları</Link></li>
                                 <li><Link href="#">Popüler Villalar</Link></li>
                                 <li><Link href="#">Çocuk Havuzlu Villalar</Link></li>
                                 <li><Link href="#">Ekonomik Manzaralı</Link></li>
                                 <li><Link href="#">Korunaklı Villalar</Link></li>
                                 <li><Link href="#">Kış Aylarına Uygun</Link></li> */}
-                                <li><Link onClick={closeMenu} href={`/villalar`}>Tüm Villalar</Link></li>
-                                {
-                                    category.map((item, i) => {
-                                        return (
-                                            <li key={i}><Link onClick={closeMenu} href={`/villalar/${item?.slug}`}>{item?.categoryDetails[0]?.name}</Link></li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                        </li>
-                        <li className={styles.hmMenuLi}>
-                            <Link onClick={closeMenu} href="#" className={styles.hmMenuLink}>KİRALIK APARTLAR</Link>
-                        </li>
-                        <li className={styles.hmMenuLi}>
-                            <Link onClick={closeMenu} href="#" className={styles.hmMenuLink}>YARDIM / DESTEK</Link>
-                        </li>
-                        <li className={styles.hmMenuLi}>
-                            <Link onClick={closeMenu} href="/iletisim" className={styles.hmMenuLink}>İLETİŞİM</Link>
-                        </li>
-                        <li onClick={() => setMenu2(!menu2)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu2 ? styles["open"] : ""}`}>
-                            <Link href="#" onClick={e=> e.preventDefault()} className={styles.hmMenuLink}>KURUMSAL</Link>
-                            <ul>
-                                <li>
-                                    <Link onClick={closeMenu} href="/hakkimizda">Hakkımızda</Link>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div >
-        </section >
+                                    <li><Link onClick={closeMenu} href={`/villalar`}>Tüm Villalar</Link></li>
+                                    {
+                                        category.map((item, i) => {
+                                            return (
+                                                <li key={i}><Link onClick={closeMenu} href={`/villalar/${item?.slug}`}>{item?.categoryDetails[0]?.name}</Link></li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </li>
+                            <li className={styles.hmMenuLi}>
+                                <Link onClick={closeMenu} href="#" className={styles.hmMenuLink}>KİRALIK APARTLAR</Link>
+                            </li>
+                            <li className={styles.hmMenuLi}>
+                                <Link onClick={closeMenu} href="#" className={styles.hmMenuLink}>YARDIM / DESTEK</Link>
+                            </li>
+                            <li className={styles.hmMenuLi}>
+                                <Link onClick={closeMenu} href="/iletisim" className={styles.hmMenuLink}>İLETİŞİM</Link>
+                            </li>
+                            <li onClick={() => setMenu2(!menu2)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu2 ? styles["open"] : ""}`}>
+                                <Link href="#" onClick={e => e.preventDefault()} className={styles.hmMenuLink}>KURUMSAL</Link>
+                                <ul>
+                                    <li>
+                                        <Link onClick={closeMenu} href="/hakkimizda">Hakkımızda</Link>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div >
+            </section >
+        </>
     )
 }
