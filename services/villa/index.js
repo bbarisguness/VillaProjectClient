@@ -135,12 +135,12 @@ async function createComment(type = 0,
     const reservation = {
         [type == 0 ? 'VillaId' : 'HotelId']: data?.id,
         Title: "",
-        CommentText: "",
-        Rating: "4,5",
-        Name: "name",
-        Surname: "surname",
-        Phone: "phone",
-        Email: "email"
+        CommentText: data?.form_message,
+        Rating: data?.form_rating,
+        Name: data?.form_name,
+        Surname: data?.form_surname,
+        Phone: data?.form_phone,
+        Email: data?.form_email
     };
 
     const formData = new FormData();

@@ -511,7 +511,7 @@
   display: flex;
 }
 
-.linkBox a {
+.linkBox button {
   padding: 15px 25px;
   display: flex;
   justify-content: center;
@@ -523,38 +523,39 @@
   color: #7e53f9;
   position: relative;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-.linkBox a.blueButton {
+.linkBox button.blueButton {
   background: #3e2093;
   color: #ffffff;
   padding: 15px 45px;
 }
 
-.linkBox a.blueButton:after {
+.linkBox button.blueButton:after {
   background: #7e53f9;
 }
 
-.linkBox a.blueButtonArrow {
+.linkBox button.blueButtonArrow {
   background: #3e2093;
   color: #ffffff;
   padding: 18px 90px 18px 60px;
   position: relative;
 }
 
-.linkBox a.blueButtonArrow:hover {
+.linkBox button.blueButtonArrow:hover {
   color: #7e53f9;
 }
 
-.linkBox a.blueButtonArrow:hover::before {
+.linkBox button.blueButtonArrow:hover::before {
   right: 50px;
 }
 
-.linkBox a.blueButtonArrow::after {
+.linkBox button.blueButtonArrow::after {
   background: #7e53f9;
 }
 
-.linkBox a.blueButtonArrow::before {
+.linkBox button.blueButtonArrow::before {
   content: "";
   background-image: url("/images/right-arrow-white.png");
   width: 8px;
@@ -568,11 +569,11 @@
   transition: right 0.2s ease-in-out;
 }
 
-.linkBox a.blueButtonArrow span {
+.linkBox button.blueButtonArrow span {
   color: #ffffff;
 }
 
-.linkBox a:after {
+.linkBox button:after {
   position: absolute;
   transition: 0.3s;
   content: "";
@@ -586,17 +587,17 @@
   z-index: 1;
 }
 
-.linkBox a:hover {
+.linkBox button:hover {
   color: #ffffff;
 }
 
-.linkBox a:hover:after {
+.linkBox button:hover:after {
   left: -10%;
   right: auto;
   width: 120%;
 }
 
-.linkBox a span {
+.linkBox button span {
   position: relative;
   z-index: 2;
   display: flex;
@@ -1594,4 +1595,10 @@ section.villaDetail
   .makeAReservation {
     display: flex;
   }
+}
+
+.inputFeedback {
+  color: red;
+  margin-top: 0.25rem;
+  font-size: 15px;
 }

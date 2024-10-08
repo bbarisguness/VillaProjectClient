@@ -1,5 +1,5 @@
 import VillaCard from "@/components/index/villa/card/villaCard";
-import { getRoom } from "@/services/villa";
+import { getRoom, createComment } from "@/services/villa";
 import "@/styles/styles.css";
 import { useRouter } from "next/router";
 
@@ -20,6 +20,9 @@ import lgVideo from "lightgallery/plugins/video";
 import { useEffect, useState } from "react";
 import Seo from "@/components/seo";
 import VideoWithComment from "@/components/villaDetail/VideoWithComment";
+import { Rating } from "react-simple-star-rating";
+import * as Yup from "yup";
+import { Formik } from "formik";
 
 export default function List({
   roomDetail,
@@ -29,10 +32,10 @@ export default function List({
   roomId,
   villaName,
 }) {
-  console.log(roomDetail);
   const router = useRouter();
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
+  const [rating, setRating] = useState(0);
   const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
     useState(false);
 
@@ -58,6 +61,11 @@ export default function List({
 
       observer.observe(element); // Elementi gözlemlemeye başla
     }
+  };
+
+  const handleRating = (rate) => {
+    setRating(rate);
+    // other logic
   };
 
   const scrolltoHash = function (element_id) {
@@ -750,90 +758,193 @@ export default function List({
                       </li>
                     </ul>
                   </div>
-                  <form id={styles.commentForm}>
-                    <ul>
-                      <li className={styles.full}>
-                        <div className={styles.inputBox}>
-                          <div className={styles.inputName}>
-                            Villa için Yorumunuz
-                          </div>
-                          <textarea
-                            id="form_message"
-                            name="form_message"
-                            rows="4"
-                            cols="50"
-                            placeholder="•••"
-                            required
-                          ></textarea>
+                  <Formik
+                    initialValues={{
+                      form_email: "",
+                      form_name: "",
+                      form_surname: "",
+                      form_phone: "",
+                      form_message: "",
+                      form_rating: 0,
+                    }}
+                    validationSchema={Yup.object({
+                      form_email: Yup.string().required(
+                        "Bu alan boş bırakılamaz"
+                      ),
+                      form_name: Yup.string().required(
+                        "Bu alan boş bırakılamaz"
+                      ),
+                      form_surname: Yup.string().required(
+                        "Bu alan boş bırakılamaz"
+                      ),
+                      form_phone: Yup.string().required(
+                        "Bu alan boş bırakılamaz"
+                      ),
+                      form_message: Yup.string().required(
+                        "Bu alan boş bırakılamaz"
+                      ),
+                      form_rating: Yup.number()
+                        .transform((value, originalValue) =>
+                          originalValue === "" ? null : value
+                        )
+                        .required("Puan verin")
+                        .min(0.5, "Lütfen puan verin"),
+                    })}
+                    onSubmit={async (values, { resetForm }) => {
+                      const response = await createComment(1, {
+                        ...values,
+                        id: roomId,
+                      });
+                      if (response.statusCode == 200) {
+                        alert("Yorum gönderildi");
+                        resetForm();
+                      }
+                    }}
+                  >
+                    {({
+                      values,
+                      errors,
+                      handleChange,
+                      handleSubmit,
+                      handleReset,
+                      dirty,
+                      isSubmitting,
+                      touched,
+                      setFieldValue,
+                    }) => (
+                      <form id={styles.commentForm} onSubmit={handleSubmit}>
+                        <ul>
+                          <li
+                            className={styles.full}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <span style={{ fontSize: 22 }}>Puanınız</span>
+                            <Rating
+                              transition
+                              onClick={(value) => {
+                                handleRating(value);
+                                setFieldValue("form_rating", value);
+                              }}
+                              allowFraction
+                            />
+                            {errors.form_rating && touched.form_rating && (
+                              <div className={styles.inputFeedback}>
+                                {errors.form_rating}
+                              </div>
+                            )}
+                          </li>
+                          <li className={styles.full}>
+                            <div className={styles.inputBox}>
+                              <div className={styles.inputName}>
+                                Villa için Yorumunuz
+                              </div>
+                              <textarea
+                                name="form_message"
+                                rows="4"
+                                cols="50"
+                                placeholder="•••"
+                                value={values.form_message}
+                                onChange={handleChange}
+                              ></textarea>
+                              {errors.form_message && touched.form_message && (
+                                <div className={styles.inputFeedback}>
+                                  {errors.form_message}
+                                </div>
+                              )}
+                            </div>
+                          </li>
+                          <li>
+                            <div className={styles.inputBox}>
+                              <div className={styles.inputName}>Ad</div>
+                              <input
+                                name="form_name"
+                                value={values.form_name}
+                                onChange={handleChange}
+                                type="text"
+                                className={styles.form_name}
+                                placeholder="•••••"
+                              />
+                              {errors.form_name && touched.form_name && (
+                                <div className={styles.inputFeedback}>
+                                  {errors.form_name}
+                                </div>
+                              )}
+                            </div>
+                          </li>
+                          <li>
+                            <div className={styles.inputBox}>
+                              <div className={styles.inputName}>Soyad</div>
+                              <input
+                                type="text"
+                                className={styles.form_surname}
+                                name="form_surname"
+                                placeholder="•••••"
+                                onChange={handleChange}
+                                value={values.form_surname}
+                              />
+                              {errors.form_surname && touched.form_surname && (
+                                <div className={styles.inputFeedback}>
+                                  {errors.form_surname}
+                                </div>
+                              )}
+                            </div>
+                          </li>
+                          <li>
+                            <div className={styles.inputBox}>
+                              <div className={styles.inputName}>
+                                Telefon Numaranız
+                              </div>
+                              <input
+                                type="text"
+                                className={styles.form_phone}
+                                name="form_phone"
+                                placeholder="(•••) ••• •• ••"
+                                onChange={handleChange}
+                                value={values.form_phone}
+                              />
+                              {errors.form_phone && touched.form_phone && (
+                                <div className={styles.inputFeedback}>
+                                  {errors.form_phone}
+                                </div>
+                              )}
+                            </div>
+                          </li>
+                          <li>
+                            <div className={styles.inputBox}>
+                              <div className={styles.inputName}>
+                                Email Adresiniz
+                              </div>
+                              <input
+                                type="text"
+                                className={styles.form_email}
+                                name="form_email"
+                                placeholder="•••••••••"
+                                onChange={handleChange}
+                                value={values.form_email}
+                              />
+                              {errors.form_email && touched.form_email && (
+                                <div className={styles.inputFeedback}>
+                                  {errors.form_email}
+                                </div>
+                              )}
+                            </div>
+                          </li>
+                        </ul>
+                        <div className={styles.linkBox}>
+                          <button
+                            type={"submit"}
+                            className={`${styles["blueButtonArrow"]} ${styles["sendCommentForm"]}`}
+                          >
+                            <span>Yorumu Gönder</span>
+                          </button>
                         </div>
-                      </li>
-                      <li>
-                        <div className={styles.inputBox}>
-                          <div className={styles.inputName}>Ad</div>
-                          <input
-                            type="text"
-                            className={styles.form_name}
-                            id="form_name"
-                            name="form_name"
-                            placeholder="•••••"
-                            required
-                          />
-                        </div>
-                      </li>
-                      <li>
-                        <div className={styles.inputBox}>
-                          <div className={styles.inputName}>Soyad</div>
-                          <input
-                            type="text"
-                            className={styles.form_surname}
-                            id="form_surname"
-                            name="form_surname"
-                            placeholder="•••••"
-                            required
-                          />
-                        </div>
-                      </li>
-                      <li>
-                        <div className={styles.inputBox}>
-                          <div className={styles.inputName}>
-                            Telefon Numaranız
-                          </div>
-                          <input
-                            type="text"
-                            className={styles.form_phone}
-                            id="form_phone"
-                            name="form_phone"
-                            placeholder="(•••) ••• •• ••"
-                            required
-                          />
-                        </div>
-                      </li>
-                      <li>
-                        <div className={styles.inputBox}>
-                          <div className={styles.inputName}>
-                            Email Adresiniz
-                          </div>
-                          <input
-                            type="text"
-                            className={styles.form_email}
-                            id="form_email"
-                            name="form_email"
-                            placeholder="•••••••••"
-                            required
-                          />
-                        </div>
-                      </li>
-                    </ul>
-                  </form>
-                  <div className={styles.linkBox}>
-                    <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className={`${styles["blueButtonArrow"]} ${styles["sendCommentForm"]}`}
-                    >
-                      <span>Yorumu Gönder</span>
-                    </a>
-                  </div>
+                      </form>
+                    )}
+                  </Formik>
                 </div>
               </div>
             </div>
