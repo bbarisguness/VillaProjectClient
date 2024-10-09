@@ -793,7 +793,7 @@ export default function List({
                     onSubmit={async (values, { resetForm }) => {
                       const response = await createComment(1, {
                         ...values,
-                        id: roomId,
+                        id: roomDetail?.data?.hotelId,
                       });
                       if (response.statusCode == 200) {
                         alert("Yorum gönderildi");
