@@ -42,6 +42,7 @@ export default function List({
   villaId,
   villaName,
 }) {
+  console.log(villa);
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(
@@ -61,15 +62,6 @@ export default function List({
     setRating(rate);
     // other logic
   };
-
-  function NewPagination() {
-    return (
-      <Pagination
-        newActivePage={activePage}
-        pageCount={Math.ceil(villa?.totalCount / 20)}
-      />
-    );
-  }
 
   const observeElementVisibility = function (
     element_id,
@@ -149,15 +141,13 @@ export default function List({
                     </ul>
                   </div>
                 </div>
-                {/* <Pagination
-                  setNewActivePage={setNewActivePage}
-                  newActivePage={newActivePage}
-                  pageCount={villaData.meta.pagination.pageCount}
-                /> */}
+                <Pagination
+                  newActivePage={activePage}
+                  pageCount={Math.ceil(villa?.totalCount / 20)}
+                />
               </div>
             </div>
           </div>
-          {villa?.data?.length > 0 && <NewPagination />}
         </section>
       </>
     );
@@ -1065,7 +1055,8 @@ export async function getServerSideProps({ params, query }) {
     allCategories?.data?.find((item) => item?.slug == slug[0]) || true;
   const villa =
     (await getAllVillaByCategoryId(
-      allCategories?.data?.find((item) => item?.slug == slug[0])?.id
+      allCategories?.data?.find((item) => item?.slug == slug[0])?.id,
+      query?.p ? query?.p - 1 : 0
     )) || [];
   const totalPage = 1;
   const villaDetail =

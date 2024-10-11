@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import { createReservation } from "@/services/reservation";
 import { getPrice, isVillaAvailable } from "@/services/reservation";
 import Seo from "@/components/seo";
+import moment from "moment";
 
 export default function Reservation() {
   const router = useRouter();
@@ -49,6 +50,11 @@ export default function Reservation() {
     setreservationItems(
       JSON.parse(localStorage.getItem("reservation")) || null
     );
+
+    return () => {
+      localStorage.removeItem("reservation");
+      localStorage.removeItem("personInfo");
+    };
   }, []);
 
   //localstoragede ilgili veri yok ise geri anasayfaya yönlendirilir
@@ -240,8 +246,6 @@ export default function Reservation() {
         );
         if (createResponse == true) {
           setActiveStep(2);
-          localStorage.removeItem("reservation");
-          localStorage.removeItem("personInfo");
         } else {
           alert(createResponse?.message || "Bir sorun oluştu");
         }
@@ -864,7 +868,20 @@ export default function Reservation() {
                       <li>
                         <div className={styles.priceBox}>
                           <span>
-                            {reservationItems?.reservationItems?.length} Gece{" "}
+                            {moment
+                              .duration(
+                                moment(
+                                  reservationItems?.checkOut,
+                                  "YYYY-MM-DD"
+                                ).diff(
+                                  moment(
+                                    reservationItems?.checkIn,
+                                    "YYYY-MM-DD"
+                                  )
+                                )
+                              )
+                              .asDays()}{" "}
+                            Gece{" "}
                           </span>
                           <span>
                             {[reservationItems?.totalPrice]

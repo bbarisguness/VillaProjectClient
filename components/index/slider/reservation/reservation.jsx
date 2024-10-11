@@ -110,9 +110,8 @@ export default function ReservationBox() {
     if (openDate) setDateClickCount(1);
     if (!openDate) setDateClickCount1(0);
 
-    if(!openDate){
-      if(dateRange[1] == null)
-        setDateRange([])
+    if (!openDate) {
+      if (dateRange[1] == null) setDateRange([]);
     }
   }, [openDate]);
 
@@ -149,9 +148,9 @@ export default function ReservationBox() {
   const handleSearch = () => {
     let startDate, endDate;
 
-    if(dateRange.length > 0){
-      startDate = moment(dateRange[0]).format('DD-M-YYYY').toString()
-      endDate = moment(dateRange[1]).format('DD-M-YYYY').toString()
+    if (dateRange.length > 0) {
+      startDate = moment(dateRange[0]).format("DD-M-YYYY").toString();
+      endDate = moment(dateRange[1]).format("DD-M-YYYY").toString();
     }
 
     // router.replace({
@@ -162,11 +161,7 @@ export default function ReservationBox() {
     //   },
     // });
 
-    if (
-      dateRange.length == 2 &&
-      filterText !== "" &&
-      numberOfAdults1 !== 0
-    ) {
+    if (dateRange.length == 2 && filterText !== "" && numberOfAdults1 !== 0) {
       router.replace({
         pathname: "/searchs",
         query: {
@@ -318,7 +313,7 @@ export default function ReservationBox() {
         style={{ position: "relative" }}
         className={`${styles["colon"]} ${styles["location"]}`}
       >
-        <div className={styles.colonTitle}>Villa Adı</div>
+        <div className={styles.colonTitle}>Tesis Ara</div>
         <div className={styles.colonInput}>
           <i className={styles.searchIcon} />
           <input
@@ -326,7 +321,7 @@ export default function ReservationBox() {
             ref={inputRefVillaName}
             onChange={(e) => setFilterText(e.target.value)}
             type="text"
-            placeholder="Villa Adı"
+            placeholder="Tesis Adı"
           />
         </div>
         <div
@@ -377,7 +372,7 @@ export default function ReservationBox() {
             onChange={(update) => {
               setDateRange(update);
             }}
-            monthsShown={2}            
+            monthsShown={2}
             locale={tr}
             minDate={new Date()}
           />
@@ -389,7 +384,7 @@ export default function ReservationBox() {
             placeholder={datePlaceHolder}
           /> */}
         </div>
-          {/* <DateRange
+        {/* <DateRange
             locale={tr}
             editableDateInputs={true}
             onChange={(item) => setReservationDate(item.selection)}
