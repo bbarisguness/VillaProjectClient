@@ -17,6 +17,7 @@ export default function VillaCard({
   categories,
   homeVillasActiveImage,
   setHomeVillasActiveImage,
+  nightLength
 }) {
   const router = useRouter();
   const currentPriceTypeText = priceTypes?.find(
@@ -437,7 +438,7 @@ export default function VillaCard({
                 )}
                 <div className={styles.priceTitle}>
                   {data?.price != "-" && data?.price
-                    ? "Toplam Fiyat"
+                    ? nightLength ? `Toplam Fiyat (${nightLength}) Gece` : `Toplam Fiyat`
                     : "Günlük Fiyat Aralığı"}
                 </div>
                 {data?.priceTables?.length > 0 &&

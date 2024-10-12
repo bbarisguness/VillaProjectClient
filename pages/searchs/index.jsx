@@ -21,9 +21,7 @@ export default function Searchs({ getFilterVillas, totalPage }) {
             <div className="box">
               <div className="top">
                 <div className="titleBox">
-                  <div className="title">
-                    {nightLength} Gece İçin Arama Sonuçları
-                  </div>
+                  <div className="title">Arama Sonuçları</div>
                   <div className="subTitle">
                     Toplam {getFilterVillas?.totalCount} adet tesis
                     bulunmaktadır.
@@ -35,6 +33,7 @@ export default function Searchs({ getFilterVillas, totalPage }) {
                   <ul>
                     {getFilterVillas?.data.map((villa, index) => (
                       <VillaCard
+                        nightLength={nightLength || null}
                         from={"search"}
                         key={index}
                         data={villa}
