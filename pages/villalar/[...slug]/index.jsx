@@ -30,6 +30,7 @@ import { useEffect, useState } from "react";
 import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
 import VideoWithComment from "@/components/villaDetail/VideoWithComment";
+import { priceTypes } from "@/data/data";
 
 export default function List({
   villa,
@@ -42,7 +43,9 @@ export default function List({
   villaId,
   villaName,
 }) {
-  console.log(villa);
+  const currentPriceTypeText = priceTypes?.find(
+    (item) => item?.type == villaDetail?.data?.priceType
+  )?.text;
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(
@@ -224,19 +227,18 @@ export default function List({
                 <div className={styles.right}>
                   <div className={styles.priceType}>Gecelik En Düşük</div>
                   <div className={styles.price}>
-                    {" "}
+                    {currentPriceTypeText}
                     {Math.min(
                       ...villaDetail?.data?.priceTables?.map((o) => o.price)
                     )
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL -{" "}
+                    -{currentPriceTypeText}
                     {Math.max(
                       ...villaDetail?.data?.priceTables?.map((o) => o.price)
                     )
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL
                   </div>
                 </div>
               </div>
@@ -294,12 +296,14 @@ export default function List({
                     ready={ready}
                     dates={villaDetail?.data?.reservationCalendars || []}
                     calendarPrices={villaDetail?.data?.prices || []}
+                    priceTypeText={currentPriceTypeText}
                   />
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
                   <div className={styles.right}>
                     <div className={styles.general}>
                       <Reservation
+                        priceTypeText={currentPriceTypeText}
                         villaId={villaId}
                         villaName={villaName}
                         prices={villaDetail?.data?.priceTables}

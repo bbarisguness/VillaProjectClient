@@ -2,6 +2,7 @@ import styles from "./villaCard.module.css";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { priceTypes } from "@/data/data";
 //import { getPhotosVilla } from "@/services/photo"
 
 export default function VillaCard({
@@ -18,6 +19,9 @@ export default function VillaCard({
   setHomeVillasActiveImage,
 }) {
   const router = useRouter();
+  const currentPriceTypeText = priceTypes?.find(
+    (item) => item?.type == data?.priceType
+  )?.text;
 
   // const a = Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price))
   const [imageIndex, setImageIndex] = useState(0);
@@ -134,6 +138,7 @@ export default function VillaCard({
                 <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
                 {data?.attributes?.price_tables?.data ? (
                   <div className={styles.price}>
+                    {currentPriceTypeText}
                     {Math.min(
                       ...data.attributes.price_tables.data.map(
                         (o) => o.attributes.price
@@ -141,15 +146,14 @@ export default function VillaCard({
                     )
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL -{" "}
+                    - {currentPriceTypeText}
                     {Math.max(
                       ...data.attributes.price_tables.data.map(
                         (o) => o.attributes.price
                       )
                     )
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
                   <></>
@@ -236,14 +240,14 @@ export default function VillaCard({
                 {data?.priceTables?.length > 0 &&
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
+                    {currentPriceTypeText}
                     {Math.min(...data.priceTables.map((o) => o.price))
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL -{" "}
+                    - {currentPriceTypeText}
                     {Math.max(...data.priceTables.map((o) => o.price))
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
                   <></>
@@ -335,14 +339,14 @@ export default function VillaCard({
                 {data?.priceTables?.length > 0 &&
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
+                    {currentPriceTypeText}
                     {Math.min(...data.priceTables.map((o) => o.price))
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL -{" "}
+                    - {currentPriceTypeText}
                     {Math.max(...data.priceTables.map((o) => o.price))
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
                   <></>
@@ -439,14 +443,14 @@ export default function VillaCard({
                 {data?.priceTables?.length > 0 &&
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
+                    {currentPriceTypeText}
                     {Math.min(...data.priceTables.map((o) => o.price))
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL -{" "}
+                    - {currentPriceTypeText}
                     {Math.max(...data.priceTables.map((o) => o.price))
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
                   <></>
@@ -539,14 +543,14 @@ export default function VillaCard({
                 {data?.priceTables?.length > 0 &&
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
+                    {currentPriceTypeText}
                     {Math.min(...data.priceTables.map((o) => o.price))
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL -{" "}
+                    - {currentPriceTypeText}
                     {Math.max(...data.priceTables.map((o) => o.price))
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
                   <></>
@@ -718,14 +722,14 @@ export default function VillaCard({
                 {/* {data.attributes.price_tables.data ? <div className={styles.price}>{data.attributes.price_tables?.data[0]?.attributes?.price} TL - {data.attributes.price_tables?.data[(data.attributes.price_tables.data.length - 1)]?.attributes?.price} TL</div> : <></>} */}
                 {data?.priceTables?.length > 0 ? (
                   <div className={styles.price}>
+                    {currentPriceTypeText}
                     {Math.min(...data?.priceTables?.map((o) => o.price))
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL -{" "}
+                    - {currentPriceTypeText}
                     {Math.max(...data?.priceTables?.map((o) => o.price))
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
                   <></>

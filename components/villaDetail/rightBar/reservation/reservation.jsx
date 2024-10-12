@@ -21,6 +21,7 @@ export default function Reservation({
   villaName,
   villaFirstPhoto,
   region,
+  priceTypeText,
 }) {
   const router = useRouter();
 
@@ -253,10 +254,10 @@ export default function Reservation({
         <div className={styles.reservationTitleText}>
           <div className={styles.textTop}>
             <div className={styles.price}>
+              {priceTypeText}
               {Math.min(...prices?.map((o) => o.price))
                 .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-              TL
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
             </div>
           </div>
           <div className={styles.textBottom}>

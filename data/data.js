@@ -147,6 +147,25 @@ export const menu = [
   },
 ];
 
+export const priceTypes = [
+  {
+    type: 1,
+    text: "₺",
+  },
+  {
+    type: 2,
+    text: "$",
+  },
+  {
+    type: 3,
+    text: "€",
+  },
+  {
+    type: 4,
+    text: "£",
+  },
+];
+
 // export const google301 = [
 //   {
 //     link1: "/b/bloglar",

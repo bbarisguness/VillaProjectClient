@@ -23,6 +23,7 @@ import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 import { Rating } from "react-simple-star-rating";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import { priceTypes } from "@/data/data";
 
 export default function List({
   roomDetail,
@@ -32,6 +33,9 @@ export default function List({
   roomId,
   villaName,
 }) {
+  const currentPriceTypeText = priceTypes?.find(
+    (item) => item?.type == roomDetail?.data?.priceType
+  )?.text;
   const router = useRouter();
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
@@ -161,18 +165,18 @@ export default function List({
                   <div className={styles.priceType}>Gecelik En Düşük</div>
                   <div className={styles.price}>
                     {" "}
+                    {currentPriceTypeText}
                     {Math.min(
                       ...roomDetail?.data?.priceTables?.map((o) => o.price)
                     )
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL -{" "}
+                    - {currentPriceTypeText}
                     {Math.max(
                       ...roomDetail?.data?.priceTables?.map((o) => o.price)
                     )
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 </div>
               </div>
@@ -230,12 +234,14 @@ export default function List({
                     ready={ready}
                     dates={roomDetail?.data?.reservationCalendars || []}
                     calendarPrices={roomDetail?.data?.prices || []}
+                    priceTypeText={currentPriceTypeText}
                   />
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
                   <div className={styles.right}>
                     <div className={styles.general}>
                       <Reservation
+                      priceTypeText={currentPriceTypeText}
                         roomId={roomId}
                         villaName={villaName}
                         prices={roomDetail?.data?.priceTables}

@@ -7,10 +7,9 @@ import Pagination from "@/components/pagination/Pagination";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-
 export default function List({ villas }) {
   const router = useRouter();
-  const activePage = parseInt(router?.query?.p) || 1
+  const activePage = parseInt(router?.query?.p) || 1;
 
   return (
     <>
@@ -34,7 +33,12 @@ export default function List({ villas }) {
                 <div className="row">
                   <ul>
                     {villas?.data.map((villa, index) => (
-                      <VillaCard listPage={true} key={index} data={villa} photos={villa?.photos} />
+                      <VillaCard
+                        listPage={true}
+                        key={index}
+                        data={villa}
+                        photos={villa?.photos}
+                      />
                     ))}
                   </ul>
                 </div>
@@ -53,6 +57,6 @@ export default function List({ villas }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const villas = await getVillas(query?.p ? query?.p-1 : 0);
+  const villas = await getVillas(query?.p ? query?.p - 1 : 0);
   return { props: { villas } };
 }
