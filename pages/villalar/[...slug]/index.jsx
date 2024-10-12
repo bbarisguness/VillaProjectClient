@@ -1025,7 +1025,7 @@ export default function List({
               <div className={styles.container}>
                 <div className={styles.box}>
                   <div className={styles.titleBox}>
-                    <div className={styles.title}>Yakınındaki Villalar</div>
+                    <div className={styles.title}>Önerilen Villalar</div>
                     <div className={styles.subTitle}>
                       Villalarımız arasından en seçkinlerini sizler için
                       derledik.

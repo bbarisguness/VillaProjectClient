@@ -25,7 +25,6 @@ import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 export default function List({
   villa,
   villaDetail,
-  nearVillas,
   imgs,
   totalPage,
   allCategories,
