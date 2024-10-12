@@ -151,20 +151,28 @@ export const priceTypes = [
   {
     type: 1,
     text: "₺",
+    tag: "TL"
   },
   {
     type: 2,
     text: "$",
+    tag: "DOLAR"
   },
   {
     type: 3,
     text: "€",
+    tag: "EURO"
   },
   {
     type: 4,
     text: "£",
+    tag: "POUNT"
   },
 ];
+
+export const getPriceTypeDetail = (priceTypeNumber) => {
+  return priceTypes?.find(item => item?.type == priceTypeNumber)
+}
 
 // export const google301 = [
 //   {

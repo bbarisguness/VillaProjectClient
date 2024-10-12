@@ -291,7 +291,10 @@ export default function List({
                     </div>
                   </div>
                   <DistanceRuler data={villaDetail?.data?.distanceRulers} />
-                  <PriceTable data={villaDetail?.data?.priceTables} />
+                  <PriceTable
+                    priceTypeNumber={villaDetail?.data?.priceType || 1}
+                    data={villaDetail?.data?.priceTables}
+                  />
                   <Calendar
                     ready={ready}
                     dates={villaDetail?.data?.reservationCalendars || []}

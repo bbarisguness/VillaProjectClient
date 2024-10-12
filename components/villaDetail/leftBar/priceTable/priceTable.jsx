@@ -2,13 +2,14 @@
 import styles from "./priceTable.module.css"
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
+import { getPriceTypeDetail } from "@/data/data";
 
 
-export default function PriceTable({ data }) {
+export default function PriceTable({ data, priceTypeNumber }) {
 
     // console.log(data);
 
-    const [priceTableActiveIndex, setPriceTableActiveIndex] = useState(0)
+    const [priceTableActiveIndex, setPriceTableActiveIndex] = useState(priceTypeNumber)
 
     const handlePriceTable = (index) => {
         setPriceTableActiveIndex(index)
@@ -16,17 +17,10 @@ export default function PriceTable({ data }) {
 
     }
 
-    const priceType = () => {
-        if (priceTableActiveIndex == 0) return "₺"
-        else if (priceTableActiveIndex == 1) return "$"
-        else if (priceTableActiveIndex == 2) return "€"
-        else return "£"
-    }
-
     // exchange
-    const [usd, setUsd] = useState(0)
-    const [eur, setEur] = useState(0)
-    const [gbp, setGbp] = useState(0)
+    const [usd, setUsd] = useState(34.31)
+    const [eur, setEur] = useState(37.56)
+    const [gbp, setGbp] = useState(44.85)
     // useEffect(() => {
 
     //     fetch('http://hasanadiguzel.com.tr/api/kurgetir')
@@ -48,10 +42,10 @@ export default function PriceTable({ data }) {
                 <div className={styles.title}>Fiyat Tablosu</div>
                 <div className={styles.exchangeRateMenu}>
                     <ul>
-                        <li onClick={() => handlePriceTable(0)} className={`${priceTableActiveIndex == 0 ? styles["active"] : ""}`}><Link onClick={(e) => e.preventDefault()} href="#">TL</Link></li>
-                        {/* <li onClick={() => handlePriceTable(1)} className={`${priceTableActiveIndex == 1 ? styles["active"] : ""}`}><Link onClick={(e) => e.preventDefault()} href="#">DOLAR</Link></li>
-                        <li onClick={() => handlePriceTable(2)} className={`${priceTableActiveIndex == 2 ? styles["active"] : ""}`}><Link onClick={(e) => e.preventDefault()} href="#">EURO</Link></li>
-                        <li onClick={() => handlePriceTable(3)} className={`${priceTableActiveIndex == 3 ? styles["active"] : ""}`}><Link onClick={(e) => e.preventDefault()} href="#">POUND</Link></li> */}
+                        <li onClick={() => handlePriceTable(1)} className={`${priceTableActiveIndex == 1 ? styles["active"] : ""}`}><Link onClick={(e) => e.preventDefault()} href="#">TL</Link></li>
+                        <li onClick={() => handlePriceTable(2)} className={`${priceTableActiveIndex == 2 ? styles["active"] : ""}`}><Link onClick={(e) => e.preventDefault()} href="#">DOLAR</Link></li>
+                        <li onClick={() => handlePriceTable(3)} className={`${priceTableActiveIndex == 3 ? styles["active"] : ""}`}><Link onClick={(e) => e.preventDefault()} href="#">EURO</Link></li>
+                        <li onClick={() => handlePriceTable(4)} className={`${priceTableActiveIndex == 4 ? styles["active"] : ""}`}><Link onClick={(e) => e.preventDefault()} href="#">POUND</Link></li>
                     </ul>
                 </div>
             </div>
@@ -72,7 +66,7 @@ export default function PriceTable({ data }) {
                                         <div className={styles.desc}>{data?.priceTableDetails[0]?.description}</div>
                                         <div className={styles.price}>
                                             {
-                                                (priceTableActiveIndex === 1 ? ((data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") / usd) + " " + priceType()) : priceTableActiveIndex === 2 ? ((data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") / eur) + " " + priceType()) : priceTableActiveIndex === 3 ? ((data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") / gbp) + " " + priceType()) : (data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " " + priceType()))
+                                                (priceTableActiveIndex === 2 ? ((data?.price / usd).toFixed(2) + " " + getPriceTypeDetail(2)?.text) : priceTableActiveIndex === 3 ? ((data?.price / eur).toFixed(2) + " " + getPriceTypeDetail(3)?.text) : priceTableActiveIndex === 4 ? ((data?.price / gbp).toFixed(2) + " " + getPriceTypeDetail(4)?.text) : (data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " " + getPriceTypeDetail(1)?.text))
                                             }
                                         </div>
                                     </div>

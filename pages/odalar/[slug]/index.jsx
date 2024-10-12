@@ -229,7 +229,7 @@ export default function List({
                     </div>
                   </div>
                   <DistanceRuler data={roomDetail?.data?.distanceRulers} />
-                  <PriceTable data={roomDetail?.data?.priceTables} />
+                  <PriceTable priceTypeNumber={roomDetail?.data?.priceType || 1} data={roomDetail?.data?.priceTables} />
                   <Calendar
                     ready={ready}
                     dates={roomDetail?.data?.reservationCalendars || []}

@@ -32,7 +32,7 @@ export default function List({
   villaId,
   villaName,
 }) {
-  console.log(villaDetail)
+  console.log(villaDetail);
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(
@@ -232,8 +232,8 @@ export default function List({
                       </div>
                     </div>
                   </div>
-                  <DistanceRuler data={villaDetail?.data?.distanceRulers} />
-                  <PriceTable data={villaDetail?.data?.priceTables} />
+                  {/* <DistanceRuler data={villaDetail?.data?.distanceRulers} /> */}
+                  {/* <PriceTable data={villaDetail?.data?.priceTables} /> */}
                   {/* <Calendar
                     ready={ready}
                     dates={villaDetail?.data?.reservationCalendars || []}
@@ -262,11 +262,11 @@ export default function List({
               </div>
             </div>
           </div>
-          <div className={styles.dualBoxes}>
+          {/* <div className={styles.dualBoxes}>
             <div className={styles.container}>
               <div className={styles.row}>
                 <ul>
-                  {/* <li>
+                  <li>
                                         <div className={styles.title}>Konum</div>
                                         <div className={styles.box} style={{ backgroundImage: `url(http://3.127.136.179:1337${villa?.attributes?.locationImage?.data?.attributes?.formats?.medium?.url})`, backgroundPosition: "center", backgroundSize: "100% 100%" }}>
                                             <div className={styles.linkBox} style={{ position: "relative", width: "50px", height: "50px", left: "15px", top: "15px" }}>
@@ -275,7 +275,7 @@ export default function List({
                                                 </Link>
                                             </div>
                                         </div>
-                                    </li> */}
+                                    </li>
                   {villaDetail?.data[0]?.attributes?.video && (
                     <li className={styles.popupImage}>
                       <div className={styles.title}>Tanıtım Videosu</div>
@@ -301,7 +301,7 @@ export default function List({
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
