@@ -167,7 +167,7 @@ export default function List({
                     </div>
                   </div>
                 </div>
-                <div className={styles.right}>
+                {/* <div className={styles.right}>
                   <div className={styles.priceType}>Gecelik En Düşük</div>
                   <div className={styles.price}>
                     {" "}
@@ -180,7 +180,7 @@ export default function List({
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                     TL
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
