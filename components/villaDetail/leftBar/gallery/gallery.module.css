@@ -34,6 +34,14 @@
     display: none;
 }
 
+.videoContainer {
+    height: 100%;
+    display: flex;
+    position: relative;
+    float: none;
+    overflow: visible;
+}
+
 .lightBoxItem .lightBoxItemChild.video-icon::before {
     background-image: url(/images/player_btn.png);
 }

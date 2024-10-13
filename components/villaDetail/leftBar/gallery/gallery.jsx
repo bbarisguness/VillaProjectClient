@@ -1,6 +1,7 @@
 import LightGallery from "lightgallery/react";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
+import lgVideo from "lightgallery/plugins/video";
 import Link from "next/link";
 // LightGallery Styles
 import "lightgallery/css/lightgallery.css";
@@ -11,10 +12,20 @@ import Image from "next/image";
 import { memo } from "react";
 
 const Gallery = memo(function Gallery({ photos, from }) {
+  const videoObject = photos?.find(item =>item?.videoLink != null)
+  // 1. videoLink'i null olmayan kaydı bul ve diziden çıkar
+  const kayitIndex = photos.findIndex((item) => item.videoLink !== null);
+  //video var ise
+  if (kayitIndex !== -1) {
+    const [kayit] = photos.splice(kayitIndex, 1); // Kayıt çıkarıldı
+    // 2. Kayıtı ilk elemandan sonra dizinin 1. indexine ekle
+    photos.splice(1, 0, kayit);
+  }
+
   if (photos != null) {
     if (from == "hotelList") {
       return (
-        <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
+        <LightGallery speed={500} plugins={[lgThumbnail, lgZoom, lgVideo]}>
           {photos.map((data, index) =>
             index < 10 ? (
               index === 0 ? (
@@ -79,6 +90,40 @@ const Gallery = memo(function Gallery({ photos, from }) {
                     <span>
                       {photos.length - 10 > 0 ? `+${photos.length - 10}` : "+"}
                     </span>
+                  </div>
+                  <Image
+                    alt=""
+                    src={
+                      process.env.NEXT_PUBLIC_APIHOTELPHOTOS_URL +
+                      "k_" +
+                      data?.image
+                    }
+                    width={96}
+                    height={76}
+                    style={{ display: "none" }}
+                  />
+                </Link>
+              ) : index === 1 && kayitIndex != -1 ? (
+                <Link
+                  key={index}
+                  className={styles.lightBoxItem}
+                  href={
+                    videoObject?.videoLink
+                  }
+                >
+                  <div className={`${styles["lightBoxItemChild"]} ${styles["video-icon"]}`}>
+                    <div className={styles.imageBox}>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: `url(${
+                            process.env.NEXT_PUBLIC_APIHOTELPHOTOS_URL +
+                            "k_" +
+                            data?.image
+                          })`,
+                        }}
+                      ></div>
+                    </div>
                   </div>
                   <Image
                     alt=""
@@ -157,7 +202,7 @@ const Gallery = memo(function Gallery({ photos, from }) {
       );
     } else if (from == "roomDetail") {
       return (
-        <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
+        <LightGallery speed={500} plugins={[lgThumbnail, lgZoom, lgVideo]}>
           {photos.map((data, index) =>
             index < 10 ? (
               index === 0 ? (
@@ -222,6 +267,40 @@ const Gallery = memo(function Gallery({ photos, from }) {
                     <span>
                       {photos.length - 10 > 0 ? `+${photos.length - 10}` : "+"}
                     </span>
+                  </div>
+                  <Image
+                    alt=""
+                    src={
+                      process.env.NEXT_PUBLIC_APIROOMPHOTOS_URL +
+                      "k_" +
+                      data?.image
+                    }
+                    width={96}
+                    height={76}
+                    style={{ display: "none" }}
+                  />
+                </Link>
+              ) : index == 1 && kayitIndex != -1 ? (
+                <Link
+                  key={index}
+                  className={styles.lightBoxItem}
+                  href={
+                    videoObject?.videoLink
+                  }
+                >
+                  <div className={`${styles["lightBoxItemChild"]} ${styles["video-icon"]}`}>
+                    <div className={styles.imageBox}>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: `url(${
+                            process.env.NEXT_PUBLIC_APIROOMPHOTOS_URL +
+                            "k_" +
+                            data?.image
+                          })`,
+                        }}
+                      ></div>
+                    </div>
                   </div>
                   <Image
                     alt=""
@@ -298,7 +377,7 @@ const Gallery = memo(function Gallery({ photos, from }) {
       );
     } else {
       return (
-        <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
+        <LightGallery speed={500} plugins={[lgThumbnail, lgZoom, lgVideo]}>
           {photos.map((data, index) =>
             index < 10 ? (
               index === 0 ? (
@@ -357,6 +436,38 @@ const Gallery = memo(function Gallery({ photos, from }) {
                     <span>
                       {photos.length - 10 > 0 ? `+${photos.length - 10}` : "+"}
                     </span>
+                  </div>
+                  <Image
+                    alt=""
+                    src={
+                      process.env.NEXT_PUBLIC_APIPHOTOS_URL + "k_" + data?.image
+                    }
+                    width={96}
+                    height={76}
+                    style={{ display: "none" }}
+                  />
+                </Link>
+              ) : index == 1 && kayitIndex != -1 ? (
+                <Link
+                  key={index}
+                  className={styles.lightBoxItem}
+                  href={
+                    videoObject?.videoLink
+                  }
+                >
+                  <div className={`${styles["lightBoxItemChild"]} ${styles["video-icon"]}`}>
+                    <div className={styles.imageBox}>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: `url(${
+                            process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                            "k_" +
+                            data?.image
+                          })`,
+                        }}
+                      ></div>
+                    </div>
                   </div>
                   <Image
                     alt=""
