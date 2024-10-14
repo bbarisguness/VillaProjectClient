@@ -1,9 +1,10 @@
 const apiUrl = process.env.NEXT_PUBLIC_API_URL
+const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
 
 const qs = require('qs');
 
 async function getRegions() {
-    const response = await fetch(`${apiUrl}/regions?populate=*`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllWebPage?Language=tr&CompanyId=${companyId}&MenuId=82FA2F5B-C87A-4E5D-29A9-08DCE9D62FAD`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -11,18 +12,7 @@ async function getRegions() {
 }
 
 async function getRegion({ slug }) {
-    const query = qs.stringify({
-        fields: '*',
-        populate: '*',
-        filters: {
-            slug: {
-                $eq: `${slug}`,
-            },
-        },
-    }, {
-        encodeValuesOnly: true,
-    });
-    const response = await fetch(`${apiUrl}/regions?${query}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetWebPage?Id=${slug}&Language=tr`, {
         cache: 'no-store'
     })
     const data = await response.json()

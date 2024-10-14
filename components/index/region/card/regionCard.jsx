@@ -2,17 +2,13 @@ import styles from "./regionCard.module.css"
 import Link from "next/link"
 
 export default function RegionCard({ data }) {
-    var backgroundImg = {
-        backgroundImage: "url(" + data?.attributes?.photo?.data?.attributes?.url + ")"
-    };
-
     return (
         <li className={styles.cardContainer}>
-            <Link href={`/bolgeler/${data?.attributes?.slug}`}>
-                <div style={backgroundImg} className={`${styles.imgBox}`}></div>
+            <Link href={`/bolgeler/${data?.id}`}>
+                <div style={{ backgroundImage: `url(https://villaapi.testgrande.com/Uploads/WebPhotos/k_${data?.photos[0]?.image})` }} className={`${styles.imgBox}`}></div>
                 <div className={styles.textBox}>
-                    <div className={styles.title}>{data?.attributes?.name}</div>
-                    <div className={styles.desc}>{data?.attributes?.descriptionShort}</div>
+                    <div className={styles.title}>{data?.webPageDetails[0]?.title}</div>
+                    <div className={styles.desc}>{data?.webPageDetails[0]?.descriptionShort}</div>
                 </div>
             </Link>
 

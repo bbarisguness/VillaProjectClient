@@ -30,10 +30,10 @@ export default function Blog({ blogs }) {
                                             blogs?.data.map(item => (
                                                 <li key={item.id}>
                                                     <div className={styles.column}>
-                                                        <Link href={`/bloglar/${item?.attributes?.slug}`}>
+                                                        <Link href={`/bloglar/${item?.id}`}>
                                                             <div className={styles.imgBox}>
                                                                 <div className={styles.carouselBox}>
-                                                                    <div className={styles.bgImage} style={{ backgroundImage: `url(${item?.attributes?.photo?.data?.attributes?.url})` }}></div>
+                                                                    <div className={styles.bgImage} style={{ backgroundImage: `url(https://villaapi.testgrande.com/Uploads/WebPhotos/k_${item?.photos[0]?.image})` }}></div>
                                                                     {/* <div className={styles.navButtons}>
                                                                          <button onClick={(e) => handleImageButton(e)}></button>
                                                                          <button onClick={(e) => handleImageButton(e)} className={styles.next}></button>
@@ -41,8 +41,8 @@ export default function Blog({ blogs }) {
                                                                 </div>
                                                             </div>
                                                             <div className={styles.textBox}>
-                                                                <div className={styles.title}>{item?.attributes?.name}</div>
-                                                                <div className={styles.desc}>{item?.attributes?.descriptionShort}</div>
+                                                                <div className={styles.title}>{item?.webPageDetails[0]?.title}</div>
+                                                                <div className={styles.desc}>{item?.webPageDetails[0]?.descriptionShort}</div>
                                                             </div>
                                                         </Link>
                                                     </div>

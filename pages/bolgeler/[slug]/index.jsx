@@ -10,7 +10,7 @@ export default function Bolge({ region }) {
     const router = useRouter()
     const renderHtmlContent = () => {
 
-        const description = region?.data[0]?.attributes?.descriptionLong
+        const description = region?.data.webPageDetails[0].descriptionLong
 
         const strongContent = description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
@@ -18,7 +18,7 @@ export default function Bolge({ region }) {
         const finalContent = headerContent.length > 0 ? headerContent : `<p>${strongContent}</p>`;
         return { __html: finalContent };
     };
-    if (region?.data?.length > 0) {
+    if (region?.data) {
         return (
             <>
                 <Seo pageTitle={region?.data[0]?.attributes?.metaTitle} pageDesc={region?.data[0]?.attributes?.metaDescription} />
@@ -26,7 +26,7 @@ export default function Bolge({ region }) {
                 <section className={`${styles['contentDetail']} ${styles['corporate']}`}>
                     <div className={styles.titleBox}>
                         <div className={styles.container}>
-                            <h1 className={styles.title}>{region?.data[0]?.attributes?.name}</h1>
+                            <h1 className={styles.title}>{region?.data?.webPageDetails[0]?.title}</h1>
                         </div>
                     </div>
                     <div className={styles.textBox}>

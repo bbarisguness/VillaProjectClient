@@ -65,7 +65,7 @@ export default function BlogCard({ data }) {
     }
 
     const formatDateAndTime = () => {
-        const _data = data.attributes.createdAt.split('T')
+        const _data = data?.attributes?.createdAt?.split('T')
         const _date = _data[0]
         const _hour = _data[1]
 
@@ -80,10 +80,10 @@ export default function BlogCard({ data }) {
 
     return (
         <li className={styles.blogCardContainer}>
-            <Link href={`bloglar/${data.attributes.slug}`}>
+            <Link href={`bloglar/${data.id}`}>
                 <div className={styles.imgBox}>
                     <div className={styles.bgImage}
-                        style={{ backgroundImage: `url(${data.attributes.photo?.data?.attributes?.url})` }}>
+                        style={{ backgroundImage: `url(https://villaapi.testgrande.com/Uploads/WebPhotos/k_${data?.photos[0]?.image})` }}>
                     </div>
                     <div className={styles.cardFeatures}>Seyahat Uzmanı</div>
                 </div>
@@ -95,12 +95,12 @@ export default function BlogCard({ data }) {
                         </div>
                         <div className={styles.colon}>
                             <i className={styles.date_icon}></i>
-                            <span>{formatDateAndTime()}</span>
+                            <span>1</span>
                         </div>
                     </div>
-                    <div className={styles.title}>{data.attributes.name}</div>
+                    <div className={styles.title}>{data?.webPageDetails[0].title}</div>
                     <div className={styles.desc}>
-                        {data.attributes.descriptionShort}
+                        {data?.attributes?.descriptionShort}
                     </div>
                     <div className={styles.detailButton}>DEVAMI...</div>
                 </div>

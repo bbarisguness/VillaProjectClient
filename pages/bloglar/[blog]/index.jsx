@@ -10,7 +10,7 @@ export default function Blog({ blog }) {
     const router = useRouter();
     const renderHtmlContent = () => {
 
-        const description = blog?.data[0]?.attributes?.descriptionLong
+        const description = blog?.data?.webPageDetails[0]?.descriptionLong
 
         const strongContent = description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
@@ -19,21 +19,21 @@ export default function Blog({ blog }) {
         return { __html: finalContent };
     };
 
-    if (blog.data.length > 0) {
+    if (blog.data) {
         return (
             <>
-                <Seo pageTitle={blog?.data[0]?.attributes?.metaTitle} pageDesc={blog?.data[0]?.attributes?.metaDescription} />
+                <Seo pageTitle={blog?.data?.metaTitle} pageDesc={blog?.data?.metaDescription} />
                 <BreadCrumb />
                 <section className={`${styles['contentDetail']} ${styles['corporate']}`}>
                     <div className={styles.titleBox}>
                         <div className={styles.container}>
-                            <h1 className={styles.title}>{blog?.data[0]?.attributes?.name}</h1>
+                            <h1 className={styles.title}>{blog?.data?.webPageDetails[0]?.title}</h1>
                         </div>
                     </div>
                     <div className={styles.textBox}>
                         <div className={styles.container}>
                             <div className={styles.text}>
-                                <img src={`${blog?.data[0]?.attributes?.photo?.data?.attributes?.url}`} />
+                                <img src={`https://villaapi.testgrande.com/Uploads/WebPhotos/k_${blog?.data?.photos[0]?.image}`} />
                                 <div dangerouslySetInnerHTML={renderHtmlContent()} style={{ whiteSpace: 'pre-line' }} />
                             </div>
                         </div>

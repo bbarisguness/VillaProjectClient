@@ -1,9 +1,10 @@
 const apiUrl = process.env.NEXT_PUBLIC_API_URL
+const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
 
 const qs = require('qs');
 
 async function getBlogs() {
-    const response = await fetch(`${apiUrl}/blogs?populate=*`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllWebPage?Language=tr&CompanyId=${companyId}&MenuId=868abcc6-c260-46b5-4de3-08dce9d46910`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -11,18 +12,7 @@ async function getBlogs() {
 }
 
 async function getBlog({ slug }) {
-    const query = qs.stringify({
-        fields: '*',
-        populate: '*',
-        filters: {
-            slug: {
-                $eq: `${slug}`,
-            },
-        },
-    }, {
-        encodeValuesOnly: true,
-    });
-    const response = await fetch(`${apiUrl}/blogs?${query}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetWebPage?Language=tr&Id=${slug}`, {
         cache: 'no-store'
     })
     const data = await response.json()
