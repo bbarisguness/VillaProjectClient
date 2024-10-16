@@ -17,7 +17,7 @@ export default function VillaCard({
   categories,
   homeVillasActiveImage,
   setHomeVillasActiveImage,
-  nightLength
+  nightLength,
 }) {
   const router = useRouter();
   const currentPriceTypeText = priceTypes?.find(
@@ -181,7 +181,7 @@ export default function VillaCard({
     } else {
       return <div>loading</div>;
     }
-  } else if (listPage && from == "hotels") {
+  } else if ((listPage && from == "hotels") || (listPage && type == "apart")) {
     //kiralık apartlar sayfası
     if (data) {
       return (
@@ -438,7 +438,9 @@ export default function VillaCard({
                 )}
                 <div className={styles.priceTitle}>
                   {data?.price != "-" && data?.price
-                    ? nightLength ? `Toplam Fiyat (${nightLength}) Gece` : `Toplam Fiyat`
+                    ? nightLength
+                      ? `Toplam Fiyat (${nightLength}) Gece`
+                      : `Toplam Fiyat`
                     : "Günlük Fiyat Aralığı"}
                 </div>
                 {data?.priceTables?.length > 0 &&

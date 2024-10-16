@@ -11,8 +11,8 @@ async function getVillas(page = 1) {
     return data
 }
 
-async function getHotels(page = 0) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=tr&CompanyId=${companyId}&Size=20&Page=${page}`, {
+async function getHotels(page = 0, size = 20) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=tr&CompanyId=${companyId}&Size=${size}&Page=${page}`, {
         cache: 'no-store'
     })
     const data = await response.json()
