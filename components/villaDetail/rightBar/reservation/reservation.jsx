@@ -192,14 +192,13 @@ export default function Reservation({
       //     router.push("/rezervasyon");
       //   }
       // });
-      if (
-        (await isVillaAvailable(
-          villaId ? 0 : 1,
-          villaId || roomId,
-          moment(dateRange[0]).format("YYYY-MM-DD").toString(),
-          moment(dateRange[1]).format("YYYY-MM-DD").toString()
-        )) == false
-      ) {
+      const isVillaAvailableResponse = await isVillaAvailable(
+        villaId ? 0 : 1,
+        villaId || roomId,
+        moment(dateRange[0]).format("YYYY-MM-DD").toString(),
+        moment(dateRange[1]).format("YYYY-MM-DD").toString()
+      );
+      if (isVillaAvailableResponse?.data?.isAvailible == false) {
         //Villa müsait
         const villaReservationLocalData = {
           checkIn: moment(dateRange[0]).format("YYYY-MM-DD").toString(),
@@ -207,7 +206,7 @@ export default function Reservation({
           villaId,
           roomId,
           villaName,
-          totalPrice: 50000,
+          totalPrice: isVillaAvailableResponse?.data?.totalPrice,
           reservationItems: [],
           adult: numberOfAdults1,
           child: numberOfChild1,

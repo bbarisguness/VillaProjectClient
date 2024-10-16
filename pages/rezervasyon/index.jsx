@@ -230,14 +230,14 @@ export default function Reservation() {
     const reservationData = JSON.parse(localStorage.getItem("reservation"));
 
     if (transferType == 1) {
-      if (
-        (await isVillaAvailable(
-          reservationData?.villaId ? 0 : 1,
-          values?.villaId ? values?.villaId : values?.roomId,
-          values.checkIn,
-          values.checkOut
-        )) == false
-      ) {
+      const availableResponse = await isVillaAvailable(
+        reservationData?.villaId ? 0 : 1,
+        values?.villaId ? values?.villaId : values?.roomId,
+        values.checkIn,
+        values.checkOut
+      );
+
+      if (availableResponse?.data?.isAvailible == false) {
         const createResponse = await createReservation(
           reservationData?.villaId ? 0 : 1,
           reservationData,
