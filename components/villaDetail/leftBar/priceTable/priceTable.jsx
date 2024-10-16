@@ -65,8 +65,11 @@ export default function PriceTable({ data, priceTypeNumber }) {
                                         </div>
                                         <div className={styles.desc}>{data?.priceTableDetails[0]?.description}</div>
                                         <div className={styles.price}>
-                                            {
+                                            {/* {
                                                 (priceTableActiveIndex === 2 ? ((data?.price / usd).toFixed(2) + " " + getPriceTypeDetail(2)?.text) : priceTableActiveIndex === 3 ? ((data?.price / eur).toFixed(2) + " " + getPriceTypeDetail(3)?.text) : priceTableActiveIndex === 4 ? ((data?.price / gbp).toFixed(2) + " " + getPriceTypeDetail(4)?.text) : (data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " " + getPriceTypeDetail(1)?.text))
+                                            } */}
+                                            {
+                                                (priceTableActiveIndex === 2 ? ((data?.price).toFixed(2) + " " + getPriceTypeDetail(2)?.text) : priceTableActiveIndex === 3 ? ((data?.price).toFixed(2) + " " + getPriceTypeDetail(3)?.text) : priceTableActiveIndex === 4 ? ((data?.price).toFixed(2) + " " + getPriceTypeDetail(4)?.text) : (data?.price.toFixed(2) + " " + getPriceTypeDetail(1)?.text))
                                             }
                                         </div>
                                     </div>
