@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, forwardRef } from "react";
 import styles from "./reservation.module.css";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -278,6 +278,18 @@ export default function ReservationBox() {
     }
   });
 
+  // Klavyeyi engelleyen özel input
+  const CustomInput = forwardRef(({ value, onClick }, ref) => (
+    <input
+      value={value}
+      onClick={onClick}
+      ref={ref}
+      readOnly // readOnly burada input'u sadece takvim seçimi için yapar
+      onFocus={(e) => e.target.blur()} // Odaklanma sırasında klavyeyi engeller
+      placeholder="Tarih Seçin"
+    />
+  ));
+
   useEffect(() => {
     let handler = (e) => {
       //Kişi sayısı menüsü için
@@ -375,6 +387,7 @@ export default function ReservationBox() {
             monthsShown={2}
             locale={tr}
             minDate={new Date()}
+            customInput={<CustomInput />} // Özelleştirilmiş input kullanımı
           />
 
           {/* <input
