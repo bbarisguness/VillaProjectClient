@@ -3,7 +3,7 @@ import styles from "./reservation.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { DateRange } from "react-date-range";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, forwardRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate, changeNumberOfPeople } from "@/store/globalState";
 import Image from "next/image";
@@ -177,6 +177,17 @@ export default function Reservation({
     };
   });
 
+  const CustomInput = forwardRef(({ value, onClick }, ref) => (
+    <input
+      value={value}
+      onClick={onClick}
+      ref={ref}
+      readOnly // readOnly burada input'u sadece takvim seçimi için yapar
+      onFocus={(e) => e.target.blur()} // Odaklanma sırasında klavyeyi engeller
+      placeholder="Tarih Seçin"
+    />
+  ));
+
   async function handleClick() {
     if (dateRange[1] != null) {
       // getPrice({
@@ -297,6 +308,7 @@ export default function Reservation({
                 locale={tr}
                 minDate={new Date()}
                 width="100%"
+                customInput={<CustomInput />}
               />
             </div>
           </div>

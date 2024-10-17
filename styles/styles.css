@@ -380,9 +380,6 @@ img {
   height: 56px;
 }
 
-.react-datepicker__current-month {
-}
-
 .reservation_colonInput__dbL_v input {
   background: none !important;
 }
@@ -413,6 +410,15 @@ img {
 
   .listPage_contentDetail.listPage_villasDetail {
     padding: 45px 0;
+  }
+
+  .date-picker-reservation .react-datepicker-popper {
+    width: 100% !important;
+    justify-content: center;
+    align-items: center;
+    display: block !important;
+    top: 30px !important;
+    z-index: 100 !important;
   }
 }
 
@@ -507,10 +513,22 @@ img {
 @media screen and (max-width: 767px) {
   .react-datepicker {
     display: block !important;
-    padding: 20px;
+    padding: 15px;
   }
 
   .react-datepicker-popper {
+    width: 100% !important;
+    position: fixed !important;
+    top: 0 !important;
+    transform: none !important;
+    display: flex !important;
+    height: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: rgba(25, 25, 46, 0.75);
+  }
+
+  .date-picker-reservation .react-datepicker-popper {
     width: 100% !important;
     position: fixed !important;
     top: 0 !important;
@@ -584,15 +602,4 @@ img {
   display: flex !important;
   top: 30px !important;
   z-index: 100 !important;
-}
-
-@media only screen and (max-width: 1199px) {
-  .date-picker-reservation .react-datepicker-popper {
-    width: 100% !important;
-    justify-content: center;
-    align-items: center;
-    display: block !important;
-    top: 30px !important;
-    z-index: 100 !important;
-  }
 }
