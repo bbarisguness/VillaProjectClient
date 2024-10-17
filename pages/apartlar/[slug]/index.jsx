@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
 import VideoWithComment from "@/components/villaDetail/VideoWithComment";
+import Comments from "@/components/other/Comments";
 
 export default function List({
   villa,
@@ -300,247 +301,10 @@ export default function List({
               </div>
             </div>
           </div> */}
-          {/* <div className={styles.customerCommentsBox}>
+          <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
-                <div className={styles.title}>4,91 · 11 değerlendirme</div>
-                <div className={styles.commentRating}>
-                  <ul>
-                    <li>
-                      <div className={styles.name}>Temizlik</div>
-                      <div className={styles.rating}>
-                        <div className={styles.graphic}>
-                          <span></span>
-                        </div>
-                        <div className={styles.rate}>1.8</div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className={styles.name}>İletişim</div>
-                      <div className={styles.rating}>
-                        <div className={styles.graphic}>
-                          <span></span>
-                        </div>
-                        <div className={styles.rate}>2.5</div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className={styles.name}>Giriş</div>
-                      <div className={styles.rating}>
-                        <div className={styles.graphic}>
-                          <span></span>
-                        </div>
-                        <div className={styles.rate}>5.0</div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className={styles.name}>Doğruluk</div>
-                      <div className={styles.rating}>
-                        <div className={styles.graphic}>
-                          <span></span>
-                        </div>
-                        <div className={styles.rate}>4.7</div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className={styles.name}>Konum</div>
-                      <div className={styles.rating}>
-                        <div className={styles.graphic}>
-                          <span></span>
-                        </div>
-                        <div className={styles.rate}>3.9</div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className={styles.name}>Kalite/fiyat oranı</div>
-                      <div className={styles.rating}>
-                        <div className={styles.graphic}>
-                          <span></span>
-                        </div>
-                        <div className={styles.rate}>4.7</div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div className={styles.comments}>
-                  <ul>
-                    <li>
-                      <div className={styles.imageBox}>
-                        <div className={styles.img}>
-                          <img src="/images/person-1.png" alt="" />
-                        </div>
-                      </div>
-                      <div className={styles.name}>Ali Tufan</div>
-                      <div className={styles.dateandRating}>
-                        <div className={styles.date}>
-                          April 6, 2021 at 3:21 AM
-                        </div>
-                        <div className={styles.stars}>
-                          <div className={styles.starItems}>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                          </div>
-                          <div className={styles.text}>(5 reviews)</div>
-                        </div>
-                      </div>
-                      <div className={styles.descBox}>
-                        Every single thing we tried with John was delicious!
-                        Found some awesome places we would definitely go back to
-                        on our trip. John was also super friendly and passionate
-                        about Beşiktaş and Istanbul.{" "}
-                      </div>
-                    </li>
-                    <li>
-                      <LightGallery
-                          plugins={[lgZoom, lgVideo]}
-                          elementClassNames={styles.videoContainer}
-                        >
-                          <a data-src="https://www.youtube.com/embed/cFYXWYyYcB0">
-                            <div className={styles.imageBox}>
-                              <div
-                                className={styles.img}
-                                style={{
-                                  backgroundImage: `url(${imgs?.data[0]?.attributes?.photo?.data?.attributes?.url})`,
-                                }}
-                              ></div>
-                            </div>
-                          </a>
-                        </LightGallery>
-
-                      <div className={styles.imageBox}>
-                        <div className={styles.img}>
-                          <img src="/images/person-3.png" alt="" />
-                        </div>
-                        <VideoWithComment />
-                      </div>
-                      <div className={styles.name}>Ali Tufan</div>
-                      <div className={styles.dateandRating}>
-                        <div className={styles.date}>
-                          April 6, 2021 at 3:21 AM
-                        </div>
-                        <div className={styles.stars}>
-                          <div className={styles.starItems}>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                          </div>
-                          <div className={styles.text}>(5 reviews)</div>
-                        </div>
-                      </div>
-                      <div className={styles.descBox}>
-                        Every single thing we tried with John was delicious!
-                        Found some awesome places we would definitely go back to
-                        on our trip. John was also super friendly and passionate
-                        about Beşiktaş and Istanbul.{" "}
-                      </div>
-                    </li>
-                    <li>
-                      <div className={styles.imageBox}>
-                        <div className={styles.img}>
-                          <img src="/images/person-2.png" alt="" />
-                        </div>
-                      </div>
-                      <div className={styles.name}>Ali Tufan</div>
-                      <div className={styles.dateandRating}>
-                        <div className={styles.date}>
-                          April 6, 2021 at 3:21 AM
-                        </div>
-                        <div className={styles.stars}>
-                          <div className={styles.starItems}>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                            <div
-                              className={`${styles["starItem"]} ${styles["active"]}`}
-                            >
-                              <div className={styles.star}></div>
-                            </div>
-                          </div>
-                          <div className={styles.text}>(5 reviews)</div>
-                        </div>
-                      </div>
-                      <div className={styles.descBox}>
-                        Every single thing we tried with John was delicious!
-                        Found some awesome places we would definitely go back to
-                        on our trip. John was also super friendly and passionate
-                        about Beşiktaş and Istanbul.{" "}
-                      </div>
-                    </li>
-                  </ul>
-                  <div className={styles.linkBox}>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                      className={styles.blueButtonArrowOpa}
-                    >
-                      <span>45 değerlendirmenin tümünü göster</span>
-                    </a>
-                  </div>
-                </div>
+                <Comments commentData={villaDetail?.data?.comments} />
                 <div className={styles.commentForm}>
                   <div className={styles.title}>Yorumunuzu Bekliyoruz</div>
                   <div className={styles.row}>
@@ -850,7 +614,7 @@ export default function List({
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
           {villaDetail?.data?.rooms?.length > 0 && (
             <div className={styles.apartments}>
               <div className={styles.container}>

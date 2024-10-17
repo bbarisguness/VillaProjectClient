@@ -517,198 +517,6 @@ section.villaDetail .customerCommentsBox .customerComments {
     width: 100%;
 }
 
-section.villaDetail .customerCommentsBox .customerComments .title {
-    width: 100%;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 36px;
-    color: #02044A;
-    margin: 0 0 30px 0;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .commentRating {
-    width: 100%;
-    margin: 0 0 40px 0;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .commentRating ul {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -15px;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .commentRating ul li {
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-    padding: 0 15px;
-    margin: 0 0 20px 0;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .commentRating ul li .name {
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 21px;
-    color: #02044A;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .commentRating ul li .rating {
-    display: flex;
-    align-items: center;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .commentRating ul li .rating .graphic {
-    background: #D9D9E4;
-    display: flex;
-    width: 120px;
-    height: 5px;
-    border-radius: 30px;
-    overflow: hidden;
-    position: relative;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .commentRating ul li .rating .graphic span {
-    background: #7E53F9;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .commentRating ul li .rating .rate {
-    width: 40px;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 21px;
-    color: #02044A;
-    text-align: right;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments {
-    width: 100%;
-    padding: 0 0 60px 0;
-    margin: 0 0 60px 0;
-    border-bottom: 1px solid #E6E9EC;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -15px;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li {
-    width: 33.3333%;
-    padding: 0 15px;
-    margin: 0 0 30px 0;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .imageBox {
-    margin: 0 0 10px 0;
-    display: flex;
-    justify-content: space-between;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .imageBox .img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .imageBox .videoButton {
-    display: inline;
-    overflow: hidden;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .imageBox .videoButton:hover a::before {
-    right: 10px;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .imageBox .videoButton a {
-    display: flex;
-    background-color: #3E2093;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 20px;
-    color: #FFFFFF;
-    padding: 15px 60px 15px 30px;
-    border-radius: 60px;
-    position: relative;
-    overflow: hidden;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .imageBox .videoButton a::before {
-    content: "";
-    position: absolute;
-    top: calc(50% - 20px);
-    right: 5px;
-    background-image: url(../../../public/images/player_btn_red.png);
-    width: 40px;
-    height: 40px;
-    transition: all 0.3s ease-in-out;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .name {
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 25px;
-    color: #02044A;
-    margin: 0 0 10px 0;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .dateandRating {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 0 25px 0;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .dateandRating .date {
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 19px;
-    color: #6A6B93;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .dateandRating .stars {
-    display: flex;
-    align-items: center;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .dateandRating .stars .starItems {
-    display: flex;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .dateandRating .stars .starItems .starItem {
-    margin: 0 5px 0 0;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .dateandRating .stars .starItems .starItem.active .star {
-    background-image: url(../../../public/images/star-icon.png);
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .dateandRating .stars .starItems .starItem .star {
-    background-image: url(../../../public/images/star-icon-passive.png);
-    width: 10px;
-    height: 10px;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .dateandRating .stars .text {
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 19px;
-    color: #6A6B93;
-}
-
-section.villaDetail .customerCommentsBox .customerComments .comments ul li .descBox {
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 26px;
-    color: #6A6B93;
-}
-
 section.villaDetail .customerCommentsBox .customerComments .commentForm {
     width: 100%;
     width: calc(100% - 375px);
@@ -962,10 +770,6 @@ section.villaDetail .customerCommentsBox .customerComments .commentForm ul li .i
         margin: 0 0 45px 0;
     }
 
-    section.villaDetail .customerCommentsBox .customerComments .comments ul li {
-        width: 50%;
-    }
-
     section.villaDetail .customerCommentsBox .customerComments .commentForm {
         width: 100%;
         padding: 0;
@@ -987,9 +791,6 @@ section.villaDetail .customerCommentsBox .customerComments .commentForm ul li .i
     .villaDetail .detailTitleBox .box .right .price {
         font-size: 20px;
     }
-    section.villaDetail .customerCommentsBox .customerComments .comments ul li {
-        width: 100%;
-      }
 }
 
 @media screen and (max-width: 767px) {
@@ -1071,34 +872,6 @@ section.villaDetail .customerCommentsBox .customerComments .commentForm ul li .i
 
     section.villaDetail .customerCommentsBox {
         margin: 0 0 30px 0;
-      }
-      section.villaDetail .customerCommentsBox .customerComments .title {
-        margin: 0 0 10px 0;
-        font-size: 20px;
-        line-height: 30px;
-      }
-      section.villaDetail .customerCommentsBox .customerComments .commentRating {
-        margin: 0 0 30px 0;
-      }
-      section.villaDetail .customerCommentsBox .customerComments .commentRating ul li {
-        width: 100%;
-      }
-      section.villaDetail .customerCommentsBox .customerComments .commentRating ul li:last-child {
-        margin: 0;
-      }
-      section.villaDetail .customerCommentsBox .customerComments .comments {
-        padding: 0 0 30px 0;
-        margin: 0 0 30px 0;
-      }
-      section.villaDetail .customerCommentsBox .customerComments .comments .linkBox {
-        width: 100%;
-      }
-      section.villaDetail .customerCommentsBox .customerComments .comments .linkBox a.blueButtonArrowOpa {
-        width: 100%;
-        padding: 18px 50px 18px 30px;
-      }
-      section.villaDetail .customerCommentsBox .customerComments .comments .linkBox a.blueButtonArrowOpa::before {
-        right: 30px;
       }
       section.villaDetail .customerCommentsBox .customerComments .commentForm ul.commentUl {
         margin: 0 0 30px 0;
