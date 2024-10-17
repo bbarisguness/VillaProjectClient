@@ -254,9 +254,11 @@ export default function Reservation({
           <div className={styles.textTop}>
             <div className={styles.price}>
               {priceTypeText}
-              {Math.min(...prices?.map((o) => o.price))
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+              {prices?.length > 0
+                ? Math.min(...prices?.map((o) => o.price))
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                : 0}
             </div>
           </div>
           <div className={styles.textBottom}>
