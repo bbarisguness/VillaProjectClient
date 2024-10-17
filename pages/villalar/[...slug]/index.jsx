@@ -31,6 +31,7 @@ import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
 import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 import { priceTypes } from "@/data/data";
+import { getPriceRange } from "@/utils/globalUtils";
 
 export default function List({
   villa,
@@ -227,18 +228,10 @@ export default function List({
                 <div className={styles.right}>
                   <div className={styles.priceType}>Gecelik En Düşük</div>
                   <div className={styles.price}>
-                    {currentPriceTypeText}
-                    {Math.min(
-                      ...villaDetail?.data?.priceTables?.map((o) => o.price)
-                    )
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    -{currentPriceTypeText}
-                    {Math.max(
-                      ...villaDetail?.data?.priceTables?.map((o) => o.price)
-                    )
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                    {getPriceRange(
+                      villaDetail?.data?.priceTables,
+                      currentPriceTypeText
+                    )}
                   </div>
                 </div>
               </div>

@@ -24,6 +24,7 @@ import { Rating } from "react-simple-star-rating";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { priceTypes } from "@/data/data";
+import { getPriceRange } from "@/utils/globalUtils";
 
 export default function List({
   roomDetail,
@@ -164,19 +165,10 @@ export default function List({
                 <div className={styles.right}>
                   <div className={styles.priceType}>Gecelik En Düşük</div>
                   <div className={styles.price}>
-                    {" "}
-                    {currentPriceTypeText}
-                    {Math.min(
-                      ...roomDetail?.data?.priceTables?.map((o) => o.price)
-                    )
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    - {currentPriceTypeText}
-                    {Math.max(
-                      ...roomDetail?.data?.priceTables?.map((o) => o.price)
-                    )
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    {getPriceRange(
+                      roomDetail?.data?.priceTables,
+                      currentPriceTypeText
+                    )}
                   </div>
                 </div>
               </div>
@@ -229,7 +221,10 @@ export default function List({
                     </div>
                   </div>
                   <DistanceRuler data={roomDetail?.data?.distanceRulers} />
-                  <PriceTable priceTypeNumber={roomDetail?.data?.priceType || 1} data={roomDetail?.data?.priceTables} />
+                  <PriceTable
+                    priceTypeNumber={roomDetail?.data?.priceType || 1}
+                    data={roomDetail?.data?.priceTables}
+                  />
                   <Calendar
                     ready={ready}
                     dates={roomDetail?.data?.reservationCalendars || []}
@@ -241,7 +236,7 @@ export default function List({
                   <div className={styles.right}>
                     <div className={styles.general}>
                       <Reservation
-                      priceTypeText={currentPriceTypeText}
+                        priceTypeText={currentPriceTypeText}
                         roomId={roomId}
                         villaName={villaName}
                         prices={roomDetail?.data?.priceTables}
