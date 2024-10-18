@@ -7,8 +7,8 @@ import Pagination from "@/components/pagination/Pagination";
 import { useRouter } from "next/router";
 
 export default function SalesList({ villasForSale, totalPage }) {
-  const router = useRouter()
-  const activePage = parseInt(router?.query?.p) || 1
+  const router = useRouter();
+  const activePage = parseInt(router?.query?.p) || 1;
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function SalesList({ villasForSale, totalPage }) {
                         salePage={true}
                         key={index}
                         data={villa}
-                        photos={villa?.photos}
+                        photos={villa?.photos || []}
                       />
                     ))}
                   </ul>
@@ -44,7 +44,7 @@ export default function SalesList({ villasForSale, totalPage }) {
               </div>
               <Pagination
                 newActivePage={activePage}
-                pageCount={2}
+                pageCount={Math.ceil(villasForSale?.totalCount / 20) || 1}
               />
             </div>
           </div>
@@ -55,7 +55,8 @@ export default function SalesList({ villasForSale, totalPage }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const villasForSale = await getVillasForSale();
+  const page = query?.p ? query?.p - 1 : 0;
+  const villasForSale = await getVillasForSale(page);
   const totalPage = villasForSale?.totalCount || 0;
   return { props: { villasForSale, totalPage } };
 }

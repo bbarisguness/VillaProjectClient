@@ -35,8 +35,8 @@ async function getAllVillaByCategoryId(categoryId, page = 0) {
     return data
 }
 
-async function getVillasForSale() {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&CompanyId=${companyId}&Size=20`, {
+async function getVillasForSale(page = 0, size = 20) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSale?Language=tr&CompanyId=${companyId}&Page=${page}&Size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
