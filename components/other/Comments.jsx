@@ -66,9 +66,9 @@ export default function Comments({ commentData }) {
       </div>
       <div className={styles.comments}>
         <ul>
-          {commentData.slice(0, 3).map((item) => {
+          {commentData.slice(0, 3).map((item, index) => {
             return (
-              <li>
+              <li key={"customerComment" + index + 1}>
                 <div className={styles.imageBox}>
                   <div className={styles.img}>
                     <img src="/images/person-3.png" alt="" />
