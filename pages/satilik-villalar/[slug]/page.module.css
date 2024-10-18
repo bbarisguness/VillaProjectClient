@@ -517,6 +517,15 @@ section.villaDetail .customerCommentsBox .customerComments {
     width: 100%;
 }
 
+section.villaDetail .customerCommentsBox .customerComments .title {
+    width: 100%;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 36px;
+    color: #02044a;
+    margin: 0 0 30px 0;
+}
+
 section.villaDetail .customerCommentsBox .customerComments .commentForm {
     width: 100%;
     width: calc(100% - 375px);
