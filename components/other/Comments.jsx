@@ -1,8 +1,28 @@
+import { useState } from "react";
 import VideoWithComment from "../villaDetail/VideoWithComment";
 import styles from "./comments.module.css";
 import { formatDate } from "@/utils/date";
 
 export default function Comments({ commentData }) {
+  const [numberOfCommentsShown, setNumberOfCommentsShown] = useState(3);
+  const [isShowingAllComments, setShowingAllComments] = useState(
+    commentData?.length < 3 ? true : false
+  );
+  const Star = ({ rating }) => {
+    return (
+      <>
+        {Array.from({ length: Math.round(rating) }, (_, index) => (
+          <div
+            key={index}
+            className={`${styles["starItem"]} ${styles["active"]}`}
+          >
+            <div className={styles.star}></div>
+          </div>
+        ))}
+      </>
+    );
+  };
+
   return (
     <>
       <div className={styles.title}>4,91 · 11 değerlendirme</div>
@@ -66,7 +86,7 @@ export default function Comments({ commentData }) {
       </div>
       <div className={styles.comments}>
         <ul>
-          {commentData.slice(0, 3).map((item, index) => {
+          {commentData.slice(0, numberOfCommentsShown).map((item, index) => {
             return (
               <li key={"customerComment" + index + 1}>
                 <div className={styles.imageBox}>
@@ -84,56 +104,33 @@ export default function Comments({ commentData }) {
                   </div>
                   <div className={styles.stars}>
                     <div className={styles.starItems}>
-                      <div
-                        className={`${styles["starItem"]} ${styles["active"]}`}
-                      >
-                        <div className={styles.star}></div>
-                      </div>
-                      <div
-                        className={`${styles["starItem"]} ${styles["active"]}`}
-                      >
-                        <div className={styles.star}></div>
-                      </div>
-                      <div
-                        className={`${styles["starItem"]} ${styles["active"]}`}
-                      >
-                        <div className={styles.star}></div>
-                      </div>
-                      <div
-                        className={`${styles["starItem"]} ${styles["active"]}`}
-                      >
-                        <div className={styles.star}></div>
-                      </div>
-                      <div
-                        className={`${styles["starItem"]} ${styles["active"]}`}
-                      >
-                        <div className={styles.star}></div>
-                      </div>
+                      <Star rating={item?.rating} />
                     </div>
-                    <div className={styles.text}>(5 reviews)</div>
+                    <div className={styles.text}>
+                      ({Math.round(item?.rating)} reviews)
+                    </div>
                   </div>
                 </div>
-                <div className={styles.descBox}>
-                  Every single thing we tried with John was delicious! Found
-                  some awesome places we would definitely go back to on our
-                  trip. John was also super friendly and passionate about
-                  Beşiktaş and Istanbul.{" "}
-                </div>
+                <div className={styles.descBox}>{item?.commentText}</div>
               </li>
             );
           })}
         </ul>
-        <div className={styles.linkBox}>
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-            className={styles.blueButtonArrowOpa}
-          >
-            <span>45 değerlendirmenin tümünü göster</span>
-          </a>
-        </div>
+        {!isShowingAllComments && (
+          <div className={styles.linkBox}>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowingAllComments(true);
+                setNumberOfCommentsShown(commentData?.length);
+              }}
+              className={styles.blueButtonArrowOpa}
+            >
+              <span>45 değerlendirmenin tümünü göster</span>
+            </a>
+          </div>
+        )}
       </div>
     </>
   );
