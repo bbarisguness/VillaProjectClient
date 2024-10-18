@@ -140,11 +140,11 @@
 }
 
 .comments ul li .dateandRating .stars .starItems .starItem.active .star {
-  background-image: url(../../public/images/star-icon.png);
+  background-image: url(../../../public/images/star-icon.png);
 }
 
 .comments ul li .dateandRating .stars .starItems .starItem .star {
-  background-image: url(../../public/images/star-icon-passive.png);
+  background-image: url(../../../public/images/star-icon-passive.png);
   width: 10px;
   height: 10px;
 }

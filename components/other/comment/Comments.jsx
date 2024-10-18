@@ -1,5 +1,5 @@
 import { useState } from "react";
-import VideoWithComment from "../villaDetail/VideoWithComment";
+import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 import styles from "./comments.module.css";
 import { formatDate } from "@/utils/date";
 

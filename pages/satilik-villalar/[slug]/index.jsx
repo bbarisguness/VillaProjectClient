@@ -8,7 +8,7 @@ import styles from './page.module.css'
 import DistanceRuler from '@/components/villaDetail/leftBar/distanceRuler/distanceRuler';
 import VillaCard from '@/components/index/villa/card/villaCard';
 import { useRouter } from 'next/router';
-import Comments from '@/components/other/Comments';
+import Comments from '@/components/other/comment/Comments';
 
 export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
     const router = useRouter();

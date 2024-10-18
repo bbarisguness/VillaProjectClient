@@ -25,7 +25,7 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import { priceTypes } from "@/data/data";
 import { getPriceRange } from "@/utils/globalUtils";
-import Comments from "@/components/other/Comments";
+import Comments from "@/components/other/comment/Comments";
 
 export default function List({
   roomDetail,

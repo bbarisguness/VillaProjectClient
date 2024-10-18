@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
 import VideoWithComment from "@/components/villaDetail/VideoWithComment";
-import Comments from "@/components/other/Comments";
+import Comments from "@/components/other/comment/Comments";
 
 export default function List({
   villa,
