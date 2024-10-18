@@ -111,10 +111,8 @@ export default function VillaCard({
                     </div>
                   </div>
                 </div>
-                {data?.villaDetails[0]?.featureTextBlue != null && (
-                  <div className={styles.cardFeatures}>
-                    {data?.villaDetails[0].featureTextBlue}
-                  </div>
+                {data?.villaNumber && (
+                  <div className={styles.cardFeatures}>{data?.villaNumber}</div>
                 )}
                 {data?.onlineReservation == true && (
                   <div className={styles.cardFeatures2}>
@@ -212,10 +210,8 @@ export default function VillaCard({
                     </div>
                   </div>
                 </div>
-                {data?.hotelDetails[0]?.featureTextBlue != null && (
-                  <div className={styles.cardFeatures}>
-                    {data?.hotelDetails[0].featureTextBlue}
-                  </div>
+                {data?.villaNumber && (
+                  <div className={styles.cardFeatures}>{data?.villaNumber}</div>
                 )}
                 {data?.onlineReservation == true && (
                   <div className={styles.cardFeatures2}>
@@ -311,10 +307,8 @@ export default function VillaCard({
                     </div>
                   </div>
                 </div>
-                {data?.roomDetails[0]?.featureTextBlue != null && (
-                  <div className={styles.cardFeatures}>
-                    {data?.roomDetails[0].featureTextBlue}
-                  </div>
+                {data?.villaNumber && (
+                  <div className={styles.cardFeatures}>{data?.villaNumber}</div>
                 )}
                 {data?.onlineReservation == true && (
                   <div className={styles.cardFeatures2}>
@@ -411,10 +405,8 @@ export default function VillaCard({
                     </div>
                   </div>
                 </div>
-                {data?.villaDetails[0]?.featureTextBlue != null && (
-                  <div className={styles.cardFeatures}>
-                    {data?.villaDetails[0].featureTextBlue}
-                  </div>
+                {data?.villaNumber && (
+                  <div className={styles.cardFeatures}>{data?.villaNumber}</div>
                 )}
                 {data?.onlineReservation == true && (
                   <div className={styles.cardFeatures2}>
@@ -486,7 +478,7 @@ export default function VillaCard({
       );
     }
   } else if (listPage) {
-    //kiralık villalar sayfası
+    //kiralık villalar sayfası ve önerilen villalar
 
     if (data) {
       return (
@@ -517,10 +509,8 @@ export default function VillaCard({
                     </div>
                   </div>
                 </div>
-                {data?.villaDetails[0]?.featureTextBlue != null && (
-                  <div className={styles.cardFeatures}>
-                    {data?.villaDetails[0].featureTextBlue}
-                  </div>
+                {data?.villaNumber && (
+                  <div className={styles.cardFeatures}>{data?.villaNumber}</div>
                 )}
                 {data?.onlineReservation == true && (
                   <div className={styles.cardFeatures2}>
@@ -615,10 +605,8 @@ export default function VillaCard({
                     </div>
                   </div>
                 </div>
-                {data?.villaDetails[0]?.featureTextBlue != null && (
-                  <div className={styles.cardFeatures}>
-                    {data?.villaDetails[0].featureTextBlue}
-                  </div>
+                {data?.villaNumber && (
+                  <div className={styles.cardFeatures}>{data?.villaNumber}</div>
                 )}
                 {data?.onlineReservation == true && (
                   <div className={styles.cardFeatures2}>
@@ -696,10 +684,8 @@ export default function VillaCard({
                     </div>
                   </div>
                 </div>
-                {data?.villaDetails[0]?.featureTextBlue != null && (
-                  <div className={styles.cardFeatures}>
-                    {data?.villaDetails[0].featureTextBlue}
-                  </div>
+                {data?.villaNumber && (
+                  <div className={styles.cardFeatures}>{data?.villaNumber}</div>
                 )}
                 {data?.onlineReservation == true && (
                   <div className={styles.cardFeatures2}>
