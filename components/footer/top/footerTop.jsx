@@ -61,11 +61,11 @@ export default function FooterTop() {
                                         <i></i>
                                     </Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link href="https://g.page/labirentfethiye?share" target="_blank" className={styles.google} title="">
                                         <i></i>
                                     </Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                         <div className={styles.tursabBox}>

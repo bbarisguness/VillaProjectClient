@@ -36,11 +36,11 @@ export default function HeaderTop() {
                                         <i></i>
                                     </Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link target="_blank" href='https://g.page/labirentfethiye?share' className={styles.google}>
                                         <i></i>
                                     </Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                         <div className={styles.lang}>
