@@ -415,7 +415,7 @@ export default function MyDatePicker({
         return currentDate >= start && currentDate <= end;
       });
       return willPrintPrice != -1
-        ? priceTypeText + calendarPrices[willPrintPrice].price
+        ? priceTypeText + calendarPrices[willPrintPrice].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         : "";
     };
 
