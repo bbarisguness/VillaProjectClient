@@ -143,12 +143,10 @@ export default function HeaderBottom({ from }) {
                                 </Link>
                             </div>
                         </div> */}
-                        <div className={styles.loginBox}>
-                            <div className={`${styles["linkBox"]} ${from ? styles["linkBoxDetailed"] : ""}`}>
-                                <Link href="/rezervasyon-takip">
-                                    <span>REZERVASYON SORGULA</span>
-                                </Link>
-                            </div>
+                        <div className={`${styles["linkBox"]} ${from ? styles["linkBoxDetailed"] : ""}`}>
+                            <Link href="/rezervasyon-takip">
+                                <span>REZERVASYON SORGULA</span>
+                            </Link>
                         </div>
                         <div onClick={() => menuHandle()} className={styles.menuIcon}>
                             <span></span>

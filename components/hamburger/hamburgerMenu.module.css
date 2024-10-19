@@ -184,6 +184,27 @@
     left: -16px;
 }
 
+.linkBox {
+    display: flex;
+    align-self: center;
+    position: absolute;
+    bottom: 50px;
+}
+
+.linkBox a {
+    padding: 15px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #3E2093;
+    color: #ffffff;
+    position: relative;
+    transition: all .2s ease-in-out;
+}
+
 @media screen and (max-width: 767px) {
     .hamburgerMenu {
         width: 95%;
