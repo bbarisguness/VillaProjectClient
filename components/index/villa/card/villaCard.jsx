@@ -15,6 +15,7 @@ export default function VillaCard({
   categories,
   nightLength,
 }) {
+  console.log(data);
   const router = useRouter();
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == data?.priceType
@@ -199,12 +200,14 @@ export default function VillaCard({
                     </div>
                   </div>
                 </div>
-                {data?.villaNumber && (
-                  <div className={styles.cardFeatures}>{data?.villaNumber}</div>
+                {data?.hotelDetails[0]?.featureTextBlue && (
+                  <div className={styles.cardFeatures}>
+                    {data?.hotelDetails[0]?.featureTextBlue}
+                  </div>
                 )}
-                {data?.onlineReservation == true && (
+                {data?.hotelDetails[0]?.featureTextRed && (
                   <div className={styles.cardFeatures2}>
-                    {"Anında Rezervasyon"}
+                    {data?.hotelDetails[0]?.featureTextRed}
                   </div>
                 )}
                 {data?.hotelDetails[0]?.featureTextWhite != null && (
