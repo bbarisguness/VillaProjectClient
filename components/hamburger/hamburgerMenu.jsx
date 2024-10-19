@@ -85,10 +85,12 @@ export default function HamburgerMenu() {
                             </li>
                         </ul>
                     </div>
-                    <div className={`${styles["linkBox"]}`}>
-                        <Link onClick={closeMenu} href="/rezervasyon-takip">
-                            <span>REZERVASYON SORGULA</span>
-                        </Link>
+                    <div className={styles.bottomSection}>
+                        <div className={`${styles["linkBox"]}`}>
+                            <Link onClick={closeMenu} href="/rezervasyon-takip">
+                                <span>REZERVASYON SORGULA</span>
+                            </Link>
+                        </div>
                     </div>
                 </div >
             </section >

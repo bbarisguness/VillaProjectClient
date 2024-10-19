@@ -190,11 +190,14 @@
     left: -16px;
 }
 
-.linkBox {
-    display: flex;
+.hamburgerMenu .hamburgerMenuBox .bottomSection {
     align-self: center;
     position: absolute;
     bottom: 50px;
+}
+
+.linkBox {
+    display: flex;
 }
 
 .linkBox a {
