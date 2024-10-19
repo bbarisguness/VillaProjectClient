@@ -15,7 +15,6 @@ export default function VillaCard({
   categories,
   nightLength,
 }) {
-  console.log(data);
   const router = useRouter();
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == data?.priceType

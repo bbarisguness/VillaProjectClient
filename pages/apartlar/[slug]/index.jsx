@@ -231,7 +231,32 @@ export default function List({
                       </div>
                     </div>
                   </div>
-                  {/* <DistanceRuler data={villaDetail?.data?.distanceRulers} /> */}
+                  <DistanceRuler data={villaDetail?.data?.distanceRulers} />
+                  {villaDetail?.data?.rooms?.length > 0 && (
+                    <div className={styles.apartments}>
+                      <div className={styles.container}>
+                        <div className={styles.box}>
+                          <div className={styles.titleBox}>
+                            <div className={styles.title}>Odalar</div>
+                            <div className={styles.subTitle}>
+                              Apartımızın odaları
+                            </div>
+                          </div>
+                          <ul>
+                            {villaDetail?.data?.rooms.map((data, index) => (
+                              <VillaCard
+                                listPage={true}
+                                key={"room" + index}
+                                data={data}
+                                photos={data?.photos}
+                                from={"room"}
+                              />
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   {/* <PriceTable data={villaDetail?.data?.priceTables} /> */}
                   {/* <Calendar
                     ready={ready}
@@ -615,29 +640,6 @@ export default function List({
               </div>
             </div>
           </div>
-          {villaDetail?.data?.rooms?.length > 0 && (
-            <div className={styles.apartments}>
-              <div className={styles.container}>
-                <div className={styles.box}>
-                  <div className={styles.titleBox}>
-                    <div className={styles.title}>Odalar</div>
-                    <div className={styles.subTitle}>Apartımızın odaları</div>
-                  </div>
-                  <ul>
-                    {villaDetail?.data?.rooms.map((data, index) => (
-                      <VillaCard
-                        listPage={true}
-                        key={"room" + index}
-                        data={data}
-                        photos={data?.photos}
-                        from={"room"}
-                      />
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
         </section>
       </>
     );
