@@ -297,7 +297,7 @@ export default function Reservation({
                 selectsRange={true}
                 startDate={startDate}
                 endDate={endDate}
-                monthsShown={2}
+                monthsShown={1}
                 value={dateRange.length == 0 ? "Tarih Seçin" : dateRange}
                 onChange={(update) => {
                   setDateRange(update);

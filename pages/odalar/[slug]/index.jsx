@@ -32,7 +32,6 @@ export default function List({
   roomId,
   villaName,
 }) {
-  console.log(roomDetail);
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == roomDetail?.data?.priceType
   )?.text;
