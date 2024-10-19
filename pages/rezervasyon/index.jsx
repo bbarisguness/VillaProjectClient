@@ -838,11 +838,11 @@ export default function Reservation() {
                                 `${reservationItems.adult} Yetişkin, ${reservationItems.child} Çocuk, ${reservationItems.baby} Bebek`}
                             </span>
                           </div>
-                          <div className={styles.changeButton}>
+                          {/* <div className={styles.changeButton}>
                             <Link onClick={(e) => e.preventDefault()} href="#">
                               Değiştir
                             </Link>
-                          </div>
+                          </div> */}
                         </div>
                       </li>
                       <li>
