@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { changeHamburgerMenuState } from "@/store/globalState";
 import { getCategories } from "@/services/category";
+import Image from "next/image";
 
 export default function HamburgerMenu() {
     const dispatch = useDispatch()
@@ -30,6 +31,15 @@ export default function HamburgerMenu() {
             <section className={`${styles["hamburgerMenu"]} ${isHamburgerMenuActive ? styles["active"] : ""}`}>
                 <div className={styles.hamburgerMenuBox}>
                     <div className={styles.menuCloseBox}>
+                        <div className={styles.logo}>
+                            <Image
+                                src="/images/labirent.png"
+                                alt="call"
+                                width={142}
+                                height={56}
+                                priority={true}
+                            />
+                        </div>
                         <div onClick={closeMenu} className={styles.menuClose}></div>
                     </div>
                     <div className={styles.hmMenu}>

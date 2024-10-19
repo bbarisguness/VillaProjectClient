@@ -75,7 +75,13 @@
     width: 100%;
     margin: 0 0 30px 0;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hamburgerMenu .hamburgerMenuBox .menuCloseBox .logo {
+    background-color: #3E2093;
+    padding: 5px;
 }
 
 .hamburgerMenu .hamburgerMenuBox .menuCloseBox .menuClose {
