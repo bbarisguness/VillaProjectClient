@@ -24,6 +24,8 @@ export default function VillaCard({
     (item) => item?.type == data?.priceType
   )?.text;
 
+  console.log(currentPriceTypeText);
+
   // const a = Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price))
   const [imageIndex, setImageIndex] = useState(0);
   const [image, setImage] = useState();
@@ -247,7 +249,7 @@ export default function VillaCard({
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
-                  <></>
+                  <div className={styles.price}>{currentPriceTypeText}0</div>
                 )}
                 {data?.price != "-" && data?.price ? (
                   <div className={styles.price}>
@@ -344,7 +346,7 @@ export default function VillaCard({
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
-                  <></>
+                  <div className={styles.price}>{currentPriceTypeText}0</div>
                 )}
                 {data?.price != "-" && data?.price ? (
                   <div className={styles.price}>
@@ -448,7 +450,7 @@ export default function VillaCard({
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
-                  <></>
+                  <div className={styles.price}>{currentPriceTypeText}0</div>
                 )}
                 {data?.price != "-" && data?.price ? (
                   <div className={styles.price}>
@@ -546,7 +548,9 @@ export default function VillaCard({
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
-                  <></>
+                  <>
+                    <div className={styles.price}>{currentPriceTypeText}0</div>
+                  </>
                 )}
                 {data?.price != "-" && data?.price ? (
                   <div className={styles.price}>
@@ -721,7 +725,7 @@ export default function VillaCard({
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </div>
                 ) : (
-                  <></>
+                  <div className={styles.price}>{currentPriceTypeText}0</div>
                 )}
                 <div className={styles.features}>
                   <div className={styles.colon}>
