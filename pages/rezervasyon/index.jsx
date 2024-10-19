@@ -361,9 +361,17 @@ export default function Reservation() {
                         surname: Yup.string().required(
                           "Bu alan boş bırakılamaz"
                         ),
-                        idNo: Yup.number().required("Bu alan boş bırakılamaz"),
-                        email: Yup.string().email("Geçersiz email"),
-                        phone: Yup.string().required("Bu alan boş bırakılamaz"),
+                        idNo: Yup.string()
+                          .length(11, "ID numarası 11 haneli olmalıdır")
+                          .test(
+                            "no-leading-zero",
+                            "ID numarası 0 ile başlayamaz",
+                            (value) => value && !value.startsWith("0")
+                          )
+                          .required("Bu alan boş bırakılamaz"),
+                        phone: Yup.string()
+                          .length(15, "Geçerli bir telefon numarası girin")
+                          .required("Bu alan boş bırakılamaz"),
                       })}
                       onSubmit={(values) => {
                         submitFormPerson(values);
@@ -484,7 +492,6 @@ export default function Reservation() {
                                   }
                                   type="text"
                                   placeholder="(•••) ••• •• ••"
-                                  minLength="15"
                                   maxLength="15"
                                 />
                                 {errors.phone && touched.phone && (
