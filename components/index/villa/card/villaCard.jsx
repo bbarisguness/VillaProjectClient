@@ -3,20 +3,16 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { priceTypes } from "@/data/data";
-//import { getPhotosVilla } from "@/services/photo"
 
 export default function VillaCard({
   data,
   type,
   from,
-  activeCategorySlug,
   listPage,
   photos,
   salePage,
   activeCategoryId,
   categories,
-  homeVillasActiveImage,
-  setHomeVillasActiveImage,
   nightLength,
 }) {
   const router = useRouter();
@@ -24,19 +20,10 @@ export default function VillaCard({
     (item) => item?.type == data?.priceType
   )?.text;
 
-  console.log(currentPriceTypeText);
-
   // const a = Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price))
   const [imageIndex, setImageIndex] = useState(0);
   const [image, setImage] = useState();
-  const [images, setImages] = useState(data?.attributes?.photos?.data);
   const [activeImage, setActiveImage] = useState(0);
-
-  // useEffect(() => {
-  //     getPhotosVilla({ slug: data.attributes.slug }).then((res) => {
-  //         setImages(res.data)
-  //     })
-  // }, [])
 
   function checkVillaCategory() {
     const found = categories?.data?.find(

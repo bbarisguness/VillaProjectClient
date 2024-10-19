@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import Comments from '@/components/other/comment/Comments';
 
 export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
+    console.log(villaDetail)
     const router = useRouter();
     const [isDescOpen, setIsDescOpen] = useState(false);
     if (villaDetail?.data) {
@@ -103,7 +104,7 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                                             className={`${styles["desc"]} ${isDescOpen && styles["active"]
                                                 }`}
                                         >
-                                            {villaDetail?.data[0]?.attributes?.descriptionLong}
+                                            {villaDetail?.data?.villaDetails[0]?.descriptionLong}
                                         </div>
                                         <div
                                             className={`${styles["readMore"]} ${isDescOpen && styles["active"]
@@ -490,7 +491,8 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                                     </form>
                                     <div className={styles.linkBox}>
                                         <a
-                                            href="javascript:;"
+                                            href="#"
+                                            onClick={e=> e.preventDefault()}
                                             className={`${styles["blueButtonArrow"]} ${styles["sendCommentForm"]}`}
                                         >
                                             <span>Yorumu Gönder</span>
