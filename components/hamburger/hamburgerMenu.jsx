@@ -70,10 +70,10 @@ export default function HamburgerMenu() {
                                 <Link onClick={closeMenu} href="#" className={styles.hmMenuLink}>KİRALIK APARTLAR</Link>
                             </li>
                             <li className={styles.hmMenuLi}>
-                                <Link onClick={closeMenu} href="#" className={styles.hmMenuLink}>YARDIM / DESTEK</Link>
+                                <Link onClick={closeMenu} href="/arac-kiralama" className={styles.hmMenuLink}>ARAÇ KİRALAMA</Link>
                             </li>
                             <li className={styles.hmMenuLi}>
-                                <Link onClick={closeMenu} href="/iletisim" className={styles.hmMenuLink}>İLETİŞİM</Link>
+                                <Link onClick={closeMenu} href="/bloglar" className={styles.hmMenuLink}>BLOG</Link>
                             </li>
                             <li onClick={() => setMenu2(!menu2)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu2 ? styles["open"] : ""}`}>
                                 <Link href="#" onClick={e => e.preventDefault()} className={styles.hmMenuLink}>KURUMSAL</Link>
@@ -82,6 +82,9 @@ export default function HamburgerMenu() {
                                         <Link onClick={closeMenu} href="/hakkimizda">Hakkımızda</Link>
                                     </li>
                                 </ul>
+                            </li>
+                            <li className={styles.hmMenuLi}>
+                                <Link onClick={closeMenu} href="/iletisim" className={styles.hmMenuLink}>İLETİŞİM</Link>
                             </li>
                         </ul>
                     </div>
