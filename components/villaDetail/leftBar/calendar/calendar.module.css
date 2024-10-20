@@ -1,9 +1,27 @@
+.mobileAvailabilityCalendarButton {
+    display: none;
+    padding: 10px 20px;
+    width: 200px;
+    height: auto;
+    background-color: #3E2093;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
 .fullDatepicker {
     width: 100%;
     margin: 0 0 60px 0;
     border-bottom: 1px solid #E6E9EC;
     display: flex;
     flex-direction: column;
+}
+
+.fullDatepicker.modal {
+    margin-top: 30px;
+    padding: 0 20px;
 }
 
 .fullDatepicker .title {
@@ -14,6 +32,10 @@
     margin: 0 0 35px 0;
     display: flex;
     justify-content: space-between;
+}
+
+.fullDatepicker.modal .datepickerBox {
+    overflow: auto;
 }
 
 .fullDatepicker .title span {
@@ -106,3 +128,19 @@
         display: none
     }
 }
+
+@media screen and (max-width: 490px) {
+    .fullDatepicker {
+        display: none;
+    }
+
+    .fullDatepicker.modal {
+        display: flex;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 490px) {
+    .mobileAvailabilityCalendarButton {
+      display: inline-block; /* Veya görünür olmasını sağlayacak herhangi bir stil */
+    }
+  }

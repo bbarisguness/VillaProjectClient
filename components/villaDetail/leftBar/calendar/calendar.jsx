@@ -1,6 +1,7 @@
 import MyDatePicker from "./mydatepicker";
 import styles from "./calendar.module.css";
 import { useState } from "react";
+import ModalComponent from "@/components/other/modalComponent";
 
 export default function Calendar({
   ready,
@@ -10,6 +11,7 @@ export default function Calendar({
 }) {
   const [yearTab, setYearTab] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth());
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleYearTab = (operation) => {
     if (operation == "next" && yearTab - new Date().getFullYear() < 2) {
@@ -53,16 +55,51 @@ export default function Calendar({
     }
   };
 
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
-    <div className={styles.fullDatepicker}>
-      <div className={styles.title}>
-        Müsaitlik Takvimi
-        <div style={{ display: "flex", gap: "20px" }}>
-          <span className={styles.orange}>Opsiyonlu</span>
-          <span className={styles.red}>Dolu</span>
-        </div>
+    <>
+      <div>
+        <button
+          className={styles.mobileAvailabilityCalendarButton}
+          onClick={openModal}
+        >
+          Müsaitlik Takvimi Aç
+        </button>
+
+        <ModalComponent isOpen={isModalOpen} onClose={closeModal}>
+          <div className={`${styles.fullDatepicker} ${styles.modal}`}>
+            <div className={styles.title}>
+              Müsaitlik Takvimi
+              <div style={{ display: "flex", gap: "20px" }}>
+                <span className={styles.orange}>Opsiyonlu</span>
+                <span className={styles.red}>Dolu</span>
+              </div>
+            </div>
+
+            <div className={styles.datepickerBox}>
+              <MyDatePicker
+                calendarPrices={calendarPrices}
+                nowYear={yearTab}
+                year={yearTab}
+                dates={dates}
+                currentMounth={month}
+                priceTypeText={priceTypeText}
+              />
+            </div>
+          </div>
+        </ModalComponent>
       </div>
-      {/* {ready &&
+      <div className={styles.fullDatepicker}>
+        <div className={styles.title}>
+          Müsaitlik Takvimi
+          <div style={{ display: "flex", gap: "20px" }}>
+            <span className={styles.orange}>Opsiyonlu</span>
+            <span className={styles.red}>Dolu</span>
+          </div>
+        </div>
+        {/* {ready &&
                 <div className={`${styles['calendar-header']}`}>
                     <div>
                         <div onClick={() => handleYearTab('back')} className={styles.prev}><span>{displayLessIcon('back')}</span></div>
@@ -75,16 +112,17 @@ export default function Calendar({
                     </div>
                 </div>
             } */}
-      <div className={styles.datepickerBox}>
-        <MyDatePicker
-          calendarPrices={calendarPrices}
-          nowYear={yearTab}
-          year={yearTab}
-          dates={dates}
-          currentMounth={month}
-          priceTypeText={priceTypeText}
-        />
+        <div className={styles.datepickerBox}>
+          <MyDatePicker
+            calendarPrices={calendarPrices}
+            nowYear={yearTab}
+            year={yearTab}
+            dates={dates}
+            currentMounth={month}
+            priceTypeText={priceTypeText}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
