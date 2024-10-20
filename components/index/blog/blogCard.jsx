@@ -2,7 +2,6 @@ import styles from "./blogCard.module.css";
 import Link from "next/link";
 
 export default function BlogCard({ data }) {
-  console.log(data);
   // const generateBlogLink = (title) => {
   //     let url = title
   //         .toLowerCase()

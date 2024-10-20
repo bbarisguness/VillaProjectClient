@@ -123,13 +123,13 @@ export default function FooterTop() {
                                             <span>Sıkça Sorulan Sorular</span>
                                         </Link>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <Link href="#" title="">
                                             <span>Soru Cevap</span>
                                         </Link>
-                                    </li>
+                                    </li> */}
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={e=> e.preventDefault()} href="/#" title="">
                                             <span>Fırsatlar</span>
                                         </Link>
                                     </li>
