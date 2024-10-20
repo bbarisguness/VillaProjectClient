@@ -91,6 +91,46 @@ export default function HamburgerMenu() {
                                 <span>REZERVASYON SORGULA</span>
                             </Link>
                         </div>
+                        <div className={styles.socialMedia}>
+                            {/* <div className={styles.socialText}>Bizi Takip Edin</div> */}
+                            <ul>
+                                <li>
+                                    <Link href="https://www.facebook.com/Labirentfethiye/" target="_blank" className={styles.facebook}
+                                        title="">
+                                        <i></i>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="https://www.youtube.com/channel/UCHSwoqGIPpT6rqP2fsA9TwA" target="_blank"
+                                        className={styles.youtube} title="">
+                                        <i></i>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="https://www.instagram.com/labirentfethiye/" target="_blank" className={styles.instagram}
+                                        title="">
+                                        <i></i>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="https://wa.me/5317241934/?text=Merhaba, yardımcı olur musunuz ?" target="_blank" className={styles.whatsapp}
+                                        title="">
+                                        <i></i>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="tel:05317241934" target="_blank" className={styles.call}
+                                        title="">
+                                        <i></i>
+                                    </Link>
+                                </li>
+                                {/* <li>
+                                    <Link href="https://g.page/labirentfethiye?share" target="_blank" className={styles.google} title="">
+                                        <i></i>
+                                    </Link>
+                                </li> */}
+                            </ul>
+                        </div>
                     </div>
                 </div >
             </section >
