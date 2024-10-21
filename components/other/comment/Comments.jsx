@@ -4,6 +4,7 @@ import styles from "./comments.module.css";
 import { formatDate } from "@/utils/date";
 
 export default function Comments({ commentData }) {
+  console.log(commentData)
   const [numberOfCommentsShown, setNumberOfCommentsShown] = useState(3);
   const [isShowingAllComments, setShowingAllComments] = useState(
     commentData?.length < 3 ? true : false
@@ -25,7 +26,7 @@ export default function Comments({ commentData }) {
 
   return (
     <>
-      <div className={styles.title}>4,91 · 11 değerlendirme</div>
+      <div className={styles.title}>4,91 · {commentData?.length} değerlendirme</div>
       <div className={styles.commentRating}>
         <ul>
           <li>
@@ -127,7 +128,7 @@ export default function Comments({ commentData }) {
               }}
               className={styles.blueButtonArrowOpa}
             >
-              <span>45 değerlendirmenin tümünü göster</span>
+              <span>{commentData?.length} değerlendirmenin tümünü göster</span>
             </a>
           </div>
         )}
