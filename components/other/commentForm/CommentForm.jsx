@@ -5,17 +5,17 @@ import { Rating } from "react-simple-star-rating";
 import { useState } from "react";
 
 export default function CommentForm() {
-    const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(0);
 
-    const handleRating = (rate) => {
-        setRating(rate);
-        // other logic
-      };
+  const handleRating = (rate) => {
+    setRating(rate);
+    // other logic
+  };
 
   return (
     <div className={styles.commentForm}>
       <div className={styles.title}>Yorumunuzu Bekliyoruz</div>
-      <div className={styles.row}>
+      {/* <div className={styles.row}>
         <ul className={styles.commentUl}>
           <li className={styles.commentLi}>
             <div className={styles.textandRating}>
@@ -162,7 +162,7 @@ export default function CommentForm() {
             </div>
           </li>
         </ul>
-      </div>
+      </div> */}
       <Formik
         initialValues={{
           form_email: "",
@@ -214,11 +214,13 @@ export default function CommentForm() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  flexDirection: "column",
+                  gap: 10,
+                  marginBottom: 10,
                 }}
               >
-                <span style={{ fontSize: 22 }}>Puanınız</span>
+                <span style={{ fontSize: 18 }}>Puanınız</span>
                 <Rating
+                  size={30}
                   transition
                   onClick={(value) => {
                     handleRating(value);
