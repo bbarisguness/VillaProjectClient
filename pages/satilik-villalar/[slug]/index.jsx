@@ -101,30 +101,34 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                                     <div className={styles.villaDetailTitle}>Villa Açıklama</div>
                                     <div className={styles.villaDetailDesc}>
                                         <div
-                                            style={{ whiteSpace: "pre-line" }}
-                                            className={`${styles["desc"]} ${isDescOpen && styles["active"]
-                                                }`}
-                                        >
-                                            {villaDetail?.data?.villaDetails[0]?.descriptionLong}
-                                        </div>
+                                        dangerouslySetInnerHTML={{
+                                            __html:
+                                            villaDetail?.data?.villaDetails[0]?.descriptionLong,
+                                        }}
+                                        style={{ whiteSpace: "pre-line" }}
+                                        className={`${styles["desc"]} ${
+                                            isDescOpen && styles["active"]
+                                        }`}
+                                        ></div>
                                         <div
-                                            className={`${styles["readMore"]} ${isDescOpen && styles["active"]
-                                                }`}
+                                        className={`${styles["readMore"]} ${
+                                            isDescOpen && styles["active"]
+                                        }`}
                                         >
-                                            <div className={styles.allButton}>
-                                                <span
-                                                    onClick={() => setIsDescOpen(true)}
-                                                    className={styles.first}
-                                                >
-                                                    Devamı...
-                                                </span>
-                                                <span
-                                                    onClick={() => setIsDescOpen(false)}
-                                                    className={styles.last}
-                                                >
-                                                    Kapat...
-                                                </span>
-                                            </div>
+                                        <div className={styles.allButton}>
+                                            <span
+                                            onClick={() => setIsDescOpen(true)}
+                                            className={styles.first}
+                                            >
+                                            Devamı...
+                                            </span>
+                                            <span
+                                            onClick={() => setIsDescOpen(false)}
+                                            className={styles.last}
+                                            >
+                                            Kapat...
+                                            </span>
+                                        </div>
                                         </div>
                                     </div>
                                     <DistanceRuler
