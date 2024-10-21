@@ -21,8 +21,6 @@ export default function VillaCard({
   )?.text;
 
   // const a = Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price))
-  const [imageIndex, setImageIndex] = useState(0);
-  const [image, setImage] = useState();
   const [activeImage, setActiveImage] = useState(0);
 
   function checkVillaCategory() {
@@ -35,20 +33,6 @@ export default function VillaCard({
       return false;
     }
   }
-
-  useEffect(() => {
-    setImage(
-      data?.attributes?.gallery?.data?.attributes?.image?.data[0]?.attributes
-        .url
-    );
-  }, [data]);
-
-  useEffect(() => {
-    setImage(
-      data?.attributes?.gallery?.data?.attributes?.image?.data[imageIndex]
-        ?.attributes?.url
-    );
-  }, [imageIndex]);
 
   const imageHandler = (e, operation) => {
     e.preventDefault();
