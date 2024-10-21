@@ -62,27 +62,31 @@ export default function VillaCard({
             >
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
-                  <div
-                    className={styles.bgImage}
-                    style={{
-                      backgroundImage:
-                        photos[activeImage]?.image != undefined
-                          ? `url(${
-                              process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                              "k_" +
-                              photos[activeImage]?.image
-                            })`
-                          : "none",
-                    }}
-                  >
-                    <div className={styles.imgNav}>
-                      <button onClick={(e) => imageHandler(e, "prev")}></button>
-                      <button
-                        style={{ transform: "rotate(180deg)" }}
-                        onClick={(e) => imageHandler(e, "next")}
-                      ></button>
-                    </div>
-                  </div>
+                  {photos?.map((photo, index) => (
+                    <div
+                      key={"photo" + index + 1}
+                      className={`${styles.bgImage} ${
+                        activeImage === index ? styles.active : ""
+                      }`}
+                      style={{
+                        backgroundImage:
+                          photo.image != undefined
+                            ? `url(${
+                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                                "k_" +
+                                photo.image
+                              })`
+                            : "none",
+                      }}
+                    ></div>
+                  ))}
+                </div>
+                <div className={styles.imgNav}>
+                  <button onClick={(e) => imageHandler(e, "prev")}></button>
+                  <button
+                    style={{ transform: "rotate(180deg)" }}
+                    onClick={(e) => imageHandler(e, "next")}
+                  ></button>
                 </div>
                 {data?.villaNumber && (
                   <div className={styles.cardFeatures}>{data?.villaNumber}</div>
@@ -161,27 +165,31 @@ export default function VillaCard({
             <Link href={`/apartlar/${data?.id}`}>
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
-                  <div
-                    className={styles.bgImage}
-                    style={{
-                      backgroundImage:
-                        photos[activeImage]?.image != undefined
-                          ? `url(${
-                              process.env.NEXT_PUBLIC_APIHOTELPHOTOS_URL +
-                              "k_" +
-                              photos[activeImage]?.image
-                            })`
-                          : "none",
-                    }}
-                  >
-                    <div className={styles.imgNav}>
-                      <button onClick={(e) => imageHandler(e, "prev")}></button>
-                      <button
-                        style={{ transform: "rotate(180deg)" }}
-                        onClick={(e) => imageHandler(e, "next")}
-                      ></button>
-                    </div>
-                  </div>
+                  {photos?.map((photo, index) => (
+                    <div
+                      key={"photo" + index + 1}
+                      className={`${styles.bgImage} ${
+                        activeImage === index ? styles.active : ""
+                      }`}
+                      style={{
+                        backgroundImage:
+                          photo.image != undefined
+                            ? `url(${
+                                process.env.NEXT_PUBLIC_APIHOTELPHOTOS_URL +
+                                "k_" +
+                                photo.image
+                              })`
+                            : "none",
+                      }}
+                    ></div>
+                  ))}
+                </div>
+                <div className={styles.imgNav}>
+                  <button onClick={(e) => imageHandler(e, "prev")}></button>
+                  <button
+                    style={{ transform: "rotate(180deg)" }}
+                    onClick={(e) => imageHandler(e, "next")}
+                  ></button>
                 </div>
                 {data?.hotelDetails[0]?.featureTextBlue && (
                   <div className={styles.cardFeatures}>
@@ -260,27 +268,31 @@ export default function VillaCard({
             <Link href={`/odalar/${data?.id}`}>
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
-                  <div
-                    className={styles.bgImage}
-                    style={{
-                      backgroundImage:
-                        photos[activeImage]?.image != undefined
-                          ? `url(${
-                              process.env.NEXT_PUBLIC_APIROOMPHOTOS_URL +
-                              "k_" +
-                              photos[activeImage]?.image
-                            })`
-                          : "none",
-                    }}
-                  >
-                    <div className={styles.imgNav}>
-                      <button onClick={(e) => imageHandler(e, "prev")}></button>
-                      <button
-                        style={{ transform: "rotate(180deg)" }}
-                        onClick={(e) => imageHandler(e, "next")}
-                      ></button>
-                    </div>
-                  </div>
+                  {photos?.map((photo, index) => (
+                    <div
+                      key={"photo" + index + 1}
+                      className={`${styles.bgImage} ${
+                        activeImage === index ? styles.active : ""
+                      }`}
+                      style={{
+                        backgroundImage:
+                          photo.image != undefined
+                            ? `url(${
+                                process.env.NEXT_PUBLIC_APIROOMPHOTOS_URL +
+                                "k_" +
+                                photo.image
+                              })`
+                            : "none",
+                      }}
+                    ></div>
+                  ))}
+                </div>
+                <div className={styles.imgNav}>
+                  <button onClick={(e) => imageHandler(e, "prev")}></button>
+                  <button
+                    style={{ transform: "rotate(180deg)" }}
+                    onClick={(e) => imageHandler(e, "next")}
+                  ></button>
                 </div>
                 {data?.villaNumber && (
                   <div className={styles.cardFeatures}>{data?.villaNumber}</div>
@@ -358,27 +370,31 @@ export default function VillaCard({
             <Link href={`/villalar/${data?.id}`}>
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
-                  <div
-                    className={styles.bgImage}
-                    style={{
-                      backgroundImage:
-                        photos[activeImage]?.image != undefined
-                          ? `url(${
-                              process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                              "k_" +
-                              photos[activeImage]?.image
-                            })`
-                          : "none",
-                    }}
-                  >
-                    <div className={styles.imgNav}>
-                      <button onClick={(e) => imageHandler(e, "prev")}></button>
-                      <button
-                        style={{ transform: "rotate(180deg)" }}
-                        onClick={(e) => imageHandler(e, "next")}
-                      ></button>
-                    </div>
-                  </div>
+                  {photos?.map((photo, index) => (
+                    <div
+                      key={"photo" + index + 1}
+                      className={`${styles.bgImage} ${
+                        activeImage === index ? styles.active : ""
+                      }`}
+                      style={{
+                        backgroundImage:
+                          photo.image != undefined
+                            ? `url(${
+                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                                "k_" +
+                                photo.image
+                              })`
+                            : "none",
+                      }}
+                    ></div>
+                  ))}
+                </div>
+                <div className={styles.imgNav}>
+                  <button onClick={(e) => imageHandler(e, "prev")}></button>
+                  <button
+                    style={{ transform: "rotate(180deg)" }}
+                    onClick={(e) => imageHandler(e, "next")}
+                  ></button>
                 </div>
                 {data?.villaNumber && (
                   <div className={styles.cardFeatures}>{data?.villaNumber}</div>
@@ -564,27 +580,31 @@ export default function VillaCard({
             <Link href={`/satilik-villalar/${data?.id}`}>
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
-                  <div
-                    className={styles.bgImage}
-                    style={{
-                      backgroundImage:
-                        photos[activeImage]?.image != undefined
-                          ? `url(${
-                              process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                              "k_" +
-                              photos[activeImage]?.image
-                            })`
-                          : "none",
-                    }}
-                  >
-                    <div className={styles.imgNav}>
-                      <button onClick={(e) => imageHandler(e, "prev")}></button>
-                      <button
-                        style={{ transform: "rotate(180deg)" }}
-                        onClick={(e) => imageHandler(e, "next")}
-                      ></button>
-                    </div>
-                  </div>
+                  {photos?.map((photo, index) => (
+                    <div
+                      key={"photo" + index + 1}
+                      className={`${styles.bgImage} ${
+                        activeImage === index ? styles.active : ""
+                      }`}
+                      style={{
+                        backgroundImage:
+                          photo.image != undefined
+                            ? `url(${
+                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                                "k_" +
+                                photo.image
+                              })`
+                            : "none",
+                      }}
+                    ></div>
+                  ))}
+                </div>
+                <div className={styles.imgNav}>
+                  <button onClick={(e) => imageHandler(e, "prev")}></button>
+                  <button
+                    style={{ transform: "rotate(180deg)" }}
+                    onClick={(e) => imageHandler(e, "next")}
+                  ></button>
                 </div>
                 {data?.villaNumber && (
                   <div className={styles.cardFeatures}>{data?.villaNumber}</div>
@@ -643,27 +663,31 @@ export default function VillaCard({
             <Link href={`/villalar/${data?.id}`}>
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
-                  <div
-                    className={styles.bgImage}
-                    style={{
-                      backgroundImage:
-                        photos[activeImage]?.image != undefined
-                          ? `url(${
-                              process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                              "k_" +
-                              photos[activeImage]?.image
-                            })`
-                          : "none",
-                    }}
-                  >
-                    <div className={styles.imgNav}>
-                      <button onClick={(e) => imageHandler(e, "prev")}></button>
-                      <button
-                        style={{ transform: "rotate(180deg)" }}
-                        onClick={(e) => imageHandler(e, "next")}
-                      ></button>
-                    </div>
-                  </div>
+                  {photos?.map((photo, index) => (
+                    <div
+                      key={"photo" + index + 1}
+                      className={`${styles.bgImage} ${
+                        activeImage === index ? styles.active : ""
+                      }`}
+                      style={{
+                        backgroundImage:
+                          photo.image != undefined
+                            ? `url(${
+                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                                "k_" +
+                                photo.image
+                              })`
+                            : "none",
+                      }}
+                    ></div>
+                  ))}
+                </div>
+                <div className={styles.imgNav}>
+                  <button onClick={(e) => imageHandler(e, "prev")}></button>
+                  <button
+                    style={{ transform: "rotate(180deg)" }}
+                    onClick={(e) => imageHandler(e, "next")}
+                  ></button>
                 </div>
                 {data?.villaNumber && (
                   <div className={styles.cardFeatures}>{data?.villaNumber}</div>
