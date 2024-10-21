@@ -16,7 +16,7 @@
   border-radius: 5px;
   width: 90%;
   max-width: 500px;
-  max-height: 60vh; /* Modalın yüksekliğini sınırlıyoruz */
+  max-height: 90vh; /* Modalın yüksekliğini sınırlıyoruz */
   overflow-y: auto; /* Modal içinde kaydırmayı etkinleştiriyoruz */
   position: relative;
 }

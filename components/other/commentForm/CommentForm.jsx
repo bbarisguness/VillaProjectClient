@@ -209,34 +209,9 @@ export default function CommentForm() {
         }) => (
           <form id={styles.commentForm} onSubmit={handleSubmit}>
             <ul>
-              <li
-                className={styles.full}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  marginBottom: 10,
-                }}
-              >
-                <span style={{ fontSize: 18 }}>Puanınız</span>
-                <Rating
-                  size={30}
-                  transition
-                  onClick={(value) => {
-                    handleRating(value);
-                    setFieldValue("form_rating", value);
-                  }}
-                  allowFraction
-                />
-                {errors.form_rating && touched.form_rating && (
-                  <div className={styles.inputFeedback}>
-                    {errors.form_rating}
-                  </div>
-                )}
-              </li>
               <li className={styles.full}>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Villa için Yorumunuz</div>
+                  <div className={styles.inputName}>Yorumunuz</div>
                   <textarea
                     name="form_message"
                     rows="4"
@@ -251,6 +226,32 @@ export default function CommentForm() {
                     </div>
                   )}
                 </div>
+              </li>
+              <li
+                className={styles.full}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: 10,
+                  marginBottom: 10,
+                }}
+              >
+                <span style={{ fontSize: 15, fontWeight: 600 }}>Puanınız</span>
+                <Rating
+                  size={30}
+                  transition
+                  onClick={(value) => {
+                    handleRating(value);
+                    setFieldValue("form_rating", value);
+                  }}
+                  allowFraction
+                />
+                {errors.form_rating && touched.form_rating && (
+                  <div className={styles.inputFeedback}>
+                    {errors.form_rating}
+                  </div>
+                )}
               </li>
               <li>
                 <div className={styles.inputBox}>

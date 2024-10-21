@@ -4,7 +4,6 @@ import styles from "./comments.module.css";
 import { formatDate } from "@/utils/date";
 
 export default function Comments({ commentData }) {
-  console.log(commentData)
   const [numberOfCommentsShown, setNumberOfCommentsShown] = useState(3);
   const [isShowingAllComments, setShowingAllComments] = useState(
     commentData?.length < 3 ? true : false

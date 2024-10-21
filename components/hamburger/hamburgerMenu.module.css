@@ -81,7 +81,7 @@
 
 .hamburgerMenu .hamburgerMenuBox .menuCloseBox .logo {
     background-color: #3E2093;
-    padding: 5px;
+    padding: 5px 25px;
 }
 
 .hamburgerMenu .hamburgerMenuBox .menuCloseBox .menuClose {
@@ -110,6 +110,7 @@
 
 .hamburgerMenu .hamburgerMenuBox .hmMenu .hmMenuUl .hmMenuLi {
     width: 100%;
+    line-height: 1.4;
 }
 
 .hamburgerMenu .hamburgerMenuBox .hmMenu .hmMenuUl .hmMenuLi:last-child {
@@ -199,15 +200,26 @@
     width: 75%;
 }
 
+.hamburgerMenu .hamburgerMenuBox .bottomSection .container2 {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.hamburgerMenu .hamburgerMenuBox .bottomSection .container2 .linkBox {
+    width: 50%;
+}
+
 .linkBox a {
-    padding: 15px 25px;
+    padding: 20px 25px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 15px;
     overflow: hidden;
     border-radius: 8px;
-    background: #3E2093;
+    background: #ff8300;
     color: #ffffff;
     position: relative;
     transition: all .2s ease-in-out;
@@ -227,7 +239,8 @@
 
 .socialMedia ul {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 10px;
     align-items: center;
 }
 

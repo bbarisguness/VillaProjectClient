@@ -1,7 +1,7 @@
 .mobileAvailabilityCalendarButton {
     display: none;
-    padding: 10px 20px;
-    width: 200px;
+    padding: 30px 20px;
+    width: 100%;
     height: auto;
     background-color: #3E2093;
     color: white;
@@ -9,6 +9,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 20px;
   }
 
 .fullDatepicker {
@@ -32,6 +33,12 @@
     margin: 0 0 35px 0;
     display: flex;
     justify-content: space-between;
+}
+
+.fullDatepicker.modal .title {
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 
 .fullDatepicker.modal .datepickerBox {

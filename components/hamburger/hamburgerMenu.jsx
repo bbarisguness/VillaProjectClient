@@ -94,6 +94,18 @@ export default function HamburgerMenu() {
                                 <span>REZERVASYON SORGULA</span>
                             </Link>
                         </div>
+                        <div className={styles.container2}>
+                            <div className={`${styles["linkBox"]}`}>
+                                <Link style={{backgroundColor: "#3ac007"}} onClick={closeMenu} href="/rezervasyon-takip">
+                                    <span>WhatsApp</span>
+                                </Link>
+                            </div>
+                            <div className={`${styles["linkBox"]}`}>
+                                <Link style={{backgroundColor: "#c10a0a"}} onClick={closeMenu} href="/rezervasyon-takip">
+                                    <span>Hemen Ara</span>
+                                </Link>
+                            </div>
+                        </div>
                         <div className={styles.socialMedia}>
                             {/* <div className={styles.socialText}>Bizi Takip Edin</div> */}
                             <ul>
@@ -115,7 +127,7 @@ export default function HamburgerMenu() {
                                         <i></i>
                                     </Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link href="https://wa.me/5317241934/?text=Merhaba, yardımcı olur musunuz ?" target="_blank" className={styles.whatsapp}
                                         title="">
                                         <i></i>
@@ -126,7 +138,7 @@ export default function HamburgerMenu() {
                                         title="">
                                         <i></i>
                                     </Link>
-                                </li>
+                                </li> */}
                                 {/* <li>
                                     <Link href="https://g.page/labirentfethiye?share" target="_blank" className={styles.google} title="">
                                         <i></i>

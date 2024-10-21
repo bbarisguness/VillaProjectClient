@@ -384,6 +384,15 @@ img {
   background: none !important;
 }
 
+.date-picker-reservation .react-datepicker-popper {
+  width: 100% !important;
+  justify-content: center;
+  align-items: center;
+  display: flex !important;
+  top: 30px !important;
+  z-index: 100 !important;
+}
+
 @keyframes loadingRotate {
   100% {
     transform: rotate(360deg);
@@ -593,13 +602,4 @@ img {
   width: 100% !important;
   margin-bottom: 20px !important;
   float: none !important;
-}
-
-.date-picker-reservation .react-datepicker-popper {
-  width: 100% !important;
-  justify-content: center;
-  align-items: center;
-  display: flex !important;
-  top: 30px !important;
-  z-index: 100 !important;
 }

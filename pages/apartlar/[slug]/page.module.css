@@ -170,8 +170,6 @@
 }
 
 .villaDetail .villaDetailContentBox .villaDetailContent .left {
-    width: calc(100% - 375px);
-    padding: 0 165px 0 0;
     position: relative;
 }
 
@@ -705,10 +703,6 @@ section.villaDetail .customerCommentsBox .customerComments .commentForm ul li .i
         width: 1400px;
     }
 
-    .villaDetail .villaDetailContentBox .villaDetailContent .left {
-        padding: 0 80px 0 0;
-    }
-
     section.villaDetail .customerCommentsBox .customerComments .commentForm {
         padding: 0 80px 0 0;
     }
@@ -721,11 +715,6 @@ section.villaDetail .customerCommentsBox .customerComments .commentForm ul li .i
 @media screen and (max-width: 1499px) {
     .container {
         width: 1170px;
-    }
-
-    .villaDetail .villaDetailContentBox .villaDetailContent .left {
-        width: calc(100% - 320px);
-        padding: 0 50px 0 0;
     }
 
     .villaDetail .dualBoxes ul li .box {
@@ -766,11 +755,6 @@ section.villaDetail .customerCommentsBox .customerComments .commentForm ul li .i
 
     .villaDetail .villaDetailContentBox .villaDetailContent {
         flex-direction: column;
-    }
-
-    .villaDetail .villaDetailContentBox .villaDetailContent .left {
-        width: 100%;
-        padding: 0;
     }
 
     .villaDetail .productImagesBox {

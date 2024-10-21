@@ -102,11 +102,10 @@
 
 .commentForm ul li {
   width: 50%;
-  padding: 0 0 0 20px;
 }
 
 .commentForm ul li:nth-child(odd) {
-  padding: 0 0 0 20px;
+  padding: 0 20px 0 0;
 }
 
 .commentForm ul li.full {
