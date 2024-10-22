@@ -11,14 +11,12 @@ export default function Villa({ villas, category }) {
     const [activeCategoryId, setActiveCategoryId] = useState(category?.data[0]?.id)
     const [activeCategorySlug, setActiveCategorySlug] = useState(category?.data[0]?.slug || "balayi-villalari")
     const [villasData, setVillasData] = useState(villas)
-    const [homeVillasActiveImage, setHomeVillasActiveImage] = useState(0)
     const [isTabChanged, setTabIsChanged] = useState(false)
 
     useEffect(()=> {
         async function getHomeVillas(){
             const data = await getVillasHome(8, 0, activeCategoryId)
             setVillasData(data)
-            setHomeVillasActiveImage(0)
         }
         if(isTabChanged){
             getHomeVillas()
@@ -42,7 +40,7 @@ export default function Villa({ villas, category }) {
                         <div className={styles.row}>
                             <ul>
                                 {
-                                    villasData?.data?.map((villa, index) => <VillaCard homeVillasActiveImage={homeVillasActiveImage} setHomeVillasActiveImage={setHomeVillasActiveImage} categories={category} activeCategorySlug={activeCategorySlug} activeCategoryId={activeCategoryId} key={index} data={villa} type="villa" photos={villa?.photos} />)
+                                    villasData?.data?.map((villa, index) => <VillaCard activeTabIndex={activeTabIndex} categories={category} activeCategorySlug={activeCategorySlug} activeCategoryId={activeCategoryId} key={index} data={villa} type="villa" photos={villa?.photos} />)
                                 }
                                 <div className={styles.linkBox}>
                                     <Link className={styles.blueButton2} href={`/villalar/${activeCategorySlug}`}>

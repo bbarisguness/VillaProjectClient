@@ -14,6 +14,7 @@ export default function VillaCard({
   activeCategoryId,
   categories,
   nightLength,
+  activeTabIndex,
 }) {
   const router = useRouter();
   const currentPriceTypeText = priceTypes?.find(
@@ -22,6 +23,10 @@ export default function VillaCard({
 
   // const a = Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price))
   const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    setActiveImage(0);
+  }, [activeTabIndex]);
 
   function checkVillaCategory() {
     const found = categories?.data?.find(
