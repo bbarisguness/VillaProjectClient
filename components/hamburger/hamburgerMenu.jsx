@@ -96,12 +96,12 @@ export default function HamburgerMenu() {
                         </div>
                         <div className={styles.container2}>
                             <div className={`${styles["linkBox"]}`}>
-                                <Link style={{backgroundColor: "#3ac007"}} onClick={closeMenu} href="/rezervasyon-takip">
+                                <Link style={{backgroundColor: "#3ac007"}} onClick={closeMenu} href="https://wa.me/5317241934/?text=Merhaba, yardımcı olur musunuz ?" target="_blank">
                                     <span>WhatsApp</span>
                                 </Link>
                             </div>
                             <div className={`${styles["linkBox"]}`}>
-                                <Link style={{backgroundColor: "#c10a0a"}} onClick={closeMenu} href="/rezervasyon-takip">
+                                <Link href="tel:05317241934" target="_blank" style={{backgroundColor: "#c10a0a"}} onClick={closeMenu}>
                                     <span>Hemen Ara</span>
                                 </Link>
                             </div>
