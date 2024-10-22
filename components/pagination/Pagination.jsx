@@ -1,25 +1,17 @@
-
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import styles from "./page.module.css";
 
-
-
-export default function Pagination({
-  pageCount,
-  newActivePage,
-}) {
-
+export default function Pagination({ pageCount, newActivePage }) {
   const router = useRouter();
   const query = router?.query;
 
-
   useEffect(() => {
     if (parseInt(router?.query?.p) > pageCount) {
-      delete router?.query?.p
-      router.push({ query: router.query })
+      delete router?.query?.p;
+      router.push({ query: router.query });
     }
-  }, [])
-
+  }, []);
 
   let allPaginationListItems = Array.from(
     { length: pageCount },
@@ -36,20 +28,22 @@ export default function Pagination({
     if (operation == "+") {
       if (newActivePage != pageCount) {
         if (router.query.p) {
-          router.push({ query: { ...query, p: parseInt(parseInt(router.query.p) + 1) } })
-        }
-        else {
-          router.push({ query: { ...query, p: 2 } })
+          router.push({
+            query: { ...query, p: parseInt(parseInt(router.query.p) + 1) },
+          });
+        } else {
+          router.push({ query: { ...query, p: 2 } });
         }
       }
     } else {
       if (newActivePage != 1) {
         if (parseInt(parseInt(router.query.p) - 1) > 1) {
-          router.push({ query: { ...query, p: parseInt(parseInt(router.query.p) - 1) } })
-        }
-        else {
-          delete router?.query?.p
-          router.push({ query: router.query })
+          router.push({
+            query: { ...query, p: parseInt(parseInt(router.query.p) - 1) },
+          });
+        } else {
+          delete router?.query?.p;
+          router.push({ query: router.query });
         }
       }
     }
@@ -93,11 +87,10 @@ export default function Pagination({
 
   const handleClickItem = (e, index) => {
     if (parseInt(e.target.innerHTML) > 1) {
-      router.push({ query: { ...query, p: parseInt(e.target.innerHTML) } })
-    }
-    else {
-      delete router?.query?.p
-      router.push({ query: router.query })
+      router.push({ query: { ...query, p: parseInt(e.target.innerHTML) } });
+    } else {
+      delete router?.query?.p;
+      router.push({ query: router.query });
     }
   };
 
@@ -106,18 +99,30 @@ export default function Pagination({
   }, [newActivePage, pageCount]);
 
   return (
-    <div className="listItemsContainer" style={{ display: pageCount < 2 ? 'none' : 'block' }}>
-      <div className="listItemsContainer_box">
-        <div className={newActivePage == 1 ? "disabled" : null} onClick={() => changeIndex("-")}>{"<"}</div>
+    <div
+      className={styles.listItemsContainer}
+      style={{ display: pageCount < 2 ? "none" : "block" }}
+    >
+      <div className={styles.listItemsContainer_box}>
+        <div
+          className={newActivePage == 1 ? styles.disabled : null}
+          onClick={() => changeIndex("-")}
+        >
+          {"<"}
+        </div>
         <ul>
           {paginationList.map((item, index) => {
             return (
               <li
                 key={"paginationItem" + index}
-                onClick={(e) => { e.target.innerHTML !== '...' && newActivePage != item && handleClickItem(e, index) }}
+                onClick={(e) => {
+                  e.target.innerHTML !== "..." &&
+                    newActivePage != item &&
+                    handleClickItem(e, index);
+                }}
                 className={
                   //   activeListItemIndex == index ? "listItemActive" : null
-                  newActivePage == item ? "listItemActive" : null
+                  newActivePage == item ? styles.listItemActive : null
                 }
               >
                 {item}
@@ -125,7 +130,12 @@ export default function Pagination({
             );
           })}
         </ul>
-        <div className={newActivePage == pageCount ? "disabled" : null} onClick={() => changeIndex("+")}>{">"}</div>
+        <div
+          className={newActivePage == pageCount ? styles.disabled : null}
+          onClick={() => changeIndex("+")}
+        >
+          {">"}
+        </div>
       </div>
     </div>
   );
