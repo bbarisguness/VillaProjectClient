@@ -10,7 +10,7 @@ export default function WhyLabirent() {
         pageTitle={"Neden Labirent"}
         pageDesc={"Labirent Fethiye Neden Labirent"}
       />
-      <BreadCrumb />
+      <BreadCrumb link="neden-labirent" />
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>

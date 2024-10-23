@@ -10,7 +10,7 @@ export default function Complaint() {
         pageTitle={"Şikayet Bildirimi"}
         pageDesc={"Labirent Fethiye Şikayet Bildirimi"}
       />
-      <BreadCrumb />
+      <BreadCrumb link="sikayet-bildirimi" />
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>

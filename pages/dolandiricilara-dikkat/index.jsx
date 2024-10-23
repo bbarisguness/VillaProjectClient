@@ -10,7 +10,7 @@ export default function Cheat() {
         pageTitle={"Dolandırıcılara Dikkat"}
         pageDesc={"Labirent Fethiye Dolandırıcılara Dikkat"}
       />
-      <BreadCrumb />
+      <BreadCrumb link="dolandiricilara-dikkat" />
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>

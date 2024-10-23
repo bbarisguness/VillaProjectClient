@@ -10,7 +10,7 @@ export default function LeaseTerms() {
         pageTitle={"Kiralama Şartları"}
         pageDesc={"Labirent Fethiye Kiralama Şartları"}
       />
-      <BreadCrumb />
+      <BreadCrumb link="kiralama-sartlari" />
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>

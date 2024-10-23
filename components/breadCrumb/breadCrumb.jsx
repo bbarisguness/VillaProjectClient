@@ -8,7 +8,12 @@ export default function BreadCrumb({ link }) {
         if (link == "sss") { return "Sıkça Sorulan Sorular" }
         else if (link == "contact") { return "İletişim" }
         else if (link == "about") { return "Hakkımızda" }
+        else if (link == "yemek-servisi") { return "Yemek Servisi" }
+        else if (link == "kiralama-sartlari") { return "Kiralama Şartları" }
         else if (link == "rezervasyon-takip") { return "Rezervasyon Takip" }
+        else if (link == "sikayet-bildirimi") { return "Şikayet Bildirimi" }
+        else if (link == "dolandiricilara-dikkat") { return "Dolandırıcılara Dikkat" }
+        else if (link == "neden-labirent") { return "Neden Labirent ?" }
         else if (link == "kiraya-ver") {return "Kiraya Ver"}
         else { return link }
     }
