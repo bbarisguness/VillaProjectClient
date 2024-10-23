@@ -14,7 +14,7 @@ export default function DistanceRuler({ data }) {
                 {data?.map((data, index) => (
                   <li key={index}>
                     <div className={styles.column}>
-                      <Link href="#">
+                      <Link onClick={(e) => e.preventDefault()} href="#">
                         <div className={styles.iconBox}>
                           <i
                             style={{
