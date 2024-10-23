@@ -2,14 +2,41 @@ import styles from "./page.module.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Rating } from "react-simple-star-rating";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function CommentForm() {
   const [rating, setRating] = useState(0);
+  const mailRef = useRef(null);
 
   const handleRating = (rate) => {
     setRating(rate);
     // other logic
+  };
+
+  const phoneFormat = (string) => {
+    // Rakam dışındaki karakterleri temizle
+    let cleaned = ("" + string).replace(/\D/g, "");
+
+    // Format: (•••) ••• •• ••
+    let formattedNumber = "";
+
+    if (cleaned.length > 0) {
+      formattedNumber += "(" + cleaned.substring(0, 3);
+    }
+
+    if (cleaned.length >= 4) {
+      formattedNumber += ") " + cleaned.substring(3, 6);
+    }
+
+    if (cleaned.length >= 7) {
+      formattedNumber += " " + cleaned.substring(6, 8);
+    }
+
+    if (cleaned.length >= 9) {
+      formattedNumber += " " + cleaned.substring(8, 10);
+    }
+
+    return formattedNumber;
   };
 
   return (
@@ -176,7 +203,7 @@ export default function CommentForm() {
           form_email: Yup.string().required("Bu alan boş bırakılamaz"),
           form_name: Yup.string().required("Bu alan boş bırakılamaz"),
           form_surname: Yup.string().required("Bu alan boş bırakılamaz"),
-          form_phone: Yup.string().required("Bu alan boş bırakılamaz"),
+          form_phone: Yup.string().length(15, "Geçerli bir telefon numarası girin").required("Bu alan boş bırakılamaz"),
           form_message: Yup.string().required("Bu alan boş bırakılamaz"),
           form_rating: Yup.number()
             .transform((value, originalValue) =>
@@ -297,7 +324,14 @@ export default function CommentForm() {
                     className={styles.form_phone}
                     name="form_phone"
                     placeholder="(•••) ••• •• ••"
-                    onChange={handleChange}
+                    inputMode="numeric"
+                    onChange={(e) => {
+                      setFieldValue("form_phone", phoneFormat(e.target.value));
+                      if (e?.target?.value?.length >= 15) {
+                        mailRef.current.focus();
+                        return;
+                      }
+                    }}
                     value={values.form_phone}
                   />
                   {errors.form_phone && touched.form_phone && (
@@ -311,6 +345,7 @@ export default function CommentForm() {
                 <div className={styles.inputBox}>
                   <div className={styles.inputName}>Email Adresiniz</div>
                   <input
+                    ref={mailRef}
                     type="text"
                     className={styles.form_email}
                     name="form_email"
