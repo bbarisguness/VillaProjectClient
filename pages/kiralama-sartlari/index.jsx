@@ -19,7 +19,7 @@ export default function LeaseTerms() {
         </div>
         <div className={styles.textBox}>
           <div className={styles.container}>
-            <div class={styles.text}>
+            <div className={styles.text}>
               <h2>TARAFLAR VE AMAÇ</h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non sit
