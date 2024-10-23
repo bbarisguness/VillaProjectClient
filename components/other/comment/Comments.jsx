@@ -25,7 +25,7 @@ export default function Comments({ commentData }) {
 
   return (
     <>
-      <div className={styles.title}>4,91 · {commentData?.length} değerlendirme</div>
+      {/* <div className={styles.title}>4,91 · {commentData?.length} değerlendirme</div>
       <div className={styles.commentRating}>
         <ul>
           <li>
@@ -83,7 +83,7 @@ export default function Comments({ commentData }) {
             </div>
           </li>
         </ul>
-      </div>
+      </div> */}
       <div className={styles.comments}>
         <ul>
           {commentData.slice(0, numberOfCommentsShown).map((item, index) => {
