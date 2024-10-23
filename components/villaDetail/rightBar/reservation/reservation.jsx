@@ -89,7 +89,7 @@ export default function Reservation({
     if (type == "adult") {
       operation == "+"
         ? setNumberOfAdults1(numberOfAdults1 + 1)
-        : numberOfAdults1 > 0 && setNumberOfAdults1(numberOfAdults1 - 1);
+        : numberOfAdults1 > 1 && setNumberOfAdults1(numberOfAdults1 - 1);
     } else if (type == "child") {
       operation == "+"
         ? setNumberOfChild1(numberOfChild1 + 1)
