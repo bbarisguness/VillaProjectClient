@@ -31,7 +31,7 @@ export default function VillaRent() {
                             sepetini sizin ve sevdikleriniz için hazır etmemizi sağlayabilirsiniz.
                         </div>
                         <div className={styles.linkBox}>
-                            <Link href="#" className={styles.blueButton}>
+                            <Link onClick={e=> e.preventDefault()} href="#" className={styles.blueButton}>
                                 <span>Sepetleri Gör</span>
                             </Link>
                         </div>
