@@ -10,7 +10,7 @@ export default function RentCar() {
         pageTitle={"Araç Kiralama"}
         pageDesc={"Labirent Fethiye Araç Kiralama"}
       />
-      <BreadCrumb />
+      <BreadCrumb link="arac-kiralama" />
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>

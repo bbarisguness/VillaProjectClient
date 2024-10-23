@@ -14,6 +14,7 @@ export default function BreadCrumb({ link }) {
         else if (link == "sikayet-bildirimi") { return "Şikayet Bildirimi" }
         else if (link == "dolandiricilara-dikkat") { return "Dolandırıcılara Dikkat" }
         else if (link == "neden-labirent") { return "Neden Labirent ?" }
+        else if (link == "arac-kiralama") { return "Araç Kiralama" }
         else if (link == "kiraya-ver") {return "Kiraya Ver"}
         else { return link }
     }
