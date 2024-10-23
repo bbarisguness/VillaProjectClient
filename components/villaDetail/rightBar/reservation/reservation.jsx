@@ -1,15 +1,10 @@
 "use client";
 import styles from "./reservation.module.css";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { DateRange } from "react-date-range";
 import { useRef, useState, useEffect, forwardRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { changeDate, changeNumberOfPeople } from "@/store/globalState";
 import Image from "next/image";
 import moment from "moment";
 import { isVillaAvailable } from "@/services/reservation";
-const qs = require("qs");
 import tr from "date-fns/locale/tr";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -31,8 +26,6 @@ export default function Reservation({
   const menuRefNumberOfPeople = useRef();
   const menuRefCalendar = useRef();
   const datepickerRef = useRef();
-  const [dateClickCount, setDateClickCount] = useState(0);
-  const [datePlaceHolder, setdatePlaceHolder] = useState("Tarih Seçin");
 
   const [numberOfAdults1, setNumberOfAdults1] = useState(1);
   const [numberOfChild1, setNumberOfChild1] = useState(0);
@@ -41,38 +34,20 @@ export default function Reservation({
   const [dateRange, setDateRange] = useState([]);
   const [startDate, endDate] = dateRange;
 
-  const dispatch = useDispatch();
-  const {
-    numberOfAdults,
-    numberOfChild,
-    numberOfBabies,
-    reservationStartDate,
-    reservationEndDate,
-  } = useSelector((state) => state.globalState);
+  const [isNumberPeopleMenuOpen, setNumberPeople] = useState(false);
 
-  //Villa müsaitliği sorgula butonuna tıklayınca rezervasyon giriş ve çıkış tarihleri değişiyor ve bir sonraki sayfaya gönderilecek veriler localstorageye kaydediliyor
-  useEffect(() => {
-    if (reservationStartDate != "" && reservationEndDate != "") {
-      let date = new Date();
-      //let utcTimestamp = Math.floor((Math.abs(date.getTimezoneOffset() * 60) + (date.getTime())) / 1000)
-
-      const items = [
-        {
-          villaId: villaId || roomId,
-          startDate: reservationStartDate,
-          endDate: reservationEndDate,
-          numberOfAdults,
-          numberOfChild,
-          numberOfBabies,
-          expiryDate: Math.floor(date.getTime() / 1000),
-        },
-      ];
-
-      localStorage.setItem("reservationItems", JSON.stringify(items));
-    }
-  }, [reservationStartDate, reservationEndDate]);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   useEffect(() => {
+    let handler = (e) => {
+      //Kişi sayısı menüsü için
+      if (!menuRefNumberOfPeople.current.contains(e.target)) {
+        setNumberPeople(false);
+      }
+    };
+
+    document.addEventListener("mouseup", handler);
+
     if (numberOfAdults1 != 0 || numberOfChild1 != 0 || numberOfBabies1 != 0) {
       inputRefNumberOfPeople.current.value = `${
         numberOfAdults1 + numberOfChild1
@@ -80,12 +55,20 @@ export default function Reservation({
     } else {
       inputRefNumberOfPeople.current.value = "2 Misafir, 1 Bebek";
     }
+
+    return () => {
+      document.removeEventListener("mouseup", handler);
+    };
   });
+
+  useEffect(() => {
+    if (dateRange?.includes(null)) {
+      setDateRange([]);
+    }
+  }, [isCalendarOpen]);
 
   //Change People Number
   const changeNumber = (operation, type) => {
-    //dispatch(changeNumberOfPeople([type, operation]))
-
     if (type == "adult") {
       operation == "+"
         ? setNumberOfAdults1(numberOfAdults1 + 1)
@@ -101,82 +84,6 @@ export default function Reservation({
     }
   };
 
-  const girisveCikisTarihiniAl = () => {
-    let startDate = reservationDate.startDate;
-    let endDate = reservationDate.endDate;
-    let string =
-      startDate.getDate() +
-      "-" +
-      (startDate.getMonth() + 1) +
-      "-" +
-      startDate.getFullYear() +
-      " / " +
-      endDate.getDate() +
-      "-" +
-      (endDate.getMonth() + 1) +
-      "-" +
-      endDate.getFullYear();
-    setdatePlaceHolder(string);
-  };
-
-  const [isDateRangeOpen, setDateRangeOpen] = useState(false);
-  const [reservationDate, setReservationDate] = useState({
-    startDate: new Date(),
-    endDate: new Date(),
-    key: "selection",
-  });
-
-  useEffect(() => {
-    setDateClickCount(dateClickCount + 1);
-    //console.log(reservationDate);
-    if (
-      !(
-        reservationDate.startDate.getTime() == reservationDate.endDate.getTime()
-      )
-    ) {
-      girisveCikisTarihiniAl();
-    }
-  }, [reservationDate]);
-
-  // useEffect(() => {
-  //   // if (isDateRangeOpen) setDateClickCount(1);
-
-  //   console.log(isDateRangeOpen)
-  //   if(!isDateRangeOpen){
-  //     if(dateRange[1] == null){
-  //       setDateRange([])
-  //     }
-  //   }
-  // }, [isDateRangeOpen]);
-
-  // useEffect(() => {
-  //   if (dateClickCount != 1 && dateClickCount % 2 == 1) {
-  //     setDateRangeOpen(false);
-  //   }
-  // }, [dateClickCount]);
-
-  const [isNumberPeopleMenuOpen, setNumberPeople] = useState(false);
-
-  useEffect(() => {
-    let handler = (e) => {
-      //Kişi sayısı menüsü için
-      if (!menuRefNumberOfPeople.current.contains(e.target)) {
-        setNumberPeople(false);
-      }
-
-      //takvim menüsü için
-      // if (!menuRefCalendar.current.contains(e.target)) {
-      //   setDateRangeOpen(false);
-      // }
-    };
-
-    document.addEventListener("mouseup", handler);
-
-    return () => {
-      document.removeEventListener("mouseup", handler);
-    };
-  });
-
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <input
       value={value}
@@ -190,19 +97,6 @@ export default function Reservation({
 
   async function handleClick() {
     if (dateRange[1] != null) {
-      // getPrice({
-      //   adult: numberOfAdults1,
-      //   villaId: villaId,
-      //   checkIn: moment(dateRange[0]).format("YYYY-MM-DD").toString(),
-      //   checkOut: moment(dateRange[1]).format("YYYY-MM-DD").toString(),
-      // }).then((res) => {
-      //   if (!res) {
-      //     alert("Seçtiğiniz Tarihler Tesisimiz Müsait Değildir");
-      //   } else {
-      //     localStorage.setItem("reservation", JSON.stringify(res));
-      //     router.push("/rezervasyon");
-      //   }
-      // });
       const isVillaAvailableResponse = await isVillaAvailable(
         villaId ? 0 : 1,
         villaId || roomId,
@@ -284,13 +178,11 @@ export default function Reservation({
           <div className={styles.colonTitle}>Giriş / Çıkış</div>
           <div
             onClick={() => {
-              setDateRangeOpen(!isDateRangeOpen);
               datepickerRef.current.input.blur();
             }}
             className={styles.colonInput}
           >
             <i className={styles.loginDateIcon}></i>
-            {/* <input style={{ cursor: 'pointer' }} type="text" placeholder={datePlaceHolder} readOnly /> */}
             <div className="date-picker-reservation">
               <DatePicker
                 ref={datepickerRef}
@@ -309,22 +201,11 @@ export default function Reservation({
                 minDate={new Date()}
                 width="100%"
                 customInput={<CustomInput />}
+                onCalendarOpen={() => setIsCalendarOpen(true)} // Takvim açıldığında
+                onCalendarClose={() => setIsCalendarOpen(false)} // Takvim kapandığında
               />
             </div>
           </div>
-          {/* {isDateRangeOpen && (<DateRange
-            locale={tr}
-            editableDateInputs={false}
-            onChange={(item) => setReservationDate(item.selection)}
-            moveRangeOnFirstSelection={false}
-            ranges={[reservationDate]}
-            className={styles.dateRange}
-            minDate={new Date()}
-            months={2}
-            direction="vertical"
-            showDateDisplay={false}
-            showMonthAndYearPickers={false}
-          />)} */}
         </div>
         <div ref={menuRefNumberOfPeople} className={styles.colon}>
           <div className={styles.colonTitle}>Kişi Sayısı</div>
@@ -423,9 +304,6 @@ export default function Reservation({
           </div>
         </div>
         <div className={styles.linkBox}>
-          {/* <Link className={styles.blueButtonArrow} href="javascript" onClick={handleClick}>
-                        <span>Villa Müsaitliği Sorgula</span>
-                    </Link>  */}
           <button className={styles.blueButtonArrow} onClick={handleClick}>
             <span>Villa Müsaitliği Sorgula</span>
           </button>
