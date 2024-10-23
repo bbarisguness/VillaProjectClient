@@ -70,14 +70,6 @@ export default function Calendar({
 
         <ModalComponent isOpen={isModalOpen} onClose={closeModal}>
           <div className={`${styles.fullDatepicker} ${styles.modal}`}>
-            <div className={styles.title}>
-              Müsaitlik Takvimi
-              <div style={{ display: "flex", gap: "20px" }}>
-                <span className={styles.orange}>Opsiyonlu</span>
-                <span className={styles.red}>Dolu</span>
-              </div>
-            </div>
-
             <div className={styles.datepickerBox}>
               <MyDatePicker
                 calendarPrices={calendarPrices}
