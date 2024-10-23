@@ -19,7 +19,7 @@ export default function Hakkimizda() {
           <div className={styles.container}>
             <ul>
               <li className={styles.single}>
-                <Link href="#">
+                <Link onClick={(e) => e.preventDefault()} href="#">
                   <div
                     className={styles.img}
                     style={{
@@ -29,7 +29,7 @@ export default function Hakkimizda() {
                 </Link>
               </li>
               <li className={styles.double}>
-                <Link href="#">
+                <Link onClick={(e) => e.preventDefault()} href="#">
                   <div
                     className={styles.img}
                     style={{
@@ -37,7 +37,7 @@ export default function Hakkimizda() {
                     }}
                   ></div>
                 </Link>
-                <Link href="#">
+                <Link onClick={(e) => e.preventDefault()} href="#">
                   <div
                     className={styles.img}
                     style={{
@@ -47,7 +47,7 @@ export default function Hakkimizda() {
                 </Link>
               </li>
               <li className={`${styles["double"]} ${styles["reverse"]}`}>
-                <Link href="#">
+                <Link onClick={(e) => e.preventDefault()} href="#">
                   <div
                     className={styles.img}
                     style={{
@@ -55,7 +55,7 @@ export default function Hakkimizda() {
                     }}
                   ></div>
                 </Link>
-                <Link href="#">
+                <Link onClick={(e) => e.preventDefault()} href="#">
                   <div
                     className={styles.img}
                     style={{
@@ -65,7 +65,7 @@ export default function Hakkimizda() {
                 </Link>
               </li>
               <li className={styles.single}>
-                <Link href="#">
+                <Link onClick={(e) => e.preventDefault()} href="#">
                   <div
                     className={styles.img}
                     style={{
@@ -172,7 +172,7 @@ export default function Hakkimizda() {
             <div className={styles.fancyboxImages}>
               <ul>
                 <li>
-                  <Link href="#">
+                  <Link onClick={(e) => e.preventDefault()} href="#">
                     <div className={styles.imageBox}>
                       <div
                         className={styles.image}
@@ -184,7 +184,7 @@ export default function Hakkimizda() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#">
+                  <Link onClick={(e) => e.preventDefault()} href="#">
                     <div className={styles.imageBox}>
                       <div
                         className={styles.image}
