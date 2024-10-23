@@ -66,7 +66,7 @@ export default function Service() {
                             <ul>
                                 <li>
                                     <div className={styles.column}>
-                                        <Link href="#">
+                                        <Link onClick={e=> e.preventDefault()} href="#">
                                             <div className={styles.iconBox}>
                                                 <i style={{backgroundImage: "url(/images/services1.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services1-hover.png)"}}></i>
@@ -77,7 +77,7 @@ export default function Service() {
                                 </li>
                                 <li>
                                     <div className={styles.column}>
-                                        <Link href="#">
+                                        <Link onClick={e=> e.preventDefault()} href="#">
                                             <div className={styles.iconBox}>
                                                 <i style={{backgroundImage: "url(/images/services2.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services2-hover.png)"}}></i>
@@ -88,7 +88,7 @@ export default function Service() {
                                 </li>
                                 <li>
                                     <div className={styles.column}>
-                                        <Link href="#">
+                                        <Link onClick={e=> e.preventDefault()} href="#">
                                             <div className={styles.iconBox}>
                                                 <i style={{backgroundImage: "url(/images/services3.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services3-hover.png)"}}></i>
@@ -99,7 +99,7 @@ export default function Service() {
                                 </li>
                                 <li>
                                     <div className={styles.column}>
-                                        <Link href="#">
+                                        <Link onClick={e=> e.preventDefault()} href="#">
                                             <div className={styles.iconBox}>
                                                 <i style={{backgroundImage: "url(/images/services4.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services4-hover.png)"}}></i>
@@ -110,7 +110,7 @@ export default function Service() {
                                 </li>
                                 <li>
                                     <div className={styles.column}>
-                                        <Link href="#">
+                                        <Link onClick={e=> e.preventDefault()} href="#">
                                             <div className={styles.iconBox}>
                                                 <i style={{backgroundImage: "url(/images/services5.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services5-hover.png)"}}></i>
@@ -121,7 +121,7 @@ export default function Service() {
                                 </li>
                                 <li>
                                     <div className={styles.column}>
-                                        <Link href="#">
+                                        <Link onClick={e=> e.preventDefault()} href="#">
                                             <div className={styles.iconBox}>
                                                 <i style={{backgroundImage: "url(/images/services6.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services6-hover.png)"}}></i>
@@ -132,7 +132,7 @@ export default function Service() {
                                 </li>
                                 <li>
                                     <div className={styles.column}>
-                                        <Link href="#">
+                                        <Link onClick={e=> e.preventDefault()} href="#">
                                             <div className={styles.iconBox}>
                                                 <i style={{backgroundImage: "url(/images/services7.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services7-hover.png)"}}></i>
@@ -143,7 +143,7 @@ export default function Service() {
                                 </li>
                                 <li>
                                     <div className={styles.column}>
-                                        <Link href="#">
+                                        <Link onClick={e=> e.preventDefault()} href="#">
                                             <div className={styles.iconBox}>
                                                 <i style={{backgroundImage: "url(/images/services8.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services8-hover.png)"}}></i>
