@@ -129,7 +129,7 @@ export default function FooterTop() {
                                         </Link>
                                     </li> */}
                                     <li>
-                                        <Link onClick={e=> e.preventDefault()} href="/#" title="">
+                                        <Link onClick={e=> e.preventDefault()} href="#" title="">
                                             <span>Fırsatlar</span>
                                         </Link>
                                     </li>
@@ -139,52 +139,52 @@ export default function FooterTop() {
                                 <div className={styles.colonTitle}>Bölgeler</div>
                                 <ul className={styles.footerMenu}>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Antalya Kiralık Villa</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Muğla Kiralık Villa</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Kalkan Kiralık Villa</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Fethiye Kiralık Villa</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Kaş Kiralık Villa</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Patara Kiralık Villa</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Göcek Kiralık Villa</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Bodrum Kiralık Villa</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Marmaris Kiralık Villa</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#" title="">
+                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
                                             <span>Dalyan Kiralık Villa</span>
                                         </Link>
                                     </li>
