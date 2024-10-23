@@ -85,6 +85,12 @@ export default function Comments({ commentData }) {
         </ul>
       </div> */}
       <div className={styles.comments}>
+        <div
+          className={styles.title}
+          style={{ textAlign: "center", fontSize: 26 }}
+        >
+          Yorumlar
+        </div>
         <ul>
           {commentData.slice(0, numberOfCommentsShown).map((item, index) => {
             return (
