@@ -150,6 +150,7 @@
 .top .reservationBox .colon .numberPeopleOpen.active {
     opacity: 1;
     visibility: visible;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6); /* Gölge */
 }
 
 .top .reservationBox .colon .numberPeopleOpen ul {
