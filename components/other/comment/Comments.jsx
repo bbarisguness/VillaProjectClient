@@ -92,7 +92,7 @@ export default function Comments({ commentData }) {
           Yorumlar
         </div>
         <ul>
-          {commentData.slice(0, numberOfCommentsShown).map((item, index) => {
+          {commentData?.slice(0, numberOfCommentsShown).map((item, index) => {
             return (
               <li key={"customerComment" + index + 1}>
                 <div className={styles.imageBox}>

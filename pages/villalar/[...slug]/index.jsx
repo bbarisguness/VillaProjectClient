@@ -48,11 +48,13 @@ export default function List({
   )?.text;
   const router = useRouter();
   const slug = router?.query?.slug;
-  const categorySlug = allCategories?.data?.find(
-    (item) =>
-      item?.categoryDetails[0]?.name ==
-      villaDetail?.data?.categories[0]?.categoryDetails[0]?.name
-  )?.slug;
+  const categorySlug = villaDetail?.data?.categories
+    ? allCategories?.data?.find(
+        (item) =>
+          item?.categoryDetails[0]?.name ==
+          villaDetail?.data?.categories[0]?.categoryDetails[0]?.name
+      )?.slug
+    : null;
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
@@ -161,7 +163,7 @@ export default function List({
                 <li className={styles.breadCrumbItem}>
                   <Link href="/">Anasayfa</Link>
                 </li>
-                {villaDetail?.data?.categories[0] && (
+                {villaDetail?.data?.categories && (
                   <li className={styles.breadCrumbItem}>
                     <Link href={`/villalar/${categorySlug}`}>
                       {
@@ -296,7 +298,9 @@ export default function List({
                         villaName={villaName}
                         prices={villaDetail?.data?.priceTables}
                         villaFirstPhoto={
-                          villaDetail?.data?.photos[0]?.image || null
+                          villaDetail?.data?.photos
+                            ? villaDetail?.data?.photos[0]?.image
+                            : null
                         }
                         region={
                           villaDetail?.data?.town?.district?.name +
