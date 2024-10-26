@@ -49,10 +49,10 @@ export default function Home({
         pageTitle={"Labirent Fehiye"}
         pageDesc={"Labirent Fethiye Villalar"}
       />
-   
 
-      <Suspense fallback={<div>loading</div>}>
       <Slider />
+      <Suspense fallback={<div>loading</div>}>
+
         <section id="contentContainer">
           <TreeStep />
           <Villa category={categories} villas={villa} />
