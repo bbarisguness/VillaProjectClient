@@ -17,7 +17,7 @@ function myApp({ Component, pageProps }) {
                 <Component {...pageProps} />
             } */}
             <Component {...pageProps} />
-            <Footer />
+            <Footer regions={pageProps?.regions?.data} />
             <HamburgerMenu />
         </Providers>
     )

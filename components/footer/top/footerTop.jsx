@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import styles from "./footerTop.module.css"
 
-export default function FooterTop() {
+export default function FooterTop({ regions }) {
     return (
         <div className={styles.top}>
             <div className={styles.container}>
@@ -138,56 +138,15 @@ export default function FooterTop() {
                             <div className={styles.colon}>
                                 <div className={styles.colonTitle}>Bölgeler</div>
                                 <ul className={styles.footerMenu}>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Antalya Kiralık Villa</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Muğla Kiralık Villa</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Kalkan Kiralık Villa</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Fethiye Kiralık Villa</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Kaş Kiralık Villa</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Patara Kiralık Villa</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Göcek Kiralık Villa</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Bodrum Kiralık Villa</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Marmaris Kiralık Villa</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={(e) => e.preventDefault()} href="#" title="">
-                                            <span>Dalyan Kiralık Villa</span>
-                                        </Link>
-                                    </li>
+                                    {
+                                        regions?.map((item, index) => (
+                                            <li key={item?.id || ("regionItem" + index)}>
+                                                <Link href={`/bolgeler/${item?.id}`}>
+                                                    <span>{item?.webPageDetails ? item?.webPageDetails[0]?.title : undefined}</span>
+                                                </Link>
+                                            </li>
+                                        ))
+                                    }
                                 </ul>
                             </div>
                         </div>
