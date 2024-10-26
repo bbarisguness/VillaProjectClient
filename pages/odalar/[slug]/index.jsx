@@ -23,6 +23,9 @@ import { priceTypes } from "@/data/data";
 import { getPriceRange } from "@/utils/globalUtils";
 import Comments from "@/components/other/comment/Comments";
 import CommentForm from "@/components/other/commentForm/CommentForm";
+import 'lightgallery/css/lightgallery.css'
+import 'lightgallery/css/lg-zoom.css'
+import 'lightgallery/css/lg-video.css'
 
 export default function List({
   roomDetail,
@@ -187,14 +190,12 @@ export default function List({
                           roomDetail?.data?.roomDetails[0]?.descriptionLong,
                       }}
                       style={{ whiteSpace: "pre-line" }}
-                      className={`${styles["desc"]} ${
-                        isDescOpen && styles["active"]
-                      }`}
+                      className={`${styles["desc"]} ${isDescOpen && styles["active"]
+                        }`}
                     ></div>
                     <div
-                      className={`${styles["readMore"]} ${
-                        isDescOpen && styles["active"]
-                      }`}
+                      className={`${styles["readMore"]} ${isDescOpen && styles["active"]
+                        }`}
                     >
                       <div className={styles.allButton}>
                         <span

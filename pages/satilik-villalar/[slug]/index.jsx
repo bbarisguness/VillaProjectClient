@@ -10,6 +10,9 @@ import VillaCard from '@/components/index/villa/card/villaCard';
 import { useRouter } from 'next/router';
 import Comments from '@/components/other/comment/Comments';
 import CommentForm from '@/components/other/commentForm/CommentForm';
+import 'lightgallery/css/lightgallery.css'
+import 'lightgallery/css/lg-zoom.css'
+import 'lightgallery/css/lg-video.css'
 
 export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
     console.log(villaDetail)

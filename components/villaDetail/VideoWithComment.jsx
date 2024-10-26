@@ -3,6 +3,9 @@ import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";
 import styles from "./page.module.css";
 import { memo } from "react";
+import 'lightgallery/css/lightgallery.css'
+import 'lightgallery/css/lg-zoom.css'
+import 'lightgallery/css/lg-video.css'
 
 const VideoWithComment = memo(function VideoWithComment() {
   return (
