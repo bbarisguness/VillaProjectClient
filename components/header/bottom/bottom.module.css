@@ -29,6 +29,7 @@
 
 .linkBox a:hover {
     color: #ffffff;
+    background-color: transparent;
 }
 
 .linkBox a:hover::after {

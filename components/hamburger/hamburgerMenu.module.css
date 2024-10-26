@@ -196,8 +196,8 @@
 .hamburgerMenu .hamburgerMenuBox .bottomSection {
     align-self: center;
     position: absolute;
-    bottom: 50px;
-    width: 75%;
+    bottom: 0;
+    width: 85%;
 }
 
 .hamburgerMenu .hamburgerMenuBox .bottomSection .container2 {
