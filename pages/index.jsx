@@ -1,13 +1,24 @@
-import Slider from "@/components/index/slider/slider";
-import TreeStep from "@/components/index/treestep/treestep";
-import Villa from "@/components/index/villa/villa";
-import Regions from "@/components/index/region/region";
-import Apart from "@/components/index/apart/apart";
-import Service from "@/components/index/service/service";
-import NewVillas from "@/components/index/newest/newest";
-import Testimonial from "@/components/index/testimonial/testimonial";
-import Blog from "@/components/index/blog/blog";
-import VillaRent from "@/components/index/villaRentInfo/villaRentInfo";
+//import Slider from "@/components/index/slider/slider";
+// import TreeStep from "@/components/index/treestep/treestep";
+// import Villa from "@/components/index/villa/villa";
+// import Regions from "@/components/index/region/region";
+// import Apart from "@/components/index/apart/apart";
+// import Service from "@/components/index/service/service";
+// import Blog from "@/components/index/blog/blog";
+// import VillaRent from "@/components/index/villaRentInfo/villaRentInfo";
+
+const Slider = lazy(() => import('@/components/index/slider/slider'));
+const TreeStep = lazy(() => import('@/components/index/treestep/treestep'));
+const Villa = lazy(() => import('@/components/index/villa/villa'));
+const Regions = lazy(() => import('@/components/index/region/region'));
+const Apart = lazy(() => import('@/components/index/apart/apart'));
+const Service = lazy(() => import('@/components/index/service/service'));
+const Blog = lazy(() => import('@/components/index/blog/blog'));
+const VillaRent = lazy(() => import('@/components/index/villaRentInfo/villaRentInfo'));
+
+
+
+
 
 import "@/styles/styles.css";
 import {
@@ -21,6 +32,7 @@ import Seo from "@/components/seo";
 import { getRegions } from "@/services/region";
 import { getBlogs } from "@/services/blog";
 import { getTestimonials } from "@/services/testimonial";
+import { lazy, Suspense } from "react";
 
 export default function Home({
   villa,
@@ -37,18 +49,22 @@ export default function Home({
         pageTitle={"Labirent Fehiye"}
         pageDesc={"Labirent Fethiye Villalar"}
       />
+   
+
+      <Suspense fallback={<div>loading</div>}>
       <Slider />
-      <section id="contentContainer">
-        <TreeStep />
-        <Villa category={categories} villas={villa} />
-        <Regions homePage={true} regions={regions} />
-        <Apart aparts={aparts} />
-        <Service />
-        {/* <NewVillas villas={newVillas} /> */}
-        {/* <Testimonial testimonials={testimonials} /> */}
-        <Blog blog={blogs} />
-        <VillaRent />
-      </section>
+        <section id="contentContainer">
+          <TreeStep />
+          <Villa category={categories} villas={villa} />
+          <Regions homePage={true} regions={regions} />
+          <Apart aparts={aparts} />
+          <Service />
+          {/* <NewVillas villas={newVillas} /> */}
+          {/* <Testimonial testimonials={testimonials} /> */}
+          <Blog blog={blogs} />
+          <VillaRent />
+        </section>
+      </Suspense>
     </>
   );
 }
