@@ -1,4 +1,4 @@
-//import Slider from "@/components/index/slider/slider";
+import Slider from "@/components/index/slider/slider";
 // import TreeStep from "@/components/index/treestep/treestep";
 // import Villa from "@/components/index/villa/villa";
 // import Regions from "@/components/index/region/region";
@@ -7,7 +7,7 @@
 // import Blog from "@/components/index/blog/blog";
 // import VillaRent from "@/components/index/villaRentInfo/villaRentInfo";
 
-const Slider = lazy(() => import('@/components/index/slider/slider'));
+//const Slider = lazy(() => import('@/components/index/slider/slider'));
 const TreeStep = lazy(() => import('@/components/index/treestep/treestep'));
 const Villa = lazy(() => import('@/components/index/villa/villa'));
 const Regions = lazy(() => import('@/components/index/region/region'));
