@@ -1,13 +1,19 @@
 'use client';
 import styles from "./slider.module.css"
 import ReservationBox from "./reservation/reservation"
+import Image from "next/image";
 
 export default function Slider() {
     return (
         <section className={styles.slider}>
             <div className={styles.sliderBox}>
-                <div className={styles.bgImage}>
-                </div>
+                {/* <div className={styles.bgImage}>
+                </div> */}
+                <Image width={0}
+                    height={0}
+                    sizes="100%"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} src='/images/slider-1.jpg' />
+
                 <div className={styles.sliderText}>
                     <ReservationBox />
                     <div className={styles.sliderSubTitle}>
