@@ -1,11 +1,14 @@
 import BreadCrumb from "@/components/breadCrumb/breadCrumb";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Seo from "@/components/seo";
 import { searchReservation } from "@/services/reservation";
 import { timeStringToDate } from "@/utils/date";
+import { scrolltoHash } from "@/utils/globalUtils";
+import moment from "moment";
+import Link from "next/link";
 
 export default function RezervasyonTakip() {
   const [step, setStep] = useState(0);
@@ -24,7 +27,13 @@ export default function RezervasyonTakip() {
   const [villaDetail, setVillaDetail] = useState({
     name: "",
     region: "",
+    url: null,
   });
+
+  //Sayfa açıldığında inputa kayması
+  // useEffect(()=> {
+  //   scrolltoHash("reservationNoArea")
+  // }, [])
 
   function searchHandle(values) {
     searchReservation({ reservationNumber: values?.reservationNumber }).then(
@@ -44,6 +53,7 @@ export default function RezervasyonTakip() {
           setVillaDetail({
             name: res?.data?.villa?.name,
             region: res?.data?.villa?.district + " / " + res?.data?.villa?.town,
+            url: res?.data?.villa?.id,
           });
           setReservationDetail({
             checkIn: timeStringToDate(res?.data?.checkIn),
@@ -70,7 +80,7 @@ export default function RezervasyonTakip() {
         <div className={styles.container}>
           <div className={styles.content}>
             <h1>Rezervasyon Takip Bölümü - Müşteri Girişi</h1>
-            <div className={styles.formContent}>
+            <div id="reservationNoArea" className={styles.formContent}>
               <Formik
                 initialValues={{
                   reservationNumber: "",
@@ -101,6 +111,7 @@ export default function RezervasyonTakip() {
                         <div className={styles.inputBox}>
                           <div className={styles.inputName}>Rezervasyon No</div>
                           <input
+                            autoFocus
                             name="reservationNumber"
                             value={values.reservationNumber}
                             onChange={handleChange}
@@ -133,10 +144,18 @@ export default function RezervasyonTakip() {
         <div className={styles.container}>
           <div className={styles.content}>
             <div className={styles.successMessage}>
-              <div className={styles.iconBox}>
+              <div className={styles.iconBox} style={{ margin: 0 }}>
                 <div
                   style={{ backgroundImage: `url(${villaCoverPhoto})` }}
                 ></div>
+              </div>
+              <div className={styles.linkBox}>
+                <Link
+                  className={styles.blueButton2}
+                  href={`/villalar/${villaDetail?.url}`}
+                >
+                  <span>Tesis Detay</span>
+                </Link>
               </div>
               <div className={styles.textBox}>
                 <div className={styles.title}>
@@ -150,10 +169,20 @@ export default function RezervasyonTakip() {
                   Çıkış Tarihi : {reservationDetail?.checkOut}
                 </div>
                 <div className={styles.desc}>
-                  Villa İsmi : {villaDetail?.name}
+                  Gece Sayısı :{" "}
+                  {moment
+                    .duration(
+                      moment(reservationDetail?.checkOut, "YYYY-MM-DD").diff(
+                        moment(reservationDetail?.checkIn, "YYYY-MM-DD")
+                      )
+                    )
+                    .asDays()}
                 </div>
                 <div className={styles.desc}>
-                  Villa Bölgesi : {villaDetail?.region}
+                  Tesis İsmi : {villaDetail?.name}
+                </div>
+                <div className={styles.desc}>
+                  Tesis Bölgesi : {villaDetail?.region}
                 </div>
                 <div className={styles.desc}>
                   Rezervasyon Sahibi : {ownerInfo?.name} {ownerInfo?.surname}

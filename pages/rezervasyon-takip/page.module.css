@@ -74,7 +74,7 @@
 
 .linkBox {
     display: flex;
-    margin-top: 20px;
+    margin: 10px 0;
 }
 
 .linkBox button {
@@ -136,14 +136,73 @@
     display: flex;
 }
 
+.linkBox a {
+    padding: 15px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #7E53F9;
+    position: relative;
+    transition: all .2s ease-in-out;
+}
 
+.linkBox a::after {
+    position: absolute;
+    transition: 0.3s;
+    content: "";
+    width: 0;
+    left: auto;
+    right: -10%;
+    bottom: 0;
+    height: 100%;
+    background: #3E2093;
+    transform: skewX(15deg);
+    z-index: 1;
+}
+
+.linkBox a:hover {
+    color: #ffffff;
+}
+
+.linkBox a:hover::after {
+    left: -10%;
+    right: auto;
+    width: 120%;
+}
+
+.linkBox a span {
+    position: relative;
+    z-index: 2;
+    display: flex;
+}
+
+.linkBox a.blueButton2 {
+    background: #3E2093;
+    color: #ffffff;
+    padding: 15px 45px;
+}
+
+.linkBox a.blueButton2:hover {
+    color: #ffffff;
+}
+
+.linkBox a.blueButton2::after {
+    background: #7E53F9;
+}
 
 .successMessage {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .successMessage .iconBox {
-    margin: 0 0 30px 0;
+    margin: 0 0 20px 0;
     display: flex;
     justify-content: center;
 }
@@ -167,7 +226,6 @@
     color: #02044A;
     margin: 0 0 20px 0;
     text-align: center;
-    padding: 0 100px;
 }
 
 .successMessage .textBox .desc {
