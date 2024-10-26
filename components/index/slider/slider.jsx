@@ -11,6 +11,7 @@ export default function Slider() {
                 </div> */}
                 <Image width={0}
                     height={0}
+                    alt="bgImage"
                     sizes="100%"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }} src='/images/slider-1.jpg' />
 
