@@ -106,7 +106,12 @@ export default function HeaderBottom({ from }) {
                                         <span>BLOG</span>
                                     </Link>
                                 </li>
-                                <li className={`${styles["menu_li"]} ${styles["li_open"]}`}>
+                                <li className={styles.menu_li}>
+                                    <Link href="/hakkimizda" className={styles.menuLink}>
+                                        <span>HAKKIMIZDA</span>
+                                    </Link>
+                                </li>
+                                {/* <li className={`${styles["menu_li"]} ${styles["li_open"]}`}>
                                     <Link href="#" onClick={e=> e.preventDefault()} className={styles.menuLink}>
                                         <span>KURUMSAL</span>
                                         <i></i>
@@ -120,7 +125,7 @@ export default function HeaderBottom({ from }) {
                                             </li>
                                         </ul>
                                     </div>
-                                </li>
+                                </li> */}
                                 <li className={styles.menu_li}>
                                     <Link href="/iletisim" className={styles.menuLink}>
                                         <span>İLETİŞİM</span>
