@@ -69,9 +69,9 @@ export default function HamburgerMenu() {
                             <li className={styles.hmMenuLi}>
                                 <Link onClick={closeMenu} href="/apartlar" className={styles.hmMenuLink}>KİRALIK APARTLAR</Link>
                             </li>
-                            <li className={styles.hmMenuLi}>
+                            {/* <li className={styles.hmMenuLi}>
                                 <Link onClick={closeMenu} href="/arac-kiralama" className={styles.hmMenuLink}>ARAÇ KİRALAMA</Link>
-                            </li>
+                            </li> */}
                             <li className={styles.hmMenuLi}>
                                 <Link onClick={closeMenu} href="/bloglar" rel="nofollow" className={styles.hmMenuLink}>BLOG</Link>
                             </li>
@@ -110,19 +110,19 @@ export default function HamburgerMenu() {
                             {/* <div className={styles.socialText}>Bizi Takip Edin</div> */}
                             <ul>
                                 <li>
-                                    <Link href="https://www.facebook.com/Labirentfethiye/" target="_blank" className={styles.facebook}
+                                    <Link href="https://www.facebook.com/Labirentfethiye/" rel="nofollow" target="_blank" className={styles.facebook}
                                         title="">
                                         <i></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="https://www.youtube.com/channel/UCHSwoqGIPpT6rqP2fsA9TwA" target="_blank"
+                                    <Link href="https://www.youtube.com/channel/UCHSwoqGIPpT6rqP2fsA9TwA" rel="nofollow" target="_blank"
                                         className={styles.youtube} title="">
                                         <i></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="https://www.instagram.com/labirentfethiye/" target="_blank" className={styles.instagram}
+                                    <Link href="https://www.instagram.com/labirentfethiye/" rel="nofollow" target="_blank" className={styles.instagram}
                                         title="">
                                         <i></i>
                                     </Link>

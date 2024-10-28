@@ -22,17 +22,17 @@ export default function HeaderTop() {
                             <div className={styles.socialText}>Bizi Takip Edin</div>
                             <ul>
                                 <li>
-                                    <Link target="_blank" href='https://www.facebook.com/Labirentfethiye/' className={styles.facebook}>
+                                    <Link target="_blank" rel="nofollow" href='https://www.facebook.com/Labirentfethiye/' className={styles.facebook}>
                                         <i></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link target="_blank" href='https://www.youtube.com/channel/UCHSwoqGIPpT6rqP2fsA9TwA' className={styles.youtube}>
+                                    <Link target="_blank" rel="nofollow" href='https://www.youtube.com/channel/UCHSwoqGIPpT6rqP2fsA9TwA' className={styles.youtube}>
                                         <i></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link target="_blank" href='https://www.instagram.com/labirentfethiye/' className={styles.instagram}>
+                                    <Link target="_blank" rel="nofollow" href='https://www.instagram.com/labirentfethiye/' className={styles.instagram}>
                                         <i></i>
                                     </Link>
                                 </li>

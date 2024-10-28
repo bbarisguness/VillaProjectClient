@@ -22,7 +22,7 @@ export default function FooterTop({ regions }) {
                                 <li>
                                     <div className={styles.footerTitle}>Rezervasyon</div>
                                     <div className={styles.footerDecs}>
-                                        <Link href="tel:+902526166648">+90 252 616 66 48</Link>
+                                        <Link rel="nofollow" href="tel:+902526166648">+90 252 616 66 48</Link>
                                     </div>
                                 </li>
                                 <li>
@@ -35,7 +35,7 @@ export default function FooterTop({ regions }) {
                                 <li>
                                     <div className={styles.footerTitle}>E-Mail</div>
                                     <div className={styles.footerDecs}>
-                                        <Link href="mailto:info@labirentfethiye.com">info@labirentfethiye.com</Link>
+                                        <Link rel="nofollow" href="mailto:info@labirentfethiye.com">info@labirentfethiye.com</Link>
                                     </div>
                                 </li>
                             </ul>
@@ -44,19 +44,19 @@ export default function FooterTop({ regions }) {
                             <div className={styles.socialText}>Bizi Takip Edin</div>
                             <ul>
                                 <li>
-                                    <Link href="https://www.facebook.com/Labirentfethiye/" target="_blank" className={styles.facebook}
+                                    <Link href="https://www.facebook.com/Labirentfethiye/" target="_blank" rel="nofollow" className={styles.facebook}
                                         title="">
                                         <i></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="https://www.youtube.com/channel/UCHSwoqGIPpT6rqP2fsA9TwA" target="_blank"
+                                    <Link href="https://www.youtube.com/channel/UCHSwoqGIPpT6rqP2fsA9TwA" rel="nofollow" target="_blank"
                                         className={styles.youtube} title="">
                                         <i></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="https://www.instagram.com/labirentfethiye/" target="_blank" className={styles.instagram}
+                                    <Link href="https://www.instagram.com/labirentfethiye/" rel="nofollow" target="_blank" className={styles.instagram}
                                         title="">
                                         <i></i>
                                     </Link>
