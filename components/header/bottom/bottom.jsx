@@ -102,12 +102,12 @@ export default function HeaderBottom({ from }) {
                                     </Link>
                                 </li>
                                 <li className={styles.menu_li}>
-                                    <Link href="/bloglar" className={styles.menuLink}>
+                                    <Link rel="nofollow" href="/bloglar" className={styles.menuLink}>
                                         <span>BLOG</span>
                                     </Link>
                                 </li>
                                 <li className={styles.menu_li}>
-                                    <Link href="/hakkimizda" className={styles.menuLink}>
+                                    <Link rel="nofollow" href="/hakkimizda" className={styles.menuLink}>
                                         <span>HAKKIMIZDA</span>
                                     </Link>
                                 </li>
@@ -127,7 +127,7 @@ export default function HeaderBottom({ from }) {
                                     </div>
                                 </li> */}
                                 <li className={styles.menu_li}>
-                                    <Link href="/iletisim" className={styles.menuLink}>
+                                    <Link href="/iletisim" rel="nofollow" className={styles.menuLink}>
                                         <span>İLETİŞİM</span>
                                     </Link>
                                 </li>

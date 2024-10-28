@@ -24,7 +24,7 @@ export default function Blog({ blog }) {
             })}
           </ul>
           <div className={styles.linkBox}>
-            <Link href="/bloglar" className={styles.greyButton}>
+            <Link href="/bloglar" rel="nofollow" className={styles.greyButton}>
               <span>Tümü</span>
             </Link>
           </div>

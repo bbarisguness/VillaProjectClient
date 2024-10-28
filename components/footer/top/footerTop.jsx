@@ -89,37 +89,37 @@ export default function FooterTop({ regions }) {
                                 <div className={styles.colonTitle}>Faydalı Bağlantılar</div>
                                 <ul className={styles.footerMenu}>
                                     <li>
-                                        <Link href="/kiralama-sartlari" title="">
+                                        <Link href="/kiralama-sartlari" rel="nofollow" title="">
                                             <span>Kiralama Şartları</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/yemek-servisi" title="">
+                                        <Link href="/yemek-servisi" rel="nofollow" title="">
                                             <span>Yemek Servisi</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/sikayet-bildirimi" title="">
+                                        <Link href="/sikayet-bildirimi" rel="nofollow" title="">
                                             <span>Şikayet Bildirimi</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/dolandiricilara-dikkat" title="">
+                                        <Link href="/dolandiricilara-dikkat" rel="nofollow" title="">
                                             <span>Dolandırıcılara Dikkat</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/neden-labirent" title="">
+                                        <Link href="/neden-labirent" rel="nofollow" title="">
                                             <span>Neden labirent</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/hakkimizda" title="">
+                                        <Link rel="nofollow" href="/hakkimizda" title="">
                                             <span>Hakkımızda</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/sss" title="">
+                                        <Link href="/sss" rel="nofollow" title="">
                                             <span>Sıkça Sorulan Sorular</span>
                                         </Link>
                                     </li>
@@ -129,7 +129,7 @@ export default function FooterTop({ regions }) {
                                         </Link>
                                     </li> */}
                                     <li>
-                                        <Link onClick={e=> e.preventDefault()} href="#" title="">
+                                        <Link onClick={e=> e.preventDefault()} href="#" rel="nofollow" title="">
                                             <span>Fırsatlar</span>
                                         </Link>
                                     </li>
