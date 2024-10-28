@@ -58,7 +58,7 @@ export default function Home({
           <Villa category={categories} villas={villa} />
           <Regions homePage={true} regions={regions} />
           <Apart aparts={aparts} />
-          <Service />
+          {/* <Service /> */}
           {/* <NewVillas villas={newVillas} /> */}
           {/* <Testimonial testimonials={testimonials} /> */}
           <Blog blog={blogs} />
