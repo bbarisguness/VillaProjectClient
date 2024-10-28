@@ -80,7 +80,7 @@ export default function Iletisim() {
                 </div>
                 <div className={styles.nameBox}>Adres</div>
                 <div className={styles.descBox}>
-                  Açık adress.... Fethiye/Muğla
+                  Ölüdeniz, Atatürk Cd. No:83, 48300 Fethiye/Muğla
                 </div>
                 <div className={styles.mapLinkBox}>
                   <Link
