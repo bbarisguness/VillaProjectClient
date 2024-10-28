@@ -119,7 +119,7 @@ export default function Reservation() {
 
   const phoneFormat = (string) => {
     // Rakam dışındaki karakterleri temizle
-    let cleaned = ("" + string).replace(/\D/g, "");
+    let cleaned = ("" + string).replace(/\D/g, "").replace(/^0+/, "");
 
     // Format: (•••) ••• •• ••
     let formattedNumber = "";

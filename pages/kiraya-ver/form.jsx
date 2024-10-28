@@ -19,26 +19,30 @@ export default function Form() {
     setCaptchaIsDone(true);
   }
 
-  const phoneFormat = (value) => {
-    if (value.length > 15) return value.slice(0, value.length - 1);
-    if (!value) return value;
-    if (value == 0) return "";
-    const phoneNumber = value.replace(/[^\d]/g, "");
-    const phoneNumberLength = phoneNumber.length;
-    if (phoneNumberLength < 4) return phoneNumber;
-    if (phoneNumberLength < 7) {
-      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  const phoneFormat = (string) => {
+    // Rakam dışındaki karakterleri temizle
+    let cleaned = ("" + string).replace(/\D/g, "").replace(/^0+/, "");
+
+    // Format: (•••) ••• •• ••
+    let formattedNumber = "";
+
+    if (cleaned.length > 0) {
+      formattedNumber += "(" + cleaned.substring(0, 3);
     }
-    if (phoneNumberLength < 9) {
-      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
-        3,
-        6
-      )} ${phoneNumber.slice(6, 10)}`;
+
+    if (cleaned.length >= 4) {
+      formattedNumber += ") " + cleaned.substring(3, 6);
     }
-    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
-      3,
-      6
-    )} ${phoneNumber.slice(6, 8)} ${phoneNumber.slice(8)}`;
+
+    if (cleaned.length >= 7) {
+      formattedNumber += " " + cleaned.substring(6, 8);
+    }
+
+    if (cleaned.length >= 9) {
+      formattedNumber += " " + cleaned.substring(8, 10);
+    }
+
+    return formattedNumber;
   };
 
   return (
