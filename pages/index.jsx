@@ -56,7 +56,7 @@ export default function Home({
         <section id="contentContainer">
           <TreeStep />
           <Villa category={categories} villas={villa} />
-          <Regions homePage={true} regions={regions} />
+          {/* <Regions homePage={true} regions={regions} /> */}
           <Apart aparts={aparts} />
           {/* <Service /> */}
           {/* <NewVillas villas={newVillas} /> */}

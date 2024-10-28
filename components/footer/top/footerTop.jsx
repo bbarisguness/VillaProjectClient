@@ -135,7 +135,7 @@ export default function FooterTop({ regions }) {
                                     </li>
                                 </ul>
                             </div>
-                            <div className={styles.colon}>
+                            {/* <div className={styles.colon}>
                                 <div className={styles.colonTitle}>Bölgeler</div>
                                 <ul className={styles.footerMenu}>
                                     {
@@ -148,7 +148,7 @@ export default function FooterTop({ regions }) {
                                         ))
                                     }
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
