@@ -69,9 +69,9 @@ export default function HamburgerMenu() {
                             <li className={styles.hmMenuLi}>
                                 <Link onClick={closeMenu} href="/apartlar" className={styles.hmMenuLink}>KİRALIK APARTLAR</Link>
                             </li>
-                            {/* <li className={styles.hmMenuLi}>
-                                <Link onClick={closeMenu} href="/arac-kiralama" className={styles.hmMenuLink}>ARAÇ KİRALAMA</Link>
-                            </li> */}
+                            <li className={styles.hmMenuLi}>
+                                <Link onClick={closeMenu} href="/arac-kiralama" rel="nofollow" className={styles.hmMenuLink}>ARAÇ KİRALAMA</Link>
+                            </li>
                             <li className={styles.hmMenuLi}>
                                 <Link onClick={closeMenu} href="/bloglar" rel="nofollow" className={styles.hmMenuLink}>BLOG</Link>
                             </li>

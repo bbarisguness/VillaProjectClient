@@ -3,6 +3,9 @@ import { Providers } from "@/store/provider"
 import Header from "@/components/header/header"
 import Footer from "@/components/footer/footer"
 import HamburgerMenu from "@/components/hamburger/hamburgerMenu"
+import { useEffect, useState } from "react";
+import { getRegions } from "@/services/region"
+
 
 import "@/styles/styles.css"
 //import { usePageLoading } from "@/hooks/usePageLoading"
@@ -10,6 +13,17 @@ import Loading from "@/app/loading"
 
 function myApp({ Component, pageProps }) {
     //const { isPageLoading } = usePageLoading();
+    const [footerData, setFooterData] = useState([]);
+
+    useEffect(() => {
+        console.log("_app geldi")
+        async function fetchData() {
+            const data = await getRegions()
+            setFooterData(data?.data);
+        }
+        fetchData();
+    }, []);
+
     return (
         <Providers store={store}>
             <Header />
@@ -17,7 +31,7 @@ function myApp({ Component, pageProps }) {
                 <Component {...pageProps} />
             } */}
             <Component {...pageProps} />
-            <Footer regions={pageProps?.regions?.data} />
+            <Footer regions={footerData} />
             <HamburgerMenu />
         </Providers>
     )

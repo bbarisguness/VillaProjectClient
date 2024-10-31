@@ -8,17 +8,15 @@ import Slider from "@/components/index/slider/slider";
 // import VillaRent from "@/components/index/villaRentInfo/villaRentInfo";
 
 //const Slider = lazy(() => import('@/components/index/slider/slider'));
-const TreeStep = lazy(() => import('@/components/index/treestep/treestep'));
-const Villa = lazy(() => import('@/components/index/villa/villa'));
-const Regions = lazy(() => import('@/components/index/region/region'));
-const Apart = lazy(() => import('@/components/index/apart/apart'));
-const Service = lazy(() => import('@/components/index/service/service'));
-const Blog = lazy(() => import('@/components/index/blog/blog'));
-const VillaRent = lazy(() => import('@/components/index/villaRentInfo/villaRentInfo'));
-
-
-
-
+const TreeStep = lazy(() => import("@/components/index/treestep/treestep"));
+const Villa = lazy(() => import("@/components/index/villa/villa"));
+const Regions = lazy(() => import("@/components/index/region/region"));
+const Apart = lazy(() => import("@/components/index/apart/apart"));
+const Service = lazy(() => import("@/components/index/service/service"));
+const Blog = lazy(() => import("@/components/index/blog/blog"));
+const VillaRent = lazy(() =>
+  import("@/components/index/villaRentInfo/villaRentInfo")
+);
 
 import "@/styles/styles.css";
 import {
@@ -52,13 +50,12 @@ export default function Home({
 
       <Slider />
       <Suspense fallback={<div>loading</div>}>
-
         <section id="contentContainer">
           <TreeStep />
           <Villa category={categories} villas={villa} />
-          {/* <Regions homePage={true} regions={regions} /> */}
+          <Regions homePage={true} regions={regions} />
           <Apart aparts={aparts} />
-          {/* <Service /> */}
+          <Service />
           {/* <NewVillas villas={newVillas} /> */}
           {/* <Testimonial testimonials={testimonials} /> */}
           <Blog blog={blogs} />
