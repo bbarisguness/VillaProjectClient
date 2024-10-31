@@ -182,6 +182,17 @@
     color: #7E53F9;
 }
 
+.column .textBox .shortDesc {
+    width: 100%;
+    padding: 15px 0 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #000;
+    height: auto;
+    max-height: 200px;
+}
+
 .column .textBox .features {
     width: 100%;
     padding: 15px 0 0 0;

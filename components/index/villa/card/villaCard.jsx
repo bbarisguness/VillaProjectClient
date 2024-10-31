@@ -637,7 +637,11 @@ export default function VillaCard({
                 ) : (
                   <></>
                 )}
-                <div style={{ marginTop: "5rem" }} className={styles.features}>
+                <div className={styles.shortDesc}>
+                  <p style={{color: "#02044A"}}>Açıklama</p>
+                  <p style={{color: "#525265"}}>{data?.villaDetails[0]?.descriptionShort}</p>
+                </div>
+                <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>
                     <span>{data?.person} Kişi</span>
