@@ -5,7 +5,6 @@ import { getRegions } from "@/services/region";
 import React from "react";
 
 const Footer = ({ regions }) => {
-  console.log("Footer rendered");
   return (
     <footer className={styles.footer}>
       <FooterTop regions={regions} />

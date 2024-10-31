@@ -16,7 +16,6 @@ function myApp({ Component, pageProps }) {
     const [footerData, setFooterData] = useState([]);
 
     useEffect(() => {
-        console.log("_app geldi")
         async function fetchData() {
             const data = await getRegions()
             setFooterData(data?.data);

@@ -112,6 +112,7 @@ export default function Reservation({
           roomId,
           villaName,
           totalPrice: isVillaAvailableResponse?.data?.totalPrice,
+          priceType: isVillaAvailableResponse?.data?.priceType,
           reservationItems: [],
           adult: numberOfAdults1,
           child: numberOfChild1,

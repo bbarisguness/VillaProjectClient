@@ -12,6 +12,7 @@ import { createReservation } from "@/services/reservation";
 import { getPrice, isVillaAvailable } from "@/services/reservation";
 import Seo from "@/components/seo";
 import moment from "moment";
+import { priceTypes } from "@/data/data";
 
 export default function Reservation() {
   const router = useRouter();
@@ -19,6 +20,9 @@ export default function Reservation() {
   const refOfStateMenu = useRef();
   const [isPageLoading, setLoading] = useState(true);
   const [reservationItems, setreservationItems] = useState([]);
+  const priceTypeText = priceTypes?.find(
+    (item) => item?.type == reservationItems?.priceType
+  )?.text;
   const [citys, setCitys] = useState(null);
   const [villa, setVilla] = useState([]);
   const turkishDays = [
@@ -244,7 +248,8 @@ export default function Reservation() {
           personData?.data,
           values.villaName
         );
-        if (createResponse == true) {
+        console.log(createResponse);
+        if (createResponse?.statusCode == 200) {
           setActiveStep(2);
         } else {
           alert(createResponse?.message || "Bir sorun oluştu");
@@ -806,6 +811,10 @@ export default function Reservation() {
                         about Beşiktaş and Istanbul.
                       </div>
                     </div>
+                    <div className={styles.controls}>
+                      <span>Rezervasyon numaranız</span>
+                      <span>apiden gelecek</span>
+                    </div>
                   </div>
                 )}
               </div>
@@ -894,7 +903,7 @@ export default function Reservation() {
                             {[reservationItems?.totalPrice]
                               .toString()
                               .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                            ₺
+                            {priceTypeText}
                           </span>
                         </div>
                         {/* <div className={styles.priceBox}>
@@ -908,8 +917,8 @@ export default function Reservation() {
                           <span>
                             {((reservationItems?.totalPrice * 30) / 100)
                               .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                            ₺
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                            {priceTypeText}
                           </span>
                         </div>
                         <div className={styles.priceBox}>
@@ -920,8 +929,8 @@ export default function Reservation() {
                               (reservationItems?.totalPrice * 30) / 100
                             )
                               .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                            ₺
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                            {priceTypeText}
                           </span>
                         </div>
                         <div className={styles.priceBox}>
@@ -930,8 +939,8 @@ export default function Reservation() {
                             <strong>
                               {[reservationItems?.totalPrice]
                                 .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                              ₺
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                              {priceTypeText}
                             </strong>
                           </span>
                         </div>
