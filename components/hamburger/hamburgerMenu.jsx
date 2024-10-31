@@ -75,13 +75,16 @@ export default function HamburgerMenu() {
                             <li className={styles.hmMenuLi}>
                                 <Link onClick={closeMenu} href="/bloglar" rel="nofollow" className={styles.hmMenuLink}>BLOG</Link>
                             </li>
-                            <li onClick={() => setMenu2(!menu2)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu2 ? styles["open"] : ""}`}>
+                            {/* <li onClick={() => setMenu2(!menu2)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu2 ? styles["open"] : ""}`}>
                                 <Link href="#" onClick={e => e.preventDefault()} className={styles.hmMenuLink}>KURUMSAL</Link>
                                 <ul>
                                     <li>
                                         <Link onClick={closeMenu} rel="nofollow" href="/hakkimizda">Hakkımızda</Link>
                                     </li>
                                 </ul>
+                            </li> */}
+                            <li className={styles.hmMenuLi}>
+                                <Link onClick={closeMenu} href="/hakkimizda" rel="nofollow" className={styles.hmMenuLink}>HAKKIMIZDA</Link>
                             </li>
                             <li className={styles.hmMenuLi}>
                                 <Link onClick={closeMenu} href="/iletisim" rel="nofollow" className={styles.hmMenuLink}>İLETİŞİM</Link>
