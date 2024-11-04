@@ -43,7 +43,7 @@ export default function List({
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
-    useState(false);
+    useState(true);
 
   const activePage = parseInt(router.query.p) || 1;
 

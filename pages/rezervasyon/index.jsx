@@ -18,8 +18,10 @@ export default function Reservation() {
   const router = useRouter();
   const refOfCityMenu = useRef();
   const refOfStateMenu = useRef();
+  const [isVilla, setIsVilla] = useState(false);
   const [isPageLoading, setLoading] = useState(true);
   const [reservationItems, setreservationItems] = useState([]);
+  const [reservationNumber, setReservationNumber] = useState("");
   const priceTypeText = priceTypes?.find(
     (item) => item?.type == reservationItems?.priceType
   )?.text;
@@ -51,9 +53,9 @@ export default function Reservation() {
 
   useEffect(() => {
     setCitys(citiess.data);
-    setreservationItems(
-      JSON.parse(localStorage.getItem("reservation")) || null
-    );
+    const localData = JSON.parse(localStorage.getItem("reservation")) || null;
+    setreservationItems(localData);
+    setIsVilla(localData?.villaId ? true : false);
 
     return () => {
       localStorage.removeItem("reservation");
@@ -248,9 +250,9 @@ export default function Reservation() {
           personData?.data,
           values.villaName
         );
-        console.log(createResponse);
         if (createResponse?.statusCode == 200) {
           setActiveStep(2);
+          setReservationNumber(createResponse?.data?.id || "");
         } else {
           alert(createResponse?.message || "Bir sorun oluştu");
         }
@@ -802,18 +804,16 @@ export default function Reservation() {
                     </div>
                     <div className={styles.textBox}>
                       <div className={styles.title}>
-                        Teşekkürler. Rezervasyon Siparişiniz Şimdi Onaylandı.
+                        Teşekkürler. Rezervasyon Siparişiniz Alındı.
                       </div>
                       <div className={styles.desc}>
-                        Every single thing we tried with John was delicious!
-                        Found some awesome places we would definitely go back to
-                        on our trip. John was also super friendly and passionate
-                        about Beşiktaş and Istanbul.
+                        Rezervasyonunuz en kısa süre içerisinde işleme alınıp onaylandıktan sonra sizinle iletişime geçeceğiz. Şimdiden iyi tatiller dileriz.
                       </div>
                     </div>
                     <div className={styles.controls}>
                       <span>Rezervasyon numaranız</span>
-                      <span>apiden gelecek</span>
+                      <span>{reservationNumber}</span>
+                      <Link style={{textDecoration: "underline"}} href={`/${isVilla ? 'villalar' : 'apartlar'}/${reservationItems?.villaId || reservationItems?.roomId}`}>Tesis Detayına Git</Link>
                     </div>
                   </div>
                 )}

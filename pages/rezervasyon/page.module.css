@@ -177,11 +177,11 @@
 
 .contentDetail .rezervationBox .reservation {
     display: flex;
-    width: 1005;
+    justify-content: center;
 }
 
 .contentDetail .rezervationBox .reservation .left {
-    padding: 0 165px 0 0;
+    padding: 0;
 }
 
 .contentDetail .rezervationBox .reservation .left .personInfoBox {
