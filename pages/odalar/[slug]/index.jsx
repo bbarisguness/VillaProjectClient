@@ -23,9 +23,9 @@ import { priceTypes } from "@/data/data";
 import { getPriceRange } from "@/utils/globalUtils";
 import Comments from "@/components/other/comment/Comments";
 import CommentForm from "@/components/other/commentForm/CommentForm";
-import 'lightgallery/css/lightgallery.css'
-import 'lightgallery/css/lg-zoom.css'
-import 'lightgallery/css/lg-video.css'
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-video.css";
 
 export default function List({
   roomDetail,
@@ -42,7 +42,7 @@ export default function List({
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
-    useState(false);
+    useState(!roomDetail?.data?.onlineReservation);
 
   const observeElementVisibility = function (
     element_id,
@@ -190,12 +190,14 @@ export default function List({
                           roomDetail?.data?.roomDetails[0]?.descriptionLong,
                       }}
                       style={{ whiteSpace: "pre-line" }}
-                      className={`${styles["desc"]} ${isDescOpen && styles["active"]
-                        }`}
+                      className={`${styles["desc"]} ${
+                        isDescOpen && styles["active"]
+                      }`}
                     ></div>
                     <div
-                      className={`${styles["readMore"]} ${isDescOpen && styles["active"]
-                        }`}
+                      className={`${styles["readMore"]} ${
+                        isDescOpen && styles["active"]
+                      }`}
                     >
                       <div className={styles.allButton}>
                         <span
@@ -225,27 +227,29 @@ export default function List({
                     priceTypeText={currentPriceTypeText}
                   />
                 </div>
-                <div id="makeReservation" style={{ paddingTop: 20 }}>
-                  <div className={styles.right}>
-                    <div className={styles.general}>
-                      <Reservation
-                        priceTypeText={currentPriceTypeText}
-                        roomId={roomId}
-                        villaName={villaName}
-                        prices={roomDetail?.data?.priceTables}
-                        villaFirstPhoto={
-                          roomDetail?.data?.photos[0]?.image || null
-                        }
-                        region={
-                          roomDetail?.data?.town?.district?.name +
-                          " / " +
-                          roomDetail?.data?.town?.name
-                        }
-                      />
-                      {/* <FoodPackage /> */}
+                {roomDetail?.data?.onlineReservation && (
+                  <div id="makeReservation" style={{ paddingTop: 20 }}>
+                    <div className={styles.right}>
+                      <div className={styles.general}>
+                        <Reservation
+                          priceTypeText={currentPriceTypeText}
+                          roomId={roomId}
+                          villaName={villaName}
+                          prices={roomDetail?.data?.priceTables}
+                          villaFirstPhoto={
+                            roomDetail?.data?.photos[0]?.image || null
+                          }
+                          region={
+                            roomDetail?.data?.town?.district?.name +
+                            " / " +
+                            roomDetail?.data?.town?.name
+                          }
+                        />
+                        {/* <FoodPackage /> */}
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

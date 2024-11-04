@@ -31,9 +31,9 @@ import Pagination from "@/components/pagination/Pagination";
 import { priceTypes } from "@/data/data";
 import { getPriceRange } from "@/utils/globalUtils";
 import Comments from "@/components/other/comment/Comments";
-import 'lightgallery/css/lightgallery.css'
-import 'lightgallery/css/lg-zoom.css'
-import 'lightgallery/css/lg-video.css'
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-video.css";
 
 export default function List({
   villa,
@@ -53,15 +53,15 @@ export default function List({
   const slug = router?.query?.slug;
   const categorySlug = villaDetail?.data?.categories
     ? allCategories?.data?.find(
-      (item) =>
-        item?.categoryDetails[0]?.name ==
-        villaDetail?.data?.categories[0]?.categoryDetails[0]?.name
-    )?.slug
+        (item) =>
+          item?.categoryDetails[0]?.name ==
+          villaDetail?.data?.categories[0]?.categoryDetails[0]?.name
+      )?.slug
     : null;
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
-    useState(false);
+    useState(!villaDetail?.data?.onlineReservation);
   const activePage = parseInt(router.query.p) || 1;
 
   const observeElementVisibility = function (
@@ -255,12 +255,14 @@ export default function List({
                           villaDetail?.data?.villaDetails[0]?.descriptionLong,
                       }}
                       style={{ whiteSpace: "pre-line" }}
-                      className={`${styles["desc"]} ${isDescOpen && styles["active"]
-                        }`}
+                      className={`${styles["desc"]} ${
+                        isDescOpen && styles["active"]
+                      }`}
                     ></div>
                     <div
-                      className={`${styles["readMore"]} ${isDescOpen && styles["active"]
-                        }`}
+                      className={`${styles["readMore"]} ${
+                        isDescOpen && styles["active"]
+                      }`}
                     >
                       <div className={styles.allButton}>
                         <span
@@ -290,29 +292,31 @@ export default function List({
                     priceTypeText={currentPriceTypeText}
                   />
                 </div>
-                <div id="makeReservation" style={{ paddingTop: 20 }}>
-                  <div className={styles.right}>
-                    <div className={styles.general}>
-                      <Reservation
-                        priceTypeText={currentPriceTypeText}
-                        villaId={villaId}
-                        villaName={villaName}
-                        prices={villaDetail?.data?.priceTables}
-                        villaFirstPhoto={
-                          villaDetail?.data?.photos
-                            ? villaDetail?.data?.photos[0]?.image
-                            : null
-                        }
-                        region={
-                          villaDetail?.data?.town?.district?.name +
-                          " / " +
-                          villaDetail?.data?.town?.name
-                        }
-                      />
-                      {/* <FoodPackage /> */}
+                {villaDetail?.data?.onlineReservation && (
+                  <div id="makeReservation" style={{ paddingTop: 20 }}>
+                    <div className={styles.right}>
+                      <div className={styles.general}>
+                        <Reservation
+                          priceTypeText={currentPriceTypeText}
+                          villaId={villaId}
+                          villaName={villaName}
+                          prices={villaDetail?.data?.priceTables}
+                          villaFirstPhoto={
+                            villaDetail?.data?.photos
+                              ? villaDetail?.data?.photos[0]?.image
+                              : null
+                          }
+                          region={
+                            villaDetail?.data?.town?.district?.name +
+                            " / " +
+                            villaDetail?.data?.town?.name
+                          }
+                        />
+                        {/* <FoodPackage /> */}
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
