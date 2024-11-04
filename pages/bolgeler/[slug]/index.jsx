@@ -36,7 +36,7 @@ export default function Bolge({ region }) {
           <div className={styles.titleBox}>
             <div className={styles.container}>
               <h1 className={styles.title}>
-                {region?.data?.webPageDetails[0]?.title}
+                {region?.data?.webPageDetails[0]?.title}{" "} Kiralık Villa
               </h1>
             </div>
           </div>
