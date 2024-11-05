@@ -12,7 +12,7 @@ async function getBlogs() {
 }
 
 async function getBlog({ slug }) {
-    const response = await fetch(`${apiUrl}/Clients/GetWebPage?Language=tr&Id=${slug}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetWebPage?Language=tr&Slug=${slug}`, {
         cache: 'no-store'
     })
     const data = await response.json()

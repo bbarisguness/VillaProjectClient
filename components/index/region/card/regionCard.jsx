@@ -4,7 +4,7 @@ import Link from "next/link"
 export default function RegionCard({ data }) {
     return (
         <li className={styles.cardContainer}>
-            <Link href={`/bolgeler/${data?.id}`}>
+            <Link href={`/bolgeler/${data?.slug}`}>
                 <div style={{ backgroundImage: `url(https://villaapi.testgrande.com/Uploads/WebPhotos/k_${data?.photos[0]?.image})` }} className={`${styles.imgBox}`}></div>
                 <div className={styles.textBox}>
                     <div className={styles.title}>{data?.webPageDetails[0]?.title}</div>

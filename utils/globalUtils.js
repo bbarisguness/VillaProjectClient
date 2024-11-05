@@ -29,7 +29,6 @@ export function getPriceRange(priceTablesArray = [], currentPriceTypeText) {
 
 export function scrolltoHash(element_id) {
     const element = document.getElementById(element_id);
-    console.log(element_id)
     element?.scrollIntoView({
         behavior: "smooth",
         block: "start",

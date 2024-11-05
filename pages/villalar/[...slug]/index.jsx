@@ -370,7 +370,7 @@ export default function List({
               </div>
             </div>
           </div>
-          {nearVillas?.length > 0 && (
+          {nearVillas?.data?.length > 0 && (
             <div className={styles.apartments}>
               <div className={styles.container}>
                 <div className={styles.box}>
@@ -382,7 +382,7 @@ export default function List({
                     </div>
                   </div>
                   <ul>
-                    {nearVillas?.map((data, index) => (
+                    {nearVillas?.data?.map((data, index) => (
                       <VillaCard
                         listPage={true}
                         key={index}
@@ -420,7 +420,7 @@ export async function getServerSideProps({ params, query }) {
     willGetVillaDetail == true ? await getVilla(slug[0]) : null;
   const nearVillas =
     willGetVillaDetail == true
-      ? await getNearVillas(villaDetail?.data?.town?.id, slug[0])
+      ? await getNearVillas(villaDetail?.data?.town?.id, villaDetail.id)
       : [];
   const imgs = villaDetail?.data?.photos || [];
   return {

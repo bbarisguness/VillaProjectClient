@@ -30,7 +30,7 @@ export default function Blog({ blogs }) {
                                             blogs?.data.map(item => (
                                                 <li key={item.id}>
                                                     <div className={styles.column}>
-                                                        <Link rel="nofollow" href={`/bloglar/${item?.id}`}>
+                                                        <Link rel="nofollow" href={`/bloglar/${item?.slug}`}>
                                                             <div className={styles.imgBox}>
                                                                 <div className={styles.carouselBox}>
                                                                     <div className={styles.bgImage} style={{ backgroundImage: `url(https://villaapi.testgrande.com/Uploads/WebPhotos/k_${item?.photos[0]?.image})` }}></div>

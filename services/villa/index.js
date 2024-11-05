@@ -20,7 +20,7 @@ async function getHotels(page = 0, size = 20) {
 }
 
 async function getHotel(hotelId) {
-    const response = await fetch(`${apiUrl}/Clients/GetHotel?Id=${hotelId}&Language=tr`, {
+    const response = await fetch(`${apiUrl}/Clients/GetHotel?Slug=${hotelId}&Language=tr`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -51,16 +51,16 @@ async function getVillasHome(size = 8, page = 0, categoryId) {
     return data
 }
 
-async function getVilla(villaId) {
-    const response = await fetch(`${apiUrl}/Clients/GetVilla?Id=${villaId}&Language=tr`, {
+async function getVilla(villaSlug) {
+    const response = await fetch(`${apiUrl}/Clients/GetVilla?slug=${villaSlug}&Language=tr`, {
         cache: 'no-store'
     })
     const data = await response.json()
     return data
 }
 
-async function getRoom(roomId) {
-    const response = await fetch(`${apiUrl}/Clients/GetRoom?Id=${roomId}&Language=tr`, {
+async function getRoom(roomSlug) {
+    const response = await fetch(`${apiUrl}/Clients/GetRoom?Slug=${roomSlug}&Language=tr`, {
         cache: 'no-store'
     })
     const data = await response.json()

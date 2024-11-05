@@ -14,7 +14,6 @@ import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-video.css";
 export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
-  console.log(villaDetail);
   const router = useRouter();
   const [isDescOpen, setIsDescOpen] = useState(false);
   if (villaDetail?.data) {

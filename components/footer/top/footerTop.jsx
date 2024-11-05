@@ -141,7 +141,7 @@ export default function FooterTop({ regions }) {
                                     {
                                         regions?.map((item, index) => (
                                             <li key={item?.id || ("regionItem" + index)}>
-                                                <Link href={`/bolgeler/${item?.id}`}>
+                                                <Link href={`/bolgeler/${item?.slug}`}>
                                                     <span>{item?.webPageDetails ? item?.webPageDetails[0]?.title : undefined}</span>
                                                 </Link>
                                             </li>
