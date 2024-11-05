@@ -219,6 +219,7 @@ export default function List({
                   <PriceTable
                     priceTypeNumber={roomDetail?.data?.priceType || 1}
                     data={roomDetail?.data?.priceTables}
+                    currencies={roomDetail?.data?.currencies}
                   />
                   <Calendar
                     ready={ready}

@@ -4,9 +4,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { getPriceTypeDetail } from "@/data/data";
 
-export default function PriceTable({ data, priceTypeNumber }) {
-  // console.log(data);
-
+export default function PriceTable({ data, priceTypeNumber, currencies }) {
+  
   const [priceTableActiveIndex, setPriceTableActiveIndex] =
     useState(priceTypeNumber);
 
@@ -15,9 +14,24 @@ export default function PriceTable({ data, priceTypeNumber }) {
   };
 
   // exchange
-  const [usd, setUsd] = useState(34.31);
-  const [eur, setEur] = useState(37.56);
-  const [gbp, setGbp] = useState(44.85);
+  const currenciesData = [
+    {
+      priceTypeNumber: 1,
+      value: 1,
+    },
+    {
+      priceTypeNumber: 2,
+      value: currencies?.usd,
+    },
+    {
+      priceTypeNumber: 3,
+      value: currencies?.eur,
+    },
+    {
+      priceTypeNumber: 4,
+      value: currencies?.gbp,
+    },
+  ];
   // useEffect(() => {
 
   //     fetch('http://hasanadiguzel.com.tr/api/kurgetir')
@@ -34,6 +48,26 @@ export default function PriceTable({ data, priceTypeNumber }) {
   // }, [gbp])
 
   if (data?.length == 0) return null;
+
+  const getPrice = (price) => {
+    // Aktif kur değerini al
+    const selectedCurrency = currenciesData.find(
+      (item) => item.priceTypeNumber === priceTableActiveIndex
+    )?.value;
+  
+    const baseCurrency = currenciesData.find(
+      (item) => item.priceTypeNumber === priceTypeNumber
+    )?.value;
+  
+    // Eğer seçilen kur TL değilse, fiyatı TL'ye dönüştürüp hedef kura çevir
+    const convertedPrice = (price * baseCurrency) / selectedCurrency;
+  
+    return (
+      convertedPrice.toFixed(2) +
+      " " +
+      getPriceTypeDetail(priceTableActiveIndex)?.text
+    );
+  };
 
   return (
     <div className={styles.priceTable}>
@@ -102,10 +136,8 @@ export default function PriceTable({ data, priceTypeNumber }) {
                     {data?.priceTableDetails[0]?.description}
                   </div>
                   <div className={styles.price}>
-                    {/* {
-                                                (priceTableActiveIndex === 2 ? ((data?.price / usd).toFixed(2) + " " + getPriceTypeDetail(2)?.text) : priceTableActiveIndex === 3 ? ((data?.price / eur).toFixed(2) + " " + getPriceTypeDetail(3)?.text) : priceTableActiveIndex === 4 ? ((data?.price / gbp).toFixed(2) + " " + getPriceTypeDetail(4)?.text) : (data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " " + getPriceTypeDetail(1)?.text))
-                                            } */}
-                    {priceTableActiveIndex === 2
+                    {getPrice(data?.price)}
+                    {/* {priceTableActiveIndex === 2
                       ? (data?.price).toFixed(2) +
                         " " +
                         getPriceTypeDetail(2)?.text
@@ -119,7 +151,7 @@ export default function PriceTable({ data, priceTypeNumber }) {
                         getPriceTypeDetail(4)?.text
                       : data?.price.toFixed(2) +
                         " " +
-                        getPriceTypeDetail(1)?.text}
+                        getPriceTypeDetail(1)?.text} */}
                   </div>
                 </div>
               </div>
