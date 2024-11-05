@@ -16,7 +16,9 @@
     background-image: url("/images/arrowLeft.png");
     border: none;
     cursor: pointer;
-    color: red;
+    padding: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #cardContainer {
