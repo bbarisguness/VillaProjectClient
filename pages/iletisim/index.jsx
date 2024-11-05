@@ -63,7 +63,10 @@ export default function Iletisim() {
 
   return (
     <>
-      <Seo pageTitle={"Labirent Fethiye | İletişim"} pageDesc={"Labirent Fethiye İletişim"} />
+      <Seo
+        pageTitle={"Labirent Fethiye | İletişim"}
+        pageDesc={"Labirent Fethiye İletişim"}
+      />
       <BreadCrumb link="contact" />
       <section className={`${styles["contentDetail"]} ${styles["contact"]}`}>
         <div className={styles.titleBox}>
@@ -97,7 +100,7 @@ export default function Iletisim() {
                 </div>
                 <div className={styles.nameBox}>Bize Ulaşın</div>
                 <div className={styles.descBox}>
-                  0531 724 19 14
+                  +90 252 616 66 48
                   <br />
                   info@labirentfethiye.com
                 </div>
@@ -142,7 +145,7 @@ export default function Iletisim() {
           <div className={styles.map}>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d952.5870093077987!2d29.150164384399808!3d36.57561502461795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c043f1e85cb76b%3A0x16aa198ee98fbfcf!2sLabirent%20Fethiye!5e0!3m2!1str!2str!4v1646905878663!5m2!1str!2str"
-              allowfullscreen=""
+              allowFullScreen
               loading="lazy"
               style={{ border: 0, width: "100%", height: 700 }}
             ></iframe>
@@ -208,7 +211,7 @@ export default function Iletisim() {
                           <div className={styles.inputBox}>
                             <div className={styles.inputName}>Ad</div>
                             <Field
-                              autocomplete="off"
+                              autoComplete="off"
                               name="name"
                               type="text"
                               id="form_name"
@@ -226,7 +229,7 @@ export default function Iletisim() {
                           <div className={styles.inputBox}>
                             <div className={styles.inputName}>Soyad</div>
                             <Field
-                              autocomplete="off"
+                              autoComplete="off"
                               name="surname"
                               type="text"
                               id="form_surname"
@@ -246,7 +249,7 @@ export default function Iletisim() {
                               Telefon Numaranız
                             </div>
                             <Field
-                              autocomplete="off"
+                              autoComplete="off"
                               onChange={(e) =>
                                 setFieldValue(
                                   "phone",
@@ -272,7 +275,7 @@ export default function Iletisim() {
                               Email Adresiniz
                             </div>
                             <Field
-                              autocomplete="off"
+                              autoComplete="off"
                               name="email"
                               type="text"
                               id="form_email"
@@ -285,7 +288,7 @@ export default function Iletisim() {
                           <div className={styles.inputBox}>
                             <div className={styles.inputName}>Mesajınız</div>
                             <Field
-                              autocomplete="off"
+                              autoComplete="off"
                               as="textarea"
                               row="4"
                               cols="50"
