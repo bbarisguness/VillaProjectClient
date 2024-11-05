@@ -334,6 +334,7 @@ export default function ReservationBox() {
             onChange={(e) => setFilterText(e.target.value)}
             type="text"
             placeholder="Tesis Adı"
+            style={{cursor: "text"}}
           />
         </div>
         <div
