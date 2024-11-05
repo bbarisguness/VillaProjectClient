@@ -182,14 +182,14 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
               </div>
             </div>
           </div>
-          <div className={styles.customerCommentsBox}>
+          {/* <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
                 <Comments commentData={villaDetail?.data?.comments} />
                 <CommentForm />
               </div>
             </div>
-          </div>
+          </div> */}
           {nearVillas?.data?.length > 0 && (
             <div className={styles.apartments}>
               <div className={styles.container}>
