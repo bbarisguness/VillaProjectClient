@@ -5,7 +5,7 @@ import React from "react";
 export default function index({ regions }) {
   return (
     <>
-      <Seo pageTitle={"Bölgeler"} pageDesc={"bölge"} />
+      <Seo pageTitle={"Labirent Fethiye | Bölgeler"} pageDesc={"Labirent Fethiye Bölgeler"} />
       <section className="listPage_contentDetail listPage_villasDetail">
         <div className="villas">
           <div className="listPage_container">

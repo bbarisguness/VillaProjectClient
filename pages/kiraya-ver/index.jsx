@@ -8,8 +8,8 @@ export default function KirayaVer() {
   return (
     <>
       <Seo
-        pageTitle={"Villanızı Kiraya Verin"}
-        pageDesc={"Villanızı Kiraya Verin<"}
+        pageTitle={"Labirent Fethiye | Villanızı Kiraya Verin"}
+        pageDesc={"Labirent Fethiye Villanızı Kiraya Verin"}
       />
       <BreadCrumb link={"kiraya-ver"} />
       <div className={styles.container}>

@@ -14,8 +14,8 @@ export default function List({ villas }) {
   return (
     <>
       <Seo
-        pageTitle={"Kiralık Villalar"}
-        pageDesc={"Labirent Fethiye Villalar"}
+        pageTitle={"Labirent Fethiye | Kiralık Villalar"}
+        pageDesc={"Labirent Fethiye Kiralık Villalar"}
       />
       <section className="listPage_contentDetail listPage_villasDetail">
         <div className="villas">

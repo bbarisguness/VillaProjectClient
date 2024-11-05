@@ -26,8 +26,8 @@ export default function Bolge({ region }) {
     return (
       <>
         <Seo
-          pageTitle={region?.data[0]?.attributes?.metaTitle}
-          pageDesc={region?.data[0]?.attributes?.metaDescription}
+          pageTitle={region?.data?.metaTitle}
+          pageDesc={region?.data?.metaDescription}
         />
         <BreadCrumb />
         <section

@@ -103,8 +103,8 @@ export default function List({
     return (
       <>
         <Seo
-          pageTitle={villaDetail?.data?.hotelDetails[0]?.name}
-          pageDesc={"yok"}
+          pageTitle={"Labirent Fethiye | " + villaDetail?.data?.metaTitle}
+          pageDesc={villaDetail?.data?.metaDescription}
         />
         {/* <section className={styles.breadCrumb}>
           <div className={styles.container}>

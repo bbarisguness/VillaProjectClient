@@ -7,7 +7,7 @@ export default function FoodServices() {
   return (
     <>
       <Seo
-        pageTitle={"Yemek Servisi"}
+        pageTitle={"Labirent Fethiye | Yemek Servisi"}
         pageDesc={"Labirent Fethiye Yemek Servisi"}
       />
       <BreadCrumb link="yemek-servisi" />

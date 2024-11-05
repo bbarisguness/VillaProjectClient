@@ -7,7 +7,7 @@ export default function Complaint() {
   return (
     <>
       <Seo
-        pageTitle={"Şikayet Bildirimi"}
+        pageTitle={"Labirent Fethiye | Şikayet Bildirimi"}
         pageDesc={"Labirent Fethiye Şikayet Bildirimi"}
       />
       <BreadCrumb link="sikayet-bildirimi" />

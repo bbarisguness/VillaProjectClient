@@ -74,7 +74,7 @@ export default function RezervasyonTakip() {
 
   return (
     <>
-      <Seo pageTitle={"Rezervasyon Takip"} pageDesc={"Rezervasyon Takip"} />
+      <Seo pageTitle={"Labirent Fethiye | Rezervasyon Takip"} pageDesc={"Labirent Feyhiye Rezervasyon Takip"} />
       <BreadCrumb link={"rezervasyon-takip"} />
       {step === 0 ? (
         <div className={styles.container}>

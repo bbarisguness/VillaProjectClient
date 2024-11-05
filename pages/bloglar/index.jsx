@@ -12,7 +12,7 @@ export default function Blog({ blogs }) {
 
     return (
         <>
-            <Seo pageTitle={'Tüm Bloglar'} pageDesc={'Tüm bloglar'}/>
+            <Seo pageTitle={'Labirent Fethiye | Bloglar'} pageDesc={'Bloglar'}/>
             <section className={`${styles["contentDetail"]} ${styles["villasDetail"]} ${styles["blogList"]}`}>
                 <div className={styles.villas}>
                     <div className={styles.container}>

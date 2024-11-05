@@ -63,7 +63,7 @@ export default function Iletisim() {
 
   return (
     <>
-      <Seo pageTitle={"İletişim"} pageDesc={"Labirent Fethiye İletişim"} />
+      <Seo pageTitle={"Labirent Fethiye | İletişim"} pageDesc={"Labirent Fethiye İletişim"} />
       <BreadCrumb link="contact" />
       <section className={`${styles["contentDetail"]} ${styles["contact"]}`}>
         <div className={styles.titleBox}>

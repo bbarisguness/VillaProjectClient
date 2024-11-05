@@ -21,8 +21,8 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
     return (
       <>
         <Seo
-          pageTitle={villaDetail?.data?.villaDetails[0]?.name}
-          pageDesc={villaDetail?.data[0]?.attributes?.metaDescription}
+          pageTitle={villaDetail?.data?.metaTitle}
+          pageDesc={villaDetail?.data?.metaDescription}
         />
         <section className={styles.breadCrumb}>
           <div className={styles.container}>

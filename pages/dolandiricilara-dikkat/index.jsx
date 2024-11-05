@@ -7,7 +7,7 @@ export default function Cheat() {
   return (
     <>
       <Seo
-        pageTitle={"Dolandırıcılara Dikkat"}
+        pageTitle={"Labirent Fethiye | Dolandırıcılara Dikkat"}
         pageDesc={"Labirent Fethiye Dolandırıcılara Dikkat"}
       />
       <BreadCrumb link="dolandiricilara-dikkat" />

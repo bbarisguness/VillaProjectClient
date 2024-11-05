@@ -11,7 +11,7 @@ export default function SalesList({ villasForSale, totalPage }) {
   return (
     <>
       <Seo
-        pageTitle={"Satılık Villalar"}
+        pageTitle={"Labirent Fethiye | Satılık Villalar"}
         pageDesc={"Labirent Fethiye Satılık Villalar"}
       />
       <section className="listPage_contentDetail listPage_villasDetail">

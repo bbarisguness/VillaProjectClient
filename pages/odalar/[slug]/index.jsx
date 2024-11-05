@@ -35,6 +35,7 @@ export default function List({
   roomId,
   villaName,
 }) {
+  console.log(roomDetail);
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == roomDetail?.data?.priceType
   )?.text;
@@ -91,8 +92,8 @@ export default function List({
     return (
       <>
         <Seo
-          pageTitle={roomDetail?.data?.roomDetails[0]?.name}
-          pageDesc={roomDetail?.data[0]?.attributes?.metaDescription}
+          pageTitle={roomDetail?.data?.metaTitle}
+          pageDesc={roomDetail?.data?.metaDescription}
         />
         {/* <section className={styles.breadCrumb}>
           <div className={styles.container}>

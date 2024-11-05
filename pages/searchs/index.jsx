@@ -14,7 +14,10 @@ export default function Searchs({ getFilterVillas, totalPage }) {
 
   return (
     <>
-      <Seo pageTitle={"Arama Sonuçları"} pageDesc={"Arama sonuçları desc"} />
+      <Seo
+        pageTitle={"Labirent Fethiye | Arama Sonuçları"}
+        pageDesc={"Labirent Fethiye Arama Sonuçları"}
+      />
       <section className="listPage_contentDetail listPage_villasDetail">
         <div className="villas">
           <div className="listPage_container">

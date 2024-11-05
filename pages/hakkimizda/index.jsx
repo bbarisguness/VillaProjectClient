@@ -7,7 +7,7 @@ import Seo from "@/components/seo";
 export default function Hakkimizda() {
   return (
     <>
-      <Seo pageTitle={"Hakkımızda"} pageDesc={"Labirent Fethiye Hakkımızda"} />
+      <Seo pageTitle={"Labirent Fethiye | Hakkımızda"} pageDesc={"Labirent Fethiye Hakkımızda"} />
       <BreadCrumb link="about" />
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>

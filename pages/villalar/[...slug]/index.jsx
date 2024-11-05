@@ -111,8 +111,10 @@ export default function List({
     return (
       <>
         <Seo
-          pageTitle={category?.categoryDetails[0]?.name}
-          pageDesc={"merhaba 1"}
+          pageTitle={"Labirent Fethiye | " + category?.categoryDetails[0]?.name}
+          pageDesc={
+            "Labirent Fethiye Kiralık " + category?.categoryDetails[0]?.name
+          }
         />
         <section className="listPage_contentDetail listPage_villasDetail">
           <div className="villas">
@@ -156,8 +158,8 @@ export default function List({
     return (
       <>
         <Seo
-          pageTitle={villaDetail?.data?.villaDetails[0]?.name}
-          pageDesc={villaDetail?.data[0]?.attributes?.metaDescription}
+          pageTitle={"Labirent Fethiye | " + villaDetail?.data?.metaTitle}
+          pageDesc={villaDetail?.data?.metaDescription}
         />
         <section className={styles.breadCrumb}>
           <div className={styles.container}>
