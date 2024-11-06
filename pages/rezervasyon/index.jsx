@@ -813,7 +813,7 @@ export default function Reservation() {
                     <div className={styles.controls}>
                       <span>Rezervasyon numaranız</span>
                       <span>{reservationNumber}</span>
-                      <Link style={{textDecoration: "underline"}} href={`/${isVilla ? 'villalar' : 'apartlar'}/${reservationItems?.villaId || reservationItems?.roomId}`}>Tesis Detayına Git</Link>
+                      <Link style={{textDecoration: "underline"}} href={`/${isVilla ? 'villalar' : 'apartlar'}/${reservationItems?.villaSlug || reservationItems?.roomSlug}`}>Tesis Detayına Git</Link>
                     </div>
                   </div>
                 )}

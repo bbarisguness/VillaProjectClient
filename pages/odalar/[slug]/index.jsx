@@ -32,7 +32,7 @@ export default function List({
   nearVillas,
   imgs,
   totalPage,
-  roomId,
+  roomSlug,
   villaName,
 }) {
   const currentPriceTypeText = priceTypes?.find(
@@ -148,7 +148,7 @@ export default function List({
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.room_icon}></i>
-                        <span>{roomDetail?.data?.room} Oda</span>
+                        <span>{roomDetail?.data?.rooms} Oda</span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.bath_icon}></i>
@@ -234,7 +234,8 @@ export default function List({
                       <div className={styles.general}>
                         <Reservation
                           priceTypeText={currentPriceTypeText}
-                          roomId={roomId}
+                          roomId={roomDetail?.data?.id}
+                          roomSlug={roomSlug}
                           villaName={villaName}
                           prices={roomDetail?.data?.priceTables}
                           villaFirstPhoto={
@@ -346,7 +347,7 @@ export async function getServerSideProps({ params, query }) {
   const imgs = roomDetail?.data?.photos || [];
   return {
     props: {
-      roomId: slug,
+      roomSlug: slug,
       villaName: roomDetail?.data?.roomDetails[0]?.name,
       roomDetail,
       imgs,

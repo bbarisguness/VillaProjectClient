@@ -12,6 +12,8 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function Reservation({
   villaId,
   roomId,
+  villaSlug,
+  roomSlug,
   prices,
   villaName,
   villaFirstPhoto,
@@ -110,6 +112,8 @@ export default function Reservation({
           checkOut: moment(dateRange[1]).format("YYYY-MM-DD").toString(),
           villaId,
           roomId,
+          villaSlug,
+          roomSlug,
           villaName,
           totalPrice: isVillaAvailableResponse?.data?.totalPrice,
           priceType: isVillaAvailableResponse?.data?.priceType,

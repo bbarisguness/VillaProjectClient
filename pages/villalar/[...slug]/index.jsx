@@ -43,7 +43,7 @@ export default function List({
   totalPage,
   allCategories,
   category,
-  villaId,
+  villaSlug,
   villaName,
 }) {
   const currentPriceTypeText = priceTypes?.find(
@@ -301,7 +301,8 @@ export default function List({
                       <div className={styles.general}>
                         <Reservation
                           priceTypeText={currentPriceTypeText}
-                          villaId={villaId}
+                          villaId={villaDetail?.data?.id}
+                          villaSlug={villaSlug}
                           villaName={villaName}
                           prices={villaDetail?.data?.priceTables}
                           villaFirstPhoto={
@@ -426,7 +427,7 @@ export async function getServerSideProps({ params, query }) {
   const imgs = villaDetail?.data?.photos || [];
   return {
     props: {
-      villaId: slug[0],
+      villaSlug: slug[0],
       villaName: villaDetail?.data?.villaDetails[0]?.name || null,
       villa,
       villaDetail,
