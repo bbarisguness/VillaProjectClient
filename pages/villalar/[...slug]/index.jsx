@@ -108,7 +108,6 @@ export default function List({
   };
 
   if (villa && slug.length == 1 && villa?.data?.length > 0) {
-    console.log("1");
     return (
       <>
         <Seo
@@ -156,7 +155,6 @@ export default function List({
       </>
     );
   } else if (slug.length == 1 && villaDetail?.data != null) {
-    console.log("2");
     return (
       <>
         <Seo
