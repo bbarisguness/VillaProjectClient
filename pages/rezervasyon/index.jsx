@@ -21,7 +21,7 @@ export default function Reservation() {
   const [isVilla, setIsVilla] = useState(false);
   const [isPageLoading, setLoading] = useState(true);
   const [reservationItems, setreservationItems] = useState([]);
-  const [reservationNumber, setReservationNumber] = useState("");
+  const [completedReservationData, setCompletedReservationData] = useState("");
   const priceTypeText = priceTypes?.find(
     (item) => item?.type == reservationItems?.priceType
   )?.text;
@@ -251,8 +251,10 @@ export default function Reservation() {
           values.villaName
         );
         if (createResponse?.statusCode == 200) {
+          //console.log(createResponse?.data);
           setActiveStep(2);
-          setReservationNumber(createResponse?.data?.id || "");
+          console.log(createResponse?.data);
+          setCompletedReservationData(createResponse?.data);
         } else {
           alert(createResponse?.message || "Bir sorun oluştu");
         }
@@ -807,13 +809,99 @@ export default function Reservation() {
                         Teşekkürler. Rezervasyon Siparişiniz Alındı.
                       </div>
                       <div className={styles.desc}>
-                        Rezervasyonunuz en kısa süre içerisinde işleme alınıp onaylandıktan sonra sizinle iletişime geçeceğiz. Şimdiden iyi tatiller dileriz.
+                        Rezervasyonunuz en kısa süre içerisinde işleme alınıp
+                        onaylandıktan sonra sizinle iletişime geçeceğiz.
+                        Şimdiden iyi tatiller dileriz.
                       </div>
                     </div>
                     <div className={styles.controls}>
-                      <span>Rezervasyon numaranız</span>
-                      <span>{reservationNumber}</span>
-                      <Link style={{textDecoration: "underline"}} href={`/${isVilla ? 'villalar' : 'apartlar'}/${reservationItems?.villaSlug || reservationItems?.roomSlug}`}>Tesis Detayına Git</Link>
+                      <div
+                        style={{
+                          width: 300,
+                          height: 250,
+                          backgroundPosition: "center",
+                          borderRadius: 20,
+                          backgroundImage: reservationItems?.villaFirstPhoto
+                            ? `url(${
+                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                                "k_" +
+                                reservationItems?.villaFirstPhoto
+                              })`
+                            : "none",
+                        }}
+                      ></div>
+                      <div className={styles.reservationInfosContainer}>
+                        <div className={styles.area1}>
+                          <div className={styles.reservationInfos}>
+                            <span className={styles.title}>
+                              Rezervasyon Bilgileri
+                            </span>
+                            <span>Giriş {reservationItems?.checkIn}</span>
+                            <span>Çıkış {reservationItems?.checkOut}</span>
+                            <span>
+                              {moment
+                                .duration(
+                                  moment(
+                                    reservationItems?.checkOut,
+                                    "YYYY-MM-DD"
+                                  ).diff(
+                                    moment(
+                                      reservationItems?.checkIn,
+                                      "YYYY-MM-DD"
+                                    )
+                                  )
+                                )
+                                .asDays()}{" "}
+                              Gece
+                            </span>
+                            <span>
+                              Fiyat {reservationItems?.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                              {priceTypeText}
+                            </span>
+                          </div>
+                          <div className={styles.reservationInfos}>
+                            <span className={styles.title}>
+                              Müşteri Bilgileri
+                            </span>
+                            <span>
+                              {completedReservationData?.reservationInfos?.name}{" "}
+                              {
+                                completedReservationData?.reservationInfos
+                                  ?.surname
+                              }
+                            </span>
+                            <span>
+                              {
+                                completedReservationData?.reservationInfos
+                                  ?.email
+                              }
+                            </span>
+                            <span>
+                              {
+                                completedReservationData?.reservationInfos
+                                  ?.phone
+                              }
+                            </span>
+                          </div>
+                        </div>
+                        <div className={styles.reservationInfos}>
+                          <span className={styles.title}>
+                            Rezervasyon numaranız
+                          </span>
+                          <span className={styles.title}>
+                            {completedReservationData?.reservationNumber}
+                          </span>
+                          <Link
+                            style={{ textDecoration: "underline" }}
+                            href={`/${isVilla ? "villalar" : "apartlar"}/${
+                              reservationItems?.villaSlug ||
+                              reservationItems?.roomSlug
+                            }`}
+                          >
+                            Tesis Detayına Git
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
