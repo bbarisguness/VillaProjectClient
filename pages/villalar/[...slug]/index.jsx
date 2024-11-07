@@ -108,6 +108,7 @@ export default function List({
   };
 
   if (villa && slug.length == 1 && villa?.data?.length > 0) {
+    console.log("1");
     return (
       <>
         <Seo
@@ -154,7 +155,8 @@ export default function List({
         </section>
       </>
     );
-  } else if (slug.length == 1 && villaDetail?.data) {
+  } else if (slug.length == 1 && villaDetail?.data != null) {
+    console.log("2");
     return (
       <>
         <Seo
@@ -401,9 +403,10 @@ export default function List({
       </>
     );
   } else {
-    useEffect(() => {
+    if (typeof window !== "undefined") {
       router.replace("/404");
-    }, []);
+    }
+    return null; // UI render edilmesin
   }
 }
 
@@ -421,7 +424,7 @@ export async function getServerSideProps({ params, query }) {
   const villaDetail =
     willGetVillaDetail == true ? await getVilla(slug[0]) : null;
   const nearVillas =
-    willGetVillaDetail == true
+    willGetVillaDetail == true && villaDetail?.data != null
       ? await getNearVillas(villaDetail?.data?.town?.id, villaDetail.id)
       : [];
   const imgs = villaDetail?.data?.photos || [];

@@ -253,7 +253,6 @@ export default function Reservation() {
         if (createResponse?.statusCode == 200) {
           //console.log(createResponse?.data);
           setActiveStep(2);
-          console.log(createResponse?.data);
           setCompletedReservationData(createResponse?.data);
         } else {
           alert(createResponse?.message || "Bir sorun oluştu");

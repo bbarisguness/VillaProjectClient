@@ -87,7 +87,7 @@ export default function List({
     );
   };
 
-  if (roomDetail?.data) {
+  if (roomDetail?.data != null) {
     return (
       <>
         <Seo
@@ -334,9 +334,10 @@ export default function List({
       </>
     );
   } else {
-    useEffect(() => {
+    if (typeof window !== "undefined") {
       router.replace("/404");
-    }, []);
+    }
+    return null; // UI render edilmesin
   }
 }
 
