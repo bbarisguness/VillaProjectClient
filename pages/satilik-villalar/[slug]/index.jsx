@@ -16,7 +16,7 @@ import "lightgallery/css/lg-video.css";
 export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
   const router = useRouter();
   const [isDescOpen, setIsDescOpen] = useState(false);
-  if (villaDetail?.data) {
+  if (villaDetail?.data != null) {
     return (
       <>
         <Seo
@@ -218,9 +218,10 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
       </>
     );
   } else {
-    useEffect(() => {
+    if (typeof window !== "undefined") {
       router.replace("/404");
-    }, []);
+    }
+    return null; // UI render edilmesin
   }
 }
 export async function getServerSideProps({ params }) {
