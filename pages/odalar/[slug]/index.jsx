@@ -349,7 +349,7 @@ export async function getServerSideProps({ params, query }) {
   return {
     props: {
       roomSlug: slug,
-      villaName: roomDetail?.data?.roomDetails[0]?.name,
+      villaName: roomDetail?.data?.roomDetails[0]?.name || "",
       roomDetail,
       imgs,
       totalPage,
