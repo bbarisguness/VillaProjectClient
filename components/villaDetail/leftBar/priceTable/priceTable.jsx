@@ -3,6 +3,7 @@ import styles from "./priceTable.module.css";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { getPriceTypeDetail } from "@/data/data";
+import { replaceLastDotWithComma } from "@/utils/globalUtils";
 
 export default function PriceTable({ data, priceTypeNumber, currencies }) {
   
@@ -63,7 +64,7 @@ export default function PriceTable({ data, priceTypeNumber, currencies }) {
     const convertedPrice = (price * baseCurrency) / selectedCurrency;
   
     return (
-      convertedPrice.toFixed(2) +
+      replaceLastDotWithComma(convertedPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ".")) +
       " " +
       getPriceTypeDetail(priceTableActiveIndex)?.text
     );
