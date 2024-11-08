@@ -18,7 +18,7 @@ const google301 = [
   },
   {
     source: '/b/3-fethiyede-terkedilmis-bir-cennet-kayakoy',
-    destination: '/bloglar/fethiye-de-terkedilmis-bir-cennet-kayakoy',
+    destination: '/bloglar/fethiyede-terkedilmis-bir-cennet-kayakoy',
     permanent: false,
   },
   {
@@ -33,17 +33,17 @@ const google301 = [
   },
   {
     source: '/b/9-yamac-parasutu-nasil-yapilir-',
-    destination: '/bloglar/yamac-parasutu-nasil-yapilir',
+    destination: '/bloglar/yamac-parasutu-nasil-yapilir-',
     permanent: false,
   },
   {
     source: '/b/8-fethiyede-gormeniz-gereken-tarihi-yerler',
-    destination: '/bloglar/fethiye-de-gormeniz-gereken-tarihi-yerler',
+    destination: '/bloglar/fethiyede-gormeniz-gereken-tarihi-yerler',
     permanent: false,
   },
   {
     source: '/b/7-fethiyede-villa-tatili-icin-uygun-fiyatlar',
-    destination: '/bloglar/fethiye-de-villa-tatili-icin-uygun-fiyatlar',
+    destination: '/bloglar/fethiyede-villa-tatili-icin-uygun-fiyatlar',
     permanent: false,
   },
   {
