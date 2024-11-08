@@ -84,7 +84,6 @@
 .column .imgBox .cardFeatures {
     padding: 6px 20px;
     position: absolute;
-    z-index: 2;
     top: 20px;
     left: 30px;
     background: rgba(2, 4, 74, 0.5);
