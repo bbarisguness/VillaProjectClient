@@ -198,7 +198,7 @@ export default function Reservation({
                 monthsShown={1}
                 value={dateRange.length == 0 ? "Tarih Seçin" : dateRange}
                 onChange={(update) => {
-                  setMinCalendarDate(new Date().setDate(new Date(update[0]).getDate() + 1))
+                  setMinCalendarDate(new Date(update[0]).setDate(new Date(update[0]).getDate() + 1))
                   setDateRange(update);
                   setTimeout(() => {
                     datepickerRef.current.input.blur();

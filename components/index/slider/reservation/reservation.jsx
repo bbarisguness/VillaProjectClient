@@ -394,7 +394,8 @@ export default function ReservationBox() {
             value={dateRange.length == 0 ? "Tarih Seçin" : dateRange}
             onChange={(update) => {
               if(update.includes(null) && update.length == 2){
-                setCalendarMinDate(new Date().setDate(new Date(update[0]).getDate() + 1))
+                console.log(update[0])
+                setCalendarMinDate(new Date(update[0]).setDate(new Date(update[0]).getDate() + 1))
               }
               setDateRange(update);
             }}
