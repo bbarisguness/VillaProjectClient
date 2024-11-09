@@ -34,6 +34,7 @@ export default function Reservation({
   const [numberOfBabies1, setNumberOfBabies1] = useState(0);
 
   const [dateRange, setDateRange] = useState([]);
+  const [minCalendarDate, setMinCalendarDate] = useState(new Date())
   const [startDate, endDate] = dateRange;
 
   const [isNumberPeopleMenuOpen, setNumberPeople] = useState(false);
@@ -197,17 +198,18 @@ export default function Reservation({
                 monthsShown={1}
                 value={dateRange.length == 0 ? "Tarih Seçin" : dateRange}
                 onChange={(update) => {
+                  setMinCalendarDate(new Date().setDate(new Date(update[0]).getDate() + 1))
                   setDateRange(update);
                   setTimeout(() => {
                     datepickerRef.current.input.blur();
                   }, 1);
                 }}
                 locale={tr}
-                minDate={new Date()}
+                minDate={minCalendarDate}
                 width="100%"
                 customInput={<CustomInput />}
                 onCalendarOpen={() => setIsCalendarOpen(true)} // Takvim açıldığında
-                onCalendarClose={() => setIsCalendarOpen(false)} // Takvim kapandığında
+                onCalendarClose={() => {setIsCalendarOpen(false); setMinCalendarDate(new Date())}} // Takvim kapandığında
               />
             </div>
           </div>

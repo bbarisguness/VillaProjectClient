@@ -487,12 +487,12 @@ const google301 = [
     permanent: false,
   },
   {
-    source: 'v/populer-villalar/300-villa-nazan',
+    source: '/v/populer-villalar/300-villa-nazan',
     destination: '/villalar/villa-nazan',
     permanent: false,
   },
   {
-    source: 'v/populer-villalar/20-villa-dilara',
+    source: '/v/populer-villalar/20-villa-dilara',
     destination: '/',
     permanent: false,
   },

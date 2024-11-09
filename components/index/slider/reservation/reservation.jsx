@@ -22,10 +22,10 @@ export default function ReservationBox() {
     setReleaseDate,
   };
   const date = new Date();
-  const [activeMonth, setActiveMonth] = useState(date.getMonth());
+  //const [activeMonth, setActiveMonth] = useState(date.getMonth());
   const router = useRouter();
   const query = router.query;
-  const [datePlaceHolder, setdatePlaceHolder] = useState("Tarih Seçin");
+  //const [datePlaceHolder, setdatePlaceHolder] = useState("Tarih Seçin");
   const [dateClickCount, setDateClickCount] = useState(0);
   const [dateClickCount1, setDateClickCount1] = useState(0);
   const inputRefNumberOfPeople = useRef();
@@ -38,6 +38,7 @@ export default function ReservationBox() {
   const [openDate, setOpenDate] = useState(false);
   const [dateRange, setDateRange] = useState([]);
   const [startDate, endDate] = dateRange;
+  const [calendarMinDate, setCalendarMinDate] = useState(new Date())
 
   const [numberOfAdults1, setNumberOfAdults1] = useState(1);
   const [numberOfChild1, setNumberOfChild1] = useState(0);
@@ -71,22 +72,22 @@ export default function ReservationBox() {
       const date2 = new Date(changeDateFormat(releaseDate));
 
       if (date1.getTime() == date2.getTime()) {
-        setdatePlaceHolder("Tarih Seçin");
+        //setdatePlaceHolder("Tarih Seçin");
         alert("Giriş çıkış günleri aynı olamaz");
       } else if (date1.getTime() > date2.getTime()) {
-        setdatePlaceHolder("Tarih Seçin");
+        //setdatePlaceHolder("Tarih Seçin");
         alert("Çıkış tarihi giriş tarihinden önce olamaz");
       } else {
-        setdatePlaceHolder(dateOfEntry + " / " + releaseDate);
+        //setdatePlaceHolder(dateOfEntry + " / " + releaseDate);
       }
     }
   }, [releaseDate]);
 
-  useEffect(() => {
-    if (!openDate) {
-      setActiveMonth(date.getMonth());
-    }
-  }, [openDate]);
+  // useEffect(() => {
+  //   if (!openDate) {
+  //     setActiveMonth(date.getMonth());
+  //   }
+  // }, [openDate]);
 
   const [reservationDate, setReservationDate] = useState({
     startDate: new Date(),
@@ -264,7 +265,7 @@ export default function ReservationBox() {
       (endDate.getMonth() + 1) +
       "-" +
       endDate.getFullYear();
-    setdatePlaceHolder(string);
+    //setdatePlaceHolder(string);
   };
 
   //Herhangi bir state güncellendiğinde çalışan kod bloğu
@@ -318,6 +319,15 @@ export default function ReservationBox() {
   //     console.log(reservationStartDate + " " + reservationEndDate)
   // }, [reservationStartDate, reservationEndDate])
 
+  const handleOpenedCalendar = () => {
+    setDateRange([])
+  }
+
+  const handleClosedCalener = () =>{
+    setCalendarMinDate(new Date())
+    //console.log(dateRange.includes(null) && dateRange.length == 2) // bir tarih seçilip kapandı ise true döner
+  }
+
   return (
     <div className={styles.reservationBox}>
       <div
@@ -334,7 +344,7 @@ export default function ReservationBox() {
             onChange={(e) => setFilterText(e.target.value)}
             type="text"
             placeholder="Tesis Adı"
-            style={{cursor: "text"}}
+            style={{ cursor: "text" }}
           />
         </div>
         <div
@@ -383,12 +393,17 @@ export default function ReservationBox() {
             endDate={endDate}
             value={dateRange.length == 0 ? "Tarih Seçin" : dateRange}
             onChange={(update) => {
+              if(update.includes(null) && update.length == 2){
+                setCalendarMinDate(new Date().setDate(new Date(update[0]).getDate() + 1))
+              }
               setDateRange(update);
             }}
             monthsShown={2}
             locale={tr}
-            minDate={new Date()}
+            minDate={calendarMinDate}
             customInput={<CustomInput />} // Özelleştirilmiş input kullanımı
+            onCalendarOpen={() => handleOpenedCalendar()}
+            onCalendarClose={() => handleClosedCalener()}
           />
 
           {/* <input
