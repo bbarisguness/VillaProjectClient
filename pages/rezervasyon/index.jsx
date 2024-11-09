@@ -15,6 +15,7 @@ import moment from "moment";
 import { priceTypes } from "@/data/data";
 
 export default function Reservation() {
+  const localPersonInfoData = JSON.parse(localStorage.getItem("personInfo"));
   const router = useRouter();
   const refOfCityMenu = useRef();
   const refOfStateMenu = useRef();
@@ -357,11 +358,11 @@ export default function Reservation() {
                     <div className={styles.subTitle}>Kişisel Bilgiler</div>
                     <Formik
                       initialValues={{
-                        name: "",
-                        surname: "",
-                        idNo: "",
-                        email: "",
-                        phone: "",
+                        name: localPersonInfoData?.data?.name || "",
+                        surname: localPersonInfoData?.data?.surname || "",
+                        idNo: localPersonInfoData?.data?.idNo || "",
+                        email: localPersonInfoData?.data?.email || "",
+                        phone: localPersonInfoData?.data?.phone || "",
                         stateAreaClicked: false,
                       }}
                       validationSchema={Yup.object({
