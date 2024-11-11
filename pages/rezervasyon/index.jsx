@@ -15,7 +15,13 @@ import moment from "moment";
 import { priceTypes } from "@/data/data";
 
 export default function Reservation() {
-  const localPersonInfoData = JSON.parse(localStorage.getItem("personInfo"));
+  let localPersonInfoData;
+  if(typeof localStorage !== "undefined") {
+    localPersonInfoData = JSON.parse(localStorage.getItem("personInfo"));
+  } else {
+    localPersonInfoData = null;
+  }
+  // const lcalPersonInfoData = JSON.parse(localStorage.getItem("personInfo"));
   const router = useRouter();
   const refOfCityMenu = useRef();
   const refOfStateMenu = useRef();
