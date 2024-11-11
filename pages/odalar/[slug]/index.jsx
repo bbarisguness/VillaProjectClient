@@ -182,7 +182,7 @@ export default function List({
             <div className={styles.container}>
               <div className={styles.villaDetailContent}>
                 <div className={styles.left}>
-                  <div className={styles.villaDetailTitle}>Villa Açıklama</div>
+                  <div className={styles.villaDetailTitle}>Tesis Detayları</div>
                   <div className={styles.villaDetailDesc}>
                     <div
                       dangerouslySetInnerHTML={{

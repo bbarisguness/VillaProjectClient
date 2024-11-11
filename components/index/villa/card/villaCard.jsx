@@ -432,7 +432,27 @@ export default function VillaCard({
                       : `Toplam Fiyat`
                     : "Günlük Fiyat Aralığı"}
                 </div>
-                {data?.priceTables?.length > 0 &&
+
+                {
+                  (data?.price && data?.price !== '-') ?
+                    <div className={styles.price}>
+                      {currentPriceTypeText}{parseFloat(data?.price).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    </div> :
+
+                    data?.priceTables?.length > 0 ?
+
+                      <div className={styles.price}>
+                        {currentPriceTypeText}
+                        {Math.min(...data.priceTables.map((o) => o.price))
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                        - {currentPriceTypeText}
+                        {Math.max(...data.priceTables.map((o) => o.price))
+                          .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                      </div> : <div className={styles.price}>{currentPriceTypeText}0</div>
+                }
+
+                {/* {data?.priceTables?.length > 0 &&
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
                     {currentPriceTypeText}
@@ -453,7 +473,8 @@ export default function VillaCard({
                   </div>
                 ) : (
                   <></>
-                )}
+                )} */}
+
                 <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>

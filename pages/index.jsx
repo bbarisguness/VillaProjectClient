@@ -44,7 +44,7 @@ export default function Home({
   return (
     <>
       <Seo
-        pageTitle={"Labirent Fehiye"}
+        pageTitle={"Labirent Fethiye"}
         pageDesc={"Labirent Fethiye Villalar"}
       />
 

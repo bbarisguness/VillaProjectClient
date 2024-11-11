@@ -80,7 +80,7 @@ export default function BlogCard({ data }) {
 
   return (
     <li className={styles.blogCardContainer}>
-      <Link rel="nofollow" href={`bloglar/${data.id}`}>
+      <Link rel="nofollow" href={`bloglar/${data?.slug}`}>
         <div className={styles.imgBox}>
           <div
             className={styles.bgImage}
