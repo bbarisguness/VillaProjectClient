@@ -908,7 +908,7 @@ export default function Reservation() {
                           </span>
                           <Link
                             style={{ textDecoration: "underline" }}
-                            href={`/${isVilla ? "villalar" : "apartlar"}/${
+                            href={`/${isVilla ? "villalar" : "odalar"}/${
                               reservationItems?.villaSlug ||
                               reservationItems?.roomSlug
                             }`}
