@@ -12,7 +12,7 @@ const google301 = [
     permanent: false,
   },
   {
-    source: '/b/2-oludeniz-nerededir-ve-nasil-gidilir-',
+    source: '/b/2-oludeniz-nerededir-ve-nasil-gidilir',
     destination: '/bloglar/oludeniz-nerededir-ve-nasil-gidilir',
     permanent: false,
   },
@@ -32,7 +32,7 @@ const google301 = [
     permanent: false,
   },
   {
-    source: '/b/9-yamac-parasutu-nasil-yapilir-',
+    source: '/b/9-yamac-parasutu-nasil-yapilir',
     destination: '/bloglar/yamac-parasutu-nasil-yapilir-',
     permanent: false,
   },
