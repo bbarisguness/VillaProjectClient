@@ -16,7 +16,7 @@ import { priceTypes } from "@/data/data";
 
 export default function Reservation() {
   let localPersonInfoData;
-  if(typeof localStorage !== "undefined") {
+  if (typeof localStorage !== "undefined") {
     localPersonInfoData = JSON.parse(localStorage.getItem("personInfo"));
   } else {
     localPersonInfoData = null;
@@ -61,6 +61,13 @@ export default function Reservation() {
   useEffect(() => {
     setCitys(citiess.data);
     const localData = JSON.parse(localStorage.getItem("reservation")) || null;
+
+    if (!localData) {
+      router.push("/");
+    } else {
+      setLoading(false);
+    }
+
     setreservationItems(localData);
     setIsVilla(localData?.villaId ? true : false);
 
@@ -70,14 +77,7 @@ export default function Reservation() {
     };
   }, []);
 
-  //localstoragede ilgili veri yok ise geri anasayfaya yönlendirilir
   useEffect(() => {
-    if (!localStorage.getItem("reservation")) {
-      router.push("/");
-    } else {
-      setLoading(false);
-    }
-
     //Menülerin dışında bir yere tıklandığı zaman menülerin kapanması için
     let handler = (e) => {
       if (activeStep == 0) {
@@ -861,7 +861,10 @@ export default function Reservation() {
                               Gece
                             </span>
                             <span>
-                              Fiyat {reservationItems?.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                              Fiyat{" "}
+                              {reservationItems?.totalPrice
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                               {priceTypeText}
                             </span>
                           </div>
