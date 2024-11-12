@@ -828,11 +828,17 @@ export default function Reservation() {
                           backgroundPosition: "center",
                           borderRadius: 20,
                           backgroundImage: reservationItems?.villaFirstPhoto
-                            ? `url(${
-                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                                "k_" +
-                                reservationItems?.villaFirstPhoto
-                              })`
+                            ? reservationItems?.villaId
+                              ? `url(${
+                                  process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                                  "k_" +
+                                  reservationItems?.villaFirstPhoto
+                                })`
+                              : `url(${
+                                  process.env.NEXT_PUBLIC_APIROOMPHOTOS_URL +
+                                  "k_" +
+                                  reservationItems?.villaFirstPhoto
+                                })`
                             : "none",
                         }}
                       ></div>
@@ -923,11 +929,17 @@ export default function Reservation() {
                         className={styles.img}
                         style={{
                           backgroundImage: reservationItems?.villaFirstPhoto
-                            ? `url(${
-                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                                "k_" +
-                                reservationItems?.villaFirstPhoto
-                              })`
+                            ? reservationItems?.villaId
+                              ? `url(${
+                                  process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                                  "k_" +
+                                  reservationItems?.villaFirstPhoto
+                                })`
+                              : `url(${
+                                  process.env.NEXT_PUBLIC_APIROOMPHOTOS_URL +
+                                  "k_" +
+                                  reservationItems?.villaFirstPhoto
+                                })`
                             : "none",
                         }}
                       ></div>
