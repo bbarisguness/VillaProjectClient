@@ -300,7 +300,7 @@ async function createReservation(type = 0,
     return response.json()
   }
 
-  const mailResult = await SendMail('template_n90pb1d', { villaName: villaName, nameAndSurname: personData.name + ' ' + personData.surname, email: personData.email, phone: personData.phone, startDate: dateToDotFormat(reservationData.checkIn), endDate: dateToDotFormat(reservationData.checkOut), to_email: "tevfikk.durmus@gmail.com" })
+  const mailResult = await SendMail('template_n90pb1d', { villaName: villaName, nameAndSurname: personData.name + ' ' + personData.surname, email: personData.email, phone: personData.phone, startDate: dateToDotFormat(reservationData.checkIn), endDate: dateToDotFormat(reservationData.checkOut), to_email: "bbarisguness@gmail.com" })
   // ReservationCreate.End
 
   return response.json();

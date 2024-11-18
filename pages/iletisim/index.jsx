@@ -171,7 +171,7 @@ export default function Iletisim() {
                         message: values.message,
                         from_name: values.name,
                         from_surname: values.surname,
-                        to_email: "tevfikk.durmus@gmail.com", //mailin gideceği adress
+                        to_email: "bbarisguness@gmail.com", //mailin gideceği adress
                         from_email: values.email,
                         phone: values.phone,
                       };

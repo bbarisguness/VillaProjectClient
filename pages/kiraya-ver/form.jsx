@@ -68,7 +68,7 @@ export default function Form() {
             const templateParams = {
               message: values.message,
               from_nameAndSurname: values.nameAndSurname,
-              to_email: "tevfikk.durmus@gmail.com", //mailin gideceği adress
+              to_email: "bbarisguness@gmail.com", //mailin gideceği adress
               phone: values.phone,
               facilityName: values.facilityName,
               facilityAddress: values.facilityAddress,
