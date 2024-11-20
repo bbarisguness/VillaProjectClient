@@ -1,4 +1,3 @@
-import VillaCard from "@/components/index/villa/card/villaCard";
 import {
   getAllVillaByCategoryId,
   getVilla,
@@ -9,7 +8,7 @@ import "@/styles/styles.css";
 import { getCategories } from "@/services/category";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
-import CommentForm from "@/components/other/commentForm/CommentForm";
+import dynamic from "next/dynamic";
 
 // villa detay
 import Link from "next/link";
@@ -17,11 +16,6 @@ import styles from "./page.module.css";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import FoodPackage from "@/components/villaDetail/rightBar/foodPackage/foodPackage";
-import Reservation from "@/components/villaDetail/rightBar/reservation/reservation";
-import Calendar from "@/components/villaDetail/leftBar/calendar/calendar";
-import DistanceRuler from "@/components/villaDetail/leftBar/distanceRuler/distanceRuler";
-import Gallery from "@/components/villaDetail/leftBar/gallery/gallery";
-import PriceTable from "@/components/villaDetail/leftBar/priceTable/priceTable";
 import LightGallery from "lightgallery/react";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";
@@ -30,10 +24,76 @@ import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
 import { priceTypes } from "@/data/data";
 import { getPriceRange } from "@/utils/globalUtils";
-import Comments from "@/components/other/comment/Comments";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-video.css";
+
+const VillaCard = dynamic(
+  () => import("@/components/index/villa/card/villaCard"),
+  {
+    ssr: true,
+  }
+);
+
+const DetailTitleBox = dynamic(
+  () => import("@/components/villaDetail/detailTitleBox/detailTitleBox"),
+  {
+    ssr: true,
+  }
+);
+
+const ProductImageBox = dynamic(
+  () => import("@/components/villaDetail/productImageBox/productImageBox"),
+  {
+    ssr: true,
+  }
+);
+
+const DetailDesc = dynamic(
+  () => import("@/components/villaDetail/detailDesc/detailsDesc"),
+  {
+    ssr: true,
+  }
+);
+
+const DistanceRuler = dynamic(
+  () => import("@/components/villaDetail/leftBar/distanceRuler/distanceRuler"),
+  {
+    ssr: true,
+  }
+);
+
+const PriceTable = dynamic(
+  () => import("@/components/villaDetail/leftBar/priceTable/priceTable"),
+  {
+    ssr: true,
+  }
+);
+
+const Calendar = dynamic(
+  () => import("@/components/villaDetail/leftBar/calendar/calendar"),
+  {
+    ssr: true,
+  }
+);
+
+const Reservation = dynamic(
+  () => import("@/components/villaDetail/rightBar/reservation/reservation"),
+  {
+    ssr: false,
+  }
+);
+
+const Comments = dynamic(() => import("@/components/other/comment/Comments"), {
+  ssr: true,
+});
+
+const CommentForm = dynamic(
+  () => import("@/components/other/commentForm/CommentForm"),
+  {
+    ssr: true,
+  }
+);
 
 export default function List({
   villa,
@@ -113,7 +173,8 @@ export default function List({
         <Seo
           pageTitle={"Labirent Fethiye | " + villa?.data[0]?.categoryMetaTitle}
           pageDesc={
-            "Labirent Fethiye Kiralık " + villa?.data[0]?.categoryMetaDescription
+            "Labirent Fethiye Kiralık " +
+            villa?.data[0]?.categoryMetaDescription
           }
         />
         <section className="listPage_contentDetail listPage_villasDetail">
@@ -193,95 +254,20 @@ export default function List({
         <section
           className={`${styles["contentDetail"]} ${styles["villaDetail"]}`}
         >
-          <div className={styles.detailTitleBox}>
-            <div className={styles.container}>
-              <div className={styles.box}>
-                <div className={styles.left}>
-                  <div className={styles.detailTitle}>
-                    {villaDetail?.data?.villaDetails[0]?.name}
-                  </div>
-                  <div className={styles.villaInformation}>
-                    <div className={styles.features}>
-                      <div className={styles.colon}>
-                        <i className={styles.pin_icon}></i>
-                        <span>
-                          {villaDetail?.data?.town?.district?.name} /{" "}
-                          {villaDetail?.data?.town?.name}
-                        </span>
-                      </div>
-                      <div className={styles.colon}>
-                        <i className={styles.person_icon}></i>
-                        <span>{villaDetail?.data?.person} Kişi</span>
-                      </div>
-                      <div className={styles.colon}>
-                        <i className={styles.room_icon}></i>
-                        <span>{villaDetail?.data?.room} Oda</span>
-                      </div>
-                      <div className={styles.colon}>
-                        <i className={styles.bath_icon}></i>
-                        <span>{villaDetail?.data?.bath} Banyo</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.right}>
-                  <div className={styles.priceType}>Gecelik En Düşük</div>
-                  <div className={styles.price}>
-                    {getPriceRange(
-                      villaDetail?.data?.priceTables,
-                      currentPriceTypeText
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.productImagesBox}>
-            <div className={styles.container}>
-              <div className={styles.productImages}>
-                <div className={styles.row}>
-                  <Gallery photos={imgs} />
-                </div>
-              </div>
-            </div>
-          </div>
+          <DetailTitleBox
+            villaDetail={villaDetail}
+            currentPriceTypeText={currentPriceTypeText}
+          />
+          <ProductImageBox imgs={imgs} />
           <div className={styles.villaDetailContentBox}>
             <div className={styles.container}>
               <div className={styles.villaDetailContent}>
                 <div className={styles.left}>
-                  <div className={styles.villaDetailTitle}>Tesis Detayları</div>
-                  <div className={styles.villaDetailDesc}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          villaDetail?.data?.villaDetails[0]?.descriptionLong,
-                      }}
-                      style={{ whiteSpace: "pre-line" }}
-                      className={`${styles["desc"]} ${
-                        isDescOpen && styles["active"]
-                      }`}
-                    ></div>
-                    <div
-                      className={`${styles["readMore"]} ${
-                        isDescOpen && styles["active"]
-                      }`}
-                    >
-                      <div className={styles.allButton}>
-                        <span
-                          onClick={() => setIsDescOpen(true)}
-                          className={styles.first}
-                        >
-                          Devamı...
-                        </span>
-                        <span
-                          onClick={() => setIsDescOpen(false)}
-                          className={styles.last}
-                        >
-                          Kapat...
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                  <DetailDesc
+                    villaDetail={villaDetail}
+                    isDescOpen={isDescOpen}
+                    setIsDescOpen={setIsDescOpen}
+                  />
                   <DistanceRuler data={villaDetail?.data?.distanceRulers} />
                   <PriceTable
                     priceTypeNumber={villaDetail?.data?.priceType || 1}
