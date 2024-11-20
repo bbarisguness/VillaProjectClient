@@ -74,10 +74,19 @@
     position: absolute;
     background-size: cover;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out; /* Geçiş ekledik */
+    transition: opacity 0.5s ease-in-out;
 }
 
 .column .imgBox .carouselBox .bgImage.active {
+    opacity: 1;
+}
+
+.column .imgBox .carouselBox img {
+    opacity: 0;
+    object-fit: cover;
+}
+
+.column .imgBox .carouselBox img.active {
     opacity: 1;
 }
 

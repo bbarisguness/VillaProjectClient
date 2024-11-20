@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { priceTypes } from "@/data/data";
+import Image from "next/image";
 
 export default function VillaCard({
   data,
@@ -433,24 +434,28 @@ export default function VillaCard({
                     : "Günlük Fiyat Aralığı"}
                 </div>
 
-                {
-                  (data?.price && data?.price !== '-') ?
-                    <div className={styles.price}>
-                      {currentPriceTypeText}{parseFloat(data?.price).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                    </div> :
-
-                    data?.priceTables?.length > 0 ?
-
-                      <div className={styles.price}>
-                        {currentPriceTypeText}
-                        {Math.min(...data.priceTables.map((o) => o.price))
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                        - {currentPriceTypeText}
-                        {Math.max(...data.priceTables.map((o) => o.price))
-                          .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                      </div> : <div className={styles.price}>{currentPriceTypeText}0</div>
-                }
+                {data?.price && data?.price !== "-" ? (
+                  <div className={styles.price}>
+                    {currentPriceTypeText}
+                    {parseFloat(data?.price)
+                      .toFixed(0)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                  </div>
+                ) : data?.priceTables?.length > 0 ? (
+                  <div className={styles.price}>
+                    {currentPriceTypeText}
+                    {Math.min(...data.priceTables.map((o) => o.price))
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                    - {currentPriceTypeText}
+                    {Math.max(...data.priceTables.map((o) => o.price))
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                  </div>
+                ) : (
+                  <div className={styles.price}>{currentPriceTypeText}0</div>
+                )}
 
                 {/* {data?.priceTables?.length > 0 &&
                 (data?.price == "-" || data?.price == null) ? (
@@ -497,7 +502,6 @@ export default function VillaCard({
     }
   } else if (listPage) {
     //kiralık villalar sayfası ve önerilen villalar
-
     if (data) {
       return (
         <li id={styles.cardContainer}>
@@ -506,22 +510,38 @@ export default function VillaCard({
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
-                    <div
+                    // <div
+                    //   key={"photo" + index + 1}
+                    //   className={`${styles.bgImage} ${
+                    //     activeImage === index ? styles.active : ""
+                    //   }`}
+                    //   style={{
+                    //     backgroundImage:
+                    //       photo.image != undefined
+                    //         ? `url(${
+                    //             process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                    //             "k_" +
+                    //             photo.image
+                    //           })`
+                    //         : "none",
+                    //   }}
+                    // ></div>
+
+                    <Image
                       key={"photo" + index + 1}
-                      className={`${styles.bgImage} ${
+                      src={
+                        process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                        "k_" +
+                        photo.image
+                      }
+                      alt={"Villa Card Image"}
+                      className={`${
                         activeImage === index ? styles.active : ""
                       }`}
-                      style={{
-                        backgroundImage:
-                          photo.image != undefined
-                            ? `url(${
-                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                                "k_" +
-                                photo.image
-                              })`
-                            : "none",
-                      }}
-                    ></div>
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      loading="lazy" // Lazy loading aktif
+                    />
                   ))}
                 </div>
                 <div className={styles.imgNav}>
@@ -659,8 +679,10 @@ export default function VillaCard({
                   <></>
                 )}
                 <div className={styles.shortDesc}>
-                  <p style={{color: "#02044A"}}>Açıklama</p>
-                  <p style={{color: "#525265"}}>{data?.villaDetails[0]?.descriptionShort}</p>
+                  <p style={{ color: "#02044A" }}>Açıklama</p>
+                  <p style={{ color: "#525265" }}>
+                    {data?.villaDetails[0]?.descriptionShort}
+                  </p>
                 </div>
                 <div className={styles.features}>
                   <div className={styles.colon}>

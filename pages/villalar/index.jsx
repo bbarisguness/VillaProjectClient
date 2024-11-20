@@ -1,11 +1,15 @@
-import VillaCard from "@/components/index/villa/card/villaCard";
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import "@/styles/styles.css";
 import Seo from "@/components/seo";
 import { getVillas } from "@/services/villa";
 import Pagination from "@/components/pagination/Pagination";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+
+const VillaCard = dynamic(() => import("@/components/index/villa/card/villaCard"), {
+  ssr: true, // SSR olmadan yüklenmesi yeterli
+});
 
 export default function List({ villas }) {
   const router = useRouter();
