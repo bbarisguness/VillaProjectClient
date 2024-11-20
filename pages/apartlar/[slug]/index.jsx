@@ -2,6 +2,7 @@ import VillaCard from "@/components/index/villa/card/villaCard";
 import { getHotel } from "@/services/villa";
 import "@/styles/styles.css";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 // villa detay
 import Link from "next/link";
