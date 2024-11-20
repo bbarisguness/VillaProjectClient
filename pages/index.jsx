@@ -65,13 +65,33 @@ export default function Home({
     </>
   );
 }
+// export async function getServerSideProps() {
+//   const categories = await getCategoriesHome();
+//   const villa = await getVillasHome(8, 0, categories?.data[0]?.id);
+//   const aparts = await getHotels(0, 4);
+//   const regions = await getRegions();
+//   const blogs = await getBlogs();
+//   //const newVillas = await getNewVillas()
+//   //const testimonials = await getTestimonials()
+//   return { props: { villa, categories, blogs, regions, aparts } };
+// }
+
 export async function getServerSideProps() {
+  // API çağrılarını paralel olarak başlat
   const categories = await getCategoriesHome();
-  const villa = await getVillasHome(8, 0, categories?.data[0]?.id);
-  const aparts = await getHotels(0, 4);
-  const regions = await getRegions();
-  const blogs = await getBlogs();
-  //const newVillas = await getNewVillas()
-  //const testimonials = await getTestimonials()
-  return { props: { villa, categories, blogs, regions, aparts } };
+
+  const [villa, aparts, regions, blogs] = await Promise.all([
+    getVillasHome(8, 0, categories?.data[0]?.id),
+    getHotels(0, 4),
+    getRegions(),
+    getBlogs(),
+  ]);
+
+  // Gerekiyorsa yeni veriler için yorum satırlarını açabilirsiniz
+  // const newVillas = await getNewVillas()
+  // const testimonials = await getTestimonials()
+
+  return {
+    props: { villa, categories, blogs, regions, aparts },
+  };
 }

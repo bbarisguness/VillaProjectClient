@@ -84,6 +84,7 @@
 .column .imgBox .carouselBox img {
     opacity: 0;
     object-fit: cover;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .column .imgBox .carouselBox img.active {

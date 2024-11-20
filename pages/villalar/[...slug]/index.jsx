@@ -396,22 +396,40 @@ export default function List({
 
 export async function getServerSideProps({ params, query }) {
   const slug = params?.slug;
-  const allCategories = await getCategories();
-  const willGetVillaDetail =
-    allCategories?.data?.find((item) => item?.slug == slug[0]) || true;
-  const villa =
-    (await getAllVillaByCategoryId(
-      allCategories?.data?.find((item) => item?.slug == slug[0])?.id,
-      query?.p ? query?.p - 1 : 0
-    )) || [];
+  const allCategories = getCategories();
+
+  // İlgili kategori verisini bulmak
+  const categoryPromise = allCategories.then(
+    (categories) =>
+      categories?.data?.find((item) => item?.slug == slug[0]) || true
+  );
+
+  const villaPromise = categoryPromise.then((category) =>
+    getAllVillaByCategoryId(category?.id, query?.p ? query?.p - 1 : 0)
+  );
+
+  const villaDetailPromise = categoryPromise.then((category) =>
+    category == true ? getVilla(slug[0]) : null
+  );
+
+  const nearVillasPromise = villaDetailPromise.then((villaDetail) =>
+    villaDetail?.data != null
+      ? getNearVillas(villaDetail?.data?.town?.id, villaDetail.id)
+      : []
+  );
+
+  // Paralel olarak verileri al
+  const [allCategoriesData, villa, villaDetail, nearVillas] = await Promise.all(
+    [allCategories, villaPromise, villaDetailPromise, nearVillasPromise]
+  );
+
   const totalPage = 1;
-  const villaDetail =
-    willGetVillaDetail == true ? await getVilla(slug[0]) : null;
-  const nearVillas =
-    willGetVillaDetail == true && villaDetail?.data != null
-      ? await getNearVillas(villaDetail?.data?.town?.id, villaDetail.id)
-      : [];
   const imgs = villaDetail?.data?.photos || [];
+  const category =
+    villaDetail == null
+      ? allCategoriesData?.data?.find((item) => item?.slug == slug[0])
+      : "yok";
+
   return {
     props: {
       villaSlug: slug[0],
@@ -421,11 +439,8 @@ export async function getServerSideProps({ params, query }) {
       nearVillas,
       imgs,
       totalPage,
-      allCategories,
-      category:
-        villaDetail == null
-          ? allCategories?.data?.find((item) => item?.slug == slug[0])
-          : "yok",
+      allCategories: allCategoriesData,
+      category,
     },
   };
 }
