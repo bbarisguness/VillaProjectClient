@@ -8,13 +8,13 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 
 const DynamicHtmlRenderer = dynamic(
-  () => import("@/components/blog/blogDetail/DynamicHtmlRenderer"),
+  () => import("../../../components/blog/blogDetail/DynamicHtmlRenderer"),
   {
     ssr: true, // SSR olmadan yüklenmesi yeterli
   }
 );
 
-const TreeStep = dynamic(() => import("@/components/index/treestep/treestep"), {
+const TreeStep = dynamic(() => import("../../../components/index/treestep/treestep"), {
   ssr: false, // SSR olmadan yüklenmesi yeterli
 });
 

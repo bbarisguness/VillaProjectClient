@@ -2,7 +2,7 @@ import styles from "./productImageBox.module.css";
 import dynamic from "next/dynamic";
 
 const Gallery = dynamic(
-  () => import("@/components/villaDetail/leftBar/gallery/gallery"),
+  () => import("../../villaDetail/leftBar/gallery/gallery"),
   {
     ssr: true,
   }

@@ -7,13 +7,7 @@ import moment from "moment";
 import { isVillaAvailable } from "@/services/reservation";
 import tr from "date-fns/locale/tr";
 import "react-datepicker/dist/react-datepicker.css";
-
-const DatePicker = dynamic(
-  () => import("react-datepicker"),
-  {
-    ssr: false,
-  }
-);
+import DatePicker from "react-datepicker";
 
 export default function Reservation({
   villaId,
@@ -40,7 +34,7 @@ export default function Reservation({
   const [numberOfBabies1, setNumberOfBabies1] = useState(0);
 
   const [dateRange, setDateRange] = useState([]);
-  const [minCalendarDate, setMinCalendarDate] = useState(new Date())
+  const [minCalendarDate, setMinCalendarDate] = useState(new Date());
   const [startDate, endDate] = dateRange;
 
   const [isNumberPeopleMenuOpen, setNumberPeople] = useState(false);
@@ -150,7 +144,13 @@ export default function Reservation({
       {availible && (
         <div className={styles.modalWrapper}>
           <div className={`${styles["modal"]}`}>
-            <Image alt="" src="/images/alert.png" width={44} height={38} loading="lazy" />
+            <Image
+              alt=""
+              src="/images/alert.png"
+              width={44}
+              height={38}
+              loading="lazy"
+            />
             <span className={styles.modalTitle}>Uyarı!</span>
             <p>
               Seçtiğiniz tarihler arasında villa müsait değildir. Lütfen
@@ -204,7 +204,11 @@ export default function Reservation({
                 monthsShown={1}
                 value={dateRange.length == 0 ? "Tarih Seçin" : dateRange}
                 onChange={(update) => {
-                  setMinCalendarDate(new Date(update[0]).setDate(new Date(update[0]).getDate() + 1))
+                  setMinCalendarDate(
+                    new Date(update[0]).setDate(
+                      new Date(update[0]).getDate() + 1
+                    )
+                  );
                   setDateRange(update);
                   setTimeout(() => {
                     datepickerRef.current.input.blur();
@@ -215,7 +219,10 @@ export default function Reservation({
                 width="100%"
                 customInput={<CustomInput />}
                 onCalendarOpen={() => setIsCalendarOpen(true)} // Takvim açıldığında
-                onCalendarClose={() => {setIsCalendarOpen(false); setMinCalendarDate(new Date())}} // Takvim kapandığında
+                onCalendarClose={() => {
+                  setIsCalendarOpen(false);
+                  setMinCalendarDate(new Date());
+                }} // Takvim kapandığında
               />
             </div>
           </div>

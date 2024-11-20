@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import Seo from "@/components/seo";
 import { priceTypes } from "@/data/data";
 import { getPriceRange } from "@/utils/globalUtils";
-import Comments from "@/components/other/comment/Comments";
+// import Comments from "@/components/other/comment/Comments";
 import CommentForm from "@/components/other/commentForm/CommentForm";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";

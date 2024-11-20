@@ -29,67 +29,75 @@ import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-video.css";
 
 const VillaCard = dynamic(
-  () => import("@/components/index/villa/card/villaCard"),
+  () => import("../../../components/index/villa/card/villaCard"),
   {
     ssr: true,
   }
 );
 
 const DetailTitleBox = dynamic(
-  () => import("@/components/villaDetail/detailTitleBox/detailTitleBox"),
+  () => import("../../../components/villaDetail/detailTitleBox/detailTitleBox"),
   {
     ssr: true,
   }
 );
 
 const ProductImageBox = dynamic(
-  () => import("@/components/villaDetail/productImageBox/productImageBox"),
+  () =>
+    import("../../../components/villaDetail/productImageBox/productImageBox"),
   {
     ssr: true,
   }
 );
 
 const DetailDesc = dynamic(
-  () => import("@/components/villaDetail/detailDesc/detailsDesc"),
+  () => import("../../../components/villaDetail/detailDesc/detailsDesc"),
   {
     ssr: true,
   }
 );
 
 const DistanceRuler = dynamic(
-  () => import("@/components/villaDetail/leftBar/distanceRuler/distanceRuler"),
+  () =>
+    import(
+      "../../../components/villaDetail/leftBar/distanceRuler/distanceRuler"
+    ),
   {
     ssr: true,
   }
 );
 
 const PriceTable = dynamic(
-  () => import("@/components/villaDetail/leftBar/priceTable/priceTable"),
+  () => import("../../../components/villaDetail/leftBar/priceTable/priceTable"),
   {
     ssr: true,
   }
 );
 
 const Calendar = dynamic(
-  () => import("@/components/villaDetail/leftBar/calendar/calendar"),
+  () => import("../../../components/villaDetail/leftBar/calendar/calendar"),
   {
     ssr: true,
   }
 );
 
 const Reservation = dynamic(
-  () => import("@/components/villaDetail/rightBar/reservation/reservation"),
+  () =>
+    import("../../../components/villaDetail/rightBar/reservation/reservation"),
   {
     ssr: false,
   }
 );
 
-const Comments = dynamic(() => import("@/components/other/comment/Comments"), {
-  ssr: true,
-});
+const Comments = dynamic(
+  () => import("../../../components/other/comment/Comments"),
+  {
+    ssr: true,
+  }
+);
 
 const CommentForm = dynamic(
-  () => import("@/components/other/commentForm/CommentForm"),
+  () => import("../../../components/other/commentForm/CommentForm"),
   {
     ssr: true,
   }

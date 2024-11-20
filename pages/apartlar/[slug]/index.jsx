@@ -2,26 +2,25 @@ import VillaCard from "@/components/index/villa/card/villaCard";
 import { getHotel } from "@/services/villa";
 import "@/styles/styles.css";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 
 // villa detay
 import Link from "next/link";
 import styles from "./page.module.css";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import FoodPackage from "@/components/villaDetail/rightBar/foodPackage/foodPackage";
-import Reservation from "@/components/villaDetail/rightBar/reservation/reservation";
-import Calendar from "@/components/villaDetail/leftBar/calendar/calendar";
+// import FoodPackage from "@/components/villaDetail/rightBar/foodPackage/foodPackage";
+// import Reservation from "@/components/villaDetail/rightBar/reservation/reservation";
+// import Calendar from "@/components/villaDetail/leftBar/calendar/calendar";
 import DistanceRuler from "@/components/villaDetail/leftBar/distanceRuler/distanceRuler";
 import Gallery from "@/components/villaDetail/leftBar/gallery/gallery";
-import PriceTable from "@/components/villaDetail/leftBar/priceTable/priceTable";
-import LightGallery from "lightgallery/react";
-import lgZoom from "lightgallery/plugins/zoom";
-import lgVideo from "lightgallery/plugins/video";
-import { useEffect, useState } from "react";
+// import PriceTable from "@/components/villaDetail/leftBar/priceTable/priceTable";
+// import LightGallery from "lightgallery/react";
+// import lgZoom from "lightgallery/plugins/zoom";
+// import lgVideo from "lightgallery/plugins/video";
+import { useState } from "react";
 import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
-import VideoWithComment from "@/components/villaDetail/VideoWithComment";
+// import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 import Comments from "@/components/other/comment/Comments";
 import CommentForm from "@/components/other/commentForm/CommentForm";
 

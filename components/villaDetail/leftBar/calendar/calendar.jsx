@@ -2,12 +2,9 @@ import styles from "./calendar.module.css";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
-const ModalComponent = dynamic(
-  () => import("@/components/other/modalComponent"),
-  {
-    ssr: true,
-  }
-);
+const ModalComponent = dynamic(() => import("../../../other/modalComponent"), {
+  ssr: true,
+});
 
 const MyDatePicker = dynamic(() => import("./mydatepicker"), {
   ssr: true,

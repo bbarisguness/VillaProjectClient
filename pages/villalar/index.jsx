@@ -7,7 +7,7 @@ import Pagination from "@/components/pagination/Pagination";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-const VillaCard = dynamic(() => import("@/components/index/villa/card/villaCard"), {
+const VillaCard = dynamic(() => import("../../components/index/villa/card/villaCard"), {
   ssr: true, // SSR olmadan yüklenmesi yeterli
 });
 
