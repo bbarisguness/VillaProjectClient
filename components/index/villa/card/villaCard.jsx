@@ -70,22 +70,21 @@ export default function VillaCard({
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
-                    <div
+                    <Image
                       key={"photo" + index + 1}
-                      className={`${styles.bgImage} ${
+                      src={
+                        process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                        "k_" +
+                        photo.image
+                      }
+                      alt={"Villa Card Image"}
+                      className={`${
                         activeImage === index ? styles.active : ""
                       }`}
-                      style={{
-                        backgroundImage:
-                          photo.image != undefined
-                            ? `url(${
-                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                                "k_" +
-                                photo.image
-                              })`
-                            : "none",
-                      }}
-                    ></div>
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      loading="lazy" // Lazy loading aktif
+                    />
                   ))}
                 </div>
                 <div className={styles.imgNav}>
@@ -173,22 +172,21 @@ export default function VillaCard({
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
-                    <div
+                    <Image
                       key={"photo" + index + 1}
-                      className={`${styles.bgImage} ${
+                      src={
+                        process.env.NEXT_PUBLIC_APIHOTELPHOTOS_URL +
+                        "k_" +
+                        photo.image
+                      }
+                      alt={"Villa Card Image"}
+                      className={`${
                         activeImage === index ? styles.active : ""
                       }`}
-                      style={{
-                        backgroundImage:
-                          photo.image != undefined
-                            ? `url(${
-                                process.env.NEXT_PUBLIC_APIHOTELPHOTOS_URL +
-                                "k_" +
-                                photo.image
-                              })`
-                            : "none",
-                      }}
-                    ></div>
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      loading="lazy" // Lazy loading aktif
+                    />
                   ))}
                 </div>
                 <div className={styles.imgNav}>
@@ -276,22 +274,21 @@ export default function VillaCard({
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
-                    <div
+                    <Image
                       key={"photo" + index + 1}
-                      className={`${styles.bgImage} ${
+                      src={
+                        process.env.NEXT_PUBLIC_APIROOMPHOTOS_URL +
+                        "k_" +
+                        photo.image
+                      }
+                      alt={"Villa Card Image"}
+                      className={`${
                         activeImage === index ? styles.active : ""
                       }`}
-                      style={{
-                        backgroundImage:
-                          photo.image != undefined
-                            ? `url(${
-                                process.env.NEXT_PUBLIC_APIROOMPHOTOS_URL +
-                                "k_" +
-                                photo.image
-                              })`
-                            : "none",
-                      }}
-                    ></div>
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      loading="lazy" // Lazy loading aktif
+                    />
                   ))}
                 </div>
                 <div className={styles.imgNav}>
@@ -378,22 +375,21 @@ export default function VillaCard({
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
-                    <div
+                    <Image
                       key={"photo" + index + 1}
-                      className={`${styles.bgImage} ${
+                      src={
+                        process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                        "k_" +
+                        photo.image
+                      }
+                      alt={"Villa Card Image"}
+                      className={`${
                         activeImage === index ? styles.active : ""
                       }`}
-                      style={{
-                        backgroundImage:
-                          photo.image != undefined
-                            ? `url(${
-                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                                "k_" +
-                                photo.image
-                              })`
-                            : "none",
-                      }}
-                    ></div>
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      loading="lazy" // Lazy loading aktif
+                    />
                   ))}
                 </div>
                 <div className={styles.imgNav}>
@@ -510,23 +506,6 @@ export default function VillaCard({
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
-                    // <div
-                    //   key={"photo" + index + 1}
-                    //   className={`${styles.bgImage} ${
-                    //     activeImage === index ? styles.active : ""
-                    //   }`}
-                    //   style={{
-                    //     backgroundImage:
-                    //       photo.image != undefined
-                    //         ? `url(${
-                    //             process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                    //             "k_" +
-                    //             photo.image
-                    //           })`
-                    //         : "none",
-                    //   }}
-                    // ></div>
-
                     <Image
                       key={"photo" + index + 1}
                       src={
@@ -628,22 +607,21 @@ export default function VillaCard({
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
-                    <div
+                    <Image
                       key={"photo" + index + 1}
-                      className={`${styles.bgImage} ${
+                      src={
+                        process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                        "k_" +
+                        photo.image
+                      }
+                      alt={"Villa Card Image"}
+                      className={`${
                         activeImage === index ? styles.active : ""
                       }`}
-                      style={{
-                        backgroundImage:
-                          photo.image != undefined
-                            ? `url(${
-                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                                "k_" +
-                                photo.image
-                              })`
-                            : "none",
-                      }}
-                    ></div>
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      loading="lazy" // Lazy loading aktif
+                    />
                   ))}
                 </div>
                 <div className={styles.imgNav}>
@@ -717,22 +695,21 @@ export default function VillaCard({
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
-                    <div
+                    <Image
                       key={"photo" + index + 1}
-                      className={`${styles.bgImage} ${
+                      src={
+                        process.env.NEXT_PUBLIC_APIPHOTOS_URL +
+                        "k_" +
+                        photo.image
+                      }
+                      alt={"Villa Card Image"}
+                      className={`${
                         activeImage === index ? styles.active : ""
                       }`}
-                      style={{
-                        backgroundImage:
-                          photo.image != undefined
-                            ? `url(${
-                                process.env.NEXT_PUBLIC_APIPHOTOS_URL +
-                                "k_" +
-                                photo.image
-                              })`
-                            : "none",
-                      }}
-                    ></div>
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      loading="lazy" // Lazy loading aktif
+                    />
                   ))}
                 </div>
                 <div className={styles.imgNav}>
