@@ -1,5 +1,12 @@
-import Gallery from "@/components/villaDetail/leftBar/gallery/gallery";
 import styles from "./productImageBox.module.css";
+import dynamic from "next/dynamic";
+
+const Gallery = dynamic(
+  () => import("@/components/villaDetail/leftBar/gallery/gallery"),
+  {
+    ssr: true,
+  }
+);
 
 export default function ProductImageBox({ imgs }) {
   return (

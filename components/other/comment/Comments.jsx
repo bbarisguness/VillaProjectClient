@@ -1,7 +1,11 @@
 import { useState } from "react";
-import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 import styles from "./comments.module.css";
 import { formatDate } from "@/utils/date";
+import dynamic from "next/dynamic";
+
+const VideoWithComment = dynamic(() => import("@/components/villaDetail/VideoWithComment"), {
+  ssr: true,
+});
 
 export default function Comments({ commentData }) {
   const [numberOfCommentsShown, setNumberOfCommentsShown] = useState(3);

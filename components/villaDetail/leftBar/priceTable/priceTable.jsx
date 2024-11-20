@@ -1,12 +1,11 @@
 "use client";
 import styles from "./priceTable.module.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { getPriceTypeDetail } from "@/data/data";
 import { replaceLastDotWithComma } from "@/utils/globalUtils";
 
 export default function PriceTable({ data, priceTypeNumber, currencies }) {
-  
   const [priceTableActiveIndex, setPriceTableActiveIndex] =
     useState(priceTypeNumber);
 
@@ -33,20 +32,6 @@ export default function PriceTable({ data, priceTypeNumber, currencies }) {
       value: currencies?.gbp,
     },
   ];
-  // useEffect(() => {
-
-  //     fetch('http://hasanadiguzel.com.tr/api/kurgetir')
-  //         .then(response => response.json())
-  //         .then(data => {
-  //             //console.log(data.TCMB_AnlikKurBilgileri)
-  //             //setExchanges(data.TCMB_AnlikKurBilgileri)
-  //             //setReady(true)
-  //             setUsd(data.TCMB_AnlikKurBilgileri[0].BanknoteSelling)
-  //             setEur(data.TCMB_AnlikKurBilgileri[3].BanknoteSelling)
-  //             setGbp(data.TCMB_AnlikKurBilgileri[4].BanknoteSelling)
-  //         });
-
-  // }, [gbp])
 
   if (data?.length == 0) return null;
 
@@ -55,16 +40,18 @@ export default function PriceTable({ data, priceTypeNumber, currencies }) {
     const selectedCurrency = currenciesData.find(
       (item) => item.priceTypeNumber === priceTableActiveIndex
     )?.value;
-  
+
     const baseCurrency = currenciesData.find(
       (item) => item.priceTypeNumber === priceTypeNumber
     )?.value;
-  
+
     // Eğer seçilen kur TL değilse, fiyatı TL'ye dönüştürüp hedef kura çevir
     const convertedPrice = (price * baseCurrency) / selectedCurrency;
-  
+
     return (
-      replaceLastDotWithComma(convertedPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ".")) +
+      replaceLastDotWithComma(
+        convertedPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      ) +
       " " +
       getPriceTypeDetail(priceTableActiveIndex)?.text
     );

@@ -6,8 +6,14 @@ import Image from "next/image";
 import moment from "moment";
 import { isVillaAvailable } from "@/services/reservation";
 import tr from "date-fns/locale/tr";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+const DatePicker = dynamic(
+  () => import("react-datepicker"),
+  {
+    ssr: false,
+  }
+);
 
 export default function Reservation({
   villaId,
@@ -144,7 +150,7 @@ export default function Reservation({
       {availible && (
         <div className={styles.modalWrapper}>
           <div className={`${styles["modal"]}`}>
-            <Image alt="" src="/images/alert.png" width={44} height={38} />
+            <Image alt="" src="/images/alert.png" width={44} height={38} loading="lazy" />
             <span className={styles.modalTitle}>Uyarı!</span>
             <p>
               Seçtiğiniz tarihler arasında villa müsait değildir. Lütfen

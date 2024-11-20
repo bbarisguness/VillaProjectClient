@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./mydatepicker.module.css";
-import { timeStringToDate } from "@/utils/date";
-import moment from "moment";
 
 //reservasyon tarihleri düşük aydan yükselen aya doğru gelmesi lazım
 export default function MyDatePicker({
@@ -415,7 +413,10 @@ export default function MyDatePicker({
         return currentDate >= start && currentDate <= end;
       });
       return willPrintPrice != -1
-        ? priceTypeText + calendarPrices[willPrintPrice].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        ? priceTypeText +
+            calendarPrices[willPrintPrice].price
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         : "";
     };
 
