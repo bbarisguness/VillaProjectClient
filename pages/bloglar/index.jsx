@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getBlogs } from "@/services/blog";
 import Seo from "@/components/seo";
 
-const BlogCard = dynamic(() => import("@/components/blog/BlogCard"), {
+const BlogCard = dynamic(() => import("../../components/blog/blogCard"), {
   ssr: false, // SSR olmadan yüklenmesi yeterli
 });
 
