@@ -1100,7 +1100,7 @@ const google301 = [
 
 const nextConfig = {
   i18n: {
-    locales: ["tr", "en"],
+    locales: ["tr"],//farklı dil ekleneceği zaman "en" diye ekle, sitede headerde kendisi gelecek
     defaultLocale: "tr",
     localeDetection: true,
   },
@@ -1110,14 +1110,14 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'app.labirentfethiye.com',
+        protocol: process.env.NEXT_PUBLIC_IMAGE_PROTOCOL,
+        hostname: process.env.NEXT_PUBLIC_IMAGE_HOSTNAME,
         port: '',
         pathname: '/**',
       },
     ],
     domains: [
-      'app.labirentfethiye.com'
+      process.env.NEXT_PUBLIC_IMAGE_HOSTNAME
     ],
   },
   async redirects() {
