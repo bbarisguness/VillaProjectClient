@@ -1110,14 +1110,14 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'villaapi.testgrande.com',
+        protocol: 'https',
+        hostname: 'app.labirentfethiye.com',
         port: '',
         pathname: '/**',
       },
     ],
     domains: [
-      'villaapi.testgrande.com'
+      'app.labirentfethiye.com'
     ],
   },
   async redirects() {
