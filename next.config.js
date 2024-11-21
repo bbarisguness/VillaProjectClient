@@ -1099,6 +1099,11 @@ const google301 = [
 ]
 
 const nextConfig = {
+  i18n: {
+    locales: ["tr", "en"],
+    defaultLocale: "tr",
+    localeDetection: true,
+  },
   experimental: {
     appDir: true,
   },

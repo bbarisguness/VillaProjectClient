@@ -5,6 +5,7 @@ import Footer from "@/components/footer/footer"
 import HamburgerMenu from "@/components/hamburger/hamburgerMenu"
 import { useEffect, useState } from "react";
 import { getRegions } from "@/services/region"
+import { appWithTranslation } from "next-i18next"
 
 
 import "@/styles/styles.css"
@@ -51,5 +52,5 @@ function myApp({ Component, pageProps }) {
     )
 }
 
-export default myApp
+export default appWithTranslation(myApp)
 

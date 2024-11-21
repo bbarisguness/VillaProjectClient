@@ -6,6 +6,9 @@ import Slider from "@/components/index/slider/slider";
 // import Service from "@/components/index/service/service";
 // import Blog from "@/components/index/blog/blog";
 // import VillaRent from "@/components/index/villaRentInfo/villaRentInfo";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 //const Slider = lazy(() => import('@/components/index/slider/slider'));
 const TreeStep = lazy(() => import("@/components/index/treestep/treestep"));
@@ -41,6 +44,8 @@ export default function Home({
   testimonials,
   aparts,
 }) {
+  const router = useRouter();
+  const { locale, locales, defaultLocale } = router;
   return (
     <>
       <Seo
@@ -76,7 +81,7 @@ export default function Home({
 //   return { props: { villa, categories, blogs, regions, aparts } };
 // }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale }) {
   // API çağrılarını paralel olarak başlat
   const categories = await getCategoriesHome();
 
@@ -92,6 +97,13 @@ export async function getServerSideProps() {
   // const testimonials = await getTestimonials()
 
   return {
-    props: { villa, categories, blogs, regions, aparts },
+    props: {
+      villa,
+      categories,
+      blogs,
+      regions,
+      aparts,
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
   };
 }
