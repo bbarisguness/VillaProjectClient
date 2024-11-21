@@ -18,12 +18,19 @@ export default function VillaCard({
   activeTabIndex,
 }) {
   const router = useRouter();
+
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == data?.priceType
   )?.text;
 
   // const a = Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price))
   const [activeImage, setActiveImage] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsLoaded(true), 100); // 100ms gecikme
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
     setActiveImage(0);
@@ -687,7 +694,10 @@ export default function VillaCard({
     if (data && !listPage) {
       return (
         <li
-          style={{ display: checkVillaCategory() ? "block" : "none" }}
+          style={{
+            display: checkVillaCategory() ? "block" : "none",
+            opacity: isLoaded ? 1 : 0,
+          }}
           id={styles.cardContainer}
         >
           <div className={styles.column}>

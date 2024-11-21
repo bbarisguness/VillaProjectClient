@@ -54,7 +54,7 @@
     position: relative;
 }
 
-.column .imgBox .carouselBox::before {
+/* .column .imgBox .carouselBox::before {
     content: '';
     width: 100%;
     height: 100%;
@@ -62,24 +62,9 @@
     top: 0;
     left: 0;
     z-index: 1;
-    /*background: linear-gradient(180deg, rgba(2, 4, 74, 0) 0%, #02044A 100%);*/
+    background: linear-gradient(180deg, rgba(2, 4, 74, 0) 0%, #02044A 100%);
     opacity: 0.5;
-}
-
-.column .imgBox .carouselBox .bgImage {
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    background-size: cover;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.column .imgBox .carouselBox .bgImage.active {
-    opacity: 1;
-}
+} */
 
 .column .imgBox .carouselBox img {
     opacity: 0;
