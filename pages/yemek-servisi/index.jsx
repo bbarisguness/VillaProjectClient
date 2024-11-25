@@ -2,6 +2,7 @@ import BreadCrumb from "@/components/breadCrumb/breadCrumb";
 import TreeStep from "@/components/index/treestep/treestep";
 import Seo from "@/components/seo";
 import styles from "./page.module.css";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function FoodServices() {
   return (
@@ -68,4 +69,8 @@ export default function FoodServices() {
       </section>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }

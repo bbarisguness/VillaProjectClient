@@ -6,7 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 import { useState, useEffect } from "react";
 const qs = require('qs');
 
-export default function NewVillas({ villas }) {
+export default function NewVillas({ villas, t }) {
 
     const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
         return (
@@ -22,8 +22,8 @@ export default function NewVillas({ villas }) {
             <div className={styles.container}>
                 <div className={styles.box}>
                     <div className={`${styles.titleBox} ${styles.white}`}>
-                        <div className={styles.title}>Yeni Eklenen Villalar</div>
-                        <div className={styles.subTitle}>Villalarımız arasından en seçkinlerini sizler için derledik.</div>
+                        <div className={styles.title}>{t("newlyAddedVillas")}</div>
+                        <div className={styles.subTitle}>{t("ourVillasText")}.</div>
                     </div>
                     <div className={styles.top}>
                         <Carousel

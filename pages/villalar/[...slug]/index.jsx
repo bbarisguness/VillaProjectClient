@@ -27,6 +27,9 @@ import { getPriceRange } from "@/utils/globalUtils";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-video.css";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+import { capitalizeWords } from "@/utils/globalUtils";
 
 const VillaCard = dynamic(
   () => import("../../../components/index/villa/card/villaCard"),
@@ -114,6 +117,7 @@ export default function List({
   villaSlug,
   villaName,
 }) {
+  const { t } = useTranslation("common")
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == villaDetail?.data?.priceType
   )?.text;
@@ -194,9 +198,7 @@ export default function List({
                     <div className="title">
                       {category?.categoryDetails[0]?.name}
                     </div>
-                    <div className="subTitle">
-                      Toplam {villa?.totalCount} adet tesis bulunmaktadır.
-                    </div>
+                    <div className="subTitle">{t("thereAreFacilities", { facilityCount: villa?.totalCount })}</div>
                   </div>
                 </div>
                 <div className="bottom">
@@ -235,7 +237,7 @@ export default function List({
             <div className={styles.breadCrumbBox}>
               <ul className={styles.breadCrumbList}>
                 <li className={styles.breadCrumbItem}>
-                  <Link href="/">Anasayfa</Link>
+                  <Link href="/">{capitalizeWords(t("headerHomePage"))}</Link>
                 </li>
                 {villaDetail?.data?.categories && (
                   <li className={styles.breadCrumbItem}>
@@ -256,13 +258,14 @@ export default function List({
             onClick={() => scrolltoHash("makeReservation")}
             className={styles.makeAReservation}
           >
-            <span>Rezervasyon Yap</span>
+            <span>{t("makeReservation")}</span>
           </div>
         )}
         <section
           className={`${styles["contentDetail"]} ${styles["villaDetail"]}`}
         >
           <DetailTitleBox
+            t={t}
             villaDetail={villaDetail}
             currentPriceTypeText={currentPriceTypeText}
           />
@@ -272,17 +275,20 @@ export default function List({
               <div className={styles.villaDetailContent}>
                 <div className={styles.left}>
                   <DetailDesc
+                    t={t}
                     villaDetail={villaDetail}
                     isDescOpen={isDescOpen}
                     setIsDescOpen={setIsDescOpen}
                   />
-                  <DistanceRuler data={villaDetail?.data?.distanceRulers} />
+                  <DistanceRuler data={villaDetail?.data?.distanceRulers} t={t} />
                   <PriceTable
+                    t={t}
                     priceTypeNumber={villaDetail?.data?.priceType || 1}
                     data={villaDetail?.data?.priceTables}
                     currencies={villaDetail?.data?.currencies}
                   />
                   <Calendar
+                    t={t}
                     ready={ready}
                     dates={villaDetail?.data?.reservationCalendars || []}
                     calendarPrices={villaDetail?.data?.prices || []}
@@ -294,6 +300,7 @@ export default function List({
                     <div className={styles.right}>
                       <div className={styles.general}>
                         <Reservation
+                          t={t}
                           priceTypeText={currentPriceTypeText}
                           villaId={villaDetail?.data?.id}
                           villaSlug={villaSlug}
@@ -361,8 +368,8 @@ export default function List({
           <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
-                <Comments commentData={villaDetail?.data?.comments} />
-                <CommentForm />
+                <Comments commentData={villaDetail?.data?.comments} t={t} />
+                <CommentForm t={t}/>
               </div>
             </div>
           </div>
@@ -371,11 +378,8 @@ export default function List({
               <div className={styles.container}>
                 <div className={styles.box}>
                   <div className={styles.titleBox}>
-                    <div className={styles.title}>Önerilen Villalar</div>
-                    <div className={styles.subTitle}>
-                      Villalarımız arasından en seçkinlerini sizler için
-                      derledik.
-                    </div>
+                    <div className={styles.title}>{t("recommendedVillas")}</div>
+                    <div className={styles.subTitle}>{t("ourVillasText")}</div>
                   </div>
                   <ul>
                     {nearVillas?.data?.map((data, index) => (
@@ -402,7 +406,7 @@ export default function List({
   }
 }
 
-export async function getServerSideProps({ params, query }) {
+export async function getServerSideProps({ params, query, locale }) {
   const slug = params?.slug;
   const allCategories = getCategories();
 
@@ -449,6 +453,7 @@ export async function getServerSideProps({ params, query }) {
       totalPage,
       allCategories: allCategoriesData,
       category,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }

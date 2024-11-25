@@ -1,7 +1,11 @@
 import styles from "./detailTitleBox.module.css";
 import { getPriceRange } from "@/utils/globalUtils";
 
-export default function DetailTitleBox({ villaDetail, currentPriceTypeText }) {
+export default function DetailTitleBox({
+  villaDetail,
+  currentPriceTypeText,
+  t,
+}) {
   return (
     <div className={styles.detailTitleBox}>
       <div className={styles.container}>
@@ -21,21 +25,27 @@ export default function DetailTitleBox({ villaDetail, currentPriceTypeText }) {
                 </div>
                 <div className={styles.colon}>
                   <i className={styles.person_icon}></i>
-                  <span>{villaDetail?.data?.person} Kişi</span>
+                  <span>
+                    {villaDetail?.data?.person} {t("people")}
+                  </span>
                 </div>
                 <div className={styles.colon}>
                   <i className={styles.room_icon}></i>
-                  <span>{villaDetail?.data?.room} Oda</span>
+                  <span>
+                    {villaDetail?.data?.room} {t("room")}
+                  </span>
                 </div>
                 <div className={styles.colon}>
                   <i className={styles.bath_icon}></i>
-                  <span>{villaDetail?.data?.bath} Banyo</span>
+                  <span>
+                    {villaDetail?.data?.bath} {t("bath")}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
           <div className={styles.right}>
-            <div className={styles.priceType}>Gecelik En Düşük</div>
+            <div className={styles.priceType}>{t("lowestNightly")}</div>
             <div className={styles.price}>
               {getPriceRange(
                 villaDetail?.data?.priceTables,

@@ -13,8 +13,12 @@ import { getPrice, isVillaAvailable } from "@/services/reservation";
 import Seo from "@/components/seo";
 import moment from "moment";
 import { priceTypes } from "@/data/data";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+import { capitalizeWords } from "@/utils/globalUtils";
 
 export default function Reservation() {
+  const { t } = useTranslation("common");
   let localPersonInfoData;
   if (typeof localStorage !== "undefined") {
     localPersonInfoData = JSON.parse(localStorage.getItem("personInfo"));
@@ -177,7 +181,7 @@ export default function Reservation() {
       return `${day} ${monthName} ${year} ${dayName}`;
     }
 
-    return girismiCikismi == "g" ? "Giriş" : "Çıkış";
+    return girismiCikismi == "g" ? t("entrance") : t("exit");
   };
 
   //#region Rezervasyon Günleri
@@ -262,10 +266,10 @@ export default function Reservation() {
           setActiveStep(2);
           setCompletedReservationData(createResponse?.data);
         } else {
-          alert(createResponse?.message || "Bir sorun oluştu");
+          alert(createResponse?.message || t("aProblemOccurred"));
         }
       } else {
-        alert("Seçtiğiniz Tarihler Tesisimiz Müsait Değildir..");
+        alert(t("facilityNotAvailableMessage"));
         router.back();
       }
     } else {
@@ -320,7 +324,9 @@ export default function Reservation() {
                     </div>
                   </div>
                   <div className={styles.textBox}>
-                    <div className={styles.text}>Kişisel Bilgiler</div>
+                    <div className={styles.text}>
+                      {t("personalInformation")}
+                    </div>
                     <div className={styles.number}>01</div>
                   </div>
                 </Link>
@@ -333,7 +339,9 @@ export default function Reservation() {
                     </div>
                   </div>
                   <div className={styles.textBox}>
-                    <div className={styles.text}>Rezervasyonu Tamamla</div>
+                    <div className={styles.text}>
+                      {t("completeReservation")}
+                    </div>
                     <div className={styles.number}>02</div>
                   </div>
                 </Link>
@@ -346,7 +354,7 @@ export default function Reservation() {
                     </div>
                   </div>
                   <div className={styles.textBox}>
-                    <div className={styles.text}>Tatile Başla</div>
+                    <div className={styles.text}>{t("startYourVacation")}</div>
                     <div className={styles.number}>03</div>
                   </div>
                 </Link>
@@ -361,7 +369,9 @@ export default function Reservation() {
               <div className={styles.left}>
                 {activeStep == 0 && (
                   <div className={styles.personInfoBox}>
-                    <div className={styles.subTitle}>Kişisel Bilgiler</div>
+                    <div className={styles.subTitle}>
+                      {t("personalInformation")}
+                    </div>
                     <Formik
                       initialValues={{
                         name: localPersonInfoData?.data?.name || "",
@@ -372,21 +382,23 @@ export default function Reservation() {
                         stateAreaClicked: false,
                       }}
                       validationSchema={Yup.object({
-                        name: Yup.string().required("Bu alan boş bırakılamaz"),
+                        name: Yup.string().required(
+                          t("thisFieldCannotBeLeftBlank")
+                        ),
                         surname: Yup.string().required(
-                          "Bu alan boş bırakılamaz"
+                          t("thisFieldCannotBeLeftBlank")
                         ),
                         idNo: Yup.string()
-                          .length(11, "ID numarası 11 haneli olmalıdır")
+                          .length(11, t("IdNumberMustBeDigits", { digit: 11 }))
                           .test(
                             "no-leading-zero",
-                            "ID numarası 0 ile başlayamaz",
+                            t("IdNumberCannotStartWith0", { number: 0 }),
                             (value) => value && !value.startsWith("0")
                           )
-                          .required("Bu alan boş bırakılamaz"),
+                          .required(t("thisFieldCannotBeLeftBlank")),
                         phone: Yup.string()
-                          .length(15, "Geçerli bir telefon numarası girin")
-                          .required("Bu alan boş bırakılamaz"),
+                          .length(15, t("pleaseEnterAValidPhoneNumber"))
+                          .required(t("thisFieldCannotBeLeftBlank")),
                       })}
                       onSubmit={(values) => {
                         submitFormPerson(values);
@@ -407,7 +419,9 @@ export default function Reservation() {
                           <ul>
                             <li>
                               <div className={styles.inputBox}>
-                                <div className={styles.inputName}>Adınız</div>
+                                <div className={styles.inputName}>
+                                  {t("yourName")}
+                                </div>
                                 <input
                                   name="name"
                                   value={values.name}
@@ -427,7 +441,7 @@ export default function Reservation() {
                             <li>
                               <div className={styles.inputBox}>
                                 <div className={styles.inputName}>
-                                  Soyadınız
+                                  {t("yourSurname")}
                                 </div>
                                 <input
                                   name="surname"
@@ -447,7 +461,9 @@ export default function Reservation() {
                             </li>
                             <li>
                               <div className={styles.inputBox}>
-                                <div className={styles.inputName}>Tc No</div>
+                                <div className={styles.inputName}>
+                                  {t("idNo")}
+                                </div>
                                 <input
                                   name="idNo"
                                   value={values.idNo}
@@ -477,7 +493,9 @@ export default function Reservation() {
                             </li>
                             <li>
                               <div className={styles.inputBox}>
-                                <div className={styles.inputName}>E-mail</div>
+                                <div className={styles.inputName}>
+                                  {t("eMail")}
+                                </div>
                                 <input
                                   name="email"
                                   value={values.email}
@@ -495,7 +513,9 @@ export default function Reservation() {
                             </li>
                             <li>
                               <div className={styles.inputBox}>
-                                <div className={styles.inputName}>Telefon</div>
+                                <div className={styles.inputName}>
+                                  {t("phone")}
+                                </div>
                                 <input
                                   name="phone"
                                   value={values.phone}
@@ -595,7 +615,7 @@ export default function Reservation() {
                               className={styles.blueButtonArrow}
                               type="submit"
                             >
-                              <span>Devam Et</span>
+                              <span>{t("continue")}</span>
                             </button>
                           </div>
                         </form>
@@ -606,7 +626,7 @@ export default function Reservation() {
 
                 {activeStep == 1 && (
                   <div className={styles.paymentBox}>
-                    <div className={styles.subTitle}>Şununla Ödeyin</div>
+                    <div className={styles.subTitle}>{t("payWith")}</div>
                     <div className={styles.payment}>
                       <div className={styles.paymentType}>
                         <ul>
@@ -617,11 +637,10 @@ export default function Reservation() {
                               </div>
                               <div className={styles.textBox}>
                                 <div className={styles.title}>
-                                  Kredi Kartı İle Ödeme ( Yakında! )
+                                  {t("paymentByCreditCard")} ( {t("soon")}! )
                                 </div>
                                 <div className={styles.desc}>
-                                  Bu rezervasyonun ödemesini kredi kartı ile
-                                  gerçekleştirmek istiyorum.
+                                  {t("paymentByCreditCardMessage")}.
                                 </div>
                               </div>
                             </Link>
@@ -643,11 +662,10 @@ export default function Reservation() {
                               </div>
                               <div className={styles.textBox}>
                                 <div className={styles.title}>
-                                  Havale İle Ödeme
+                                  {t("paymentByMoneyOrder")}
                                 </div>
                                 <div className={styles.desc}>
-                                  Bu rezervasyonun ödemesini Havale/EFT ile
-                                  gerçekleştirmek istiyorum.
+                                  {t("paymentByMoneyOrderMessage")}.
                                 </div>
                               </div>
                             </Link>
@@ -695,7 +713,7 @@ export default function Reservation() {
                                   <li className={styles.full}>
                                     <div className={styles.inputBox}>
                                       <div className={styles.inputName}>
-                                        Kart Numarası
+                                        {t("cardNo")}
                                       </div>
                                       <input
                                         onChange={handleChange}
@@ -710,7 +728,7 @@ export default function Reservation() {
                                   <li>
                                     <div className={styles.inputBox}>
                                       <div className={styles.inputName}>
-                                        Son Kullanma Tarihi
+                                        {t("expirationDate")}
                                       </div>
                                       <input
                                         onChange={handleChange}
@@ -743,7 +761,7 @@ export default function Reservation() {
                                     className={styles.blueButtonArrow}
                                     type="submit"
                                   >
-                                    <span>Devam Et</span>
+                                    <span>{t("continue")}</span>
                                   </button>
                                 </div>
                               </form>
@@ -757,31 +775,30 @@ export default function Reservation() {
                         >
                           <ul>
                             <li>
-                              <div className={styles.title}>Banka</div>
+                              <div className={styles.title}>{t("bank")}</div>
                               <div className={styles.desc}>Garanti Bankası</div>
                             </li>
                             <li>
-                              <div className={styles.title}>Hesap Sahibi</div>
+                              <div className={styles.title}>
+                                {t("accountOwner")}
+                              </div>
                               <div className={styles.desc}>Labirent Villa</div>
                             </li>
                             <li>
-                              <div className={styles.title}>IBAN</div>
+                              <div className={styles.title}>{t("iban")}</div>
                               <div className={styles.desc}>
                                 TR54 0000 0000 0000 0000 0000 00
                               </div>
                             </li>
                             <li>
                               <div className={styles.title}>
-                                Sipariş Numaranız
+                                {t("yourOrderNumber")}
                               </div>
                               <div className={styles.desc}>2038390</div>
                             </li>
                             <li className={styles.full}>
                               <div className={styles.desc}>
-                                *Gönderimlerinizin açıklama hanesine sipariş
-                                numaranızı yazmalasınız ve Havale/EFT işlemi
-                                yapan kişinin Fatura sahibi olması
-                                gerekmektedir.
+                                *{t("paymentByMoneyOrderDesc")}.
                               </div>
                             </li>
                           </ul>
@@ -796,7 +813,7 @@ export default function Reservation() {
                               href="#"
                               className={styles.blueButtonArrow}
                             >
-                              <span>Rezervasyonu Oluştur</span>
+                              <span>{t("createReservation")}</span>
                             </Link>
                           </div>
                         </div>
@@ -812,12 +829,10 @@ export default function Reservation() {
                     </div>
                     <div className={styles.textBox}>
                       <div className={styles.title}>
-                        Teşekkürler. Rezervasyon Siparişiniz Alındı.
+                        {t("thanks")}. {t("createdReservationMessage")}.
                       </div>
                       <div className={styles.desc}>
-                        Rezervasyonunuz en kısa süre içerisinde işleme alınıp
-                        onaylandıktan sonra sizinle iletişime geçeceğiz.
-                        Şimdiden iyi tatiller dileriz.
+                        {t("createdReservationDesc")}.
                       </div>
                     </div>
                     <div className={styles.controls}>
@@ -846,7 +861,7 @@ export default function Reservation() {
                         <div className={styles.area1}>
                           <div className={styles.reservationInfos}>
                             <span className={styles.title}>
-                              Rezervasyon Bilgileri
+                              {t("reservationInfos")}
                             </span>
                             <span>Giriş {reservationItems?.checkIn}</span>
                             <span>Çıkış {reservationItems?.checkOut}</span>
@@ -864,10 +879,10 @@ export default function Reservation() {
                                   )
                                 )
                                 .asDays()}{" "}
-                              Gece
+                              {capitalizeWords(t("night"))}
                             </span>
                             <span>
-                              Fiyat{" "}
+                              {t("price")}{" "}
                               {reservationItems?.totalPrice
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
@@ -876,7 +891,7 @@ export default function Reservation() {
                           </div>
                           <div className={styles.reservationInfos}>
                             <span className={styles.title}>
-                              Müşteri Bilgileri
+                              {t("customerInformation")}
                             </span>
                             <span>
                               {completedReservationData?.reservationInfos?.name}{" "}
@@ -901,7 +916,7 @@ export default function Reservation() {
                         </div>
                         <div className={styles.reservationInfos}>
                           <span className={styles.title}>
-                            Rezervasyon numaranız
+                            {t("yourReservationNumber")}
                           </span>
                           <span className={styles.title}>
                             {completedReservationData?.reservationNumber}
@@ -913,7 +928,7 @@ export default function Reservation() {
                               reservationItems?.roomSlug
                             }`}
                           >
-                            Tesis Detayına Git
+                            {t("goToFacilityDetails")}
                           </Link>
                         </div>
                       </div>
@@ -1022,7 +1037,7 @@ export default function Reservation() {
                       </li>
                       <li>
                         <div className={styles.priceBox}>
-                          <span>Ön Ödeme</span>
+                          <span>{t("advancePayment")}</span>
                           <span>
                             {((reservationItems?.totalPrice * 30) / 100)
                               .toString()
@@ -1031,7 +1046,7 @@ export default function Reservation() {
                           </span>
                         </div>
                         <div className={styles.priceBox}>
-                          <span>Girişte Ödeme</span>
+                          <span>{t("paymentUponEntry")}</span>
                           <span>
                             {(
                               reservationItems?.totalPrice -
@@ -1043,7 +1058,7 @@ export default function Reservation() {
                           </span>
                         </div>
                         <div className={styles.priceBox}>
-                          <span>Toplam</span>
+                          <span>{t("total")}</span>
                           <span>
                             <strong>
                               {[reservationItems?.totalPrice]
@@ -1064,4 +1079,8 @@ export default function Reservation() {
       </section>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }

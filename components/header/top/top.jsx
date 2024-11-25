@@ -1,8 +1,10 @@
 import styles from "./top.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 export default function HeaderTop() {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const { locales, locale: activeLocale } = router;
   const { pathname, query, asPath } = router;
@@ -19,17 +21,17 @@ export default function HeaderTop() {
             <div className={styles.colon}>
               <i style={{ backgroundImage: `url(/images/call.png)` }}></i>
               <span>
-                Bize Ulaşın <a href="tel:02428443988">+90 252 616 66 48</a>
+                {t("contactUs")} <a href="tel:02428443988">+90 252 616 66 48</a>
               </span>
             </div>
             <div className={styles.colon}>
               <i style={{ backgroundImage: `url(/images/clock.png)` }}></i>
-              <span>Çalışma Saatleri : 09:00 - 18:00</span>
+              <span>{t("workingHours")} : 09:00 - 18:00</span>
             </div>
           </div>
           <div className={styles.right}>
             <div className={styles.socialMedia}>
-              <div className={styles.socialText}>Bizi Takip Edin</div>
+              <div className={styles.socialText}>{t("followUs")}</div>
               <ul>
                 <li>
                   <Link

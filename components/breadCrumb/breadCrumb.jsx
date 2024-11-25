@@ -1,21 +1,24 @@
 'use client'
 import styles from "./breadCrumb.module.css"
 import Link from "next/link"
+import { useTranslation } from "react-i18next"
+import { capitalizeWords } from "@/utils/globalUtils"
 
 export default function BreadCrumb({ link }) {
+    const { t } = useTranslation("common")
 
     const getName = () => {
-        if (link == "sss") { return "Sıkça Sorulan Sorular" }
-        else if (link == "contact") { return "İletişim" }
-        else if (link == "about") { return "Hakkımızda" }
-        else if (link == "yemek-servisi") { return "Yemek Servisi" }
-        else if (link == "kiralama-sartlari") { return "Kiralama Şartları" }
-        else if (link == "rezervasyon-takip") { return "Rezervasyon Takip" }
-        else if (link == "sikayet-bildirimi") { return "Şikayet Bildirimi" }
-        else if (link == "dolandiricilara-dikkat") { return "Dolandırıcılara Dikkat" }
-        else if (link == "neden-labirent") { return "Neden Labirent ?" }
-        else if (link == "arac-kiralama") { return "Araç Kiralama" }
-        else if (link == "kiraya-ver") {return "Kiraya Ver"}
+        if (link == "sss") { return t("faq") }
+        else if (link == "contact") { return capitalizeWords(t("headerContact")) }
+        else if (link == "about") { return capitalizeWords(t("headerAboutUs")) }
+        else if (link == "yemek-servisi") { return t("foodService") }
+        else if (link == "kiralama-sartlari") { return t("rentalConditions") }
+        else if (link == "rezervasyon-takip") { return t("reservationTracking") }
+        else if (link == "sikayet-bildirimi") { return t("complaintNotification") }
+        else if (link == "dolandiricilara-dikkat") { return t("bewareOfScammers") }
+        else if (link == "neden-labirent") { return t("whyLabyrinth") }
+        else if (link == "arac-kiralama") { return capitalizeWords(t("headerCarRental")) }
+        else if (link == "kiraya-ver") {return t("rentItOut")}
         else { return link }
     }
     return (
@@ -24,7 +27,7 @@ export default function BreadCrumb({ link }) {
                 <div className={styles.breadCrumbBox}>
                     <ul className={styles.breadCrumbList}>
                         <li className={styles.breadCrumbItem}>
-                            <Link href="/">Anasayfa</Link>
+                            <Link href="/">{capitalizeWords(t("headerHomePage"))}</Link>
                         </li>
                         {link && <li className={styles.breadCrumbItem}>
                             <Link href="" onClick={(e) => e.preventDefault()}>{getName()}</Link>

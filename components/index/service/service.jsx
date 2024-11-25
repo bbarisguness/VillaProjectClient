@@ -1,7 +1,10 @@
 import Link from "next/link"
 import styles from "./service.module.css"
+import { useTranslation } from "react-i18next"
+import { capitalizeWords } from "@/utils/globalUtils"
 
 export default function Service() {
+    const { t } = useTranslation("common")
     return (
         <div className={styles.services}>
             <div className={styles.container}>
@@ -13,22 +16,11 @@ export default function Service() {
                                 </div>
                             </div>
                             <div className={styles.textBox}>
-                                <div className={styles.title}>Satılık Villalarımız</div>
-                                <div className={styles.desc}>
-                                    Muğla, Fethiye ve çevresinde yer alan en güzel ve en özel satılık villaları
-                                    sizler için bir araya getirdik.
-                                    Alternatifleri inceleyebilir, ihtiyaçlarınıza ve bütçenize en uygun satılık
-                                    villalarımızı görüp
-                                    değerlendirebilirsiniz. Ülkemizin en güzel bölgelerinde yer alan, doğası ve
-                                    tarihi ile mest eden, özel
-                                    dekore edilmiş, gerek konaklamak ve tatil yapmak için gerekse ticari amaçla
-                                    kullanabileceğiniz
-                                    villalarını sayfamızda bulabilirsiniz. Geniş fiyat aralığıyla bütçenize göre
-                                    seçim yapabilirsiniz.
-                                </div>
+                                <div className={styles.title}>{t("ourVillasForSale")}</div>
+                                <div className={styles.desc}>{t("ourVillasForSaleText")}</div>
                                 <div className={styles.linkBox}>
                                     <Link href="/satilik-villalar" className={styles.blueButton2}>
-                                        <span>Detaylı İncele</span>
+                                        <span>{t("examineInDetail")}</span>
                                     </Link>
                                 </div>
                             </div>
@@ -39,27 +31,19 @@ export default function Service() {
                                 </div>
                             </div>
                             <div className={styles.textBox}>
-                                <div className={styles.title}>Araç Kiralama</div>
-                                <div className={styles.desc}>
-                                    Bölgemizde ggeçireceğiniz zamanı çok daha konforlu ve kaliteli hale getirmek
-                                    için araç kiralama
-                                    hizmetimizden yararlanabilirsiniz. Kullanım alışkanlıklarınıza, ihtiyaçlarınıza
-                                    ve bütçenize en uygun
-                                    araçları kolayca kiralayabilirsiniz. Bütün doğal, tarihi ve kültürel
-                                    güzellikleri özel aracınızın rahatlığıyla
-                                    tadabilirsiniz.
-                                </div>
+                                <div className={styles.title}>{capitalizeWords(t("headerCarRental"))}</div>
+                                <div className={styles.desc}>{t("carRentalText")}</div>
                                 <div className={styles.linkBox}>
                                     <Link href="/arac-kiralama" className={styles.blueButton2}>
-                                        <span>Detaylı İncele</span>
+                                        <span>{t("examineInDetail")}</span>
                                     </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className={styles.titleBox}>
-                        <div className={styles.title}>Hizmetlerimiz</div>
-                        <div className={styles.subTitle}>Mükemmel tatil burada başlar</div>
+                        <div className={styles.title}>{t("ourServices")}</div>
+                        <div className={styles.subTitle}>{t("thePerfectHolidayStartsHere")}</div>
                     </div>
                     <div className={styles.bottom}>
                         <div className={styles.row}>
@@ -71,7 +55,7 @@ export default function Service() {
                                                 <i style={{backgroundImage: "url(/images/services1.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services1-hover.png)"}}></i>
                                             </div>
-                                            <div className={styles.title}>Araç Kiralama</div>
+                                            <div className={styles.title}>{capitalizeWords(t("headerCarRental"))}</div>
                                         </Link>
                                     </div>
                                 </li>
@@ -82,7 +66,7 @@ export default function Service() {
                                                 <i style={{backgroundImage: "url(/images/services2.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services2-hover.png)"}}></i>
                                             </div>
-                                            <div className={styles.title}>Paraşüt</div>
+                                            <div className={styles.title}>{t("parachute")}</div>
                                         </Link>
                                     </div>
                                 </li>
@@ -93,7 +77,7 @@ export default function Service() {
                                                 <i style={{backgroundImage: "url(/images/services3.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services3-hover.png)"}}></i>
                                             </div>
-                                            <div className={styles.title}>Transfer</div>
+                                            <div className={styles.title}>{t("transfer")}</div>
                                         </Link>
                                     </div>
                                 </li>
@@ -104,7 +88,7 @@ export default function Service() {
                                                 <i style={{backgroundImage: "url(/images/services4.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services4-hover.png)"}}></i>
                                             </div>
-                                            <div className={styles.title}>Jeep Safari</div>
+                                            <div className={styles.title}>{t("jeepSafari")}</div>
                                         </Link>
                                     </div>
                                 </li>
@@ -115,7 +99,7 @@ export default function Service() {
                                                 <i style={{backgroundImage: "url(/images/services5.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services5-hover.png)"}}></i>
                                             </div>
-                                            <div className={styles.title}>Atv Safari</div>
+                                            <div className={styles.title}>{t("atvSafari")}</div>
                                         </Link>
                                     </div>
                                 </li>
@@ -126,7 +110,7 @@ export default function Service() {
                                                 <i style={{backgroundImage: "url(/images/services6.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services6-hover.png)"}}></i>
                                             </div>
-                                            <div className={styles.title}>Atlı Geziler</div>
+                                            <div className={styles.title}>{t("horseRidingTours")}</div>
                                         </Link>
                                     </div>
                                 </li>
@@ -137,7 +121,7 @@ export default function Service() {
                                                 <i style={{backgroundImage: "url(/images/services7.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services7-hover.png)"}}></i>
                                             </div>
-                                            <div className={styles.title}>Rafting</div>
+                                            <div className={styles.title}>{t("rafting")}</div>
                                         </Link>
                                     </div>
                                 </li>
@@ -148,7 +132,7 @@ export default function Service() {
                                                 <i style={{backgroundImage: "url(/images/services8.png)"}}></i>
                                                 <i className={styles.two_i} style={{backgroundImage: "url(/images/services8-hover.png)"}}></i>
                                             </div>
-                                            <div className={styles.title}>Dalış</div>
+                                            <div className={styles.title}>{t("dive")}</div>
                                         </Link>
                                     </div>
                                 </li>

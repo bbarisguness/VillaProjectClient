@@ -3,8 +3,11 @@ import React from "react";
 import styles from "./page.module.css";
 import Seo from "@/components/seo";
 import Form from "./form";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
 
 export default function KirayaVer() {
+  const { t } = useTranslation("common")
   return (
     <>
       <Seo
@@ -16,7 +19,7 @@ export default function KirayaVer() {
         <div className={styles.content}>
           <div className={styles.titleBox}>
             <div className={styles.titleBoxContainer}>
-              <h1 className={styles.title}>Villanızı Kiraya Verin</h1>
+              <h1 className={styles.title}>{t("rentOutYourVilla")}</h1>
               <div className={styles.subTitle}>
                 Konaklamak için pek çok yapı türü tercih edilmektedir ve Muğla
                 ilimiz çevresinde özellikle villaların sayısı her geçen gün
@@ -80,4 +83,8 @@ export default function KirayaVer() {
       </div>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }

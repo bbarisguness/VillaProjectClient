@@ -2,7 +2,12 @@ import BreadCrumb from "@/components/breadCrumb/breadCrumb";
 import TreeStep from "@/components/index/treestep/treestep";
 import Seo from "@/components/seo";
 import styles from "./page.module.css";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { capitalizeWords } from "@/utils/globalUtils";
+import { useTranslation } from "react-i18next";
+
 export default function RentCar() {
+  const { t } = useTranslation("common");
   return (
     <>
       <Seo
@@ -13,7 +18,7 @@ export default function RentCar() {
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>
-            <h1 className={styles.title}>Araç Kiralama</h1>
+            <h1 className={styles.title}>{capitalizeWords(t("headerCarRental"))}</h1>
           </div>
         </div>
         <div className={styles.textBox}>
@@ -95,4 +100,8 @@ export default function RentCar() {
       </section>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }

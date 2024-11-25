@@ -13,7 +13,12 @@ import CommentForm from "@/components/other/commentForm/CommentForm";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-video.css";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+import { capitalizeWords } from "@/utils/globalUtils";
+
 export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const [isDescOpen, setIsDescOpen] = useState(false);
   if (villaDetail?.data != null) {
@@ -28,10 +33,10 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
             <div className={styles.breadCrumbBox}>
               <ul className={styles.breadCrumbList}>
                 <li className={styles.breadCrumbItem}>
-                  <Link href="/">Anasayfa</Link>
+                  <Link href="/">{capitalizeWords(t("headerHomePage"))}</Link>
                 </li>
                 <li className={styles.breadCrumbItem}>
-                  <Link href={`/satilik-villalar`}>Satılık Villalar</Link>
+                  <Link href={`/satilik-villalar`}>{t("villasForSale")}</Link>
                 </li>
               </ul>
             </div>
@@ -58,21 +63,27 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.person_icon}></i>
-                        <span>{villaDetail?.data?.person} Kişi</span>
+                        <span>
+                          {villaDetail?.data?.person} {t("people")}
+                        </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.room_icon}></i>
-                        <span>{villaDetail?.data?.room} Oda</span>
+                        <span>
+                          {villaDetail?.data?.room} {t("rooms")}
+                        </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.bath_icon}></i>
-                        <span>{villaDetail?.data?.bath} Banyo</span>
+                        <span>
+                          {villaDetail?.data?.bath} {t("bath")}
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className={styles.right}>
-                  <div className={styles.price}>SATILIK</div>
+                  <div className={styles.price}>{t("forSale")}</div>
                 </div>
               </div>
             </div>
@@ -90,7 +101,9 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
             <div className={styles.container}>
               <div className={styles.villaDetailContent}>
                 <div className={styles.left}>
-                  <div className={styles.villaDetailTitle}>Tesis Detayları</div>
+                  <div className={styles.villaDetailTitle}>
+                    {t("facilityDetails")}
+                  </div>
                   <div className={styles.villaDetailDesc}>
                     <div
                       dangerouslySetInnerHTML={{
@@ -112,20 +125,23 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                           onClick={() => setIsDescOpen(true)}
                           className={styles.first}
                         >
-                          Devamı...
+                          {capitalizeWords(t("continued"))}...
                         </span>
                         <span
                           onClick={() => setIsDescOpen(false)}
                           className={styles.last}
                         >
-                          Kapat...
+                          {capitalizeWords(t("close"))}...
                         </span>
                       </div>
                     </div>
                   </div>
-                  <DistanceRuler data={villaDetail?.data?.distanceRulers} />
+                  <DistanceRuler
+                    data={villaDetail?.data?.distanceRulers}
+                    t={t}
+                  />
                   {/* <PriceTable
-                                    data={villaDetail?.data[0]?.attributes?.price_tables?.data}
+                                    data={villaDetail?.data[0]?.attributes?.price_tables?.data} t={t}
                                 />
                                 <Calendar
                                     ready={ready}
@@ -157,7 +173,9 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                                       </li> */}
                   {villaDetail?.data[0]?.attributes?.video && (
                     <li className={styles.popupImage}>
-                      <div className={styles.title}>Tanıtım Videosu</div>
+                      <div className={styles.title}>
+                        {t("promotionalVideo")}
+                      </div>
                       <div className={styles.box}>
                         <LightGallery
                           plugins={[lgZoom, lgVideo]}
@@ -184,8 +202,8 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
           {/* <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
-                <Comments commentData={villaDetail?.data?.comments} />
-                <CommentForm />
+                <Comments commentData={villaDetail?.data?.comments} t={t} />
+                <CommentForm t={t} />
               </div>
             </div>
           </div> */}
@@ -194,11 +212,8 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
               <div className={styles.container}>
                 <div className={styles.box}>
                   <div className={styles.titleBox}>
-                    <div className={styles.title}>Yakınındaki Villalar</div>
-                    <div className={styles.subTitle}>
-                      Villalarımız arasından en seçkinlerini sizler için
-                      derledik.
-                    </div>
+                    <div className={styles.title}>{t("nearbyVillas")}</div>
+                    <div className={styles.subTitle}>{t("ourVillasText")}</div>
                   </div>
                   <ul>
                     {nearVillas.data.map((data, index) => (
@@ -224,10 +239,17 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
     return null; // UI render edilmesin
   }
 }
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, locale }) {
   const slug = params?.slug;
   const villaDetail = await getVilla(slug);
   const nearVillas = await getNearVillas(villaDetail?.data?.town?.id);
   const imgs = villaDetail?.data?.photos;
-  return { props: { villaDetail, nearVillas, imgs } };
+  return {
+    props: {
+      villaDetail,
+      nearVillas,
+      imgs,
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }

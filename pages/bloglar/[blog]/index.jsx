@@ -6,6 +6,7 @@ import { getBlog } from "@/services/blog";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const DynamicHtmlRenderer = dynamic(
   () => import("../../../components/blog/blogDetail/DynamicHtmlRenderer"),
@@ -87,8 +88,8 @@ export default function Blog({ blog }) {
   }
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, locale }) {
   const slug = query.blog;
   const blog = await getBlog({ slug: slug });
-  return { props: { blog } };
+  return { props: { blog, ...(await serverSideTranslations(locale, ["common"])) } };
 }

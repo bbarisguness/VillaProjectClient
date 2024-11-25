@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import VillaCard from "@/components/index/villa/card/villaCard";
 import Pagination from "@/components/pagination/Pagination";
 import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+
 export default function SalesList({ villasForSale, totalPage }) {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const activePage = parseInt(router?.query?.p) || 1;
   return (
@@ -20,9 +24,9 @@ export default function SalesList({ villasForSale, totalPage }) {
             <div className="box">
               <div className="top">
                 <div className="titleBox">
-                  <div className="title">Satılık Villalar</div>
+                  <div className="title">{t("villasForSale")}</div>
                   <div className="subTitle">
-                    Toplam {totalPage} adet tesis bulunmaktadır.
+                    {t("thereAreFacilities", { facilityCount: totalPage })}
                   </div>
                 </div>
               </div>
@@ -51,9 +55,15 @@ export default function SalesList({ villasForSale, totalPage }) {
     </>
   );
 }
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, locale }) {
   const page = query?.p ? query?.p - 1 : 0;
   const villasForSale = await getVillasForSale(page);
   const totalPage = villasForSale?.totalCount || 0;
-  return { props: { villasForSale, totalPage } };
+  return {
+    props: {
+      villasForSale,
+      totalPage,
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }

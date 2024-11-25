@@ -10,7 +10,7 @@ const VideoWithComment = dynamic(
   }
 );
 
-export default function Comments({ commentData }) {
+export default function Comments({ commentData, t }) {
   const [numberOfCommentsShown, setNumberOfCommentsShown] = useState(3);
   const [isShowingAllComments, setShowingAllComments] = useState(
     commentData?.length < 3 ? true : false
@@ -107,7 +107,7 @@ export default function Comments({ commentData }) {
                     <div className={styles.img}>
                       <img src="/images/person-3.png" alt="" />
                     </div>
-                    {item?.video != null ? <VideoWithComment /> : null}
+                    {item?.video != null ? <VideoWithComment t={t} /> : null}
                   </div>
                   <div className={styles.name}>
                     {item.name} {item.surName}
@@ -142,7 +142,7 @@ export default function Comments({ commentData }) {
                 className={styles.blueButtonArrowOpa}
               >
                 <span>
-                  {commentData?.length} değerlendirmenin tümünü göster
+                  {t("commentLinkText", { commentCount: commentData?.length })}
                 </span>
               </a>
             </div>

@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeHamburgerMenuState } from "@/store/globalState";
 import { getCategories } from "@/services/category";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function HamburgerMenu() {
+    const { t } = useTranslation("common");
     const dispatch = useDispatch()
     const isHamburgerMenuActive = useSelector(state => state.globalState.isHamburgerMenuActive)
     const [menu1, setMenu1] = useState(false)
@@ -94,7 +96,7 @@ export default function HamburgerMenu() {
                     <div className={styles.bottomSection}>
                         <div className={`${styles["linkBox"]}`}>
                             <Link onClick={closeMenu} href="/rezervasyon-takip">
-                                <span>REZERVASYON SORGULA</span>
+                                <span>{t("reservationInquiry")}</span>
                             </Link>
                         </div>
                         <div className={styles.container2}>

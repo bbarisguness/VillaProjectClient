@@ -11,8 +11,10 @@ import tr from "date-fns/locale/tr";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 export default function ReservationBox() {
+  const { t } = useTranslation("common");
   const [dateOfEntry, setDateOfEntry] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
   const datesOrSetters = {
@@ -25,7 +27,6 @@ export default function ReservationBox() {
   //const [activeMonth, setActiveMonth] = useState(date.getMonth());
   const router = useRouter();
   const query = router.query;
-  //const [datePlaceHolder, setdatePlaceHolder] = useState("Tarih Seçin");
   const [dateClickCount, setDateClickCount] = useState(0);
   const [dateClickCount1, setDateClickCount1] = useState(0);
   const inputRefNumberOfPeople = useRef();
@@ -38,7 +39,7 @@ export default function ReservationBox() {
   const [openDate, setOpenDate] = useState(false);
   const [dateRange, setDateRange] = useState([]);
   const [startDate, endDate] = dateRange;
-  const [calendarMinDate, setCalendarMinDate] = useState(new Date())
+  const [calendarMinDate, setCalendarMinDate] = useState(new Date());
 
   const [numberOfAdults1, setNumberOfAdults1] = useState(1);
   const [numberOfChild1, setNumberOfChild1] = useState(0);
@@ -72,10 +73,8 @@ export default function ReservationBox() {
       const date2 = new Date(changeDateFormat(releaseDate));
 
       if (date1.getTime() == date2.getTime()) {
-        //setdatePlaceHolder("Tarih Seçin");
         alert("Giriş çıkış günleri aynı olamaz");
       } else if (date1.getTime() > date2.getTime()) {
-        //setdatePlaceHolder("Tarih Seçin");
         alert("Çıkış tarihi giriş tarihinden önce olamaz");
       } else {
         //setdatePlaceHolder(dateOfEntry + " / " + releaseDate);
@@ -273,9 +272,9 @@ export default function ReservationBox() {
     if (numberOfAdults1 != 0 || numberOfChild1 != 0 || numberOfBabies1 != 0) {
       inputRefNumberOfPeople.current.value = `${
         numberOfAdults1 + numberOfChild1
-      } Misafir, ${numberOfBabies1} Bebek`;
+      } ${t("guest")}, ${numberOfBabies1} ${t("baby")}`;
     } else {
-      inputRefNumberOfPeople.current.value = "2 Misafir, 1 Bebek";
+      inputRefNumberOfPeople.current.value = `2 ${t("guest")}, 1 ${t("baby")}`;
     }
   });
 
@@ -287,7 +286,7 @@ export default function ReservationBox() {
       ref={ref}
       readOnly // readOnly burada input'u sadece takvim seçimi için yapar
       onFocus={(e) => e.target.blur()} // Odaklanma sırasında klavyeyi engeller
-      placeholder="Tarih Seçin"
+      placeholder={t("chooseDate")}
     />
   ));
 
@@ -320,13 +319,13 @@ export default function ReservationBox() {
   // }, [reservationStartDate, reservationEndDate])
 
   const handleOpenedCalendar = () => {
-    setDateRange([])
-  }
+    setDateRange([]);
+  };
 
-  const handleClosedCalener = () =>{
-    setCalendarMinDate(new Date())
+  const handleClosedCalener = () => {
+    setCalendarMinDate(new Date());
     //console.log(dateRange.includes(null) && dateRange.length == 2) // bir tarih seçilip kapandı ise true döner
-  }
+  };
 
   return (
     <div className={styles.reservationBox}>
@@ -335,7 +334,7 @@ export default function ReservationBox() {
         style={{ position: "relative" }}
         className={`${styles["colon"]} ${styles["location"]}`}
       >
-        <div className={styles.colonTitle}>Tesis Ara</div>
+        <div className={styles.colonTitle}>{t("searchForaFacility")}</div>
         <div className={styles.colonInput}>
           <i className={styles.searchIcon} />
           <input
@@ -343,7 +342,7 @@ export default function ReservationBox() {
             ref={inputRefVillaName}
             onChange={(e) => setFilterText(e.target.value)}
             type="text"
-            placeholder="Tesis Adı"
+            placeholder={t("facilityName")}
             style={{ cursor: "text" }}
           />
         </div>
@@ -371,7 +370,7 @@ export default function ReservationBox() {
             ) : (
               <li style={{ display: "block" }}>
                 <div className={styles.villaLink}>
-                  <div className={styles.title}>Sonuç yok</div>
+                  <div className={styles.title}>{t("noResults")}</div>
                 </div>
               </li>
             )}
@@ -383,7 +382,9 @@ export default function ReservationBox() {
         ref={menuRefCalendar}
         className={`${styles["colon"]} ${styles["date"]}`}
       >
-        <div className={styles.colonTitle}>Giriş / Çıkış</div>
+        <div className={styles.colonTitle}>
+          {t("entrance")} / {t("exit")}
+        </div>
         <div className={styles.colonInput}>
           <i className={styles.dateIcon}></i>
 
@@ -391,11 +392,13 @@ export default function ReservationBox() {
             selectsRange={true}
             startDate={startDate}
             endDate={endDate}
-            value={dateRange.length == 0 ? "Tarih Seçin" : dateRange}
+            value={dateRange.length == 0 ? t("chooseDate") : dateRange}
             onChange={(update) => {
-              if(update.includes(null) && update.length == 2){
-                console.log(update[0])
-                setCalendarMinDate(new Date(update[0]).setDate(new Date(update[0]).getDate() + 1))
+              if (update.includes(null) && update.length == 2) {
+                console.log(update[0]);
+                setCalendarMinDate(
+                  new Date(update[0]).setDate(new Date(update[0]).getDate() + 1)
+                );
               }
               setDateRange(update);
             }}
@@ -456,14 +459,14 @@ export default function ReservationBox() {
         ref={menuRefNumberOfPeople}
         className={`${styles["colon"]} ${styles["numberPeople"]}`}
       >
-        <div className={styles.colonTitle}>Kişi Sayısı</div>
+        <div className={styles.colonTitle}>{t("numberOfPeople")}</div>
         <div className={styles.colonInput}>
           <i className={styles.peopleIcon} />
           <input
             ref={inputRefNumberOfPeople}
             readOnly
             type="text"
-            placeholder="2 Misafir, 1 Bebek"
+            placeholder={`2 ${t("guest")}, 1 ${t("baby")}`}
           />
         </div>
         <div
@@ -474,8 +477,8 @@ export default function ReservationBox() {
           <ul>
             <li>
               <div className={styles.left}>
-                <div className={styles.title}>Yetişkinler</div>
-                <div className={styles.desc}>13 ve üzeri yaştakiler</div>
+                <div className={styles.title}>{t("adults")}</div>
+                <div className={styles.desc}>{t("andAboveAges", { age: 13 })}</div>
               </div>
               <div className={styles.right}>
                 <div
@@ -498,8 +501,8 @@ export default function ReservationBox() {
             </li>
             <li>
               <div className={styles.left}>
-                <div className={styles.title}>Çocuklar</div>
-                <div className={styles.desc}>4-12 arasındaki yaşlar</div>
+                <div className={styles.title}>{t("childs")}</div>
+                <div className={styles.desc}>{t("agesBetween", { agesBetweenValues: "4-12" })}</div>
               </div>
               <div className={styles.right}>
                 <div
@@ -522,8 +525,8 @@ export default function ReservationBox() {
             </li>
             <li>
               <div className={styles.left}>
-                <div className={styles.title}>Bebekler</div>
-                <div className={styles.desc}>0-3 arasındaki yaşlar</div>
+                <div className={styles.title}>{t("babies")}</div>
+                <div className={styles.desc}>{t("agesBetween", { agesBetweenValues: "0-3" })}</div>
               </div>
               <div className={styles.right}>
                 <div

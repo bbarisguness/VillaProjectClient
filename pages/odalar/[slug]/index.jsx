@@ -26,6 +26,9 @@ import CommentForm from "@/components/other/commentForm/CommentForm";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-video.css";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+import { capitalizeWords } from "@/utils/globalUtils";
 
 export default function List({
   roomDetail,
@@ -35,6 +38,7 @@ export default function List({
   roomSlug,
   villaName,
 }) {
+  const { t } = useTranslation("common");
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == roomDetail?.data?.priceType
   )?.text;
@@ -120,7 +124,7 @@ export default function List({
             onClick={() => scrolltoHash("makeReservation")}
             className={styles.makeAReservation}
           >
-            <span>Rezervasyon Yap</span>
+            <span>{t("makeReservation")}</span>
           </div>
         )}
         <section
@@ -144,21 +148,27 @@ export default function List({
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.person_icon}></i>
-                        <span>{roomDetail?.data?.person} Kişi</span>
+                        <span>
+                          {roomDetail?.data?.person} {t("people")}
+                        </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.room_icon}></i>
-                        <span>{roomDetail?.data?.rooms} Oda</span>
+                        <span>
+                          {roomDetail?.data?.rooms} {t("room")}
+                        </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.bath_icon}></i>
-                        <span>{roomDetail?.data?.bath} Banyo</span>
+                        <span>
+                          {roomDetail?.data?.bath} {t("bath")}
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className={styles.right}>
-                  <div className={styles.priceType}>Gecelik En Düşük</div>
+                  <div className={styles.priceType}>{t("lowestNightly")}</div>
                   <div className={styles.price}>
                     {getPriceRange(
                       roomDetail?.data?.priceTables,
@@ -182,7 +192,9 @@ export default function List({
             <div className={styles.container}>
               <div className={styles.villaDetailContent}>
                 <div className={styles.left}>
-                  <div className={styles.villaDetailTitle}>Tesis Detayları</div>
+                  <div className={styles.villaDetailTitle}>
+                    {t("facilityDetails")}
+                  </div>
                   <div className={styles.villaDetailDesc}>
                     <div
                       dangerouslySetInnerHTML={{
@@ -204,24 +216,29 @@ export default function List({
                           onClick={() => setIsDescOpen(true)}
                           className={styles.first}
                         >
-                          Devamı...
+                          {capitalizeWords(t("continued"))}...
                         </span>
                         <span
                           onClick={() => setIsDescOpen(false)}
                           className={styles.last}
                         >
-                          Kapat...
+                          {capitalizeWords(t("close"))}...
                         </span>
                       </div>
                     </div>
                   </div>
-                  <DistanceRuler data={roomDetail?.data?.distanceRulers} />
+                  <DistanceRuler
+                    data={roomDetail?.data?.distanceRulers}
+                    t={t}
+                  />
                   <PriceTable
+                    t={t}
                     priceTypeNumber={roomDetail?.data?.priceType || 1}
                     data={roomDetail?.data?.priceTables}
                     currencies={roomDetail?.data?.currencies}
                   />
                   <Calendar
+                    t={t}
                     ready={ready}
                     dates={roomDetail?.data?.reservationCalendars || []}
                     calendarPrices={roomDetail?.data?.prices || []}
@@ -233,6 +250,7 @@ export default function List({
                     <div className={styles.right}>
                       <div className={styles.general}>
                         <Reservation
+                          t={t}
                           priceTypeText={currentPriceTypeText}
                           roomId={roomDetail?.data?.id}
                           roomSlug={roomSlug}
@@ -272,7 +290,9 @@ export default function List({
                                     </li> */}
                     {roomDetail?.data[0]?.attributes?.video && (
                       <li className={styles.popupImage}>
-                        <div className={styles.title}>Tanıtım Videosu</div>
+                        <div className={styles.title}>
+                          {t("promotionalVideo")}
+                        </div>
                         <div className={styles.box}>
                           <LightGallery
                             plugins={[lgZoom, lgVideo]}
@@ -301,7 +321,7 @@ export default function List({
             <div className={styles.container}>
               <div className={styles.customerComments}>
                 {/* <Comments /> */}
-                <CommentForm />
+                <CommentForm t={t} />
               </div>
             </div>
           </div>
@@ -341,7 +361,7 @@ export default function List({
   }
 }
 
-export async function getServerSideProps({ params, query }) {
+export async function getServerSideProps({ params, query, locale }) {
   const slug = params?.slug;
   const totalPage = 1;
   const roomDetail = await getRoom(slug);
@@ -353,6 +373,7 @@ export async function getServerSideProps({ params, query }) {
       roomDetail,
       imgs,
       totalPage,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }

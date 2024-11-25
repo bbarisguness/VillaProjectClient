@@ -3,12 +3,15 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import { getBlogs } from "@/services/blog";
 import Seo from "@/components/seo";
+import { useTranslation } from "react-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const BlogCard = dynamic(() => import("../../components/blog/blogCard"), {
   ssr: false, // SSR olmadan yüklenmesi yeterli
 });
 
 export default function Blog({ blogs }) {
+  const { t } = useTranslation("common");
   return (
     <>
       <Seo pageTitle={"Labirent Fethiye | Bloglar"} pageDesc={"Bloglar"} />
@@ -20,9 +23,9 @@ export default function Blog({ blogs }) {
             <div className={styles.box}>
               <div className={styles.top}>
                 <div className={styles.titleBox}>
-                  <div className={styles.title}>Tüm Bloglar</div>
+                  <div className={styles.title}>{t("allBlogs")}</div>
                   <div className={styles.subTitle}>
-                    Toplam {blogs?.data?.length} adet blog listelendi.
+                    {t("blogsListed", { blogCount: blogs?.data?.length })}
                   </div>
                 </div>
               </div>
@@ -43,7 +46,9 @@ export default function Blog({ blogs }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale }) {
   const blogs = await getBlogs();
-  return { props: { blogs } };
+  return {
+    props: { blogs, ...(await serverSideTranslations(locale, ["common"])) },
+  };
 }

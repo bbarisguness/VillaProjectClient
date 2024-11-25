@@ -1,9 +1,10 @@
 import styles from "./detailDesc.module.css";
+import { capitalizeWords } from "@/utils/globalUtils";
 
-export default function DetailDesc({ isDescOpen, setIsDescOpen, villaDetail }) {
+export default function DetailDesc({ isDescOpen, setIsDescOpen, villaDetail, t }) {
   return (
     <>
-      <div className={styles.villaDetailTitle}>Tesis Detayları</div>
+      <div className={styles.villaDetailTitle}>{t("facilityDetails")}</div>
       <div className={styles.villaDetailDesc}>
         <div
           dangerouslySetInnerHTML={{
@@ -17,10 +18,10 @@ export default function DetailDesc({ isDescOpen, setIsDescOpen, villaDetail }) {
         >
           <div className={styles.allButton}>
             <span onClick={() => setIsDescOpen(true)} className={styles.first}>
-              Devamı...
+              {capitalizeWords(t("continued"))}...
             </span>
             <span onClick={() => setIsDescOpen(false)} className={styles.last}>
-              Kapat...
+              {capitalizeWords(t("close"))}...
             </span>
           </div>
         </div>

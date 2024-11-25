@@ -23,6 +23,9 @@ import Pagination from "@/components/pagination/Pagination";
 // import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 import Comments from "@/components/other/comment/Comments";
 import CommentForm from "@/components/other/commentForm/CommentForm";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { capitalizeWords } from "@/utils/globalUtils";
+import { useTranslation } from "react-i18next";
 
 export default function List({
   villa,
@@ -33,6 +36,7 @@ export default function List({
   villaId,
   villaName,
 }) {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(
@@ -132,7 +136,7 @@ export default function List({
             onClick={() => scrolltoHash("makeReservation")}
             className={styles.makeAReservation}
           >
-            <span>Rezervasyon Yap</span>
+            <span>{t("makeReservation")}</span>
           </div>
         )}
         <section
@@ -156,15 +160,21 @@ export default function List({
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.person_icon}></i>
-                        <span>{villaDetail?.data?.person} Kişi</span>
+                        <span>
+                          {villaDetail?.data?.person} {t("people")}
+                        </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.room_icon}></i>
-                        <span>{villaDetail?.data?.room} Oda</span>
+                        <span>
+                          {villaDetail?.data?.room} {t("room")}
+                        </span>
                       </div>
                       <div className={styles.colon}>
                         <i className={styles.bath_icon}></i>
-                        <span>{villaDetail?.data?.bath} Banyo</span>
+                        <span>
+                          {villaDetail?.data?.bath} {t("bath")}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -199,7 +209,9 @@ export default function List({
             <div className={styles.container}>
               <div className={styles.villaDetailContent}>
                 <div className={styles.left}>
-                  <div className={styles.villaDetailTitle}>Tesis Detayları</div>
+                  <div className={styles.villaDetailTitle}>
+                    {t("facilityDetails")}
+                  </div>
                   <div className={styles.villaDetailDesc}>
                     <div
                       dangerouslySetInnerHTML={{
@@ -221,26 +233,29 @@ export default function List({
                           onClick={() => setIsDescOpen(true)}
                           className={styles.first}
                         >
-                          Devamı...
+                          {capitalizeWords(t("continued"))}...
                         </span>
                         <span
                           onClick={() => setIsDescOpen(false)}
                           className={styles.last}
                         >
-                          Kapat...
+                          {capitalizeWords(t("close"))}...
                         </span>
                       </div>
                     </div>
                   </div>
-                  <DistanceRuler data={villaDetail?.data?.distanceRulers} />
+                  <DistanceRuler
+                    data={villaDetail?.data?.distanceRulers}
+                    t={t}
+                  />
                   {villaDetail?.data?.rooms?.length > 0 && (
                     <div className={styles.apartments}>
                       <div className={styles.container}>
                         <div className={styles.box}>
                           <div className={styles.titleBox}>
-                            <div className={styles.title}>Odalar</div>
+                            <div className={styles.title}>{t("rooms")}</div>
                             <div className={styles.subTitle}>
-                              Apartımızın odaları
+                              {t("ourApartmentRooms")}
                             </div>
                           </div>
                           <ul>
@@ -330,8 +345,8 @@ export default function List({
           <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
-                <Comments commentData={villaDetail?.data?.comments} />
-                <CommentForm />
+                <Comments commentData={villaDetail?.data?.comments} t={t} />
+                <CommentForm t={t} />
               </div>
             </div>
           </div>
@@ -346,7 +361,7 @@ export default function List({
   }
 }
 
-export async function getServerSideProps({ params, query }) {
+export async function getServerSideProps({ params, query, locale }) {
   const slug = params?.slug;
   const totalPage = 1;
   const villaDetail = await getHotel(slug);
@@ -358,6 +373,7 @@ export async function getServerSideProps({ params, query }) {
       villaDetail,
       imgs,
       totalPage,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }

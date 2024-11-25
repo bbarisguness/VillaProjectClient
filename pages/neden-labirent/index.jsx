@@ -2,8 +2,11 @@ import styles from "./page.module.css";
 import TreeStep from "@/components/index/treestep/treestep";
 import BreadCrumb from "@/components/breadCrumb/breadCrumb";
 import Seo from "@/components/seo";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
 
 export default function WhyLabirent() {
+  const { t } = useTranslation("common");
   return (
     <>
       <Seo
@@ -14,7 +17,7 @@ export default function WhyLabirent() {
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>
-            <h1 className={styles.title}>Neden Labirent</h1>
+            <h1 className={styles.title}>{t("whyLabyrinth")}</h1>
           </div>
         </div>
         <div className={styles.textBox}>
@@ -133,4 +136,8 @@ export default function WhyLabirent() {
       </section>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }

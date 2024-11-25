@@ -5,14 +5,14 @@ import "react-multi-carousel/lib/styles.css";
 import TestimonialCard from "./card/testimonialCard";
 const qs = require('qs');
 
-export default function Testimonial({ testimonials }) {
+export default function Testimonial({ testimonials, t }) {
     return (
         <div className={styles.testimonials}>
             <div className={styles.container}>
                 <div className={styles.box}>
                     <div className={styles.titleBox}>
-                        <div className={styles.title}>Görüşlerimiz</div>
-                        <div className={styles.subTitle}>Lorem ipsum dolor sit amet, consectetur adipisicing elit</div>
+                        <div className={styles.title}>{t("ourViews")}</div>
+                        <div className={styles.subTitle}>{t("ourViewsSubTitle")}</div>
                     </div>
                 </div>
                 <div className={styles.top}>

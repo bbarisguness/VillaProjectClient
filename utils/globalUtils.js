@@ -49,3 +49,10 @@ export function replaceLastDotWithComma(input) {
     
     return input.slice(0, lastDotIndex) + ',' + input.slice(lastDotIndex + 1);
 }
+
+export function capitalizeWords(text) {
+    return text
+      .split(' ') // Metni kelimelere ayır
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Her kelimenin ilk harfini büyük yap
+      .join(' '); // Kelimeleri birleştir
+  }

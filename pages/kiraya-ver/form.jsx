@@ -5,8 +5,10 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from "@emailjs/browser";
+import { useTranslation } from "react-i18next";
 
 export default function Form() {
+  const { t } = useTranslation("common");
   const [isActiveSuccessMessage, setActiveSuccessMessage] = useState(false);
   const [isActiveErrorMessage, setActiveErrorMessage] = useState(false);
 
@@ -56,11 +58,11 @@ export default function Form() {
           message: "",
         }}
         validationSchema={Yup.object({
-          phone: Yup.string().required("Bu alan boş bırakılamaz"),
-          nameAndSurname: Yup.string().required("Bu alan boş bırakılamaz"),
-          facilityName: Yup.string().required("Bu alan boş bırakılamaz"),
-          facilityAddress: Yup.string().required("Bu alan boş bırakılamaz"),
-          message: Yup.string().required("Bu alan boş bırakılamaz"),
+          phone: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
+          nameAndSurname: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
+          facilityName: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
+          facilityAddress: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
+          message: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
         })}
         onSubmit={(values) => {
           if (captchaIsDone) {
@@ -114,7 +116,7 @@ export default function Form() {
             <ul>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Ad Soyad</div>
+                  <div className={styles.inputName}>{t("name")} {t("surname")}</div>
                   <input
                     name="nameAndSurname"
                     value={values.nameAndSurname}
@@ -132,7 +134,7 @@ export default function Form() {
               </li>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Telefon</div>
+                  <div className={styles.inputName}>{t("phone")}</div>
                   <input
                     name="phone"
                     value={values.phone}
@@ -151,7 +153,7 @@ export default function Form() {
               </li>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Tesis İsmi</div>
+                  <div className={styles.inputName}>{t("facilityName")}</div>
                   <input
                     name="facilityName"
                     value={values.facilityName}
@@ -168,7 +170,7 @@ export default function Form() {
               </li>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Tesis Adresi</div>
+                  <div className={styles.inputName}>{t("facilityAddres")}</div>
                   <input
                     name="facilityAddress"
                     value={values.facilityAddress}
@@ -185,7 +187,7 @@ export default function Form() {
               </li>
               <li style={{ width: "100%" }}>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Mesajınız</div>
+                  <div className={styles.inputName}>{t("yourMessage")}</div>
                   {/* <input
                           name="message"
                           value={values.message}
@@ -215,7 +217,7 @@ export default function Form() {
             {!isMailSending && (
               <div className={styles.linkBox}>
                 <button type="submit" className={styles.blueButton2}>
-                  <span>Gönder</span>
+                  <span>{t("send")}</span>
                 </button>
               </div>
             )}

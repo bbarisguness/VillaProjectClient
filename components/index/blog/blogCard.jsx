@@ -1,7 +1,7 @@
 import styles from "./blogCard.module.css";
 import Link from "next/link";
 
-export default function BlogCard({ data }) {
+export default function BlogCard({ data, t }) {
   // const generateBlogLink = (title) => {
   //     let url = title
   //         .toLowerCase()
@@ -88,13 +88,13 @@ export default function BlogCard({ data }) {
               backgroundImage: `url(https://villaapi.testgrande.com/Uploads/WebPhotos/k_${data?.photos[0]?.image})`,
             }}
           ></div>
-          <div className={styles.cardFeatures}>Seyahat Uzmanı</div>
+          <div className={styles.cardFeatures}>{t("travelExpert")}</div>
         </div>
         <div className={styles.textBox}>
           <div className={styles.features}>
             <div className={styles.colon}>
               <i className={styles.person_icon}></i>
-              <span>Seyahat Uzmanı</span>
+              <span>{t("travelExpert")}</span>
             </div>
             <div className={styles.colon}>
               <i className={styles.date_icon}></i>
@@ -105,7 +105,7 @@ export default function BlogCard({ data }) {
           <div className={styles.desc}>
             {data?.webPageDetails[0]?.descriptionShort}
           </div>
-          <div className={styles.detailButton}>DEVAMI...</div>
+          <div className={styles.detailButton}>{t("continued")}...</div>
         </div>
       </Link>
     </li>

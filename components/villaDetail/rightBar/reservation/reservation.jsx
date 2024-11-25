@@ -19,6 +19,7 @@ export default function Reservation({
   villaFirstPhoto,
   region,
   priceTypeText,
+  t
 }) {
   const router = useRouter();
 
@@ -54,9 +55,9 @@ export default function Reservation({
     if (numberOfAdults1 != 0 || numberOfChild1 != 0 || numberOfBabies1 != 0) {
       inputRefNumberOfPeople.current.value = `${
         numberOfAdults1 + numberOfChild1
-      } Misafir, ${numberOfBabies1} Bebek`;
+      } ${t("guest")}, ${numberOfBabies1} ${t("baby")}`;
     } else {
-      inputRefNumberOfPeople.current.value = "2 Misafir, 1 Bebek";
+      inputRefNumberOfPeople.current.value = `2 ${t("guest")}, 1 ${t("baby")}`;
     }
 
     return () => {
@@ -94,7 +95,7 @@ export default function Reservation({
       ref={ref}
       readOnly // readOnly burada input'u sadece takvim seçimi için yapar
       onFocus={(e) => e.target.blur()} // Odaklanma sırasında klavyeyi engeller
-      placeholder="Tarih Seçin"
+      placeholder={t("chooseDate")}
     />
   ));
 
@@ -132,10 +133,10 @@ export default function Reservation({
         );
         router.push("/rezervasyon");
       } else {
-        alert("Seçtiğiniz Tarihler Tesisimiz Müsait Değildir");
+        alert(t("facilityNotAvailableMessage"));
       }
     } else {
-      console.log("Tarih seçin");
+      console.log(t("chooseDate"));
     }
   }
 
@@ -151,16 +152,13 @@ export default function Reservation({
               height={38}
               loading="lazy"
             />
-            <span className={styles.modalTitle}>Uyarı!</span>
-            <p>
-              Seçtiğiniz tarihler arasında villa müsait değildir. Lütfen
-              villanın müsaitlik takvimini kontrol ediniz.
-            </p>
+            <span className={styles.modalTitle}>{t("warning")}!</span>
+            <p>{t("facilityNotAvailablePleaseCheckCalender")}</p>
             <div
               onClick={() => setAvailible(false)}
               className={styles.modalButton}
             >
-              Anladım
+              {t("IUnderstand")}
             </div>
           </div>
         </div>
@@ -179,7 +177,7 @@ export default function Reservation({
             </div>
           </div>
           <div className={styles.textBottom}>
-            <span>Başlayan Fiyatlarla(Gecelik)</span>
+            <span>{t("pricesStartingFrom")}({t("nighty")})</span>
           </div>
         </div>
         <div
@@ -187,7 +185,7 @@ export default function Reservation({
           style={{ position: "relative" }}
           className={styles.colon}
         >
-          <div className={styles.colonTitle}>Giriş / Çıkış</div>
+          <div className={styles.colonTitle}>{t("entrance")} / {t("exit")}</div>
           <div
             onClick={() => {
               datepickerRef.current.input.blur();
@@ -202,7 +200,7 @@ export default function Reservation({
                 startDate={startDate}
                 endDate={endDate}
                 monthsShown={1}
-                value={dateRange.length == 0 ? "Tarih Seçin" : dateRange}
+                value={dateRange.length == 0 ? t("chooseDate") : dateRange}
                 onChange={(update) => {
                   setMinCalendarDate(
                     new Date(update[0]).setDate(
@@ -228,7 +226,7 @@ export default function Reservation({
           </div>
         </div>
         <div ref={menuRefNumberOfPeople} className={styles.colon}>
-          <div className={styles.colonTitle}>Kişi Sayısı</div>
+          <div className={styles.colonTitle}>{t("numberOfPeople")}</div>
           <div
             onClick={() => setNumberPeople(!isNumberPeopleMenuOpen)}
             className={styles.colonInput}
@@ -238,7 +236,7 @@ export default function Reservation({
               style={{ cursor: "pointer" }}
               ref={inputRefNumberOfPeople}
               type="text"
-              placeholder="0 Misafir, 0 Bebek"
+              placeholder={`0 ${t("guest")}, 0 ${t("baby")}`}
               readOnly
             ></input>
           </div>
@@ -250,8 +248,8 @@ export default function Reservation({
             <ul>
               <li>
                 <div className={styles.leftPeople}>
-                  <div className={styles.title}>Yetişkinler</div>
-                  <div className={styles.desc}>13 ve üzeri yaştakiler</div>
+                  <div className={styles.title}>{t("adults")}</div>
+                  <div className={styles.desc}>{t("andAboveAges", { age: 13 })}</div>
                 </div>
                 <div className={styles.rightPeople}>
                   <div
@@ -274,8 +272,8 @@ export default function Reservation({
               </li>
               <li>
                 <div className={styles.leftPeople}>
-                  <div className={styles.title}>Çocuklar</div>
-                  <div className={styles.desc}>13 ve üzeri yaştakiler</div>
+                  <div className={styles.title}>{t("childs")}</div>
+                  <div className={styles.desc}>{t("andAboveAges", { age: 13 })}</div>
                 </div>
                 <div className={styles.rightPeople}>
                   <div
@@ -298,8 +296,8 @@ export default function Reservation({
               </li>
               <li>
                 <div className={styles.leftPeople}>
-                  <div className={styles.title}>Bebekler</div>
-                  <div className={styles.desc}>13 ve üzeri yaştakiler</div>
+                  <div className={styles.title}>{t("babies")}</div>
+                  <div className={styles.desc}>{t("andAboveAges", { age: 13 })}</div>
                 </div>
                 <div className={styles.rightPeople}>
                   <div
@@ -325,7 +323,7 @@ export default function Reservation({
         </div>
         <div className={styles.linkBox}>
           <button className={styles.blueButtonArrow} onClick={handleClick}>
-            <span>Villa Müsaitliği Sorgula</span>
+            <span>{t("checkVillaAvailability")}</span>
           </button>
         </div>
       </div>

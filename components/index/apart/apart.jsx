@@ -2,17 +2,17 @@
 import styles from "./apart.module.css";
 import Link from "next/link";
 import VillaCard from "../villa/card/villaCard";
+import { useTranslation } from "react-i18next";
 
 export default function Apart({ aparts }) {
+  const { t } = useTranslation("common");
   return (
     <div className={styles.apartments}>
       <div className={styles.container}>
         <div className={styles.box}>
           <div className={styles.titleBox}>
-            <div className={styles.title}>Apartlarımız</div>
-            <div className={styles.subTitle}>
-              Apartlarımız arasından en seçkinlerini sizler için derledik.
-            </div>
+            <div className={styles.title}>{t("ourApartments")}</div>
+            <div className={styles.subTitle}>{t("ourApartmentsText")}</div>
           </div>
           <ul>
             {/* {
@@ -33,7 +33,7 @@ export default function Apart({ aparts }) {
           </ul>
           <div className={styles.linkBox}>
             <Link className={styles.greyButton} href="/apartlar">
-              <span>Tümü</span>
+              <span>{t("all")}</span>
             </Link>
           </div>
         </div>

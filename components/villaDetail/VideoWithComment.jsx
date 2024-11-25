@@ -7,12 +7,12 @@ import 'lightgallery/css/lightgallery.css'
 import 'lightgallery/css/lg-zoom.css'
 import 'lightgallery/css/lg-video.css'
 
-const VideoWithComment = memo(function VideoWithComment() {
+const VideoWithComment = memo(function VideoWithComment({ t }) {
   return (
     <div className={styles.videoButton}>
       <LightGallery plugins={[lgZoom, lgVideo]}>
         <a data-src="https://www.youtube.com/embed/cFYXWYyYcB0">
-          Videolu Yorum
+          {t("videoComment")}
         </a>
       </LightGallery>
     </div>

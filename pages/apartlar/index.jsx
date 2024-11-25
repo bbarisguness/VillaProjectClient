@@ -4,8 +4,12 @@ import Seo from "@/components/seo";
 import { getHotels } from "@/services/villa";
 import Pagination from "@/components/pagination/Pagination";
 import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+import { capitalizeWords } from "@/utils/globalUtils";
 
 export default function List({ hotels }) {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const activePage = parseInt(router?.query?.p) || 1;
 
@@ -21,10 +25,10 @@ export default function List({ hotels }) {
             <div className="box">
               <div className="top">
                 <div className="titleBox">
-                  <div className="title">Kiralık Apartlar</div>
-                  <div className="subTitle">
-                    Toplam {hotels?.totalCount} adet tesis bulunmaktadır.
+                  <div className="title">
+                    {capitalizeWords(t("headerApartmentsForRent"))}
                   </div>
+                  <div className="subTitle">{t("thereAreFacilities", { facilityCount: hotels?.totalCount})}</div>
                 </div>
               </div>
               <div className="bottom">
@@ -54,7 +58,9 @@ export default function List({ hotels }) {
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, locale }) {
   const hotels = await getHotels(query?.p ? query?.p - 1 : 0);
-  return { props: { hotels } };
+  return {
+    props: { hotels, ...(await serverSideTranslations(locale, ["common"])) },
+  };
 }

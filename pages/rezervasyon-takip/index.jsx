@@ -9,8 +9,11 @@ import { timeStringToDate } from "@/utils/date";
 import { scrolltoHash } from "@/utils/globalUtils";
 import moment from "moment";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function RezervasyonTakip() {
+  const { t } = useTranslation("common");
   const [step, setStep] = useState(0);
   const [villaCoverPhoto, setVillaCoverPhoto] = useState("");
   const [reservationDetail, setReservationDetail] = useState({
@@ -74,12 +77,17 @@ export default function RezervasyonTakip() {
 
   return (
     <>
-      <Seo pageTitle={"Labirent Fethiye | Rezervasyon Takip"} pageDesc={"Labirent Feyhiye Rezervasyon Takip"} />
+      <Seo
+        pageTitle={"Labirent Fethiye | Rezervasyon Takip"}
+        pageDesc={"Labirent Feyhiye Rezervasyon Takip"}
+      />
       <BreadCrumb link={"rezervasyon-takip"} />
       {step === 0 ? (
         <div className={styles.container}>
           <div className={styles.content}>
-            <h1>Rezervasyon Takip Bölümü - Müşteri Girişi</h1>
+            <h1>
+              {t("reservationTrackingSection")} - {t("customerLogin")}
+            </h1>
             <div id="reservationNoArea" className={styles.formContent}>
               <Formik
                 initialValues={{
@@ -109,7 +117,9 @@ export default function RezervasyonTakip() {
                     <ul>
                       <li>
                         <div className={styles.inputBox}>
-                          <div className={styles.inputName}>Rezervasyon No</div>
+                          <div className={styles.inputName}>
+                            {t("reservationNumber")}
+                          </div>
                           <input
                             autoFocus
                             name="reservationNumber"
@@ -131,7 +141,7 @@ export default function RezervasyonTakip() {
                     </ul>
                     <div className={styles.linkBox}>
                       <button type="submit" className={styles.blueButton2}>
-                        <span>Giriş Yap</span>
+                        <span>{t("login")}</span>
                       </button>
                     </div>
                   </form>
@@ -154,22 +164,22 @@ export default function RezervasyonTakip() {
                   className={styles.blueButton2}
                   href={`/villalar/${villaDetail?.url}`}
                 >
-                  <span>Tesis Detay</span>
+                  <span>{t("facilityDetails")}</span>
                 </Link>
               </div>
               <div className={styles.textBox}>
                 <div className={styles.title}>
-                  {reservationDetail?.reservationNumber} Numaralı Rezervasyon
-                  Bilgileri
+                  {reservationDetail?.reservationNumber}{" "}
+                  {t("numberedReservationInformation")}
                 </div>
                 <div className={styles.desc}>
-                  Giriş Tarihi : {reservationDetail?.checkIn}
+                  {t("entryDate")} : {reservationDetail?.checkIn}
                 </div>
                 <div className={styles.desc}>
-                  Çıkış Tarihi : {reservationDetail?.checkOut}
+                  {t("releaseDate")} : {reservationDetail?.checkOut}
                 </div>
                 <div className={styles.desc}>
-                  Gece Sayısı :{" "}
+                  {t("nightLength")} :{" "}
                   {moment
                     .duration(
                       moment(reservationDetail?.checkOut, "YYYY-MM-DD").diff(
@@ -179,18 +189,20 @@ export default function RezervasyonTakip() {
                     .asDays()}
                 </div>
                 <div className={styles.desc}>
-                  Tesis İsmi : {villaDetail?.name}
+                  {t("facilityName")} : {villaDetail?.name}
                 </div>
                 <div className={styles.desc}>
-                  Tesis Bölgesi : {villaDetail?.region}
+                  {t("facilityArea")} : {villaDetail?.region}
                 </div>
                 <div className={styles.desc}>
-                  Rezervasyon Sahibi : {ownerInfo?.name} {ownerInfo?.surname}
+                  {t("bookingOwner")} : {ownerInfo?.name} {ownerInfo?.surname}
                 </div>
                 <div className={styles.desc}>
-                  Telefon Numarası : {ownerInfo?.phone}
+                  {t("phoneNumber")} : {ownerInfo?.phone}
                 </div>
-                <div className={styles.desc}>Email : {ownerInfo?.email}</div>
+                <div className={styles.desc}>
+                  {t("eMail")} : {ownerInfo?.email}
+                </div>
               </div>
             </div>
           </div>
@@ -198,4 +210,8 @@ export default function RezervasyonTakip() {
       )}
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }

@@ -27,6 +27,20 @@
     text-align: center;
 }
 
+.titleBox .capitalizeFfirst {
+    width: 100%;
+    color: #02044A;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 55px;
+    text-align: center;
+    text-transform: lowercase;
+}
+
+.titleBox .capitalizeFfirst::first-letter {
+    text-transform: uppercase;
+}
+
 .titleBox .subTitle {
     width: 100%;
     margin: 10px 0 0 0;

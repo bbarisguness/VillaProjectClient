@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Seo from "@/components/seo";
 import styles from "./page.module.css";
 import { getFrequentlyAskedQuestions } from "@/services/webpage";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function SSS({ sss }) {
   const fieldRef = useRef();
@@ -84,7 +85,9 @@ export default function SSS({ sss }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale }) {
   const sss = await getFrequentlyAskedQuestions();
-  return { props: { sss } };
+  return {
+    props: { sss, ...(await serverSideTranslations(locale, ["common"])) },
+  };
 }

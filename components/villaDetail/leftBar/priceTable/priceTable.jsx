@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getPriceTypeDetail } from "@/data/data";
 import { replaceLastDotWithComma } from "@/utils/globalUtils";
 
-export default function PriceTable({ data, priceTypeNumber, currencies }) {
+export default function PriceTable({ data, priceTypeNumber, currencies, t }) {
   const [priceTableActiveIndex, setPriceTableActiveIndex] =
     useState(priceTypeNumber);
 
@@ -60,7 +60,7 @@ export default function PriceTable({ data, priceTypeNumber, currencies }) {
   return (
     <div className={styles.priceTable}>
       <div className={styles.top}>
-        <div className={styles.title}>Fiyat Tablosu</div>
+        <div className={styles.title}>{t("priceTable")}</div>
         <div className={styles.exchangeRateMenu}>
           <ul>
             <li
@@ -146,9 +146,7 @@ export default function PriceTable({ data, priceTypeNumber, currencies }) {
             </li>
           ))}
         </ul>
-        <p className={styles.notice}>
-          Özel günlerde (Bayram, Yılbaşı, vb..) fiyat değişiklik göstermektedir.
-        </p>
+        <p className={styles.notice}>{t("pricesMayVaryOnSpecialDays")}</p>
       </div>
     </div>
   );

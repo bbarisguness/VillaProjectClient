@@ -5,6 +5,7 @@ import TreeStep from "@/components/index/treestep/treestep";
 import { getRegion } from "@/services/region";
 import Seo from "@/components/seo";
 import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 export default function Bolge({ region }) {
   const router = useRouter();
   const renderHtmlContent = () => {
@@ -36,7 +37,7 @@ export default function Bolge({ region }) {
           <div className={styles.titleBox}>
             <div className={styles.container}>
               <h1 className={styles.title}>
-                {region?.data?.webPageDetails[0]?.title}{" "} Kiralık Villa
+                {region?.data?.webPageDetails[0]?.title} Kiralık Villa
               </h1>
             </div>
           </div>
@@ -60,8 +61,10 @@ export default function Bolge({ region }) {
     }, []);
   }
 }
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, locale }) {
   const slug = query?.slug;
   const region = await getRegion({ slug: slug });
-  return { props: { region } };
+  return {
+    props: { region, ...(await serverSideTranslations(locale, ["common"])) },
+  };
 }

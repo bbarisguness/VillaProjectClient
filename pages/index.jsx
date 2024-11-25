@@ -7,7 +7,6 @@ import Slider from "@/components/index/slider/slider";
 // import Blog from "@/components/index/blog/blog";
 // import VillaRent from "@/components/index/villaRentInfo/villaRentInfo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 
 //const Slider = lazy(() => import('@/components/index/slider/slider'));

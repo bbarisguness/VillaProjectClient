@@ -8,28 +8,32 @@ import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
-
-const ContactFormSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, "Lütfen daha uzun bir isim girin")
-    .max(30, "Lütfen daha kısa bir isim girin")
-    .required("Lütfen isim girin"),
-  surname: Yup.string()
-    .min(3, "Lütfen daha uzun bir soyisim girin")
-    .max(30, "Lütfen daha kısa bir soyisim girin")
-    .required("Lütfen soyisim girin"),
-  phone: Yup.string()
-    .min(15, "Lütfen geçerli bir telefon numarası girin")
-    .max(15, "Lütfen geçerli bir telefon numarası girin")
-    .required("Lütfen telefon numarası girin"),
-  message: Yup.string().required("Lütfen mesajınızı girin"),
-});
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+import { capitalizeWords } from "@/utils/globalUtils";
 
 export default function Iletisim() {
+  const { t } = useTranslation("common");
   const [captchaIsDone, setCaptchaIsDone] = useState(false);
   const [isMailSended, setMailSended] = useState(false);
   const [isMailSending, setMailSending] = useState(false);
   const [isMailSendError, setMailSendError] = useState(false);
+
+  const ContactFormSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, t("pleaseEnterALongerName"))
+      .max(30, t("pleaseEnterAShorterName"))
+      .required(t("pleaseEnterName")),
+    surname: Yup.string()
+      .min(3, t("pleaseEnterALongerSurname"))
+      .max(30, t("pleaseEnterAShorterSurname"))
+      .required(t("plaseEnterSurname")),
+    phone: Yup.string()
+      .min(15, t("pleaseEnterAValidPhoneNumber"))
+      .max(15, t("pleaseEnterAValidPhoneNumber"))
+      .required(t("pleaseEnterPhoneNumber")),
+    message: Yup.string().required(t("pleaseEnterYourMessage")),
+  });
 
   function onChange() {
     setCaptchaIsDone(true);
@@ -71,7 +75,7 @@ export default function Iletisim() {
       <section className={`${styles["contentDetail"]} ${styles["contact"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>
-            <h1 className={styles.title}>İletişim</h1>
+            <h1 className={styles.title}>{capitalizeWords(t("headerContact"))}</h1>
           </div>
         </div>
         <div className={styles.infoBox}>
@@ -81,7 +85,7 @@ export default function Iletisim() {
                 <div className={styles.imageBox}>
                   <i className={styles.address}></i>
                 </div>
-                <div className={styles.nameBox}>Adres</div>
+                <div className={styles.nameBox}>{t("address")}</div>
                 <div className={styles.descBox}>
                   Ölüdeniz, Atatürk Cd. No:83, 48300 Fethiye/Muğla
                 </div>
@@ -90,7 +94,7 @@ export default function Iletisim() {
                     target="_blank"
                     href="https://www.google.com/maps?ll=36.575887,29.150176&z=19&t=m&hl=tr&gl=TR&mapclient=embed&cid=1633145916469788623"
                   >
-                    Haritada Görüntüle
+                    {t("viewOnMap")}
                   </Link>
                 </div>
               </li>
@@ -98,7 +102,7 @@ export default function Iletisim() {
                 <div className={styles.imageBox}>
                   <i className={styles.phone}></i>
                 </div>
-                <div className={styles.nameBox}>Bize Ulaşın</div>
+                <div className={styles.nameBox}>{t("contactUs")}</div>
                 <div className={styles.descBox}>
                   +90 252 616 66 48
                   <br />
@@ -109,7 +113,7 @@ export default function Iletisim() {
                 <div className={styles.imageBox}>
                   <i className={styles.clock}></i>
                 </div>
-                <div className={styles.nameBox}>Çalışma Saatlerimiz</div>
+                <div className={styles.nameBox}>{t("ourWorkingHours")}</div>
                 <div className={styles.descBox}>
                   Pzt - Cum: 09:00 - 18:00
                   <br />
@@ -120,7 +124,7 @@ export default function Iletisim() {
                 <div className={styles.imageBox}>
                   <i className={styles.like}></i>
                 </div>
-                <div className={styles.nameBox}>Bizi Takip Edin!</div>
+                <div className={styles.nameBox}>{t("followUs")}</div>
                 <div className={styles.socialMedia}>
                   <ul>
                     <li>
@@ -153,7 +157,7 @@ export default function Iletisim() {
           <div className={styles.contactFormBox}>
             <div className={styles.container}>
               <div className={styles.contactForm}>
-                <div className={styles.formTitleBox}>Mesaj Gönderin</div>
+                <div className={styles.formTitleBox}>{t("sendMessage")}</div>
 
                 <Formik
                   initialValues={{
@@ -209,7 +213,7 @@ export default function Iletisim() {
                       <ul>
                         <li>
                           <div className={styles.inputBox}>
-                            <div className={styles.inputName}>Ad</div>
+                            <div className={styles.inputName}>{t("name")}</div>
                             <Field
                               autoComplete="off"
                               name="name"
@@ -227,7 +231,7 @@ export default function Iletisim() {
 
                         <li>
                           <div className={styles.inputBox}>
-                            <div className={styles.inputName}>Soyad</div>
+                            <div className={styles.inputName}>{t("surname")}</div>
                             <Field
                               autoComplete="off"
                               name="surname"
@@ -246,7 +250,7 @@ export default function Iletisim() {
                         <li>
                           <div className={styles.inputBox}>
                             <div className={styles.inputName}>
-                              Telefon Numaranız
+                              {t("yourPhoneNumber")}
                             </div>
                             <Field
                               autoComplete="off"
@@ -271,9 +275,7 @@ export default function Iletisim() {
 
                         <li>
                           <div className={styles.inputBox}>
-                            <div className={styles.inputName}>
-                              Email Adresiniz
-                            </div>
+                            <div className={styles.inputName}>{t("yourEmailAddress")}</div>
                             <Field
                               autoComplete="off"
                               name="email"
@@ -286,7 +288,7 @@ export default function Iletisim() {
 
                         <li className={styles.full}>
                           <div className={styles.inputBox}>
-                            <div className={styles.inputName}>Mesajınız</div>
+                            <div className={styles.inputName}>{t("yourMessage")}</div>
                             <Field
                               autoComplete="off"
                               as="textarea"
@@ -320,7 +322,7 @@ export default function Iletisim() {
                             type="submit"
                             className={styles.blueButtonArrow}
                           >
-                            <span>Mesaj Gönder</span>
+                            <span>{t("sendMessage")}</span>
                           </button>
                         </div>
                       )}
@@ -341,8 +343,8 @@ export default function Iletisim() {
                       height={101}
                     />
                   </div>
-                  <div className={styles.title}>Teşekkürler!</div>
-                  <div className={styles.desc}>Talebiniz bize ulaşmıştır.</div>
+                  <div className={styles.title}>{t("thanks")}!</div>
+                  <div className={styles.desc}>{t("contactSendResponseMessage")}</div>
                 </div>
                 <div
                   className={`${styles["mask"]} ${
@@ -357,10 +359,8 @@ export default function Iletisim() {
                       height={101}
                     />
                   </div>
-                  <div className={styles.title}>Gönderilemedi</div>
-                  <div className={styles.desc}>
-                    Talebiniz bize ulaşmamıştır.
-                  </div>
+                  <div className={styles.title}>{t("contactError")}</div>
+                  <div className={styles.desc}>{t("contactErrorMessage")}</div>
                 </div>
               </div>
             </div>
@@ -369,4 +369,8 @@ export default function Iletisim() {
       </section>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }

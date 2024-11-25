@@ -1,38 +1,28 @@
 import styles from "./villaRentInfo.module.css"
 import Link from "next/link"
+import { useTranslation } from "react-i18next"
 
 export default function VillaRent() {
+    const { t } = useTranslation("common")
     return (
         <div className={styles.villaRent}>
             <div className={styles.container}>
                 <div className={styles.box}>
                     <div className={styles.colon}>
-                        <div className={styles.rentTitle}>Villanızı Kiraya Verin</div>
-                        <div className={styles.rentDesc}>
-                            Sahip olduğunuz villalarınızı, yazlığınızı profesyonel bir firma aracılığıyla kiralamak,
-                            gelir elde etmek,
-                            yeni insanlara ev sahipliği yapmak ve profesyonel bir firmadan hizmet almak istiyorsanız
-                            bizimle
-                            iletişime geçebilirsiniz.
-                        </div>
+                        <div className={styles.rentTitle}>{t("rentOutYourVilla")}</div>
+                        <div className={styles.rentDesc}>{t("rentOutYourVillaText")}</div>
                         <div className={styles.linkBox}>
                             <Link href="/kiraya-ver" className={styles.pinkButton}>
-                                <span>Kiraya Ver</span>
+                                <span>{t("rentItOut")}</span>
                             </Link>
                         </div>
                     </div>
                     <div className={styles.colon}>
-                        <div className={styles.rentTitle}>Size Özel Gıda Sepeti</div>
-                        <div className={styles.rentDesc}>
-                            Balayınızda ya da tatilinizde damaklarınıza ve gönüllerinize bayram ettirecek, kaliteli
-                            ve güvenli
-                            gıdalarla dolu bir sepete sahip olmak istiyorsanız bizimle iletişime geçebilir,
-                            tercihinize en uygun gıda
-                            sepetini sizin ve sevdikleriniz için hazır etmemizi sağlayabilirsiniz.
-                        </div>
+                        <div className={styles.rentTitle}>{t("specialFoodBasketForYou")}</div>
+                        <div className={styles.rentDesc}>{t("specialFoodBasketForYouText")}</div>
                         <div className={styles.linkBox}>
                             <Link onClick={e=> e.preventDefault()} href="#" className={styles.blueButton}>
-                                <span>Sepetleri Gör</span>
+                                <span>{t("seeBaskets")}</span>
                             </Link>
                         </div>
                     </div>

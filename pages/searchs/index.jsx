@@ -4,8 +4,11 @@ import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
 import { useRouter } from "next/router";
 import moment from "moment";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
 
 export default function Searchs({ getFilterVillas, totalPage }) {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const activePage = parseInt(router?.query?.p) || 1;
   const startDate = moment(router?.query?.from, "DD-MM-YYYY");
@@ -24,10 +27,11 @@ export default function Searchs({ getFilterVillas, totalPage }) {
             <div className="box">
               <div className="top">
                 <div className="titleBox">
-                  <div className="title">Arama Sonuçları</div>
+                  <div className="title">{t("searchResults")}</div>
                   <div className="subTitle">
-                    Toplam {getFilterVillas?.totalCount} adet tesis
-                    bulunmaktadır.
+                    {t("thereAreFacilities", {
+                      facilityCount: getFilterVillas?.totalCount,
+                    })}
                   </div>
                 </div>
               </div>
@@ -55,7 +59,7 @@ export default function Searchs({ getFilterVillas, totalPage }) {
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, locale }) {
   const name = query?.name || "";
   const checkIn = query?.from || "";
   const checkOut = query?.to || "";
@@ -79,5 +83,13 @@ export async function getServerSideProps({ query }) {
     page: parseInt(query?.p - 1) || 0,
   });
   const totalPage = Math.ceil(getFilterVillas?.totalCount / 12);
-  return { props: { getFilterVillas, name, person, totalPage } };
+  return {
+    props: {
+      getFilterVillas,
+      name,
+      person,
+      totalPage,
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }

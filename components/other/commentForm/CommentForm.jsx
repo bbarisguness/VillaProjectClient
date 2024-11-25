@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Rating } from "react-simple-star-rating";
 import { useRef, useState } from "react";
 
-export default function CommentForm() {
+export default function CommentForm({ t }) {
   const [rating, setRating] = useState(0);
   const mailRef = useRef(null);
 
@@ -41,7 +41,7 @@ export default function CommentForm() {
 
   return (
     <div className={styles.commentForm}>
-      <div className={styles.title}>Yorumunuzu Bekliyoruz</div>
+      <div className={styles.title}>{t("weAreWaitingForYourComment")}</div>
       {/* <div className={styles.row}>
         <ul className={styles.commentUl}>
           <li className={styles.commentLi}>
@@ -203,7 +203,9 @@ export default function CommentForm() {
           form_email: Yup.string().required("Bu alan boş bırakılamaz"),
           form_name: Yup.string().required("Bu alan boş bırakılamaz"),
           form_surname: Yup.string().required("Bu alan boş bırakılamaz"),
-          form_phone: Yup.string().length(15, "Geçerli bir telefon numarası girin").required("Bu alan boş bırakılamaz"),
+          form_phone: Yup.string()
+            .length(15, "Geçerli bir telefon numarası girin")
+            .required("Bu alan boş bırakılamaz"),
           form_message: Yup.string().required("Bu alan boş bırakılamaz"),
           form_rating: Yup.number()
             .transform((value, originalValue) =>
@@ -238,7 +240,7 @@ export default function CommentForm() {
             <ul>
               <li className={styles.full}>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Yorumunuz</div>
+                  <div className={styles.inputName}>{t("yourComment")}</div>
                   <textarea
                     name="form_message"
                     rows="4"
@@ -264,7 +266,7 @@ export default function CommentForm() {
                   marginBottom: 10,
                 }}
               >
-                <span style={{ fontSize: 15, fontWeight: 600 }}>Puanınız</span>
+                <span style={{ fontSize: 15, fontWeight: 600 }}>{t("yourScore")}</span>
                 <Rating
                   size={30}
                   transition
@@ -282,7 +284,7 @@ export default function CommentForm() {
               </li>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Ad</div>
+                  <div className={styles.inputName}>{t("name")}</div>
                   <input
                     name="form_name"
                     value={values.form_name}
@@ -300,7 +302,7 @@ export default function CommentForm() {
               </li>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Soyad</div>
+                  <div className={styles.inputName}>{t("surname")}</div>
                   <input
                     type="text"
                     className={styles.form_surname}
@@ -318,7 +320,7 @@ export default function CommentForm() {
               </li>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Telefon Numaranız</div>
+                  <div className={styles.inputName}>{t("yourPhoneNumber")}</div>
                   <input
                     type="text"
                     className={styles.form_phone}
@@ -343,7 +345,7 @@ export default function CommentForm() {
               </li>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>Email Adresiniz</div>
+                  <div className={styles.inputName}>{t("yourEmailAddress")}</div>
                   <input
                     ref={mailRef}
                     type="text"
@@ -366,7 +368,7 @@ export default function CommentForm() {
                 type={"submit"}
                 className={`${styles["blueButtonArrow"]} ${styles["sendCommentForm"]}`}
               >
-                <span>Yorumu Gönder</span>
+                <span>{t("sendComment")}</span>
               </button>
             </div>
           </form>

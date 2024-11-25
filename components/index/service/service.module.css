@@ -95,6 +95,16 @@
     color: #02044A;
 }
 
+.services .box .top .colon .textBox .capitalize {
+    width: 100%;
+    margin: 0 0 20px 0;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 55px;
+    color: #02044A;
+    text-transform: capitalize;
+}
+
 .services .box .top .colon .textBox .desc {
     width: 470px;
     margin: 0 0 25px 0;

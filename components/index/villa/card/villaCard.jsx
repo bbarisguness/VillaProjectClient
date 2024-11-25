@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { priceTypes } from "@/data/data";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function VillaCard({
   data,
@@ -18,6 +19,7 @@ export default function VillaCard({
   activeTabIndex,
 }) {
   const router = useRouter();
+  const { t } = useTranslation("common");
 
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == data?.priceType
@@ -124,7 +126,7 @@ export default function VillaCard({
                 ) : (
                   <></>
                 )}
-                <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
+                <div className={styles.priceTitle}>{t("dailyPriceRange")}</div>
                 {data?.attributes?.price_tables?.data ? (
                   <div className={styles.price}>
                     {currentPriceTypeText}
@@ -228,7 +230,7 @@ export default function VillaCard({
                 ) : (
                   <></>
                 )}
-                <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
+                <div className={styles.priceTitle}>{t("dailyPriceRange")}</div>
                 {data?.priceTables?.length > 0 &&
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
@@ -328,7 +330,7 @@ export default function VillaCard({
                 ) : (
                   <></>
                 )}
-                <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
+                <div className={styles.priceTitle}>{t("dailyPriceRange")}</div>
                 {data?.priceTables?.length > 0 &&
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
@@ -432,9 +434,9 @@ export default function VillaCard({
                 <div className={styles.priceTitle}>
                   {data?.price != "-" && data?.price
                     ? nightLength
-                      ? `Toplam Fiyat (${nightLength}) Gece`
-                      : `Toplam Fiyat`
-                    : "Günlük Fiyat Aralığı"}
+                      ? `${t("totalCount")} (${nightLength}) ${t("night")}`
+                      : t("totalCount")
+                    : t("dailyPriceRange")}
                 </div>
 
                 {data?.price && data?.price !== "-" ? (
@@ -560,7 +562,7 @@ export default function VillaCard({
                 ) : (
                   <></>
                 )}
-                <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
+                <div className={styles.priceTitle}>{t("dailyPriceRange")}</div>
                 {data?.priceTables?.length > 0 &&
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
@@ -752,7 +754,7 @@ export default function VillaCard({
                 ) : (
                   <></>
                 )}
-                <div className={styles.priceTitle}>Günlük Fiyat Aralığı</div>
+                <div className={styles.priceTitle}>{t("dailyPriceRange")}</div>
                 {/* {data.attributes.price_tables.data ? <div className={styles.price}>{data.attributes.price_tables?.data[0]?.attributes?.price} TL - {data.attributes.price_tables?.data[(data.attributes.price_tables.data.length - 1)]?.attributes?.price} TL</div> : <></>} */}
                 {data?.priceTables?.length > 0 ? (
                   <div className={styles.price}>

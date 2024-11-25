@@ -15,6 +15,7 @@ export default function Calendar({
   dates,
   calendarPrices,
   priceTypeText,
+  t
 }) {
   const [yearTab, setYearTab] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth());
@@ -72,7 +73,7 @@ export default function Calendar({
           className={styles.mobileAvailabilityCalendarButton}
           onClick={openModal}
         >
-          Müsaitlik Takvimi Aç
+          {t("openAvailabilityCalendar")}
         </button>
 
         <ModalComponent isOpen={isModalOpen} onClose={closeModal}>
@@ -92,7 +93,7 @@ export default function Calendar({
       </div>
       <div className={styles.fullDatepicker}>
         <div className={styles.title}>
-          Müsaitlik Takvimi
+          {t("availabilityCalendar")}
           <div style={{ display: "flex", gap: "20px" }}>
             <span className={styles.orange}>Opsiyonlu</span>
             <span className={styles.red}>Dolu</span>

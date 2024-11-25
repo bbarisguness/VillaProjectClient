@@ -3,16 +3,23 @@ import Link from "next/link";
 import TreeStep from "@/components/index/treestep/treestep";
 import BreadCrumb from "@/components/breadCrumb/breadCrumb";
 import Seo from "@/components/seo";
+import { useTranslation } from "react-i18next";
+import { capitalizeWords } from "@/utils/globalUtils";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function Hakkimizda() {
+  const { t } = useTranslation("common")
   return (
     <>
-      <Seo pageTitle={"Labirent Fethiye | Hakkımızda"} pageDesc={"Labirent Fethiye Hakkımızda"} />
+      <Seo
+        pageTitle={"Labirent Fethiye | Hakkımızda"}
+        pageDesc={"Labirent Fethiye Hakkımızda"}
+      />
       <BreadCrumb link="about" />
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>
-            <h1 className={styles.title}>Hakkımızda</h1>
+            <h1 className={styles.title}>{capitalizeWords(t("headerAboutUs"))}</h1>
           </div>
         </div>
         <div className={styles.isotopImage}>
@@ -202,7 +209,7 @@ export default function Hakkimizda() {
         <div className={styles.ourTeam}>
           <div className={styles.container}>
             <div className={styles.titleBox}>
-              <h2 className={styles.title}>Ekibimiz</h2>
+              <h2 className={styles.title}>{t("ourTeam")}</h2>
             </div>
             <ul>
               <li>
@@ -272,4 +279,8 @@ export default function Hakkimizda() {
       </section>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }

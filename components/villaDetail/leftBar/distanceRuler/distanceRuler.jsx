@@ -1,11 +1,11 @@
 import styles from "./distanceRuler.module.css";
 import Link from "next/link";
 
-export default function DistanceRuler({ data }) {
+export default function DistanceRuler({ data, t }) {
   if (data?.length == 0) return null;
   return (
     <>
-      <div className={styles.villaDetailTitle}>Mesafe Cetveli</div>
+      <div className={styles.villaDetailTitle}>{t("distanceRuler")}</div>
       <div className={styles.services}>
         <div className={styles.box}>
           <div className={styles.bottom}>

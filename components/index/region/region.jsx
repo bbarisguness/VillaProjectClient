@@ -1,7 +1,9 @@
 import styles from "./region.module.css";
 import RegionCard from "./card/regionCard";
+import { useTranslation } from "react-i18next";
 
 export default function Regions({ regions, homePage }) {
+  const { t } = useTranslation("common")
   if (regions?.totalCount == 0) return null;
 
   return (
@@ -9,8 +11,8 @@ export default function Regions({ regions, homePage }) {
       <div className={styles.box}>
         <div className={styles.container}>
           <div className={styles.titleBox}>
-            <div className={styles.title}>Bölgelerimiz</div>
-            <div className={styles.subTitle}>Popüler Bölgelerimiz</div>
+            <div className={styles.title}>{t("ourRegions")}</div>
+            <div className={styles.subTitle}>{t("ourPopularRegions")}</div>
           </div>
         </div>
         <div className={styles.bottom}>

@@ -6,12 +6,19 @@ import { getVillas } from "@/services/villa";
 import Pagination from "@/components/pagination/Pagination";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+import { capitalizeWords } from "@/utils/globalUtils";
 
-const VillaCard = dynamic(() => import("../../components/index/villa/card/villaCard"), {
-  ssr: true, // SSR olmadan yüklenmesi yeterli
-});
+const VillaCard = dynamic(
+  () => import("../../components/index/villa/card/villaCard"),
+  {
+    ssr: true, // SSR olmadan yüklenmesi yeterli
+  }
+);
 
 export default function List({ villas }) {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const activePage = parseInt(router?.query?.p) || 1;
 
@@ -27,10 +34,10 @@ export default function List({ villas }) {
             <div className="box">
               <div className="top">
                 <div className="titleBox">
-                  <div className="title">Kiralık Villalar</div>
-                  <div className="subTitle">
-                    Toplam {villas?.totalCount} adet tesis bulunmaktadır.
+                  <div className="title">
+                    {capitalizeWords(t("headerVillasForRent"))}
                   </div>
+                  <div className="subTitle">{t("thereAreFacilities", { facilityCount: villas?.totalCount })}</div>
                 </div>
               </div>
               <div className="bottom">
@@ -60,7 +67,9 @@ export default function List({ villas }) {
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, locale }) {
   const villas = await getVillas(query?.p ? query?.p - 1 : 0);
-  return { props: { villas } };
+  return {
+    props: { villas, ...(await serverSideTranslations(locale, ["common"])) },
+  };
 }

@@ -22,10 +22,10 @@ export default function Slider() {
 
         <div className={styles.sliderText}>
           <ReservationBox />
-          <div className={styles.sliderSubTitle}>EXCLUSIVE KONFOR</div>
+          <div className={styles.sliderSubTitle}>{t("sliderText1")}</div>
           <div className={styles.sliderTitle}>
-            <strong>{t('welcome')}</strong>
-            <p>Kiralama Portalı</p>
+            <strong>{t('sliderText2')}</strong>
+            <p>{t('sliderText3')}</p>
           </div>
         </div>
       </div>
