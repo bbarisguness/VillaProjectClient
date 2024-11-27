@@ -103,6 +103,7 @@
   "yourMessage": "Your Message",
   "ourTeam": "Our Team",
   "allBlogs": "All Blogs",
+  "allVillas": "All Villas",
   "total": "Total",
   "blogsListed": "A total of {{blogCount}} blogs have been listed",
   "regionsListed": "A total of {{regionCount}} regions have been listed",
@@ -195,5 +196,6 @@
   "foodPackage": "Food Package",
   "foodPackage1Message": "Everything we tried with John was delicious",
   "full": "Full",
-  "optional": "Optional"
+  "optional": "Optional",
+  "callNow": "Call Now"
 }

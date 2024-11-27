@@ -47,10 +47,10 @@ export default function HamburgerMenu() {
                     <div className={styles.hmMenu}>
                         <ul className={styles.hmMenuUl}>
                             <li className={styles.hmMenuLi}>
-                                <Link onClick={closeMenu} href="/" className={styles.hmMenuLink}>ANASAYFA</Link>
+                                <Link onClick={closeMenu} href="/" className={styles.hmMenuLink}>{t("headerHomePage")}</Link>
                             </li>
                             <li onClick={() => setMenu1(!menu1)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu1 ? styles["open"] : ""}`}>
-                                <Link href="#" onClick={e => e.preventDefault()} className={styles.hmMenuLink}>KİRALIK VİLLALAR</Link>
+                                <Link href="#" onClick={e => e.preventDefault()} className={styles.hmMenuLink}>{t("headerVillasForRent")}</Link>
                                 <ul style={{ marginTop: menu1 ? '24px' : 0 }}>
                                     {/* <li><Link href="villalar/balayi-villalari">Balayı Villaları</Link></li>
                                 <li><Link href="#">Popüler Villalar</Link></li>
@@ -58,7 +58,7 @@ export default function HamburgerMenu() {
                                 <li><Link href="#">Ekonomik Manzaralı</Link></li>
                                 <li><Link href="#">Korunaklı Villalar</Link></li>
                                 <li><Link href="#">Kış Aylarına Uygun</Link></li> */}
-                                    <li><Link onClick={closeMenu} href={`/villalar`}>Tüm Villalar</Link></li>
+                                    <li><Link onClick={closeMenu} href={`/villalar`}>{t("allVillas")}</Link></li>
                                     {
                                         category.map((item, i) => {
                                             return (
@@ -69,13 +69,13 @@ export default function HamburgerMenu() {
                                 </ul>
                             </li>
                             <li className={styles.hmMenuLi}>
-                                <Link onClick={closeMenu} href="/apartlar" className={styles.hmMenuLink}>KİRALIK APARTLAR</Link>
+                                <Link onClick={closeMenu} href="/apartlar" className={styles.hmMenuLink}>{t("headerApartmentsForRent")}</Link>
                             </li>
                             <li className={styles.hmMenuLi}>
-                                <Link onClick={closeMenu} href="/arac-kiralama" rel="nofollow" className={styles.hmMenuLink}>ARAÇ KİRALAMA</Link>
+                                <Link onClick={closeMenu} href="/arac-kiralama" rel="nofollow" className={styles.hmMenuLink}>{t("headerCarRental")}</Link>
                             </li>
                             <li className={styles.hmMenuLi}>
-                                <Link onClick={closeMenu} href="/bloglar" rel="nofollow" className={styles.hmMenuLink}>BLOG</Link>
+                                <Link onClick={closeMenu} href="/bloglar" rel="nofollow" className={styles.hmMenuLink}>{t("headerBlog")}</Link>
                             </li>
                             {/* <li onClick={() => setMenu2(!menu2)} className={`${styles["hmMenuLi"]} ${styles["menuOpen"]} ${menu2 ? styles["open"] : ""}`}>
                                 <Link href="#" onClick={e => e.preventDefault()} className={styles.hmMenuLink}>KURUMSAL</Link>
@@ -86,10 +86,10 @@ export default function HamburgerMenu() {
                                 </ul>
                             </li> */}
                             <li className={styles.hmMenuLi}>
-                                <Link onClick={closeMenu} href="/hakkimizda" rel="nofollow" className={styles.hmMenuLink}>HAKKIMIZDA</Link>
+                                <Link onClick={closeMenu} href="/hakkimizda" rel="nofollow" className={styles.hmMenuLink}>{t("headerAboutUs")}</Link>
                             </li>
                             <li className={styles.hmMenuLi}>
-                                <Link onClick={closeMenu} href="/iletisim" rel="nofollow" className={styles.hmMenuLink}>İLETİŞİM</Link>
+                                <Link onClick={closeMenu} href="/iletisim" rel="nofollow" className={styles.hmMenuLink}>{t("headerContact")}</Link>
                             </li>
                         </ul>
                     </div>
@@ -107,7 +107,7 @@ export default function HamburgerMenu() {
                             </div>
                             <div className={`${styles["linkBox"]}`}>
                                 <Link href="tel:05317241934" target="_blank" style={{backgroundColor: "#c10a0a"}} onClick={closeMenu}>
-                                    <span>Hemen Ara</span>
+                                    <span>{t("callNow")}</span>
                                 </Link>
                             </div>
                         </div>
