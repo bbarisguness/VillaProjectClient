@@ -3,16 +3,16 @@ const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
 
 const qs = require('qs');
 
-async function getCategories() {
-    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=tr&CompanyId=${companyId}`, {
+async function getCategories(language = 'tr') {
+    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=${language}&CompanyId=${companyId}`, {
         cache: 'no-store'
     })
     const data = await response.json()
     return data
 }
 
-async function getCategoriesHome() {
-    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=tr&CompanyId=${companyId}`, {
+async function getCategoriesHome(language = 'tr') {
+    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=${language}&CompanyId=${companyId}`, {
         cache: 'no-store'
     })
     const data = await response.json()

@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 
 export default function HamburgerMenu() {
+    const { i18n } = useTranslation();
     const { t } = useTranslation("common");
     const dispatch = useDispatch()
     const isHamburgerMenuActive = useSelector(state => state.globalState.isHamburgerMenuActive)
@@ -23,7 +24,7 @@ export default function HamburgerMenu() {
     }
 
     useEffect(() => {
-        getCategories().then((res) => {
+        getCategories(i18n.language).then((res) => {
             setCategory(res?.data)
         })
     }, [])

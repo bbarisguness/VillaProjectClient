@@ -8,6 +8,7 @@ import { getCategories } from "@/services/category";
 import { useTranslation } from "react-i18next";
 
 export default function HeaderBottom({ from }) {
+  const { i18n } = useTranslation();
   const { t } = useTranslation("common");
   const [category, setCategory] = useState([]);
   const dispatch = useDispatch();
@@ -15,10 +16,27 @@ export default function HeaderBottom({ from }) {
     dispatch(changeHamburgerMenuState());
   }
   useEffect(() => {
-    getCategories().then((res) => {
+    getCategories(i18n.language).then((res) => {
       setCategory(res?.data);
     });
   }, []);
+
+  useEffect(() => {
+    // Sayfa dil değiştiğinde yenilenmesini sağlar
+    const handleLanguageChange = () => {
+      //window.location.reload();
+      getCategories(i18n.language).then((res) => {
+        setCategory(res?.data);
+      });
+    };
+
+    i18n.on("languageChanged", handleLanguageChange);
+
+    return () => {
+      i18n.off("languageChanged", handleLanguageChange);
+    };
+  }, [i18n]);
+
   return (
     <div className={styles.bottom}>
       <div className={styles.container}>

@@ -82,7 +82,7 @@ export default function Home({
 
 export async function getServerSideProps({ locale }) {
   // API çağrılarını paralel olarak başlat
-  const categories = await getCategoriesHome();
+  const categories = await getCategoriesHome(locale);
 
   const [villa, aparts, regions, blogs] = await Promise.all([
     getVillasHome(8, 0, categories?.data[0]?.id),

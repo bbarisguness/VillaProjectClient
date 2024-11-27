@@ -408,7 +408,7 @@ export default function List({
 
 export async function getServerSideProps({ params, query, locale }) {
   const slug = params?.slug;
-  const allCategories = getCategories();
+  const allCategories = getCategories(locale);
 
   // İlgili kategori verisini bulmak
   const categoryPromise = allCategories.then(

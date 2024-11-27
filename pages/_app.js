@@ -6,6 +6,7 @@ import HamburgerMenu from "@/components/hamburger/hamburgerMenu"
 import { useEffect, useState } from "react";
 import { getRegions } from "@/services/region"
 import { appWithTranslation } from "next-i18next"
+import { useTranslation } from "next-i18next"
 
 
 import "@/styles/styles.css"
@@ -14,6 +15,7 @@ import Loading from "@/app/loading"
 
 function myApp({ Component, pageProps }) {
     //const { isPageLoading } = usePageLoading();
+    const { i18n } = useTranslation();
     const [footerData, setFooterData] = useState([]);
 
     useEffect(() => {
@@ -33,11 +35,26 @@ function myApp({ Component, pageProps }) {
         document.head.appendChild(inlineScript);
 
         async function fetchData() {
-            const data = await getRegions()
+            const data = await getRegions(i18n.language)
             setFooterData(data?.data);
         }
         fetchData();
     }, []);
+
+    useEffect(() => {
+        // Sayfa dil değiştiğinde yenilenmesini sağlar
+        const handleLanguageChange = async () => {
+            //window.location.reload();
+            const data = await getRegions(i18n.language)
+            setFooterData(data?.data);
+        };
+
+        i18n.on('languageChanged', handleLanguageChange);
+
+        return () => {
+            i18n.off('languageChanged', handleLanguageChange);
+        };
+    }, [i18n]);
 
     return (
         <Providers store={store}>
