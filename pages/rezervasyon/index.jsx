@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 import { capitalizeWords } from "@/utils/globalUtils";
 
 export default function Reservation() {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   let localPersonInfoData;
   if (typeof localStorage !== "undefined") {
     localPersonInfoData = JSON.parse(localStorage.getItem("personInfo"));
@@ -177,8 +177,11 @@ export default function Reservation() {
       let date = new Date(year, month - 1, day);
       let dayName = turkishDays[date.getDay()];
       let monthName = turkishMonths[date.getMonth()];
+      const formatter = new Intl.DateTimeFormat(i18n.language, {
+        weekday: "long",
+      });
 
-      return `${day} ${monthName} ${year} ${dayName}`;
+      return `${day} ${monthName} ${year} ${formatter.format(date)}`;
     }
 
     return girismiCikismi == "g" ? t("entrance") : t("exit");
@@ -863,8 +866,12 @@ export default function Reservation() {
                             <span className={styles.title}>
                               {t("reservationInfos")}
                             </span>
-                            <span>Giriş {reservationItems?.checkIn}</span>
-                            <span>Çıkış {reservationItems?.checkOut}</span>
+                            <span>
+                              {t("entrance")} {reservationItems?.checkIn}
+                            </span>
+                            <span>
+                              {t("exit")} {reservationItems?.checkOut}
+                            </span>
                             <span>
                               {moment
                                 .duration(
@@ -975,7 +982,11 @@ export default function Reservation() {
                           <div className={styles.visitorBox}>
                             <span>
                               {reservationItems &&
-                                `${reservationItems.adult} Yetişkin, ${reservationItems.child} Çocuk, ${reservationItems.baby} Bebek`}
+                                `${reservationItems.adult} ${t("adult")}, ${
+                                  reservationItems.child
+                                } ${t("child")}, ${reservationItems.baby} ${t(
+                                  "baby"
+                                )}`}
                             </span>
                           </div>
                           {/* <div className={styles.changeButton}>
@@ -988,7 +999,7 @@ export default function Reservation() {
                       <li>
                         <div className={styles.dateBox}>
                           <div className={styles.date}>
-                            <div className={styles.title}>Giriş</div>
+                            <div className={styles.title}>{t("entrance")}</div>
                             <div className={styles.textBox}>
                               <span>
                                 {reservationItems && getDateString("g")}
@@ -996,7 +1007,7 @@ export default function Reservation() {
                             </div>
                           </div>
                           <div className={styles.date}>
-                            <div className={styles.title}>Çıkış</div>
+                            <div className={styles.title}>{t("exit")}</div>
                             <div className={styles.textBox}>
                               <span>
                                 {reservationItems && getDateString("c")}
@@ -1021,7 +1032,7 @@ export default function Reservation() {
                                 )
                               )
                               .asDays()}{" "}
-                            Gece{" "}
+                            {capitalizeWords(t("night"))}{" "}
                           </span>
                           <span>
                             {[reservationItems?.totalPrice]
