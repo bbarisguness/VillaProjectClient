@@ -8,7 +8,7 @@ import { capitalizeWords } from "@/utils/globalUtils";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function Hakkimizda() {
-  const { t } = useTranslation("common")
+  const { t } = useTranslation("common");
   return (
     <>
       <Seo
@@ -19,7 +19,9 @@ export default function Hakkimizda() {
       <section className={`${styles["contentDetail"]} ${styles["corporate"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>
-            <h1 className={styles.title}>{capitalizeWords(t("headerAboutUs"))}</h1>
+            <h1 className={styles.title}>
+              {capitalizeWords(t("headerAboutUs"))}
+            </h1>
           </div>
         </div>
         <div className={styles.isotopImage}>

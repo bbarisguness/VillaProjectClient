@@ -73,7 +73,6 @@ export default function HeaderTop() {
             <div className={styles.lang}>
               <ul>
                 {otherLocales.map((localeItem) => {
-                  const { pathname, query, asPath } = router;
                   return (
                     <li key={localeItem}>
                       <Link

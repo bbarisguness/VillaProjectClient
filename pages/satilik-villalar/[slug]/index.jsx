@@ -1,15 +1,12 @@
 import Seo from "@/components/seo";
 import Gallery from "@/components/villaDetail/leftBar/gallery/gallery";
-import { getPhotosVilla } from "@/services/photo";
-import { getNearVillas, getVillaSale, getVilla } from "@/services/villa";
+import { getNearVillas, getVilla } from "@/services/villa";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./page.module.css";
 import DistanceRuler from "@/components/villaDetail/leftBar/distanceRuler/distanceRuler";
 import VillaCard from "@/components/index/villa/card/villaCard";
 import { useRouter } from "next/router";
-import Comments from "@/components/other/comment/Comments";
-import CommentForm from "@/components/other/commentForm/CommentForm";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-video.css";

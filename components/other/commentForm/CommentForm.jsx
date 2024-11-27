@@ -2,16 +2,10 @@ import styles from "./page.module.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Rating } from "react-simple-star-rating";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 export default function CommentForm({ t }) {
-  const [rating, setRating] = useState(0);
   const mailRef = useRef(null);
-
-  const handleRating = (rate) => {
-    setRating(rate);
-    // other logic
-  };
 
   const phoneFormat = (string) => {
     // Rakam dışındaki karakterleri temizle
@@ -266,12 +260,13 @@ export default function CommentForm({ t }) {
                   marginBottom: 10,
                 }}
               >
-                <span style={{ fontSize: 15, fontWeight: 600 }}>{t("yourScore")}</span>
+                <span style={{ fontSize: 15, fontWeight: 600 }}>
+                  {t("yourScore")}
+                </span>
                 <Rating
                   size={30}
                   transition
                   onClick={(value) => {
-                    handleRating(value);
                     setFieldValue("form_rating", value);
                   }}
                   allowFraction
@@ -345,7 +340,9 @@ export default function CommentForm({ t }) {
               </li>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>{t("yourEmailAddress")}</div>
+                  <div className={styles.inputName}>
+                    {t("yourEmailAddress")}
+                  </div>
                   <input
                     ref={mailRef}
                     type="text"

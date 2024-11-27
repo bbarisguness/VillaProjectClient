@@ -12,7 +12,7 @@ import Image from "next/image";
 import { memo } from "react";
 
 const Gallery = memo(function Gallery({ photos, from }) {
-  const videoObject = photos?.find(item =>item?.videoLink != null)
+  const videoObject = photos?.find((item) => item?.videoLink != null);
   // 1. videoLink'i null olmayan kaydı bul ve diziden çıkar
   const kayitIndex = photos.findIndex((item) => item.videoLink !== null);
   //video var ise
@@ -107,11 +107,11 @@ const Gallery = memo(function Gallery({ photos, from }) {
                 <Link
                   key={index}
                   className={styles.lightBoxItem}
-                  href={
-                    videoObject?.videoLink
-                  }
+                  href={videoObject?.videoLink}
                 >
-                  <div className={`${styles["lightBoxItemChild"]} ${styles["video-icon"]}`}>
+                  <div
+                    className={`${styles["lightBoxItemChild"]} ${styles["video-icon"]}`}
+                  >
                     <div className={styles.imageBox}>
                       <div
                         className={styles.img}
@@ -284,11 +284,11 @@ const Gallery = memo(function Gallery({ photos, from }) {
                 <Link
                   key={index}
                   className={styles.lightBoxItem}
-                  href={
-                    videoObject?.videoLink
-                  }
+                  href={videoObject?.videoLink}
                 >
-                  <div className={`${styles["lightBoxItemChild"]} ${styles["video-icon"]}`}>
+                  <div
+                    className={`${styles["lightBoxItemChild"]} ${styles["video-icon"]}`}
+                  >
                     <div className={styles.imageBox}>
                       <div
                         className={styles.img}
@@ -451,11 +451,11 @@ const Gallery = memo(function Gallery({ photos, from }) {
                 <Link
                   key={index}
                   className={styles.lightBoxItem}
-                  href={
-                    videoObject?.videoLink
-                  }
+                  href={videoObject?.videoLink}
                 >
-                  <div className={`${styles["lightBoxItemChild"]} ${styles["video-icon"]}`}>
+                  <div
+                    className={`${styles["lightBoxItemChild"]} ${styles["video-icon"]}`}
+                  >
                     <div className={styles.imageBox}>
                       <div
                         className={styles.img}

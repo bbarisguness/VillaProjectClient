@@ -3,7 +3,7 @@ import RegionCard from "./card/regionCard";
 import { useTranslation } from "react-i18next";
 
 export default function Regions({ regions, homePage }) {
-  const { t } = useTranslation("common")
+  const { t } = useTranslation("common");
   if (regions?.totalCount == 0) return null;
 
   return (

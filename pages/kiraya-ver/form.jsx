@@ -59,9 +59,13 @@ export default function Form() {
         }}
         validationSchema={Yup.object({
           phone: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
-          nameAndSurname: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
+          nameAndSurname: Yup.string().required(
+            t("thisFieldCannotBeLeftBlank")
+          ),
           facilityName: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
-          facilityAddress: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
+          facilityAddress: Yup.string().required(
+            t("thisFieldCannotBeLeftBlank")
+          ),
           message: Yup.string().required(t("thisFieldCannotBeLeftBlank")),
         })}
         onSubmit={(values) => {
@@ -116,7 +120,9 @@ export default function Form() {
             <ul>
               <li>
                 <div className={styles.inputBox}>
-                  <div className={styles.inputName}>{t("name")} {t("surname")}</div>
+                  <div className={styles.inputName}>
+                    {t("name")} {t("surname")}
+                  </div>
                   <input
                     name="nameAndSurname"
                     value={values.nameAndSurname}

@@ -1,7 +1,15 @@
-import { useEffect } from "react";
 import styles from "./MyCalendar.module.css";
 
-export default function MyCalendar({ month, type, setActiveMonth, activeMonth, min, datesOrSetters, setDateClickCount1, dateClickCount1 }) {
+export default function MyCalendar({
+  month,
+  type,
+  setActiveMonth,
+  activeMonth,
+  min,
+  datesOrSetters,
+  setDateClickCount1,
+  dateClickCount1,
+}) {
   const constantDate = new Date();
   let firstRowIsEnded = false;
   const date = new Date(constantDate.getFullYear(), month, 1);
@@ -37,12 +45,11 @@ export default function MyCalendar({ month, type, setActiveMonth, activeMonth, m
 
   const isItPastHistory = () => {
     if (date < constantDate) {
-      return false
+      return false;
+    } else {
+      return true;
     }
-    else {
-      return true
-    }
-  }
+  };
 
   const getDay = (index = -1, firstDay = -1) => {
     const startingRenderingIndex = firstDay - 1 < 0 ? 6 : firstDay - 1;
@@ -56,8 +63,15 @@ export default function MyCalendar({ month, type, setActiveMonth, activeMonth, m
     if (!firstRowIsEnded) {
       if (index == 6) firstRowIsEnded = true;
       return (
-        <span onClick={(e) => clickDayItem(e)}
-          className={!(index >= startingRenderingIndex) ? [styles.passive] : isItPastHistory() ? [styles.active] : [styles.disabled]}
+        <span
+          onClick={(e) => clickDayItem(e)}
+          className={
+            !(index >= startingRenderingIndex)
+              ? [styles.passive]
+              : isItPastHistory()
+              ? [styles.active]
+              : [styles.disabled]
+          }
         >
           {day}
         </span>
@@ -70,7 +84,18 @@ export default function MyCalendar({ month, type, setActiveMonth, activeMonth, m
         return;
       }
       return (
-        <span onClick={(e) => clickDayItem(e)} className={isDaysFinished ? [styles.passive] : isItPastHistory() ? [styles.active] : [styles.disabled]}>{day}</span>
+        <span
+          onClick={(e) => clickDayItem(e)}
+          className={
+            isDaysFinished
+              ? [styles.passive]
+              : isItPastHistory()
+              ? [styles.active]
+              : [styles.disabled]
+          }
+        >
+          {day}
+        </span>
       );
     }
   };
@@ -81,7 +106,10 @@ export default function MyCalendar({ month, type, setActiveMonth, activeMonth, m
         <div className={styles.daysRow}>
           {["1", "2", "3", "4", "5", "6", "7"].map((item, index) => {
             return (
-              <div key={"month" + month + '' + index} className={styles.daysRowItem}>
+              <div
+                key={"month" + month + "" + index}
+                className={styles.daysRowItem}
+              >
                 {getDay(index, firstDay)}
               </div>
             );
@@ -93,7 +121,10 @@ export default function MyCalendar({ month, type, setActiveMonth, activeMonth, m
         <div className={styles.daysRow}>
           {["1", "2", "3", "4", "5", "6", "7"].map((item, index) => {
             return (
-              <div key={"month" + month + '' + index} className={styles.daysRowItem}>
+              <div
+                key={"month" + month + "" + index}
+                className={styles.daysRowItem}
+              >
                 {getDay()}
               </div>
             );
@@ -116,55 +147,62 @@ export default function MyCalendar({ month, type, setActiveMonth, activeMonth, m
   };
 
   const clickArrow = (e) => {
-    const id = parseInt(e.target.id)// 0 = left arrow, 1 = right arrow
+    const id = parseInt(e.target.id); // 0 = left arrow, 1 = right arrow
 
     if (id == 0) {
       if (activeMonth > min) {
-        setActiveMonth(activeMonth - 1)
+        setActiveMonth(activeMonth - 1);
       }
+    } else {
+      setActiveMonth(activeMonth + 1);
     }
-    else {
-      setActiveMonth(activeMonth + 1)
-    }
-  }
+  };
 
   const calculateYear = () => {
     if (month == 11 || month == 23 || month == 35) {
-      return date.getFullYear() - 1
+      return date.getFullYear() - 1;
     }
-    return date.getFullYear()
-  }
+    return date.getFullYear();
+  };
 
   const calcualteMonth = () => {
     if (month >= 12 && month < 24) {
-      return month - 12
+      return month - 12;
+    } else if (month >= 24) {
+      return month - 24;
     }
-    else if (month >= 24) {
-      return month - 24
-    }
-    return month
-  }
+    return month;
+  };
 
   const clickDayItem = (e) => {
-    const className = e.target.className
-    const isPastDate = className.includes("disabled")
+    const className = e.target.className;
+    const isPastDate = className.includes("disabled");
     if (!isPastDate) {
-      const date = e.target.innerText + "-" + parseInt(calcualteMonth() + 1) + "-" + calculateYear()
+      const date =
+        e.target.innerText +
+        "-" +
+        parseInt(calcualteMonth() + 1) +
+        "-" +
+        calculateYear();
 
-      setDateClickCount1(dateClickCount1 + 1)
+      setDateClickCount1(dateClickCount1 + 1);
       if (dateClickCount1 == 0) {
-        datesOrSetters.setDateOfEntry(date)
-      }
-      else {
-        datesOrSetters.setReleaseDate(date)
+        datesOrSetters.setDateOfEntry(date);
+      } else {
+        datesOrSetters.setReleaseDate(date);
       }
     }
-  }
+  };
 
   return (
     <div className={styles.mainContainer}>
       <div className={styles.monthTitle}>
-        <span style={{ display: min == activeMonth ? "none" : "block" }} id={type} onClick={(e) => clickArrow(e)} className={type == 0 ? styles.leftArrow : styles.rightArrow}></span>
+        <span
+          style={{ display: min == activeMonth ? "none" : "block" }}
+          id={type}
+          onClick={(e) => clickArrow(e)}
+          className={type == 0 ? styles.leftArrow : styles.rightArrow}
+        ></span>
         {monthsTurkish[date.getMonth()]} {date.getFullYear()}
       </div>
       <div className={styles.daysTitle}>

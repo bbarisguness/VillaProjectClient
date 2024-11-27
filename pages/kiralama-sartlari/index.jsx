@@ -6,7 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 
 export default function LeaseTerms() {
-  const { t } = useTranslation("common")
+  const { t } = useTranslation("common");
   return (
     <>
       <Seo

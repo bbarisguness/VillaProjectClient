@@ -15,7 +15,7 @@ export default function Calendar({
   dates,
   calendarPrices,
   priceTypeText,
-  t
+  t,
 }) {
   const [yearTab, setYearTab] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth());

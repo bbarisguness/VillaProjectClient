@@ -5,11 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import citiess from "../../data/tr.json";
-var qs = require("qs");
 import { useRouter } from "next/navigation";
-import { format } from "date-fns";
 import { createReservation } from "@/services/reservation";
-import { getPrice, isVillaAvailable } from "@/services/reservation";
+import { isVillaAvailable } from "@/services/reservation";
 import Seo from "@/components/seo";
 import moment from "moment";
 import { priceTypes } from "@/data/data";
@@ -25,7 +23,6 @@ export default function Reservation() {
   } else {
     localPersonInfoData = null;
   }
-  // const lcalPersonInfoData = JSON.parse(localStorage.getItem("personInfo"));
   const router = useRouter();
   const refOfCityMenu = useRef();
   const refOfStateMenu = useRef();
@@ -175,7 +172,6 @@ export default function Reservation() {
           : dateArray[dateArray.length - 1];
 
       let date = new Date(year, month - 1, day);
-      let dayName = turkishDays[date.getDay()];
       let monthName = turkishMonths[date.getMonth()];
       const formatter = new Intl.DateTimeFormat(i18n.language, {
         weekday: "long",

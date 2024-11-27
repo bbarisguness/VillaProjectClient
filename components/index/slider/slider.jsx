@@ -24,8 +24,8 @@ export default function Slider() {
           <ReservationBox />
           <div className={styles.sliderSubTitle}>{t("sliderText1")}</div>
           <div className={styles.sliderTitle}>
-            <strong>{t('sliderText2')}</strong>
-            <p>{t('sliderText3')}</p>
+            <strong>{t("sliderText2")}</strong>
+            <p>{t("sliderText3")}</p>
           </div>
         </div>
       </div>

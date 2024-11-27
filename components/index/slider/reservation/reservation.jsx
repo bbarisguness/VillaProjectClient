@@ -478,7 +478,9 @@ export default function ReservationBox() {
             <li>
               <div className={styles.left}>
                 <div className={styles.title}>{t("adults")}</div>
-                <div className={styles.desc}>{t("andAboveAges", { age: 13 })}</div>
+                <div className={styles.desc}>
+                  {t("andAboveAges", { age: 13 })}
+                </div>
               </div>
               <div className={styles.right}>
                 <div
@@ -502,7 +504,9 @@ export default function ReservationBox() {
             <li>
               <div className={styles.left}>
                 <div className={styles.title}>{t("childs")}</div>
-                <div className={styles.desc}>{t("agesBetween", { agesBetweenValues: "4-12" })}</div>
+                <div className={styles.desc}>
+                  {t("agesBetween", { agesBetweenValues: "4-12" })}
+                </div>
               </div>
               <div className={styles.right}>
                 <div
@@ -526,7 +530,9 @@ export default function ReservationBox() {
             <li>
               <div className={styles.left}>
                 <div className={styles.title}>{t("babies")}</div>
-                <div className={styles.desc}>{t("agesBetween", { agesBetweenValues: "0-3" })}</div>
+                <div className={styles.desc}>
+                  {t("agesBetween", { agesBetweenValues: "0-3" })}
+                </div>
               </div>
               <div className={styles.right}>
                 <div

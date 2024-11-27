@@ -1,7 +1,6 @@
 import "@/styles/styles.css";
 import Seo from "@/components/seo";
 import { getVillasForSale } from "@/services/villa";
-import { useEffect, useState } from "react";
 import VillaCard from "@/components/index/villa/card/villaCard";
 import Pagination from "@/components/pagination/Pagination";
 import { useRouter } from "next/router";

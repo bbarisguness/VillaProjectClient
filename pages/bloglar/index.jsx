@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import styles from "./page.module.css";
-import Link from "next/link";
 import { getBlogs } from "@/services/blog";
 import Seo from "@/components/seo";
 import { useTranslation } from "react-i18next";

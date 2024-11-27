@@ -1,12 +1,11 @@
 import BreadCrumb from "@/components/breadCrumb/breadCrumb";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./page.module.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Seo from "@/components/seo";
 import { searchReservation } from "@/services/reservation";
 import { timeStringToDate } from "@/utils/date";
-import { scrolltoHash } from "@/utils/globalUtils";
 import moment from "moment";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";

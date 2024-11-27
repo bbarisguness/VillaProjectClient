@@ -21,17 +21,11 @@ const VillaRent = lazy(() =>
 );
 
 import "@/styles/styles.css";
-import {
-  getVillas,
-  getNewVillas,
-  getVillasHome,
-  getHotels,
-} from "@/services/villa";
+import { getVillasHome, getHotels } from "@/services/villa";
 import { getCategoriesHome } from "@/services/category";
 import Seo from "@/components/seo";
 import { getRegions } from "@/services/region";
 import { getBlogs } from "@/services/blog";
-import { getTestimonials } from "@/services/testimonial";
 import { lazy, Suspense } from "react";
 
 export default function Home({
@@ -69,16 +63,6 @@ export default function Home({
     </>
   );
 }
-// export async function getServerSideProps() {
-//   const categories = await getCategoriesHome();
-//   const villa = await getVillasHome(8, 0, categories?.data[0]?.id);
-//   const aparts = await getHotels(0, 4);
-//   const regions = await getRegions();
-//   const blogs = await getBlogs();
-//   //const newVillas = await getNewVillas()
-//   //const testimonials = await getTestimonials()
-//   return { props: { villa, categories, blogs, regions, aparts } };
-// }
 
 export async function getServerSideProps({ locale }) {
   // API çağrılarını paralel olarak başlat
@@ -90,10 +74,6 @@ export async function getServerSideProps({ locale }) {
     getRegions(),
     getBlogs(),
   ]);
-
-  // Gerekiyorsa yeni veriler için yorum satırlarını açabilirsiniz
-  // const newVillas = await getNewVillas()
-  // const testimonials = await getTestimonials()
 
   return {
     props: {

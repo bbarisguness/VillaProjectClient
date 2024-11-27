@@ -2,7 +2,6 @@ import Link from "next/link";
 import styles from "./blog.module.css";
 import BlogCard from "./blogCard";
 import { useTranslation } from "react-i18next";
-const qs = require("qs");
 
 export default function Blog({ blog }) {
   const { t } = useTranslation("common");

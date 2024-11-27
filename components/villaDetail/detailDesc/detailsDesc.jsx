@@ -1,7 +1,12 @@
 import styles from "./detailDesc.module.css";
 import { capitalizeWords } from "@/utils/globalUtils";
 
-export default function DetailDesc({ isDescOpen, setIsDescOpen, villaDetail, t }) {
+export default function DetailDesc({
+  isDescOpen,
+  setIsDescOpen,
+  villaDetail,
+  t,
+}) {
   return (
     <>
       <div className={styles.villaDetailTitle}>{t("facilityDetails")}</div>

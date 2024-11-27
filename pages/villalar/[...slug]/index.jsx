@@ -2,12 +2,10 @@ import {
   getAllVillaByCategoryId,
   getVilla,
   getNearVillas,
-  createComment,
 } from "@/services/villa";
 import "@/styles/styles.css";
 import { getCategories } from "@/services/category";
 import { useRouter } from "next/router";
-import * as Yup from "yup";
 import dynamic from "next/dynamic";
 
 // villa detay
@@ -15,15 +13,13 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import FoodPackage from "@/components/villaDetail/rightBar/foodPackage/foodPackage";
 import LightGallery from "lightgallery/react";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
 import { priceTypes } from "@/data/data";
-import { getPriceRange } from "@/utils/globalUtils";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-video.css";
@@ -117,7 +113,7 @@ export default function List({
   villaSlug,
   villaName,
 }) {
-  const { t } = useTranslation("common")
+  const { t } = useTranslation("common");
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == villaDetail?.data?.priceType
   )?.text;
@@ -198,7 +194,11 @@ export default function List({
                     <div className="title">
                       {category?.categoryDetails[0]?.name}
                     </div>
-                    <div className="subTitle">{t("thereAreFacilities", { facilityCount: villa?.totalCount })}</div>
+                    <div className="subTitle">
+                      {t("thereAreFacilities", {
+                        facilityCount: villa?.totalCount,
+                      })}
+                    </div>
                   </div>
                 </div>
                 <div className="bottom">
@@ -280,7 +280,10 @@ export default function List({
                     isDescOpen={isDescOpen}
                     setIsDescOpen={setIsDescOpen}
                   />
-                  <DistanceRuler data={villaDetail?.data?.distanceRulers} t={t} />
+                  <DistanceRuler
+                    data={villaDetail?.data?.distanceRulers}
+                    t={t}
+                  />
                   <PriceTable
                     t={t}
                     priceTypeNumber={villaDetail?.data?.priceType || 1}
@@ -369,7 +372,7 @@ export default function List({
             <div className={styles.container}>
               <div className={styles.customerComments}>
                 <Comments commentData={villaDetail?.data?.comments} t={t} />
-                <CommentForm t={t}/>
+                <CommentForm t={t} />
               </div>
             </div>
           </div>

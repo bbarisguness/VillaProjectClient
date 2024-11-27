@@ -1,10 +1,8 @@
-import { useState } from "react";
 import dynamic from "next/dynamic";
 import "@/styles/styles.css";
 import Seo from "@/components/seo";
 import { getVillas } from "@/services/villa";
 import Pagination from "@/components/pagination/Pagination";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
@@ -37,7 +35,11 @@ export default function List({ villas }) {
                   <div className="title">
                     {capitalizeWords(t("headerVillasForRent"))}
                   </div>
-                  <div className="subTitle">{t("thereAreFacilities", { facilityCount: villas?.totalCount })}</div>
+                  <div className="subTitle">
+                    {t("thereAreFacilities", {
+                      facilityCount: villas?.totalCount,
+                    })}
+                  </div>
                 </div>
               </div>
               <div className="bottom">

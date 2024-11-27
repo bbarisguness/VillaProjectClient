@@ -3,9 +3,8 @@ import styles from "./villa.module.css";
 import VillaCard from "./card/villaCard";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { getAllVillaByCategoryId, getVillasHome } from "@/services/villa";
+import { getVillasHome } from "@/services/villa";
 import { useTranslation } from "react-i18next";
-const qs = require("qs");
 
 export default function Villa({ villas, category }) {
   const { t } = useTranslation("common");

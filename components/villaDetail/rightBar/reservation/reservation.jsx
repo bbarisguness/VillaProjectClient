@@ -19,7 +19,7 @@ export default function Reservation({
   villaFirstPhoto,
   region,
   priceTypeText,
-  t
+  t,
 }) {
   const router = useRouter();
 
@@ -177,7 +177,9 @@ export default function Reservation({
             </div>
           </div>
           <div className={styles.textBottom}>
-            <span>{t("pricesStartingFrom")}({t("nighty")})</span>
+            <span>
+              {t("pricesStartingFrom")}({t("nighty")})
+            </span>
           </div>
         </div>
         <div
@@ -185,7 +187,9 @@ export default function Reservation({
           style={{ position: "relative" }}
           className={styles.colon}
         >
-          <div className={styles.colonTitle}>{t("entrance")} / {t("exit")}</div>
+          <div className={styles.colonTitle}>
+            {t("entrance")} / {t("exit")}
+          </div>
           <div
             onClick={() => {
               datepickerRef.current.input.blur();
@@ -249,7 +253,9 @@ export default function Reservation({
               <li>
                 <div className={styles.leftPeople}>
                   <div className={styles.title}>{t("adults")}</div>
-                  <div className={styles.desc}>{t("andAboveAges", { age: 13 })}</div>
+                  <div className={styles.desc}>
+                    {t("andAboveAges", { age: 13 })}
+                  </div>
                 </div>
                 <div className={styles.rightPeople}>
                   <div
@@ -273,7 +279,9 @@ export default function Reservation({
               <li>
                 <div className={styles.leftPeople}>
                   <div className={styles.title}>{t("childs")}</div>
-                  <div className={styles.desc}>{t("andAboveAges", { age: 13 })}</div>
+                  <div className={styles.desc}>
+                    {t("andAboveAges", { age: 13 })}
+                  </div>
                 </div>
                 <div className={styles.rightPeople}>
                   <div
@@ -297,7 +305,9 @@ export default function Reservation({
               <li>
                 <div className={styles.leftPeople}>
                   <div className={styles.title}>{t("babies")}</div>
-                  <div className={styles.desc}>{t("andAboveAges", { age: 13 })}</div>
+                  <div className={styles.desc}>
+                    {t("andAboveAges", { age: 13 })}
+                  </div>
                 </div>
                 <div className={styles.rightPeople}>
                   <div

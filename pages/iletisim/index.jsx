@@ -75,7 +75,9 @@ export default function Iletisim() {
       <section className={`${styles["contentDetail"]} ${styles["contact"]}`}>
         <div className={styles.titleBox}>
           <div className={styles.container}>
-            <h1 className={styles.title}>{capitalizeWords(t("headerContact"))}</h1>
+            <h1 className={styles.title}>
+              {capitalizeWords(t("headerContact"))}
+            </h1>
           </div>
         </div>
         <div className={styles.infoBox}>
@@ -231,7 +233,9 @@ export default function Iletisim() {
 
                         <li>
                           <div className={styles.inputBox}>
-                            <div className={styles.inputName}>{t("surname")}</div>
+                            <div className={styles.inputName}>
+                              {t("surname")}
+                            </div>
                             <Field
                               autoComplete="off"
                               name="surname"
@@ -275,7 +279,9 @@ export default function Iletisim() {
 
                         <li>
                           <div className={styles.inputBox}>
-                            <div className={styles.inputName}>{t("yourEmailAddress")}</div>
+                            <div className={styles.inputName}>
+                              {t("yourEmailAddress")}
+                            </div>
                             <Field
                               autoComplete="off"
                               name="email"
@@ -288,7 +294,9 @@ export default function Iletisim() {
 
                         <li className={styles.full}>
                           <div className={styles.inputBox}>
-                            <div className={styles.inputName}>{t("yourMessage")}</div>
+                            <div className={styles.inputName}>
+                              {t("yourMessage")}
+                            </div>
                             <Field
                               autoComplete="off"
                               as="textarea"
@@ -344,7 +352,9 @@ export default function Iletisim() {
                     />
                   </div>
                   <div className={styles.title}>{t("thanks")}!</div>
-                  <div className={styles.desc}>{t("contactSendResponseMessage")}</div>
+                  <div className={styles.desc}>
+                    {t("contactSendResponseMessage")}
+                  </div>
                 </div>
                 <div
                   className={`${styles["mask"]} ${

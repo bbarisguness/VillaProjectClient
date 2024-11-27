@@ -2,7 +2,6 @@
 import HeaderTop from "./top/top";
 import HeaderBottom from "./bottom/bottom";
 import styles from "./header.module.css";
-import { useEffect, useState } from "react";
 
 import { usePathname } from "next/navigation";
 
