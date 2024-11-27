@@ -95,8 +95,8 @@ export default function Calendar({
         <div className={styles.title}>
           {t("availabilityCalendar")}
           <div style={{ display: "flex", gap: "20px" }}>
-            <span className={styles.orange}>Opsiyonlu</span>
-            <span className={styles.red}>Dolu</span>
+            <span className={styles.orange}>{t("optional")}</span>
+            <span className={styles.red}>{t("full")}</span>
           </div>
         </div>
         {/* {ready &&

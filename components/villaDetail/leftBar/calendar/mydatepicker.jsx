@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./mydatepicker.module.css";
+import { useTranslation } from "react-i18next";
 
 //reservasyon tarihleri düşük aydan yükselen aya doğru gelmesi lazım
 export default function MyDatePicker({
@@ -10,6 +11,7 @@ export default function MyDatePicker({
   calendarPrices,
   priceTypeText,
 }) {
+  const { i18n } = useTranslation();
   const twoDifferentYearsWillBeListed = 0 - (currentMounth + 1);
 
   dates = dates.map((reservation) => ({
@@ -506,7 +508,9 @@ export default function MyDatePicker({
                 <div className={styles.mainTitleContainer}>
                   <div className={styles.montTitleContainer}>
                     <div className={`${styles["month-title"]}`} colSpan="7">
-                      {monthsTurkish[index + currentMounth]}{" "}
+                      {new Intl.DateTimeFormat(i18n.language, {
+                        month: "long",
+                      }).format(currentDate)}{" "}
                       {new Date().getFullYear()}
                     </div>
                   </div>
@@ -536,7 +540,10 @@ export default function MyDatePicker({
                   <div className={styles.mainTitleContainer}>
                     <div className={styles.montTitleContainer}>
                       <div className={`${styles["month-title"]}`} colSpan="7">
-                        {monthsTurkish[index]} {new Date().getFullYear() + 1}
+                        {new Intl.DateTimeFormat(i18n.language, {
+                          month: "long",
+                        }).format(currentDate)}{" "}
+                        {new Date().getFullYear() + 1}
                       </div>
                     </div>
                     <div className={styles.daysHeaderContainer}>

@@ -193,5 +193,7 @@
   "videoComment": "Videolu Yorum",
   "ourFoodPackages": "Yiyecek Paketlerimiz",
   "foodPackage": "Yiyecek Paket",
-  "foodPackage1Message": "John ile denediğimiz her şey lezzetliydi"
+  "foodPackage1Message": "John ile denediğimiz her şey lezzetliydi",
+  "full": "Dolu",
+  "optional": "Opsiyonlu"
 }

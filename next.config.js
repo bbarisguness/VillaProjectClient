@@ -1100,7 +1100,7 @@ const google301 = [
 
 const nextConfig = {
   i18n: {
-    locales: ["tr"],//farklı dil ekleneceği zaman "en" diye ekle, sitede headerde kendisi gelecek
+    locales: ["tr", "en"],//farklı dil ekleneceği zaman "en" diye ekle, sitede headerde kendisi gelecek
     defaultLocale: "tr",
     localeDetection: true,
   },
