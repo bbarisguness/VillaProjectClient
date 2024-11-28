@@ -6,7 +6,9 @@ import { getRegion } from "@/services/region";
 import Seo from "@/components/seo";
 import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
 export default function Bolge({ region }) {
+  const { t } = useTranslation("common")
   const router = useRouter();
   const renderHtmlContent = () => {
     const description = region?.data.webPageDetails[0].descriptionLong;
@@ -37,7 +39,7 @@ export default function Bolge({ region }) {
           <div className={styles.titleBox}>
             <div className={styles.container}>
               <h1 className={styles.title}>
-                {region?.data?.webPageDetails[0]?.title} Kiralık Villa
+                {region?.data?.webPageDetails[0]?.title} {t("villaForRent")}
               </h1>
             </div>
           </div>
@@ -63,7 +65,7 @@ export default function Bolge({ region }) {
 }
 export async function getServerSideProps({ query, locale }) {
   const slug = query?.slug;
-  const region = await getRegion({ slug: slug });
+  const region = await getRegion({ slug: slug, language: locale });
   return {
     props: { region, ...(await serverSideTranslations(locale, ["common"])) },
   };

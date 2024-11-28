@@ -41,7 +41,7 @@ export default function index({ regions }) {
   );
 }
 export async function getServerSideProps({ locale }) {
-  const regions = await getRegions();
+  const regions = await getRegions(locale);
   return {
     props: { regions, ...(await serverSideTranslations(locale, ["common"])) },
   };

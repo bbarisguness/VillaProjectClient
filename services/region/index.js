@@ -9,8 +9,8 @@ async function getRegions(language = 'tr') {
     return data
 }
 
-async function getRegion({ slug }) {
-    const response = await fetch(`${apiUrl}/Clients/GetWebPage?Slug=${slug}&Language=tr`, {
+async function getRegion({ slug, language = 'tr' }) {
+    const response = await fetch(`${apiUrl}/Clients/GetWebPage?Slug=${slug}&Language=${language}`, {
         cache: 'no-store'
     })
     const data = await response.json()

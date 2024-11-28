@@ -152,15 +152,21 @@ export default function VillaCard({
                 <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>
-                    <span>{data.attributes.person} Kişi</span>
+                    <span>
+                      {data.attributes.person} {t("people")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.room_icon}></i>
-                    <span>{data.attributes.room} Oda</span>
+                    <span>
+                      {data.attributes.room} {t("room")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.bath_icon}></i>
-                    <span>{data.attributes.bath} Banyo</span>
+                    <span>
+                      {data.attributes.bath} {t("bath")}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -256,15 +262,21 @@ export default function VillaCard({
                 <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>
-                    <span>{data.person} Kişi</span>
+                    <span>
+                      {data.person} {t("people")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.room_icon}></i>
-                    <span>{data.room} Oda</span>
+                    <span>
+                      {data.room} {t("room")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.bath_icon}></i>
-                    <span>{data.bath} Banyo</span>
+                    <span>
+                      {data.bath} {t("bath")}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -356,15 +368,21 @@ export default function VillaCard({
                 <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>
-                    <span>{data.person} Kişi</span>
+                    <span>
+                      {data.person} {t("people")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.room_icon}></i>
-                    <span>{data.room} Oda</span>
+                    <span>
+                      {data.room} {t("room")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.bath_icon}></i>
-                    <span>{data.bath} Banyo</span>
+                    <span>
+                      {data.bath} {t("bath")}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -488,15 +506,21 @@ export default function VillaCard({
                 <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>
-                    <span>{data.person} Kişi</span>
+                    <span>
+                      {data.person} {t("people")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.room_icon}></i>
-                    <span>{data.room} Oda</span>
+                    <span>
+                      {data.room} {t("room")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.bath_icon}></i>
-                    <span>{data.bath} Banyo</span>
+                    <span>
+                      {data.bath} {t("bath")}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -590,15 +614,21 @@ export default function VillaCard({
                 <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>
-                    <span>{data.person} Kişi</span>
+                    <span>
+                      {data.person} {t("people")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.room_icon}></i>
-                    <span>{data.room} Oda</span>
+                    <span>
+                      {data.room} {t("room")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.bath_icon}></i>
-                    <span>{data.bath} Banyo</span>
+                    <span>
+                      {data.bath} {t("bath")}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -674,15 +704,21 @@ export default function VillaCard({
                 <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>
-                    <span>{data?.person} Kişi</span>
+                    <span>
+                      {data?.person} {t("people")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.room_icon}></i>
-                    <span>{data?.room} Oda</span>
+                    <span>
+                      {data?.room} {t("room")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.bath_icon}></i>
-                    <span>{data?.bath} Banyo</span>
+                    <span>
+                      {data?.bath} {t("bath")}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -773,15 +809,21 @@ export default function VillaCard({
                 <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>
-                    <span>{data.person} Kişi</span>
+                    <span>
+                      {data.person} {t("people")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.room_icon}></i>
-                    <span>{data.room} Oda</span>
+                    <span>
+                      {data.room} {t("room")}
+                    </span>
                   </div>
                   <div className={styles.colon}>
                     <i className={styles.bath_icon}></i>
-                    <span>{data.bath} Banyo</span>
+                    <span>
+                      {data.bath} {t("bath")}
+                    </span>
                   </div>
                 </div>
               </div>

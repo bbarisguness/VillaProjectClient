@@ -71,7 +71,7 @@ export async function getServerSideProps({ locale }) {
   const [villa, aparts, regions, blogs] = await Promise.all([
     getVillasHome(8, 0, categories?.data[0]?.id),
     getHotels(0, 4),
-    getRegions(),
+    getRegions(locale),
     getBlogs(),
   ]);
 
