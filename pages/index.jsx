@@ -72,7 +72,7 @@ export async function getServerSideProps({ locale }) {
     getVillasHome(8, 0, categories?.data[0]?.id),
     getHotels(0, 4),
     getRegions(locale),
-    getBlogs(),
+    getBlogs(locale),
   ]);
 
   return {

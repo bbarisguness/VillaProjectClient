@@ -46,7 +46,7 @@ export default function Blog({ blogs }) {
 }
 
 export async function getServerSideProps({ locale }) {
-  const blogs = await getBlogs();
+  const blogs = await getBlogs(locale);
   return {
     props: { blogs, ...(await serverSideTranslations(locale, ["common"])) },
   };

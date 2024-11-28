@@ -15,27 +15,30 @@ const DynamicHtmlRenderer = dynamic(
   }
 );
 
-const TreeStep = dynamic(() => import("../../../components/index/treestep/treestep"), {
-  ssr: false, // SSR olmadan yüklenmesi yeterli
-});
+const TreeStep = dynamic(
+  () => import("../../../components/index/treestep/treestep"),
+  {
+    ssr: false, // SSR olmadan yüklenmesi yeterli
+  }
+);
 
 export default function Blog({ blog }) {
   const router = useRouter();
   const renderHtmlContent = () => {
     const description = blog?.data?.webPageDetails[0]?.descriptionLong;
 
-    const strongContent = description.replace(
+    const strongContent = description?.replace(
       /\*\*(.*?)\*\*/g,
       "<strong>$1</strong>"
     );
 
-    const headerContent = strongContent.replace(
+    const headerContent = strongContent?.replace(
       /(#+)\s*(.*?)\s*(?=(?:\r\n|\r|\n|$))/g,
       (_, hashes, content) =>
         `<h${hashes.length}>${content}</h${hashes.length}>`
     );
     const finalContent =
-      headerContent.length > 0 ? headerContent : `<p>${strongContent}</p>`;
+      headerContent?.length > 0 ? headerContent : `<p>${strongContent}</p>`;
     return { __html: finalContent };
   };
 
@@ -90,6 +93,8 @@ export default function Blog({ blog }) {
 
 export async function getServerSideProps({ query, locale }) {
   const slug = query.blog;
-  const blog = await getBlog({ slug: slug });
-  return { props: { blog, ...(await serverSideTranslations(locale, ["common"])) } };
+  const blog = await getBlog({ slug: slug, language: locale });
+  return {
+    props: { blog, ...(await serverSideTranslations(locale, ["common"])) },
+  };
 }

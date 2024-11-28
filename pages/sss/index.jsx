@@ -5,8 +5,10 @@ import Seo from "@/components/seo";
 import styles from "./page.module.css";
 import { getFrequentlyAskedQuestions } from "@/services/webpage";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
 
 export default function SSS({ sss }) {
+  const { t } = useTranslation("common");
   const fieldRef = useRef();
   const [accordionIndex, setIndex] = useState(0);
 
@@ -34,7 +36,7 @@ export default function SSS({ sss }) {
         <div className="accordionBox">
           <div className={styles.container}>
             <div className={styles.titleBox}>
-              <h1 className={styles.title}>Soru Cevap</h1>
+              <h1 className={styles.title}>{t("questionAndAnswer")}</h1>
             </div>
             <div className={styles.accordion}>
               <div
@@ -47,13 +49,8 @@ export default function SSS({ sss }) {
                 }`}
                 style={{ height: "70px" }}
               >
-                <div className={styles.title}>Sık Sorulan Sorular</div>
-                <div className={styles.desc}>
-                  Bu sayfamızda hizmetlerimizle alakalı sık sorulan sorulara ve
-                  cevaplarına yer verilmektedir. Aklınıza takılan diğer
-                  sorularınız için de her zaman çağrı merkezimizle iletişime
-                  geçebilirsiniz.
-                </div>
+                <div className={styles.title}>{t("faq")}</div>
+                <div className={styles.desc}>{t("faqFırstItemDesc")}</div>
               </div>
               {sss?.data?.map((item, index) => (
                 <div

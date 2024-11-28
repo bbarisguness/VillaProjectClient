@@ -42,8 +42,8 @@ export default function FooterTop({ regions }) {
                     {t("ourWorkingHours")}
                   </div>
                   <div className={styles.footerDecs}>
-                    Hafta içi 09:00 - 18:00 <br />
-                    Hafta sonu 09:00 - 18:00
+                    {t("weekday")} 09:00 - 18:00 <br />
+                    {t("weekend")} 09:00 - 18:00
                   </div>
                 </li>
                 <li>

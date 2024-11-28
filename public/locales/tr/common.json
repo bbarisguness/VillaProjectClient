@@ -126,7 +126,7 @@
   "facilityArea": "Tesis Bölgesi",
   "bookingOwner": "Rezervasyon Sahibi",
   "phoneNumber": "Telefon Numarası",
-  "termsOfContract":"Sözleşme Şartları",
+  "termsOfContract": "Sözleşme Şartları",
   "thisFieldCannotBeLeftBlank": "Bu alan boş bırakılamaz",
   "pleaseEnterALongerName": "Lütfen daha uzun bir isim girin",
   "pleaseEnterAShorterName": "Lütfen daha kısa bir isim girin",
@@ -200,5 +200,9 @@
   "full": "Dolu",
   "optional": "Opsiyonlu",
   "callNow": "Hemen Ara",
-  "villaForRent": "Kiralık Villa"
+  "villaForRent": "Kiralık Villa",
+  "weekday": "Haftaiçi",
+  "weekend": "Haftasonu",
+  "questionAndAnswer": "Soru Cevap",
+  "faqFırstItemDesc": "Bu sayfamızda hizmetlerimizle alakalı sık sorulan sorulara ve cevaplarına yer verilmektedir. Aklınıza takılan diğer sorularınız için de her zaman çağrı merkezimizle iletişime geçebilirsiniz."
 }

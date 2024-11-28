@@ -424,7 +424,7 @@ export async function getServerSideProps({ params, query, locale }) {
   );
 
   const villaDetailPromise = categoryPromise.then((category) =>
-    category == true ? getVilla(slug[0]) : null
+    category == true ? getVilla(slug[0], locale) : null
   );
 
   const nearVillasPromise = villaDetailPromise.then((villaDetail) =>

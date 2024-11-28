@@ -238,7 +238,7 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
 }
 export async function getServerSideProps({ params, locale }) {
   const slug = params?.slug;
-  const villaDetail = await getVilla(slug);
+  const villaDetail = await getVilla(slug, locale);
   const nearVillas = await getNearVillas(villaDetail?.data?.town?.id);
   const imgs = villaDetail?.data?.photos;
   return {

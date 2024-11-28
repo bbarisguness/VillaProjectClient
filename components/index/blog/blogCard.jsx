@@ -101,7 +101,7 @@ export default function BlogCard({ data, t }) {
               <span>1</span>
             </div>
           </div>
-          <div className={styles.title}>{data?.webPageDetails[0].title}</div>
+          <div className={styles.title}>{data?.webPageDetails[0]?.title}</div>
           <div className={styles.desc}>
             {data?.webPageDetails[0]?.descriptionShort}
           </div>

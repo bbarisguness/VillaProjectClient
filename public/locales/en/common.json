@@ -200,5 +200,9 @@
   "full": "Full",
   "optional": "Optional",
   "callNow": "Call Now",
-  "villaForRent": "Villa For Rent"
+  "villaForRent": "Villa For Rent",
+  "weekday": "Weekday",
+  "weekend": "Weekend",
+  "questionAndAnswer": "Question And Answer",
+  "faqFırstItemDesc": "This page includes frequently asked questions and answers about our services. You can always contact our call center for any other questions you may have."
 }

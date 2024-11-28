@@ -12,17 +12,17 @@ export default function Bolge({ region }) {
   const router = useRouter();
   const renderHtmlContent = () => {
     const description = region?.data.webPageDetails[0].descriptionLong;
-    const strongContent = description.replace(
+    const strongContent = description?.replace(
       /\*\*(.*?)\*\*/g,
       "<strong>$1</strong>"
     );
-    const headerContent = strongContent.replace(
+    const headerContent = strongContent?.replace(
       /(#+)\s*(.*?)\s*(?=(?:\r\n|\r|\n|$))/g,
       (_, hashes, content) =>
         `<h${hashes.length}>${content}</h${hashes.length}>`
     );
     const finalContent =
-      headerContent.length > 0 ? headerContent : `<p>${strongContent}</p>`;
+      headerContent?.length > 0 ? headerContent : `<p>${strongContent}</p>`;
     return { __html: finalContent };
   };
   if (region?.data) {
