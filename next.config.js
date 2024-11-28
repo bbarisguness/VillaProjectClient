@@ -1099,19 +1099,6 @@ const google301 = [
 ]
 
 const nextConfig = {
-  async headers() {
-    return [
-      {
-        source: '/(.*)', // Tüm dosyalar için
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable', // 1 yıl cache
-          },
-        ],
-      },
-    ];
-  },
   i18n: {
     locales: ["tr", "en"],//farklı dil ekleneceği zaman "en" diye ekle, sitede headerde kendisi gelecek
     defaultLocale: "tr",
