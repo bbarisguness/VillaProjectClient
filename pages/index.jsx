@@ -64,15 +64,44 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps({ locale }) {
+// export async function getServerSideProps({ locale }) {
+//   // API çağrılarını paralel olarak başlat
+//   const otelData = getHotels(0, 4);
+//   const regionData = getRegions(locale);
+//   const blogsData = getBlogs(locale);
+//   const categories = await getCategoriesHome(locale);
+
+//   const [aparts, regions, blogs, villa] = await Promise.all([
+//     otelData,
+//     regionData,
+//     blogsData,
+//     getVillasHome(8, 0, categories?.data[0]?.id),
+//   ]);
+
+//   return {
+//     props: {
+//       villa,
+//       categories,
+//       blogs,
+//       regions,
+//       aparts,
+//       ...(await serverSideTranslations(locale, ["common"])),
+//     },
+//   };
+// }
+
+export async function getStaticProps({ locale }) {
   // API çağrılarını paralel olarak başlat
+  const otelData = getHotels(0, 4);
+  const regionData = getRegions(locale);
+  const blogsData = getBlogs(locale);
   const categories = await getCategoriesHome(locale);
 
-  const [villa, aparts, regions, blogs] = await Promise.all([
+  const [aparts, regions, blogs, villa] = await Promise.all([
+    otelData,
+    regionData,
+    blogsData,
     getVillasHome(8, 0, categories?.data[0]?.id),
-    getHotels(0, 4),
-    getRegions(locale),
-    getBlogs(locale),
   ]);
 
   return {

@@ -3,7 +3,7 @@ const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
 
 async function getBlogs(Language = 'tr') {
     const response = await fetch(`${apiUrl}/Clients/GetAllWebPage?Language=${Language}&CompanyId=${companyId}&MenuId=868abcc6-c260-46b5-4de3-08dce9d46910&Pagination.Page=0&Pagination.Size=50`, {
-        cache: 'no-store'
+        next: { revalidate: 30 }
     })
     const data = await response.json()
     return data

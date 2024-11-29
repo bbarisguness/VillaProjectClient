@@ -3,7 +3,7 @@ const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
 
 async function getCategories(language = 'tr') {
     const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=${language}&CompanyId=${companyId}`, {
-        cache: 'no-store'
+        next: { revalidate: 30 }
     })
     const data = await response.json()
     return data
@@ -11,7 +11,7 @@ async function getCategories(language = 'tr') {
 
 async function getCategoriesHome(language = 'tr') {
     const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=${language}&CompanyId=${companyId}`, {
-        cache: 'no-store'
+        next: { revalidate: 30 }
     })
     const data = await response.json()
     return data
