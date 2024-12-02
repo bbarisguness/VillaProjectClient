@@ -10,9 +10,7 @@ async function getVillas(page = 1) {
 }
 
 async function getHotels(page = 0, size = 20) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=tr&CompanyId=${companyId}&Size=${size}&Page=${page}`, {
-        next: { revalidate: 30 }
-    })
+    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=tr&CompanyId=${companyId}&Size=${size}&Page=${page}`)
     const data = await response.json()
     return data
 }
@@ -43,7 +41,7 @@ async function getVillasForSale(page = 0, size = 20) {
 
 async function getVillasHome(size = 8, page = 0, categoryId) {
     const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategoryId?Language=tr&CompanyId=${companyId}&CategoryId=${categoryId}&Size=${size}&Page=${page}`, {
-        next: { revalidate: 30 }
+        next: { revalidate: 60 }
     })
     const data = await response.json()
     return data
