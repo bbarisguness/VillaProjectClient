@@ -91,11 +91,6 @@
 }
 
 .top .reservationBox .colon .colonInput .loginDateIcon {
-    width: 20px;
-    height: 20px;
-    background-image: url(/images/date.png);
-    background-repeat: no-repeat;
-    background-position: center;
     position: absolute;
     left: 20px;
     top: calc(50% - 10px);

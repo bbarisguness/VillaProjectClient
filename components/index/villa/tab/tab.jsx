@@ -1,5 +1,6 @@
 import styles from "./tab.module.css";
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function VillaTab({
@@ -40,9 +41,15 @@ export default function VillaTab({
               }}
             >
               <div className={styles.iconBox}>
-                <i
+                {/* <i
                   style={{ backgroundImage: `url(/images/${item?.icon})` }}
-                ></i>
+                ></i> */}
+                <Image
+                  src={`/images/${item?.icon}`}
+                  alt=""
+                  width={50}
+                  height={50}
+                />
               </div>
               <div className={styles.title}>
                 {item?.categoryDetails[0]?.name}

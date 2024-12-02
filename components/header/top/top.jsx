@@ -1,5 +1,6 @@
 import styles from "./top.module.css";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 
@@ -19,13 +20,18 @@ export default function HeaderTop() {
         <div className={styles.box}>
           <div className={styles.left}>
             <div className={styles.colon}>
-              <i style={{ backgroundImage: `url(/images/call.png)` }}></i>
+              <Image src="/images/call.png" alt="call" width={20} height={20} />
               <span>
                 {t("contactUs")} <a href="tel:02428443988">+90 252 616 66 48</a>
               </span>
             </div>
             <div className={styles.colon}>
-              <i style={{ backgroundImage: `url(/images/clock.png)` }}></i>
+              <Image
+                src="/images/clock.png"
+                alt="clock"
+                width={20}
+                height={20}
+              />
               <span>{t("workingHours")} : 09:00 - 18:00</span>
             </div>
           </div>

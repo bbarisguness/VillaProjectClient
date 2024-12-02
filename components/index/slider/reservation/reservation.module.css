@@ -66,31 +66,16 @@
 }
 
 .reservationBox .colon .colonInput .searchIcon {
-    width: 20px;
-    height: 20px;
-    background-image: url(/images/search2.png);
-    background-repeat: no-repeat;
-    background-position: center;
     position: absolute;
     left: 0;
 }
 
 .reservationBox .colon .colonInput .dateIcon {
-    width: 20px;
-    height: 20px;
-    background-image: url(/images/date.png);
-    background-repeat: no-repeat;
-    background-position: center;
     position: absolute;
     left: 0;
 }
 
 .reservationBox .colon .colonInput .peopleIcon {
-    width: 20px;
-    height: 20px;
-    background-image: url(/images/people.png);
-    background-repeat: no-repeat;
-    background-position: center;
     position: absolute;
     left: 0;
 }
@@ -268,9 +253,9 @@
     background-color: #f2eefe;
     border-radius: 50%;
     cursor: pointer;
-    background-image: url("/images/minus.png");
-    background-position: center;
-    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .reservationBox .colon .villaMenuOpen ul li .right .minus {
@@ -314,9 +299,9 @@
     background-color: #f2eefe;
     border-radius: 50%;
     cursor: pointer;
-    background-image: url("/images/plus.png");
-    background-position: center;
-    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .reservationBox .colon .villaMenuOpen ul li .right .plus {
@@ -337,10 +322,10 @@
     border-radius: 50%;
     position: absolute;
     right: 15px;
-    background-image: url(/images/search.png);
-    background-repeat: no-repeat;
-    background-position: center;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .reservationBox .datepickerBox {

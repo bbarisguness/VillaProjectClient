@@ -25,6 +25,12 @@
      justify-content: center;
  }
 
+ .threeSteps .box ul li .iconBox .iconContainer {
+    border-radius: 45px;
+    background: #EDF2FE;
+    padding: 20px
+}
+
  .threeSteps .box ul li .iconBox i {
      width: 100px;
      height: 100px;

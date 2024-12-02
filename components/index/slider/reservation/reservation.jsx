@@ -8,6 +8,7 @@ import Link from "next/link";
 import { getVillasByFilter } from "@/services/villa";
 //import MyCalendar from "./MyCalendar";
 import tr from "date-fns/locale/tr";
+import Image from "next/image";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
@@ -336,7 +337,13 @@ export default function ReservationBox() {
       >
         <div className={styles.colonTitle}>{t("searchForaFacility")}</div>
         <div className={styles.colonInput}>
-          <i className={styles.searchIcon} />
+          <Image
+            src="/images/search2.png"
+            alt="search2"
+            width={20}
+            height={20}
+            className={styles.searchIcon}
+          />
           <input
             onClick={() => checkVillaMenuState()}
             ref={inputRefVillaName}
@@ -386,7 +393,13 @@ export default function ReservationBox() {
           {t("entrance")} / {t("exit")}
         </div>
         <div className={styles.colonInput}>
-          <i className={styles.dateIcon}></i>
+          <Image
+            src="/images/date.png"
+            alt="date"
+            width={20}
+            height={20}
+            className={styles.dateIcon}
+          />
 
           <DatePicker
             selectsRange={true}
@@ -460,7 +473,13 @@ export default function ReservationBox() {
       >
         <div className={styles.colonTitle}>{t("numberOfPeople")}</div>
         <div className={styles.colonInput}>
-          <i className={styles.peopleIcon} />
+          <Image
+            src="/images/people.png"
+            alt="people"
+            width={20}
+            height={20}
+            className={styles.peopleIcon}
+          />
           <input
             ref={inputRefNumberOfPeople}
             readOnly
@@ -483,9 +502,16 @@ export default function ReservationBox() {
               </div>
               <div className={styles.right}>
                 <div
-                  onClick={() => changeNumber("-", "adult")}
                   className={styles.minus}
-                ></div>
+                  onClick={() => changeNumber("-", "adult")}
+                >
+                  <Image
+                    src="/images/minus.png"
+                    alt="minus"
+                    width={10}
+                    height={2}
+                  />
+                </div>
                 <input
                   id="Adults"
                   type="text"
@@ -495,9 +521,16 @@ export default function ReservationBox() {
                   disabled
                 />
                 <div
-                  onClick={() => changeNumber("+", "adult")}
                   className={styles.plus}
-                ></div>
+                  onClick={() => changeNumber("+", "adult")}
+                >
+                  <Image
+                    src="/images/plus.png"
+                    alt="plus"
+                    width={10}
+                    height={10}
+                  />
+                </div>
               </div>
             </li>
             <li>
@@ -509,9 +542,16 @@ export default function ReservationBox() {
               </div>
               <div className={styles.right}>
                 <div
-                  onClick={() => changeNumber("-", "child")}
                   className={styles.minus}
-                ></div>
+                  onClick={() => changeNumber("-", "child")}
+                >
+                  <Image
+                    src="/images/minus.png"
+                    alt="minus"
+                    width={10}
+                    height={2}
+                  />
+                </div>
                 <input
                   id="Childs"
                   type="text"
@@ -521,9 +561,16 @@ export default function ReservationBox() {
                   disabled
                 />
                 <div
-                  onClick={() => changeNumber("+", "child")}
                   className={styles.plus}
-                ></div>
+                  onClick={() => changeNumber("+", "child")}
+                >
+                  <Image
+                    src="/images/plus.png"
+                    alt="plus"
+                    width={10}
+                    height={10}
+                  />
+                </div>
               </div>
             </li>
             <li>
@@ -535,9 +582,16 @@ export default function ReservationBox() {
               </div>
               <div className={styles.right}>
                 <div
-                  onClick={() => changeNumber("-", "babies")}
                   className={styles.minus}
-                ></div>
+                  onClick={() => changeNumber("-", "babies")}
+                >
+                  <Image
+                    src="/images/minus.png"
+                    alt="minus"
+                    width={10}
+                    height={2}
+                  />
+                </div>
                 <input
                   id="Babies"
                   type="text"
@@ -547,15 +601,24 @@ export default function ReservationBox() {
                   disabled
                 />
                 <div
-                  onClick={() => changeNumber("+", "babies")}
                   className={styles.plus}
-                ></div>
+                  onClick={() => changeNumber("+", "babies")}
+                >
+                  <Image
+                    src="/images/plus.png"
+                    alt="plus"
+                    width={10}
+                    height={10}
+                  />
+                </div>
               </div>
             </li>
           </ul>
         </div>
       </div>
-      <button onClick={handleSearch} className={styles.searchButton}></button>
+      <button onClick={handleSearch} className={styles.searchButton}>
+        <Image src="/images/search.png" alt="search" width={20} height={20} />
+      </button>
     </div>
   );
 }

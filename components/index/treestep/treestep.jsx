@@ -1,4 +1,5 @@
 import styles from "./treestep.module.css";
+import Image from "next/image";
 import { useTranslation } from "react-i18next";
 
 export default function TreeStep({ from }) {
@@ -16,11 +17,14 @@ export default function TreeStep({ from }) {
           <ul>
             <li>
               <div className={styles.iconBox}>
-                <i
-                  style={{
-                    backgroundImage: `url(/images/search-favorite.png)`,
-                  }}
-                ></i>
+                <div className={styles.iconContainer}>
+                  <Image
+                    src="/images/search-favorite.png"
+                    alt="searchFavorite"
+                    width={50}
+                    height={50}
+                  />
+                </div>
               </div>
               <div className={styles.title}>
                 {t("searchAmongHundredsofVillas")}
@@ -31,14 +35,28 @@ export default function TreeStep({ from }) {
             </li>
             <li>
               <div className={styles.iconBox}>
-                <i style={{ backgroundImage: `url(/images/send-2.png)` }}></i>
+                <div className={styles.iconContainer}>
+                  <Image
+                    src="/images/send-2.png"
+                    alt="send2"
+                    width={50}
+                    height={50}
+                  />
+                </div>
               </div>
               <div className={styles.title}>{t("sendRequest")}</div>
               <div className={styles.desc}>{t("sendRequestText")}</div>
             </li>
             <li>
               <div className={styles.iconBox}>
-                <i style={{ backgroundImage: `url(/images/like-tag.png)` }}></i>
+                <div className={styles.iconContainer}>
+                  <Image
+                    src="/images/like-tag.png"
+                    alt="likeTag"
+                    width={50}
+                    height={50}
+                  />
+                </div>
               </div>
               <div className={styles.title}>{t("completeReservation")}</div>
               <div className={styles.desc}>{t("completeReservationText")}</div>

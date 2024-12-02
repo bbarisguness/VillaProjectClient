@@ -37,6 +37,10 @@
   margin: 0 10px 0 0;
 }
 
+.top .box .left .colon img {
+  margin: 0 10px 0 0;
+}
+
 .top .box .left .colon span {
   color: #ffffff;
   font-size: 14px;
@@ -86,7 +90,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .top .box .right .socialMedia ul li a:hover {
@@ -141,7 +145,7 @@
 }
 
 .top .box .right .lang a::before {
-  content: '';
+  content: "";
   width: 8px;
   height: 5px;
   background-image: url(/images/down.png);

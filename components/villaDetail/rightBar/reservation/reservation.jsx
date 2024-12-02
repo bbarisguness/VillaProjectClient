@@ -196,7 +196,13 @@ export default function Reservation({
             }}
             className={styles.colonInput}
           >
-            <i className={styles.loginDateIcon}></i>
+            <Image
+              src="/images/date.png"
+              alt="date"
+              width={50}
+              height={50}
+              className={styles.loginDateIcon}
+            />
             <div className="date-picker-reservation">
               <DatePicker
                 ref={datepickerRef}
