@@ -4,7 +4,6 @@ import Header from "@/components/header/header"
 import Footer from "@/components/footer/footer"
 import HamburgerMenu from "@/components/hamburger/hamburgerMenu"
 import { useEffect, useState } from "react";
-import { getRegions } from "@/services/region"
 import { appWithTranslation } from "next-i18next"
 import { useTranslation } from "next-i18next"
 
@@ -35,8 +34,9 @@ function myApp({ Component, pageProps }) {
         document.head.appendChild(inlineScript);
 
         async function fetchData() {
-            const data = await getRegions(i18n.language)
-            setFooterData(data?.data);
+            fetch(`/api/regions?lang=${i18n.language}`)
+                .then((res) => res.json())
+                .then((data) => setFooterData(data?.data || []));
         }
         fetchData();
     }, []);
@@ -45,8 +45,9 @@ function myApp({ Component, pageProps }) {
         // Sayfa dil değiştiğinde yenilenmesini sağlar
         const handleLanguageChange = async () => {
             //window.location.reload();
-            const data = await getRegions(i18n.language)
-            setFooterData(data?.data);
+            fetch(`/api/regions?lang=${i18n.language}`)
+                .then((res) => res.json())
+                .then((data) => setFooterData(data?.data || []));
         };
 
         i18n.on('languageChanged', handleLanguageChange);
