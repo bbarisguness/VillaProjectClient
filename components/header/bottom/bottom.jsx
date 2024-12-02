@@ -4,7 +4,6 @@ import Link from "next/link";
 import { changeHamburgerMenuState } from "@/store/globalState";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { getCategories } from "@/services/category";
 import { useTranslation } from "react-i18next";
 
 export default function HeaderBottom({ from }) {
@@ -16,18 +15,18 @@ export default function HeaderBottom({ from }) {
     dispatch(changeHamburgerMenuState());
   }
   useEffect(() => {
-    getCategories(i18n.language).then((res) => {
-      setCategory(res?.data);
-    });
+    fetch(`/api/categories?lang=${i18n.language}`)
+      .then((res) => res.json())
+      .then((data) => setCategory(data?.data || []));
   }, []);
 
   useEffect(() => {
     // Sayfa dil değiştiğinde yenilenmesini sağlar
     const handleLanguageChange = () => {
       //window.location.reload();
-      getCategories(i18n.language).then((res) => {
-        setCategory(res?.data);
-      });
+      fetch(`/api/categories?lang=${i18n.language}`)
+        .then((res) => res.json())
+        .then((data) => setCategory(data?.data || []));
     };
 
     i18n.on("languageChanged", handleLanguageChange);

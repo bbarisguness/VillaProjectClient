@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeHamburgerMenuState } from "@/store/globalState";
-import { getCategories } from "@/services/category";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 
@@ -24,10 +23,25 @@ export default function HamburgerMenu() {
   };
 
   useEffect(() => {
-    getCategories(i18n.language).then((res) => {
-      setCategory(res?.data);
-    });
+    fetch(`/api/categories?lang=${i18n.language}`)
+      .then((res) => res.json())
+      .then((data) => setCategory(data?.data || []));
   }, []);
+
+  useEffect(() => {
+    const getHamburgerData = async () => {
+      fetch(`/api/categories?lang=${i18n.language}`)
+        .then((res) => res.json())
+        .then((data) => setCategory(data?.data || []));
+    };
+
+    i18n.on("languageChanged", getHamburgerData);
+
+    return () => {
+      i18n.off("languageChanged", getHamburgerData);
+    };
+  }, [i18n]);
+
   return (
     <>
       <div className={`${isHamburgerMenuActive && styles.openMenuDark}`}></div>
