@@ -212,12 +212,12 @@
     top: -10px;
 }
 
-.services .box .bottom ul li .column:hover .iconBox i {
+.services .box .bottom ul li .column:hover .iconBox img {
     opacity: 0;
     visibility: hidden;
 }
 
-.services .box .bottom ul li .column:hover .iconBox i.two_i {
+.services .box .bottom ul li .column:hover .iconBox img.two_i {
     opacity: 1;
     visibility: visible;
 }
@@ -241,7 +241,7 @@
     justify-content: center;
 }
 
-.services .box .bottom ul li .column .iconBox i {
+.services .box .bottom ul li .column .iconBox img {
     opacity: 1;
     visibility: visible;
     transition: all .3s ease-in-out;
@@ -253,7 +253,7 @@
     z-index: 2;
 }
 
-.services .box .bottom ul li .column .iconBox i.two_i {
+.services .box .bottom ul li .column .iconBox img.two_i {
     opacity: 0;
     visibility: hidden;
     z-index: 1;
