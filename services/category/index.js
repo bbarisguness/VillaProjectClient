@@ -10,7 +10,9 @@ async function getCategories(language = 'tr') {
 }
 
 async function getCategoriesHome(language = 'tr') {
-    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=${language}&CompanyId=${companyId}`)
+    const response = await fetch(`${apiUrl}/Clients/GetAllCategory?Language=${language}&CompanyId=${companyId}`, {
+        next: { revalidate: 60 }
+    })
     const data = await response.json()
     return data
 }

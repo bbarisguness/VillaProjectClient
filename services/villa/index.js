@@ -10,7 +10,9 @@ async function getVillas(page = 1) {
 }
 
 async function getHotels(page = 0, size = 20) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=tr&CompanyId=${companyId}&Size=${size}&Page=${page}`)
+    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=tr&CompanyId=${companyId}&Size=${size}&Page=${page}`, {
+        next: { revalidate: 60 }
+    })
     const data = await response.json()
     return data
 }
