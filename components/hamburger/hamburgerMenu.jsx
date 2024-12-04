@@ -35,10 +35,13 @@ export default function HamburgerMenu() {
         .then((data) => setCategory(data?.data || []));
     };
 
-    i18n.on("languageChanged", getHamburgerData);
-
+    if (i18n.isInitialized) {
+      i18n.on("languageChanged", getHamburgerData);
+    }
     return () => {
-      i18n.off("languageChanged", getHamburgerData);
+      if (i18n.isInitialized) {
+        i18n.off("languageChanged", getHamburgerData);
+      }
     };
   }, [i18n]);
 
