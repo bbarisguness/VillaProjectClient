@@ -4,6 +4,7 @@ import styles from "./hakkimizda/page.module.css";
 import Link from "next/link";
 import BreadCrumb from "@/components/breadCrumb/breadCrumb";
 import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const DortYuzDort = () => {
   const router = useRouter();
@@ -53,3 +54,7 @@ const DortYuzDort = () => {
 };
 
 export default DortYuzDort;
+
+export async function getStaticProps({ locale }) {
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
+}

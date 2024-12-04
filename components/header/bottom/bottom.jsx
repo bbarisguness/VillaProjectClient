@@ -30,10 +30,14 @@ export default function HeaderBottom({ from }) {
       });
     };
 
-    i18n.on("languageChanged", handleLanguageChange);
+    if (i18n.isInitialized) {
+      i18n.on("languageChanged", handleLanguageChange);
+    }
 
     return () => {
-      i18n.off("languageChanged", handleLanguageChange);
+      if (i18n.isInitialized) {
+        i18n.off("languageChanged", handleLanguageChange);
+      }
     };
   }, [i18n]);
 
