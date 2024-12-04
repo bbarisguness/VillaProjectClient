@@ -12,11 +12,11 @@ export default function BlogCard({ item }) {
               {/* <div
                 className={styles.bgImage}
                 style={{
-                  backgroundImage: `url(https://villaapi.testgrande.com/Uploads/WebPhotos/k_${item?.photos[0]?.image})`,
+                  backgroundImage: `url(${process.env.NEXT_PUBLIC_WEBHOTOS_URL}/k_${item?.photos[0]?.image})`,
                 }}
               ></div> */}
               <Image
-                src={`https://villaapi.testgrande.com/Uploads/WebPhotos/k_${item?.photos[0]?.image}`}
+                src={`${process.env.NEXT_PUBLIC_WEBHOTOS_URL}/k_${item?.photos[0]?.image}`}
                 alt={item?.webPageDetails[0]?.title || "Blog Image"}
                 style={{ objectFit: "cover" }}
                 fill
