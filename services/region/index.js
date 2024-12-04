@@ -2,9 +2,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL
 const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
 
 async function getRegions(language = 'tr') {
-    const response = await fetch(`${apiUrl}/Clients/GetAllWebPage?Language=${language}&CompanyId=${companyId}&MenuId=82FA2F5B-C87A-4E5D-29A9-08DCE9D62FAD`, {
-        next: { revalidate: 60 }
-    })
+    const response = await fetch(`${apiUrl}/Clients/GetAllWebPage?Language=${language}&CompanyId=${companyId}&MenuId=82FA2F5B-C87A-4E5D-29A9-08DCE9D62FAD`)
     const data = await response.json()
     return data
 }

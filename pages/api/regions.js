@@ -1,20 +1,17 @@
-// pages/api/categories.js
+// pages/api/regions.js
 import { getRegions } from "@/services/region";
-
-let cache = {}; // Cache'i tutmak için bir değişken
-let lastFetchTimes = {}; // Son fetch zamanını kontrol etmek için bir değişken
-const CACHE_DURATION = 1000 * 60 * 5; // 5 dakika
+import { setCache, getCache } from "@/lib/cache";
 
 export default async function handler(req, res) {
     const { lang } = req.query;
-    const now = Date.now();
-
-    // Eğer ilgili dil için cache güncel değilse veya hiç yoksa veriyi fetch et
-    if (!cache[lang] || now - (lastFetchTimes[lang] || 0) > CACHE_DURATION) {
+    const data = getCache('homepageCachedRegions', lang);
+    if (!data) {
+        console.log("regions apiden geldi")
         const regions = await getRegions(lang);
-        cache[lang] = regions;
-        lastFetchTimes[lang] = now;
+        setCache('homepageCachedRegions', lang, regions, 3600 * 1000); // 1 saat geçerli
+        return res.status(200).json(regions);
     }
+    console.log("regions cacheden geldi")
 
-    res.status(200).json(cache[lang]);
+    res.status(200).json(data);
 }

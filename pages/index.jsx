@@ -8,6 +8,7 @@ import Slider from "@/components/index/slider/slider";
 // import VillaRent from "@/components/index/villaRentInfo/villaRentInfo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
+import { getCache, setCache } from "@/lib/cache";
 
 //const Slider = lazy(() => import('@/components/index/slider/slider'));
 const TreeStep = lazy(() => import("@/components/index/treestep/treestep"));
@@ -91,18 +92,87 @@ export default function Home({
 // }
 
 export async function getStaticProps({ locale }) {
-  // API çağrılarını paralel olarak başlat
-  const otelData = getHotels(0, 4);
-  const regionData = getRegions(locale);
-  const blogsData = getBlogs(locale);
-  const categories = await getCategoriesHome(locale);
+  console.log("tekrar generate edildi");
+  const cachedAparts = getCache("homepageCachedAparts", locale);
+  const cachedRegionData = getCache("homepageCachedRegions", locale);
+  const cachedBlogData = getCache("homepageCachedBlogs", locale);
+  const cachedCategoriesData = getCache("homepageCachedCategories", locale);
+  const cachedhomeVillaData = getCache("homepageCachedVillas", locale);
+
+  let otelData, regionData, blogsData, categories, homeVillas;
+
+  if (cachedAparts) {
+    otelData = cachedAparts;
+    console.log("cachedAparts cache");
+  } else {
+    otelData = getHotels(0, 4);
+    console.log("cachedAparts api");
+  }
+
+  if (cachedRegionData) {
+    regionData = cachedRegionData;
+    console.log("cachedRegionData cache");
+  } else {
+    regionData = getRegions(locale);
+    console.log("cachedRegionData api");
+  }
+
+  if (cachedBlogData) {
+    blogsData = cachedBlogData;
+    console.log("cachedBlogData cache");
+  } else {
+    blogsData = getBlogs(locale);
+    console.log("cachedBlogData api");
+  }
+
+  if (cachedCategoriesData) {
+    categories = cachedCategoriesData;
+    console.log("cachedCategoriesData cache");
+  } else {
+    categories = await getCategoriesHome(locale);
+    console.log("cachedCategoriesData api");
+  }
+
+  if (cachedhomeVillaData) {
+    homeVillas = cachedhomeVillaData;
+    console.log("cachedHomeVillaData cache");
+  } else {
+    homeVillas = getVillasHome(8, 0, categories?.data[0]?.id);
+    console.log("cachedHomeVillaData api");
+  }
 
   const [aparts, regions, blogs, villa] = await Promise.all([
     otelData,
     regionData,
     blogsData,
-    getVillasHome(8, 0, categories?.data[0]?.id),
+    homeVillas,
   ]);
+
+  //SET CACHE DATAS
+  if (!cachedAparts) {
+    setCache("homepageCachedAparts", locale, aparts, 10 * 1000);
+    console.log("homepageCachedAparts  cacheSetEt");
+  }
+
+  if (!cachedRegionData) {
+    setCache("homepageCachedRegions", locale, regions, 3600 * 1000); // 1 saat geçerli
+    console.log("homepageCachedRegions  cacheSetEt");
+  }
+
+  if (!cachedBlogData) {
+    setCache("homepageCachedBlogs", locale, blogs, 10 * 1000);
+    console.log("homepageCachedBlogs  cacheSetEt");
+  }
+
+  if (!cachedCategoriesData) {
+    setCache("homepageCachedCategories", locale, categories, 3600 * 1000); //1 saat geçerli
+    console.log("homepageCachedCategories  cacheSetEt");
+  }
+
+  if (!cachedhomeVillaData) {
+    setCache("homepageCachedVillas", locale, villa, 10 * 1000);
+    console.log("homepageCachedVillas  cacheSetEt");
+  }
 
   return {
     props: {
@@ -113,5 +183,6 @@ export async function getStaticProps({ locale }) {
       aparts,
       ...(await serverSideTranslations(locale, ["common"])),
     },
+    revalidate: 60,
   };
 }
