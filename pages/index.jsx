@@ -150,7 +150,7 @@ export async function getStaticProps({ locale }) {
 
   //SET CACHE DATAS
   if (!cachedAparts) {
-    setCache("homepageCachedAparts", locale, aparts, 10 * 1000);
+    setCache("homepageCachedAparts", locale, aparts, 60 * 1000); // 1 dakika geçerli
     console.log("homepageCachedAparts  cacheSetEt");
   }
 
@@ -160,7 +160,7 @@ export async function getStaticProps({ locale }) {
   }
 
   if (!cachedBlogData) {
-    setCache("homepageCachedBlogs", locale, blogs, 10 * 1000);
+    setCache("homepageCachedBlogs", locale, blogs, 3600 * 1000); // 1 saat geçerli
     console.log("homepageCachedBlogs  cacheSetEt");
   }
 
@@ -170,7 +170,7 @@ export async function getStaticProps({ locale }) {
   }
 
   if (!cachedhomeVillaData) {
-    setCache("homepageCachedVillas", locale, villa, 10 * 1000);
+    setCache("homepageCachedVillas", locale, villa, 60 * 1000); //1 dakika geçerli
     console.log("homepageCachedVillas  cacheSetEt");
   }
 

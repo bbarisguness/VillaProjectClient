@@ -4,9 +4,10 @@ import { getBlogs } from "@/services/blog";
 import Seo from "@/components/seo";
 import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { getCache, setCache } from "@/lib/cache";
 
 const BlogCard = dynamic(() => import("../../components/blog/blogCard"), {
-  ssr: false, // SSR olmadan yüklenmesi yeterli
+  ssr: true,
 });
 
 export default function Blog({ blogs }) {
@@ -45,9 +46,24 @@ export default function Blog({ blogs }) {
   );
 }
 
-export async function getServerSideProps({ locale }) {
-  const blogs = await getBlogs(locale);
-  return {
-    props: { blogs, ...(await serverSideTranslations(locale, ["common"])) },
-  };
+export async function getStaticProps({ locale }) {
+  const cachedBlogData = getCache("homepageCachedBlogs", locale);
+
+  if (cachedBlogData) {
+    return {
+      props: {
+        blogs: cachedBlogData,
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+      revalidate: 3600,
+    };
+  } else {
+    const blogs = await getBlogs(locale);
+    setCache("homepageCachedBlogs", locale, blogs, 3600 * 1000); // 1 saat geçerli
+    console.log("homepageCachedBlogs  cacheSetEt");
+    return {
+      props: { blogs, ...(await serverSideTranslations(locale, ["common"])) },
+      revalidate: 3600,
+    };
+  }
 }
