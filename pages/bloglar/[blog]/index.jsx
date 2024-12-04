@@ -64,11 +64,11 @@ export default function Blog({ blog }) {
             <div className={styles.container}>
               <div className={styles.text}>
                 {/* <img
-                  src={`https://villaapi.testgrande.com/Uploads/WebPhotos/k_${blog?.data?.photos[0]?.image}`}
+                  src={`${process.env.NEXT_PUBLIC_WEBHOTOS_URL}/k_${blog?.data?.photos[0]?.image}`}
                 /> */}
                 <div className={styles.imageBox}>
                   <Image
-                    src={`https://villaapi.testgrande.com/Uploads/WebPhotos/k_${blog?.data?.photos[0]?.image}`}
+                    src={`${process.env.NEXT_PUBLIC_WEBHOTOS_URL}/k_${blog?.data?.photos[0]?.image}`}
                     alt={"Blog Detail Image"}
                     style={{ objectFit: "cover" }}
                     fill

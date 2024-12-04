@@ -7,7 +7,7 @@ export default function RegionCard({ data }) {
       <Link href={`/bolgeler/${data?.slug}`}>
         <div
           style={{
-            backgroundImage: `url(https://villaapi.testgrande.com/Uploads/WebPhotos/k_${data?.photos[0]?.image})`,
+            backgroundImage: `url(${process.env.NEXT_PUBLIC_WEBHOTOS_URL}/k_${data?.photos[0]?.image})`,
           }}
           className={`${styles.imgBox}`}
         ></div>
