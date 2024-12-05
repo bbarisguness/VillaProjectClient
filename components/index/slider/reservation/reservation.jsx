@@ -397,7 +397,7 @@ export default function ReservationBox() {
               if (update.includes(null) && update.length == 2) {
                 console.log(update[0]);
                 setCalendarMinDate(
-                  new Date(update[0]).setDate(new Date(update[0]).getDate() + 1)
+                  new Date(update[0]).setDate(new Date(update[0]).getDate() + 5)
                 );
               }
               setDateRange(update);
