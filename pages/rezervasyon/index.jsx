@@ -661,7 +661,7 @@ export default function Reservation() {
                               </div>
                               <div className={styles.textBox}>
                                 <div className={styles.title}>
-                                  {t("paymentByMoneyOrder")}
+                                  {t("createRequest")}
                                 </div>
                                 <div className={styles.desc}>
                                   {t("paymentByMoneyOrderMessage")}.
@@ -773,7 +773,7 @@ export default function Reservation() {
                           }`}
                         >
                           <ul>
-                            <li>
+                            {/* <li>
                               <div className={styles.title}>{t("bank")}</div>
                               <div className={styles.desc}>Garanti Bankası</div>
                             </li>
@@ -794,10 +794,10 @@ export default function Reservation() {
                                 {t("yourOrderNumber")}
                               </div>
                               <div className={styles.desc}>2038390</div>
-                            </li>
+                            </li> */}
                             <li className={styles.full}>
                               <div className={styles.desc}>
-                                *{t("paymentByMoneyOrderDesc")}.
+                                *{t("completeReservationStep2Text")}.
                               </div>
                             </li>
                           </ul>
