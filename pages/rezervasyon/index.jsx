@@ -14,6 +14,7 @@ import { priceTypes } from "@/data/data";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 import { capitalizeWords } from "@/utils/globalUtils";
+import { dateToDotFormat } from "@/utils/date";
 
 export default function Reservation() {
   const { t, i18n } = useTranslation("common");
@@ -831,7 +832,12 @@ export default function Reservation() {
                         {t("thanks")}. {t("createdReservationMessage")}.
                       </div>
                       <div className={styles.desc}>
-                        {t("createdReservationDesc")}.
+                        {t("createdReservationDesc", {
+                          villaName: reservationItems?.villaName,
+                          entryDate: dateToDotFormat(reservationItems?.checkIn),
+                          exitDate: dateToDotFormat(reservationItems?.checkOut),
+                        })}
+                        .
                       </div>
                     </div>
                     <div className={styles.controls}>

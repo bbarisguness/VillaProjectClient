@@ -175,7 +175,7 @@
   "completeReservationStep2Text": "When you send your reservation request, the dates for the relevant facility are closed as optional. In this way, you have reserved your place for your holiday. Our customer representative will contact you and finalize your reservation.",
   "createReservation": "Create Reservation",
   "createdReservationMessage": "Your Reservation Order Has Been Received",
-  "createdReservationDesc": "Your reservation will be processed and we will contact you once it is approved. We wish you a pleasant holiday in advance.",
+  "createdReservationDesc": "{{villaName}} has been reserved for you for the dates {{entryDate}} to {{exitDate}}. Our customer representative will contact you shortly to finalize your reservation. Thank you for choosing us.",
   "reservationInfos": "Reservation Information",
   "price": "Price",
   "customerInformation": "Customer Information",

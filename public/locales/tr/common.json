@@ -175,7 +175,7 @@
   "completeReservationStep2Text": "Rezervasyon talebinizi gönderdiğiniz anda ilgili tesis için tarihler opsiyonlu olarak kapatılır. Bu sayede tatiliniz için yerinizi ayırtmış olursunuz. Müşteri temsilcimiz sizinle iletişime geçerek rezervasyonunuzu sonuçlandırır.",
   "createReservation": "Rezervasyonu Oluştur",
   "createdReservationMessage": "Rezervasyon Siparişiniz Alındı",
-  "createdReservationDesc": "Rezervasyonunuz en kısa süre içerisinde işleme alınıp onaylandıktan sonra sizinle iletişime geçeceğiz. Şimdiden iyi tatiller dileriz",
+  "createdReservationDesc": "{{villaName}} {{entryDate}}-{{exitDate}} tarihleri için tarafınıza opsiyonlanmıştır. Müşteri temsilcimiz en kısa sürede sizinle iletişime geçerek rezervasyonunuzu tamamlayacaktır. Bizi tercih ettiğiniz için teşekkür ederiz.",
   "reservationInfos": "Rezervasyon Bilgileri",
   "price": "Fiyat",
   "customerInformation": "Müşteri Bilgileri",
