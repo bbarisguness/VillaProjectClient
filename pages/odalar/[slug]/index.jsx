@@ -42,7 +42,7 @@ export default function List({
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
-    useState(!roomDetail?.data?.onlineReservation);
+    useState(false);
 
   const observeElementVisibility = function (
     element_id,
@@ -241,31 +241,29 @@ export default function List({
                     priceTypeText={currentPriceTypeText}
                   />
                 </div>
-                {roomDetail?.data?.onlineReservation && (
-                  <div id="makeReservation" style={{ paddingTop: 20 }}>
-                    <div className={styles.right}>
-                      <div className={styles.general}>
-                        <Reservation
-                          t={t}
-                          priceTypeText={currentPriceTypeText}
-                          roomId={roomDetail?.data?.id}
-                          roomSlug={roomSlug}
-                          villaName={villaName}
-                          prices={roomDetail?.data?.priceTables}
-                          villaFirstPhoto={
-                            roomDetail?.data?.photos[0]?.image || null
-                          }
-                          region={
-                            roomDetail?.data?.town?.district?.name +
-                            " / " +
-                            roomDetail?.data?.town?.name
-                          }
-                        />
-                        {/* <FoodPackage /> */}
-                      </div>
+                <div id="makeReservation" style={{ paddingTop: 20 }}>
+                  <div className={styles.right}>
+                    <div className={styles.general}>
+                      <Reservation
+                        t={t}
+                        priceTypeText={currentPriceTypeText}
+                        roomId={roomDetail?.data?.id}
+                        roomSlug={roomSlug}
+                        villaName={villaName}
+                        prices={roomDetail?.data?.priceTables}
+                        villaFirstPhoto={
+                          roomDetail?.data?.photos[0]?.image || null
+                        }
+                        region={
+                          roomDetail?.data?.town?.district?.name +
+                          " / " +
+                          roomDetail?.data?.town?.name
+                        }
+                      />
+                      {/* <FoodPackage /> */}
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
