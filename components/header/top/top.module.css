@@ -86,7 +86,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .top .box .right .socialMedia ul li a:hover {
@@ -141,7 +141,7 @@
 }
 
 .top .box .right .lang a::before {
-  content: '';
+  content: "";
   width: 8px;
   height: 5px;
   background-image: url(/images/down.png);
@@ -149,6 +149,10 @@
   position: absolute;
   right: 0;
   top: calc(50% - 2.5px);
+}
+
+.top .box .right .lang .langFlag {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {

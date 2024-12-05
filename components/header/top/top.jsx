@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./top.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,6 +13,14 @@ export default function HeaderTop() {
   const otherLocales = (locales || []).filter(
     (locale) => locale !== activeLocale
   );
+
+  const returnLanguageFlag = (language) => {
+    if (language == "tr") {
+      return <Image className={styles.langFlag} alt="trLang" src="/images/tr.jpg" width={16} height={16} />;
+    } else if (language == "en") {
+      return <Image className={styles.langFlag} alt="enLang" src="/images/en.png" width={16} height={16} />;
+    }
+  };
 
   return (
     <div className={styles.top}>
@@ -81,7 +90,8 @@ export default function HeaderTop() {
                         locale={localeItem}
                         legacyBehavior
                       >
-                        {activeLocale}
+                        {returnLanguageFlag(localeItem)}
+                        {/* {localeItem} */}
                       </Link>
                     </li>
                   );
