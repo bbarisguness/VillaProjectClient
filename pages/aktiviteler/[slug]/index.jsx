@@ -33,8 +33,6 @@ import "lightgallery/css/lg-thumbnail.css";
 // });
 
 export default function Aktivite({ activate }) {
-  console.log(activate?.data?.photos);
-
   const { t } = useTranslation("common");
   const router = useRouter();
   const renderHtmlContent = () => {
@@ -83,7 +81,11 @@ export default function Aktivite({ activate }) {
             </div>
           </div>
           <div className={styles.container}>
-            <LightGallery elementClassNames="activatesGallery" speed={500} plugins={[lgThumbnail, lgZoom, lgVideo]}>
+            <LightGallery
+              elementClassNames="activatesGallery"
+              speed={500}
+              plugins={[lgThumbnail, lgZoom, lgVideo]}
+            >
               {activate?.data?.photos?.map((data, index) => (
                 <Link
                   key={index}
