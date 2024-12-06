@@ -52,7 +52,8 @@ export function replaceLastDotWithComma(input) {
 
 export function capitalizeWords(text) {
     return text
+      .normalize('NFD') // Unicode karakterleri normalize et
       .split(' ') // Metni kelimelere ayır
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Her kelimenin ilk harfini büyük yap
+      .map(word => word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR')) // Türkçe karakterler için uygun büyük/küçük harf dönüşümü
       .join(' '); // Kelimeleri birleştir
   }
