@@ -38,15 +38,13 @@ export default function HamburgerMenu() {
       >
         <div className={styles.hamburgerMenuBox}>
           <div className={styles.menuCloseBox}>
-            <div className={styles.logo}>
-              <Image
-                src="/images/labirent.png"
-                alt="call"
-                width={142}
-                height={56}
-                priority={true}
-              />
-            </div>
+            <Image
+              src="/images/labirentMorLogo.png"
+              alt="hamburgerLogo"
+              width={142}
+              height={56}
+              style={{ objectFit: "contain" }}
+            />
             <div onClick={closeMenu} className={styles.menuClose}></div>
           </div>
           <div className={styles.hmMenu}>

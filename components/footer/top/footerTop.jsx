@@ -15,6 +15,7 @@ export default function FooterTop({ regions }) {
               <Link href="/" title="Labirent Fethiye">
                 <Image
                   src="/images/labirent.png"
+                  priority
                   alt=""
                   width={142}
                   height={56}
