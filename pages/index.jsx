@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 const TreeStep = lazy(() => import("@/components/index/treestep/treestep"));
 const Villa = lazy(() => import("@/components/index/villa/villa"));
 const Regions = lazy(() => import("@/components/index/region/region"));
+const Activates = lazy(() => import("@/components/index/aktiviteler/activate"));
 const Apart = lazy(() => import("@/components/index/apart/apart"));
 const Service = lazy(() => import("@/components/index/service/service"));
 const Blog = lazy(() => import("@/components/index/blog/blog"));
@@ -27,6 +28,7 @@ import Seo from "@/components/seo";
 import { getRegions } from "@/services/region";
 import { getBlogs } from "@/services/blog";
 import { lazy, Suspense } from "react";
+import { getActivates } from "@/services/activite";
 
 export default function Home({
   villa,
@@ -36,6 +38,7 @@ export default function Home({
   newVillas,
   testimonials,
   aparts,
+  activates
 }) {
   const router = useRouter();
   const { locale, locales, defaultLocale } = router;
@@ -51,7 +54,8 @@ export default function Home({
         <section id="contentContainer">
           <TreeStep />
           <Villa category={categories} villas={villa} />
-          <Regions homePage={true} regions={regions} />
+          {/* <Regions homePage={true} regions={regions} /> */}
+          <Activates homePage={true} activates={activates} />
           <Apart aparts={aparts} />
           <Service />
           {/* <NewVillas villas={newVillas} /> */}
@@ -68,10 +72,10 @@ export async function getServerSideProps({ locale }) {
   // API çağrılarını paralel olarak başlat
   const categories = await getCategoriesHome(locale);
 
-  const [villa, aparts, regions, blogs] = await Promise.all([
+  const [villa, aparts, activates, blogs] = await Promise.all([
     getVillasHome(8, 0, categories?.data[0]?.id),
     getHotels(0, 4),
-    getRegions(locale),
+    getActivates(locale),
     getBlogs(locale),
   ]);
 
@@ -80,8 +84,8 @@ export async function getServerSideProps({ locale }) {
       villa,
       categories,
       blogs,
-      regions,
       aparts,
+      activates,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

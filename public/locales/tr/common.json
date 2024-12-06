@@ -25,6 +25,7 @@
   "andAboveAges": "{{age}} ve üzeri yaştakiler",
   "agesBetween": "{{agesBetweenValues}} arasındaki yaşlar",
   "headerHomePage": "ANASAYFA",
+  "headerActivates": "AKTİVİTELER",
   "headerApartmentsForRent": "KİRALIK APARTLAR",
   "headerCarRental": "ARAÇ KİRALAMA",
   "headerBlog": "BLOG",
@@ -200,5 +201,7 @@
   "weekday": "Haftaiçi",
   "weekend": "Haftasonu",
   "questionAndAnswer": "Soru Cevap",
-  "faqFırstItemDesc": "Bu sayfamızda hizmetlerimizle alakalı sık sorulan sorulara ve cevaplarına yer verilmektedir. Aklınıza takılan diğer sorularınız için de her zaman çağrı merkezimizle iletişime geçebilirsiniz."
+  "faqFırstItemDesc": "Bu sayfamızda hizmetlerimizle alakalı sık sorulan sorulara ve cevaplarına yer verilmektedir. Aklınıza takılan diğer sorularınız için de her zaman çağrı merkezimizle iletişime geçebilirsiniz.",
+  "activites": "Aktiviteler",
+  "activitesListed": "Toplam {{activiteCount}} adet aktivite listelendi"
 }

@@ -106,7 +106,7 @@ export default function HamburgerMenu() {
                   {t("headerApartmentsForRent")}
                 </Link>
               </li>
-              <li className={styles.hmMenuLi}>
+              {/* <li className={styles.hmMenuLi}>
                 <Link
                   onClick={closeMenu}
                   href="/arac-kiralama"
@@ -114,6 +114,16 @@ export default function HamburgerMenu() {
                   className={styles.hmMenuLink}
                 >
                   {t("headerCarRental")}
+                </Link>
+              </li> */}
+              <li className={styles.hmMenuLi}>
+                <Link
+                  onClick={closeMenu}
+                  href="/aktiviteler"
+                  rel="nofollow"
+                  className={styles.hmMenuLink}
+                >
+                  {t("headerActivates")}
                 </Link>
               </li>
               <li className={styles.hmMenuLi}>

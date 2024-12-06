@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function RegionCard({ data }) {
   return (
     <li className={styles.cardContainer}>
-      <Link href={`/bolgeler/${data?.slug}`}>
+      <Link href={`/${data.metaTitle == "Aktiviteler" ? "aktiviteler" : "bolgeler"}/${data?.slug}`}>
         <div
           style={{
             backgroundImage: `url(${process.env.NEXT_PUBLIC_WEBHOTOS_URL}/k_${data?.photos[0]?.image})`,

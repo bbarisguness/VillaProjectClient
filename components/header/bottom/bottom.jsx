@@ -121,9 +121,14 @@ export default function HeaderBottom({ from }) {
                     <span>{t("headerApartmentsForRent")}</span>
                   </Link>
                 </li>
-                <li className={styles.menu_li}>
+                {/* <li className={styles.menu_li}>
                   <Link href="/arac-kiralama" className={styles.menuLink}>
                     <span>{t("headerCarRental")}</span>
+                  </Link>
+                </li> */}
+                <li className={styles.menu_li}>
+                  <Link href="/aktiviteler" className={styles.menuLink}>
+                    <span>{t("headerActivates")}</span>
                   </Link>
                 </li>
                 <li className={styles.menu_li}>
