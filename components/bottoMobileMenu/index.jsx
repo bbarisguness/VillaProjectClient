@@ -40,8 +40,9 @@ export default function Page({ t }) {
               alt="bottomCalendar"
               width={35}
               height={35}
+              style={{marginBottom: 5}}
             />
-            <span className={styles.iconText} style={{ color: "#fff" }}>
+            <span className={styles.iconText} style={{ color: "#fff", fontSize: "12px" }}>
               {t("resevation")}
             </span>
           </div>
