@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './Modal.module.css';
 
-const ModalComponent = ({ isOpen, onClose, children }) => {
+const ModalComponent = ({ isOpen, onClose, children, height = "90vh", title }) => {
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden'; // Scroll engelle
@@ -18,13 +18,15 @@ const ModalComponent = ({ isOpen, onClose, children }) => {
 
     return (
         <div className={styles.modal} onClick={onClose}>
-            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalContent} style={{ maxHeight: height }} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.title}>
                     <div className={styles.titleSubContainer}>
-                        <div className={styles.propsContainer}>
-                            <span className={styles.orange}>Opsiyonlu</span>
-                            <span className={styles.red}>Dolu</span>
-                        </div>
+                        {
+                            title ? <span style={{fontSize: "20px"}}>{title}</span> : <><div className={styles.propsContainer}>
+                                <span className={styles.orange}>Opsiyonlu</span>
+                                <span className={styles.red}>Dolu</span>
+                            </div></>
+                        }
                         <span className={styles.closeButton} onClick={onClose}>
                             &times;
                         </span>
