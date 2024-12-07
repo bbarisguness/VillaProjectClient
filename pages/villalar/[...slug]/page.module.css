@@ -50,21 +50,6 @@
   color: #02044a;
 }
 
-.makeAReservation {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 500;
-  background-color: #3e2093;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 0;
-  color: #fff;
-  cursor: pointer;
-}
-
 .contentDetail {
   width: 100%;
   padding: 120px 0;
@@ -418,12 +403,6 @@ section.villaDetail .customerCommentsBox .customerComments {
 
   .villaDetail .villaDetailContentBox .villaDetailContent .right {
     margin: 0 0 30px 0;
-  }
-}
-
-@media screen and (max-width: 499px) {
-  .makeAReservation {
-    display: flex;
   }
 }
 

@@ -26,6 +26,7 @@ import CommentForm from "@/components/other/commentForm/CommentForm";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { capitalizeWords } from "@/utils/globalUtils";
 import { useTranslation } from "react-i18next";
+import BottomMenu from "@/components/bottoMobileMenu";
 
 export default function List({
   villa,
@@ -46,62 +47,7 @@ export default function List({
   )?.slug;
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
-  const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
-    useState(true);
-
   const activePage = parseInt(router.query.p) || 1;
-
-  function NewPagination() {
-    return (
-      <Pagination
-        newActivePage={activePage}
-        pageCount={Math.ceil(villa?.totalCount / 20)}
-      />
-    );
-  }
-
-  const observeElementVisibility = function (
-    element_id,
-    enterCallback,
-    exitCallback
-  ) {
-    const element = document.getElementById(element_id);
-
-    if (element) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Element görünür hale geldiğinde çalışacak
-            enterCallback();
-          } else {
-            // Element görünümden çıktığında çalışacak
-            exitCallback();
-          }
-        });
-      });
-
-      observer.observe(element); // Elementi gözlemlemeye başla
-    }
-  };
-
-  const scrolltoHash = function (element_id) {
-    const element = document.getElementById(element_id);
-    element?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
-
-    observeElementVisibility(
-      "makeReservation",
-      () => {
-        setMakeReservationButtonHidden(true);
-      },
-      () => {
-        setMakeReservationButtonHidden(false);
-      }
-    );
-  };
 
   if (villaDetail?.data != null) {
     return (
@@ -131,14 +77,7 @@ export default function List({
             </div>
           </div>
         </section> */}
-        {!ismakeReservationButtonHidden && (
-          <div
-            onClick={() => scrolltoHash("makeReservation")}
-            className={styles.makeAReservation}
-          >
-            <span>{t("makeReservation")}</span>
-          </div>
-        )}
+        <BottomMenu />
         <section
           className={`${styles["contentDetail"]} ${styles["villaDetail"]}`}
         >

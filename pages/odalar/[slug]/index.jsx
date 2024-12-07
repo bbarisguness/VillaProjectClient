@@ -25,6 +25,7 @@ import "lightgallery/css/lg-video.css";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 import { capitalizeWords } from "@/utils/globalUtils";
+import BottomMenu from "@/components/bottoMobileMenu";
 
 export default function List({
   roomDetail,
@@ -41,52 +42,6 @@ export default function List({
   const router = useRouter();
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
-  const [ismakeReservationButtonHidden, setMakeReservationButtonHidden] =
-    useState(false);
-
-  const observeElementVisibility = function (
-    element_id,
-    enterCallback,
-    exitCallback
-  ) {
-    const element = document.getElementById(element_id);
-
-    if (element) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Element görünür hale geldiğinde çalışacak
-            enterCallback();
-          } else {
-            // Element görünümden çıktığında çalışacak
-            exitCallback();
-          }
-        });
-      });
-
-      observer.observe(element); // Elementi gözlemlemeye başla
-    }
-  };
-
-  const scrolltoHash = function (element_id) {
-    const element = document.getElementById(element_id);
-    element?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
-
-    observeElementVisibility(
-      "makeReservation",
-      () => {
-        setMakeReservationButtonHidden(true);
-      },
-      () => {
-        setMakeReservationButtonHidden(false);
-      }
-    );
-  };
-
   if (roomDetail?.data != null) {
     return (
       <>
@@ -115,14 +70,7 @@ export default function List({
             </div>
           </div>
         </section> */}
-        {!ismakeReservationButtonHidden && (
-          <div
-            onClick={() => scrolltoHash("makeReservation")}
-            className={styles.makeAReservation}
-          >
-            <span>{t("makeReservation")}</span>
-          </div>
-        )}
+        <BottomMenu t={t} />
         <section
           className={`${styles["contentDetail"]} ${styles["villaDetail"]}`}
         >
