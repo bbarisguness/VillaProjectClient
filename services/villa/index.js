@@ -131,4 +131,12 @@ async function getVillasByFilter({ villaSearchText = "", checkIn = "", checkOut 
     return data
 }
 
-export { getVillas, getVilla, getNearVillas, getVillasByFilter, getVillasHome, getVillasForSale, getAllVillaByCategoryId, getHotels, getHotel, getRoom, createComment }
+async function getVillasByName({ villaSearchText = "", checkIn = "", checkOut = "", person = 1, page = 0, size = 500 }) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch?CompanyId=${companyId}&Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}&Person=${person}&Pagination.page=${page}&Pagination.size=${size}`, {
+        cache: 'no-store'
+    })
+    const data = await response.json()
+    return data
+}
+
+export { getVillas, getVilla, getNearVillas, getVillasByFilter, getVillasHome, getVillasForSale, getAllVillaByCategoryId, getHotels, getHotel, getRoom, createComment, getVillasByName }

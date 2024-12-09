@@ -16,7 +16,6 @@
   border-radius: 5px;
   width: 90%;
   max-width: 500px;
-  max-height: 90vh; /* Modalın yüksekliğini sınırlıyoruz */
   position: relative;
 }
 
@@ -30,6 +29,8 @@
   font-size: 26px;
   line-height: 36px;
   color: #02044a;
+  border-bottom: 1px solid #e7e7e7;
+  margin-bottom: 20px;
 }
 
 .title .titleSubContainer {
