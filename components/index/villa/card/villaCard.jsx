@@ -86,7 +86,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={"Villa Card Image"}
+                      alt={data?.villaDetails?.[0]?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -194,7 +194,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={"Villa Card Image"}
+                      alt={data?.villaDetails?.[0]?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -302,7 +302,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={"Villa Card Image"}
+                      alt={data?.villaDetails?.[0]?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -409,7 +409,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={"Villa Card Image"}
+                      alt={data?.villaDetails?.[0]?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -546,7 +546,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={"Villa Card Image"}
+                      alt={data?.villaDetails?.[0]?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -653,7 +653,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={"Villa Card Image"}
+                      alt={data?.villaDetails?.[0]?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -750,7 +750,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={"Villa Card Image"}
+                      alt={data?.villaDetails?.[0]?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
