@@ -24,6 +24,10 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 import { capitalizeWords } from "@/utils/globalUtils";
 import BottomMenu from "@/components/bottoMobileMenu";
+import Reservation from "@/components/villaDetail/rightBar/reservation/reservation";
+import DetailTitleBox from "@/components/villaDetail/detailTitleBox/detailTitleBox";
+import ProductImageBox from "@/components/villaDetail/productImageBox/productImageBox";
+import DetailDesc from "@/components/villaDetail/detailDesc/detailsDesc";
 
 const VillaCard = dynamic(
   () => import("../../../components/index/villa/card/villaCard"),
@@ -32,27 +36,27 @@ const VillaCard = dynamic(
   }
 );
 
-const DetailTitleBox = dynamic(
-  () => import("../../../components/villaDetail/detailTitleBox/detailTitleBox"),
-  {
-    ssr: true,
-  }
-);
+// const DetailTitleBox = dynamic(
+//   () => import("../../../components/villaDetail/detailTitleBox/detailTitleBox"),
+//   {
+//     ssr: true,
+//   }
+// );
 
-const ProductImageBox = dynamic(
-  () =>
-    import("../../../components/villaDetail/productImageBox/productImageBox"),
-  {
-    ssr: true,
-  }
-);
+// const ProductImageBox = dynamic(
+//   () =>
+//     import("../../../components/villaDetail/productImageBox/productImageBox"),
+//   {
+//     ssr: true,
+//   }
+// );
 
-const DetailDesc = dynamic(
-  () => import("../../../components/villaDetail/detailDesc/detailsDesc"),
-  {
-    ssr: true,
-  }
-);
+// const DetailDesc = dynamic(
+//   () => import("../../../components/villaDetail/detailDesc/detailsDesc"),
+//   {
+//     ssr: true,
+//   }
+// );
 
 const DistanceRuler = dynamic(
   () =>
@@ -78,13 +82,13 @@ const Calendar = dynamic(
   }
 );
 
-const Reservation = dynamic(
-  () =>
-    import("../../../components/villaDetail/rightBar/reservation/reservation"),
-  {
-    ssr: true,
-  }
-);
+// const Reservation = dynamic(
+//   () =>
+//     import("../../../components/villaDetail/rightBar/reservation/reservation"),
+//   {
+//     ssr: true,
+//   }
+// );
 
 const Comments = dynamic(
   () => import("../../../components/other/comment/Comments"),
