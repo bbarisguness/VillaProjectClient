@@ -84,7 +84,7 @@ const Reservation = dynamic(
   () =>
     import("../../../components/villaDetail/rightBar/reservation/reservation"),
   {
-    ssr: false,
+    ssr: true,
   }
 );
 
