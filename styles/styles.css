@@ -1,7 +1,3 @@
-/* @import url("https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lightgallery.css");
-@import url("https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lg-zoom.css");
-@import url("https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lg-video.css"); */
-
 html,
 body,
 div,
@@ -327,6 +323,11 @@ img {
   background: none !important;
 }
 
+.date-picker-reservation {
+  width: 100% !important;
+  position: relative;
+}
+
 .date-picker-reservation .react-datepicker-popper {
   width: 100% !important;
   justify-content: center;
@@ -381,12 +382,6 @@ img {
 .react-datepicker__month-container {
   width: 50% !important;
   margin-bottom: 20px !important;
-}
-
-.react-datepicker-popper {
-  width: 768px !important;
-  top: 30px !important;
-  z-index: 100 !important;
 }
 
 .react-datepicker__current-month {
@@ -468,18 +463,6 @@ img {
     padding: 15px;
   }
 
-  .react-datepicker-popper {
-    width: 100% !important;
-    position: fixed !important;
-    top: 0 !important;
-    transform: none !important;
-    display: flex !important;
-    height: 100% !important;
-    justify-content: center !important;
-    align-items: center !important;
-    background-color: rgba(25, 25, 46, 0.75);
-  }
-
   .date-picker-reservation .react-datepicker-popper {
     width: 100% !important;
     position: fixed !important;
@@ -526,11 +509,6 @@ img {
   .react-datepicker__day--keyboard-selected {
     width: 30px !important;
   }
-}
-
-.date-picker-reservation {
-  width: 100% !important;
-  position: relative;
 }
 
 .date-picker-reservation .react-datepicker {
