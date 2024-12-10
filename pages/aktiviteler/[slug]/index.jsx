@@ -15,10 +15,6 @@ import lgVideo from "lightgallery/plugins/video";
 import Link from "next/link";
 import Image from "next/image";
 import { memo } from "react";
-// LightGallery Styles
-import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lg-thumbnail.css";
 
 // const Gallery = memo(function Gallery({ photos, from }) {
 //   const videoObject = photos?.find((item) => item?.videoLink != null);

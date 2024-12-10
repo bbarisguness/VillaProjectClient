@@ -10,9 +10,6 @@ import dynamic from "next/dynamic";
 // villa detay
 import Link from "next/link";
 import styles from "./page.module.css";
-import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lg-video.css";
 import LightGallery from "lightgallery/react";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";

@@ -3,10 +3,6 @@ import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";
 import Link from "next/link";
-// LightGallery Styles
-import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lg-thumbnail.css";
 import styles from "./gallery.module.css";
 import Image from "next/image";
 import { memo } from "react";
