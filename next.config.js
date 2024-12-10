@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const { i18n } = require('./next-i18next.config');
 
 const google301 = [
   {
@@ -1099,11 +1100,7 @@ const google301 = [
 ]
 
 const nextConfig = {
-  i18n: {
-    locales: ["tr", "en"],//farklı dil ekleneceği zaman "en" diye ekle, sitede headerde kendisi gelecek
-    defaultLocale: "tr",
-    localeDetection: true,
-  },
+  i18n,
   experimental: {
     appDir: true,
   },
