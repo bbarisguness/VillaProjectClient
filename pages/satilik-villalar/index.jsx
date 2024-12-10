@@ -1,4 +1,3 @@
-import "@/styles/styles.css";
 import Seo from "@/components/seo";
 import { getVillasForSale } from "@/services/villa";
 import VillaCard from "@/components/index/villa/card/villaCard";

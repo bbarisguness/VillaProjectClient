@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import "@/styles/styles.css";
 import Seo from "@/components/seo";
 import { getVillas } from "@/services/villa";
 import Pagination from "@/components/pagination/Pagination";

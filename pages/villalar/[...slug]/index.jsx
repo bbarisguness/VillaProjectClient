@@ -3,7 +3,6 @@ import {
   getVilla,
   getNearVillas,
 } from "@/services/villa";
-import "@/styles/styles.css";
 import { getCategories } from "@/services/category";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";

@@ -1,5 +1,4 @@
 import VillaCard from "@/components/index/villa/card/villaCard";
-import "@/styles/styles.css";
 import Seo from "@/components/seo";
 import { getHotels } from "@/services/villa";
 import Pagination from "@/components/pagination/Pagination";

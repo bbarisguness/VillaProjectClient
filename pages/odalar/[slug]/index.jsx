@@ -1,6 +1,5 @@
 import VillaCard from "@/components/index/villa/card/villaCard";
 import { getRoom } from "@/services/villa";
-import "@/styles/styles.css";
 import { useRouter } from "next/router";
 import styles from "./page.module.css";
 import "react-date-range/dist/styles.css"; // main style file

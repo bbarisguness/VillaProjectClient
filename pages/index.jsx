@@ -20,8 +20,6 @@ const Blog = lazy(() => import("@/components/index/blog/blog"));
 const VillaRent = lazy(() =>
   import("@/components/index/villaRentInfo/villaRentInfo")
 );
-
-import "@/styles/styles.css";
 import { getVillasHome, getHotels } from "@/services/villa";
 import { getCategoriesHome } from "@/services/category";
 import Seo from "@/components/seo";
@@ -38,7 +36,7 @@ export default function Home({
   newVillas,
   testimonials,
   aparts,
-  activates
+  activates,
 }) {
   const router = useRouter();
   const { locale, locales, defaultLocale } = router;

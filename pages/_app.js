@@ -1,3 +1,4 @@
+import "@/styles/styles.css";
 import store from "@/store"
 import { Providers } from "@/store/provider"
 import Header from "@/components/header/header"
@@ -8,8 +9,6 @@ import { getRegions } from "@/services/region"
 import { appWithTranslation } from "next-i18next"
 import { useTranslation } from "next-i18next"
 
-
-import "@/styles/styles.css"
 //import { usePageLoading } from "@/hooks/usePageLoading"
 import Loading from "@/app/loading"
 
