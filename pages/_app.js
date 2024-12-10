@@ -1,3 +1,5 @@
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 import "@/styles/styles.css";
 import store from "@/store"
 import { Providers } from "@/store/provider"

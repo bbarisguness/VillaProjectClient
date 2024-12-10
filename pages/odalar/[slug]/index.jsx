@@ -2,8 +2,6 @@ import VillaCard from "@/components/index/villa/card/villaCard";
 import { getRoom } from "@/services/villa";
 import { useRouter } from "next/router";
 import styles from "./page.module.css";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
 import Reservation from "@/components/villaDetail/rightBar/reservation/reservation";
 import Calendar from "@/components/villaDetail/leftBar/calendar/calendar";
 import DistanceRuler from "@/components/villaDetail/leftBar/distanceRuler/distanceRuler";
