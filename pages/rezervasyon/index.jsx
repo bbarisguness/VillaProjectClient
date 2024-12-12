@@ -183,7 +183,9 @@ export default function Reservation() {
         month: "long", // "long", "short" veya "narrow" kullanabilirsiniz
       });
 
-      return `${day} ${formatterMonth.format(date)} ${year} ${formatterDay.format(date)}`;
+      return `${day} ${formatterMonth.format(
+        date
+      )} ${year} ${formatterDay.format(date)}`;
     }
 
     return girismiCikismi == "g" ? t("entrance") : t("exit");
@@ -613,7 +615,7 @@ export default function Reservation() {
                                                     </li> */}
                           </ul>
                           <div
-                            className={styles.linkBox}
+                            className={`${styles["linkBox"]} ${styles["BottomButton"]}`}
                             style={{ justifyContent: "flex-end" }}
                           >
                             <button
@@ -761,7 +763,9 @@ export default function Reservation() {
                                     </div>
                                   </li>
                                 </ul>
-                                <div className={styles.linkBox}>
+                                <div
+                                  className={`${styles["linkBox"]} ${styles["BottomButton"]}`}
+                                >
                                   <button
                                     className={styles.blueButtonArrow}
                                     type="submit"
@@ -807,7 +811,7 @@ export default function Reservation() {
                               </div>
                             </li>
                           </ul>
-                          <div className={styles.linkBox}>
+                          <div className={`${styles["linkBox"]} ${styles["BottomButton"]}`}>
                             <Link
                               onClick={(e) => {
                                 e.preventDefault();

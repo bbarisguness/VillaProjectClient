@@ -178,6 +178,7 @@
 .contentDetail .rezervationBox .reservation {
     display: flex;
     justify-content: center;
+    gap: 20px;
 }
 
 .contentDetail .rezervationBox .reservation .left {
@@ -1233,6 +1234,10 @@
         margin: 0 !important;
         width: 100% !important;
     }
+
+    .linkBox.BottomButton {
+        margin-top: 20px;
+    }
 }
 
 @media screen and (max-width: 999px) {
@@ -1268,6 +1273,14 @@
         margin: 0 !important;
         padding: 10px 0 10px 0 !important;
     }
+
+    .linkBox.BottomButton {
+        justify-content: flex-start !important;
+    }
+
+    .linkBox.BottomButton .blueButtonArrow {
+        width: 100% !important;
+    }
 }
 
 @media screen and (max-width: 699px) {
@@ -1283,6 +1296,10 @@
 
     .contentDetail .rezervationBox .reservation .left .personInfoBox ul li {
         width: 50%;
+    }
+
+    .contentDetail .rezervationBox .reservation .left .personInfoBox ul li:nth-child(even) {
+        padding: 0 0 0 20px !important;
     }
 
     .contentDetail .rezervationBox .reservation .left {
@@ -1303,6 +1320,10 @@
 
     .contentDetail .rezervationBox .reservation .left .personInfoBox ul li {
         width: 100%;
+    }
+
+    .contentDetail .rezervationBox .reservation .left .personInfoBox ul li:nth-child(even) {
+        padding: 0 !important;
     }
 
     .contentDetail .rezervationBox .reservation .left {
