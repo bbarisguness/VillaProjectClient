@@ -5,13 +5,18 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { getVillasByFilter } from "@/services/villa";
 //import MyCalendar from "./MyCalendar";
-import tr from "date-fns/locale/tr";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
+import { tr, enUS } from "date-fns/locale";
+
+const localeMap = {
+  tr,
+  en: enUS,
+};
 
 export default function ReservationBox() {
+  const { i18n } = useTranslation();
   const { t } = useTranslation("common");
   const [dateOfEntry, setDateOfEntry] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
@@ -401,7 +406,7 @@ export default function ReservationBox() {
               setDateRange(update);
             }}
             monthsShown={2}
-            locale={tr}
+            locale={localeMap[i18n.language]}
             minDate={calendarMinDate}
             customInput={<CustomInput />} // Özelleştirilmiş input kullanımı
             onCalendarOpen={() => handleOpenedCalendar()}

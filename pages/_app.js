@@ -3,6 +3,7 @@ import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import "react-datepicker/dist/react-datepicker.css"; // datepicker css
 import "@/styles/styles.css";
 import store from "@/store"
 import { Providers } from "@/store/provider"

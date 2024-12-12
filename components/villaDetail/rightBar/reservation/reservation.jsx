@@ -5,9 +5,15 @@ import { useRef, useState, useEffect, forwardRef } from "react";
 import Image from "next/image";
 import moment from "moment";
 import { isVillaAvailable } from "@/services/reservation";
-import tr from "date-fns/locale/tr";
-import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import { useTranslation } from "react-i18next";
+
+import { tr, enUS } from "date-fns/locale";
+
+const localeMap = {
+  tr,
+  en: enUS,
+};
 
 export default function Reservation({
   villaId,
@@ -21,6 +27,7 @@ export default function Reservation({
   priceTypeText,
   t,
 }) {
+  const { i18n } = useTranslation();
   const router = useRouter();
 
   //console.log('villaId: ' + villaId);
@@ -216,7 +223,7 @@ export default function Reservation({
                     datepickerRef.current.input.blur();
                   }, 1);
                 }}
-                locale={tr}
+                locale={localeMap[i18n.language]}
                 minDate={minCalendarDate}
                 width="100%"
                 customInput={<CustomInput />}
