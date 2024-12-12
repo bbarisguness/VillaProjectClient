@@ -11,7 +11,7 @@ export default function MyDatePicker({
   calendarPrices,
   priceTypeText,
 }) {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const twoDifferentYearsWillBeListed = 0 - (currentMounth + 1);
 
   dates = dates.map((reservation) => ({
@@ -515,13 +515,13 @@ export default function MyDatePicker({
                     </div>
                   </div>
                   <div className={styles.daysHeaderContainer}>
-                    <div className={`${styles["day-header"]}`}>Pzt</div>
-                    <div className={`${styles["day-header"]}`}>Sa</div>
-                    <div className={`${styles["day-header"]}`}>Çr</div>
-                    <div className={`${styles["day-header"]}`}>Pr</div>
-                    <div className={`${styles["day-header"]}`}>Cu</div>
-                    <div className={`${styles["day-header"]}`}>Ct</div>
-                    <div className={`${styles["day-header"]}`}>Pz</div>
+                    <div className={`${styles["day-header"]}`}>{t("days.1")}</div>
+                    <div className={`${styles["day-header"]}`}>{t("days.2")}</div>
+                    <div className={`${styles["day-header"]}`}>{t("days.3")}</div>
+                    <div className={`${styles["day-header"]}`}>{t("days.4")}</div>
+                    <div className={`${styles["day-header"]}`}>{t("days.5")}</div>
+                    <div className={`${styles["day-header"]}`}>{t("days.6")}</div>
+                    <div className={`${styles["day-header"]}`}>{t("days.7")}</div>
                   </div>
                 </div>
                 {getRows(index + currentMounth, new Date().getFullYear())}

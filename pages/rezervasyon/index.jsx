@@ -174,11 +174,16 @@ export default function Reservation() {
 
       let date = new Date(year, month - 1, day);
       let monthName = turkishMonths[date.getMonth()];
-      const formatter = new Intl.DateTimeFormat(i18n.language, {
+
+      const formatterDay = new Intl.DateTimeFormat(i18n.language, {
         weekday: "long",
       });
 
-      return `${day} ${monthName} ${year} ${formatter.format(date)}`;
+      const formatterMonth = new Intl.DateTimeFormat(i18n.language, {
+        month: "long", // "long", "short" veya "narrow" kullanabilirsiniz
+      });
+
+      return `${day} ${formatterMonth.format(date)} ${year} ${formatterDay.format(date)}`;
     }
 
     return girismiCikismi == "g" ? t("entrance") : t("exit");
