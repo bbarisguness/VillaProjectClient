@@ -17,7 +17,6 @@ import lgVideo from "lightgallery/plugins/video";
 import { useEffect, useState } from "react";
 import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
-import { priceTypes } from "@/data/data";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 import { calculatePriceType, capitalizeWords } from "@/utils/globalUtils";
@@ -27,6 +26,7 @@ import DetailTitleBox from "@/components/villaDetail/detailTitleBox/detailTitleB
 import ProductImageBox from "@/components/villaDetail/productImageBox/productImageBox";
 import DetailDesc from "@/components/villaDetail/detailDesc/detailsDesc";
 import { getCurrencies } from "@/services";
+import Image from "next/image";
 
 const VillaCard = dynamic(
   () => import("../../../components/index/villa/card/villaCard"),
@@ -256,6 +256,22 @@ export default function List({
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
                   <div className={styles.right}>
+                    <div className={styles.turizmContainer}>
+                      <Image
+                        src="/images/tcTurizm.png"
+                        width={75}
+                        height={75}
+                        alt="Picture of the author"
+                      />
+                      <div className={styles.turizmTitleAndNo}>
+                        <span className={styles.turizmTitle}>
+                          T.C Kültür ve Turizm Bakanlığı
+                        </span>
+                        <span className={styles.turizmDocumentNo}>
+                          Belge No {villaDetail?.data?.villaNumber}
+                        </span>
+                      </div>
+                    </div>
                     <div className={styles.general}>
                       <Reservation
                         t={t}
