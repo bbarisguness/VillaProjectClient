@@ -1,13 +1,20 @@
 "use client";
 import styles from "./priceTable.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { getPriceTypeDetail } from "@/data/data";
 import { replaceLastDotWithComma } from "@/utils/globalUtils";
+import { priceTypes } from "@/data/data";
 
-export default function PriceTable({ data, priceTypeNumber, currencies, t }) {
+export default function PriceTable({ data, priceTypeNumber, currencies, t, i18n }) {
+
+  useEffect(() => {
+    setPriceTableActiveIndex(priceTypes.find(item=> item.lang == i18n.language).type);
+  })
+  
+
   const [priceTableActiveIndex, setPriceTableActiveIndex] =
-    useState(priceTypeNumber);
+    useState(1);
 
   const handlePriceTable = (index) => {
     setPriceTableActiveIndex(index);

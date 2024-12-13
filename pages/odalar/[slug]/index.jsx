@@ -20,6 +20,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 import { capitalizeWords } from "@/utils/globalUtils";
 import BottomMenu from "@/components/bottoMobileMenu";
+import nookies, { parseCookies } from "nookies";
+import { getCurrencies } from "@/services";
 
 export default function List({
   roomDetail,
@@ -29,13 +31,20 @@ export default function List({
   roomSlug,
   villaName,
 }) {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = priceTypes?.find(
     (item) => item?.type == roomDetail?.data?.priceType
   )?.text;
   const router = useRouter();
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
+  const [currencies, setCurrencies] = useState(null);
+
+  useEffect(() => {
+    const cookies = parseCookies();
+    setCurrencies(JSON.parse(cookies.currencies));
+  }, []);
+
   if (roomDetail?.data != null) {
     return (
       <>
@@ -110,7 +119,10 @@ export default function List({
                   <div className={styles.price}>
                     {getPriceRange(
                       roomDetail?.data?.priceTables,
-                      currentPriceTypeText
+                      currentPriceTypeText,
+                      roomDetail?.data?.priceType,
+                      i18n,
+                      currencies
                     )}
                   </div>
                 </div>
@@ -171,9 +183,10 @@ export default function List({
                   />
                   <PriceTable
                     t={t}
+                    i18n={i18n}
                     priceTypeNumber={roomDetail?.data?.priceType || 1}
                     data={roomDetail?.data?.priceTables}
-                    currencies={roomDetail?.data?.currencies}
+                    currencies={currencies}
                   />
                   <Calendar
                     t={t}
@@ -181,6 +194,7 @@ export default function List({
                     dates={roomDetail?.data?.reservationCalendars || []}
                     calendarPrices={roomDetail?.data?.prices || []}
                     priceTypeText={currentPriceTypeText}
+                    priceType={roomDetail?.data?.priceType}
                   />
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
@@ -188,6 +202,7 @@ export default function List({
                     <div className={styles.general}>
                       <Reservation
                         t={t}
+                        priceType={roomDetail?.data?.priceTables}
                         priceTypeText={currentPriceTypeText}
                         roomId={roomDetail?.data?.id}
                         roomSlug={roomSlug}
@@ -297,8 +312,29 @@ export default function List({
   }
 }
 
-export async function getServerSideProps({ params, query, locale }) {
-  const slug = params?.slug;
+export async function getServerSideProps(context) {
+  // Get cookie
+  let currenciesResponse;
+  const cookies = nookies.get(context);
+
+  if (!cookies.currencies) {
+    const currenciesResponse = await getCurrencies();
+
+    if (currenciesResponse.statusCode == 200) {
+      // Set cookie
+      nookies.set(
+        context,
+        "currencies",
+        JSON.stringify(currenciesResponse.data),
+        {
+          maxAge: 1 * 24 * 60 * 60,
+          path: "/",
+        }
+      );
+    }
+  }
+
+  const slug = context.params?.slug;
   const totalPage = 1;
   const roomDetail = await getRoom(slug);
   const imgs = roomDetail?.data?.photos || [];
@@ -309,7 +345,7 @@ export async function getServerSideProps({ params, query, locale }) {
       roomDetail,
       imgs,
       totalPage,
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common"])),
     },
   };
 }

@@ -1,3 +1,4 @@
+import { parseCookies } from "nookies";
 import styles from "./villaCard.module.css";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -5,6 +6,11 @@ import { useRouter } from "next/router";
 import { priceTypes } from "@/data/data";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+import {
+  calculatePriceType,
+  convertToTurkishLira,
+  moneyFormat,
+} from "@/utils/globalUtils";
 
 export default function VillaCard({
   data,
@@ -18,18 +24,21 @@ export default function VillaCard({
   nightLength,
   activeTabIndex,
 }) {
+  //console.log(data)
   const router = useRouter();
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
 
-  const currentPriceTypeText = priceTypes?.find(
-    (item) => item?.type == data?.priceType
-  )?.text;
+  const currentPriceTypeText = calculatePriceType(i18n.language);
 
   // const a = Math.max(...data.attributes.price_tables.data.map(o => o.attributes.price))
   const [activeImage, setActiveImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [currencies, setCurrencies] = useState(null);
 
   useEffect(() => {
+    const cookies = parseCookies();
+    setCurrencies(JSON.parse(cookies.currencies));
+
     const timeout = setTimeout(() => setIsLoaded(true), 100); // 100ms gecikme
     return () => clearTimeout(timeout);
   }, []);
@@ -65,6 +74,56 @@ export default function VillaCard({
         setActiveImage(activeImage - 1);
       }
     }
+  };
+
+  const returnMinPrice = () => {
+    let min = Math.min(...data?.priceTables?.map((o) => o.price));
+
+    if (data?.priceType != 1 && currencies) {
+      //minDeğer tl değil ise tl ye çevirildi
+      min = convertToTurkishLira(
+        min,
+        currencies?.[
+          priceTypes?.find((item) => item?.type == data?.priceType)?.key
+        ]
+      );
+
+      //tl ücreti ilgili kura çevir
+      if (i18n.language != "tr") {
+        min =
+          min /
+          currencies[
+            priceTypes.find((item) => item.lang == i18n.language)?.key
+          ];
+      }
+    }
+
+    return moneyFormat(min);
+  };
+
+  const returnMaxPrice = () => {
+    let max = Math.max(...data?.priceTables?.map((o) => o.price));
+
+    if (data?.priceType != 1 && currencies) {
+      //maxDeğer tl değil ise tl ye çevirildi
+      max = convertToTurkishLira(
+        max,
+        currencies?.[
+          priceTypes?.find((item) => item?.type == data?.priceType)?.key
+        ]
+      );
+
+      //tl ücreti ilgili kura çevir
+      if (i18n.language != "tr") {
+        max =
+          max /
+          currencies[
+            priceTypes.find((item) => item.lang == i18n.language)?.key
+          ];
+      }
+    }
+
+    return moneyFormat(max);
   };
 
   if (from == "newest" && !listPage) {
@@ -130,21 +189,8 @@ export default function VillaCard({
                 {data?.attributes?.price_tables?.data ? (
                   <div className={styles.price}>
                     {currentPriceTypeText}
-                    {Math.min(
-                      ...data.attributes.price_tables.data.map(
-                        (o) => o.attributes.price
-                      )
-                    )
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    - {currentPriceTypeText}
-                    {Math.max(
-                      ...data.attributes.price_tables.data.map(
-                        (o) => o.attributes.price
-                      )
-                    )
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    {returnMinPrice()} - {currentPriceTypeText}
+                    {returnMaxPrice()}
                   </div>
                 ) : (
                   <></>
@@ -241,13 +287,8 @@ export default function VillaCard({
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
                     {currentPriceTypeText}
-                    {Math.min(...data.priceTables.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    - {currentPriceTypeText}
-                    {Math.max(...data.priceTables.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    {returnMinPrice()} - {currentPriceTypeText}
+                    {returnMaxPrice()}
                   </div>
                 ) : (
                   <div className={styles.price}>{currentPriceTypeText}0</div>
@@ -347,13 +388,8 @@ export default function VillaCard({
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
                     {currentPriceTypeText}
-                    {Math.min(...data.priceTables.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    - {currentPriceTypeText}
-                    {Math.max(...data.priceTables.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    {returnMinPrice()} - {currentPriceTypeText}
+                    {returnMaxPrice()}
                   </div>
                 ) : (
                   <div className={styles.price}>{currentPriceTypeText}0</div>
@@ -468,13 +504,8 @@ export default function VillaCard({
                 ) : data?.priceTables?.length > 0 ? (
                   <div className={styles.price}>
                     {currentPriceTypeText}
-                    {Math.min(...data.priceTables.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    - {currentPriceTypeText}
-                    {Math.max(...data.priceTables.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    {returnMinPrice()} - {currentPriceTypeText}
+                    {returnMaxPrice()}
                   </div>
                 ) : (
                   <div className={styles.price}>{currentPriceTypeText}0</div>
@@ -591,13 +622,8 @@ export default function VillaCard({
                 (data?.price == "-" || data?.price == null) ? (
                   <div className={styles.price}>
                     {currentPriceTypeText}
-                    {Math.min(...data.priceTables.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    - {currentPriceTypeText}
-                    {Math.max(...data.priceTables.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    {returnMinPrice()} - {currentPriceTypeText}
+                    {returnMaxPrice()}
                   </div>
                 ) : (
                   <>
@@ -795,13 +821,8 @@ export default function VillaCard({
                 {data?.priceTables?.length > 0 ? (
                   <div className={styles.price}>
                     {currentPriceTypeText}
-                    {Math.min(...data?.priceTables?.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    - {currentPriceTypeText}
-                    {Math.max(...data?.priceTables?.map((o) => o.price))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    {returnMinPrice()} - {currentPriceTypeText}
+                    {returnMaxPrice()}
                   </div>
                 ) : (
                   <div className={styles.price}>{currentPriceTypeText}0</div>

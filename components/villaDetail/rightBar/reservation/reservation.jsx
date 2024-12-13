@@ -7,8 +7,11 @@ import moment from "moment";
 import { isVillaAvailable } from "@/services/reservation";
 import DatePicker from "react-datepicker";
 import { useTranslation } from "react-i18next";
+import { priceTypes } from "@/data/data";
 
 import { tr, enUS } from "date-fns/locale";
+import { convertToTurkishLira, moneyFormat } from "@/utils/globalUtils";
+import { parseCookies } from "nookies";
 
 const localeMap = {
   tr,
@@ -26,6 +29,7 @@ export default function Reservation({
   region,
   priceTypeText,
   t,
+  priceType,
 }) {
   const { i18n } = useTranslation();
   const router = useRouter();
@@ -36,6 +40,7 @@ export default function Reservation({
   const menuRefNumberOfPeople = useRef();
   const menuRefCalendar = useRef();
   const datepickerRef = useRef();
+  const [currencies, setCurrencies] = useState(null);
 
   const [numberOfAdults1, setNumberOfAdults1] = useState(1);
   const [numberOfChild1, setNumberOfChild1] = useState(0);
@@ -48,6 +53,34 @@ export default function Reservation({
   const [isNumberPeopleMenuOpen, setNumberPeople] = useState(false);
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  const returnMinPrice = () => {
+    let min = Math.min(...prices?.map((o) => o.price));
+
+    if (priceType != 1 && currencies) {
+      //minDeğer tl değil ise tl ye çevirildi
+      min = convertToTurkishLira(
+        min,
+        currencies?.[priceTypes?.find((item) => item?.type == priceType)?.key]
+      );
+
+      //tl ücreti ilgili kura çevir
+      if (i18n.language != "tr") {
+        min =
+          min /
+          currencies[
+            priceTypes.find((item) => item.lang == i18n.language)?.key
+          ];
+      }
+    }
+
+    return moneyFormat(min);
+  };
+
+  useEffect(() => {
+    const cookies = parseCookies();
+    setCurrencies(JSON.parse(cookies.currencies));
+  }, []);
 
   useEffect(() => {
     let handler = (e) => {
@@ -176,11 +209,7 @@ export default function Reservation({
           <div className={styles.textTop}>
             <div className={styles.price}>
               {priceTypeText}
-              {prices?.length > 0
-                ? Math.min(...prices?.map((o) => o.price))
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-                : 0}
+              {prices?.length > 0 ? returnMinPrice() : 0}
             </div>
           </div>
           <div className={styles.textBottom}>

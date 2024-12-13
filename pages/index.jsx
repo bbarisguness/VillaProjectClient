@@ -8,6 +8,7 @@ import Service from "@/components/index/service/service";
 import Blog from "@/components/index/blog/blog";
 import VillaRent from "@/components/index/villaRentInfo/villaRentInfo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import nookies from "nookies";
 
 //const Slider = lazy(() => import('@/components/index/slider/slider'));
 //const TreeStep = lazy(() => import("@/components/index/treestep/treestep"));
@@ -26,6 +27,7 @@ import Seo from "@/components/seo";
 import { getBlogs } from "@/services/blog";
 //import { lazy, Suspense } from "react";
 import { getActivates } from "@/services/activite";
+import { getCurrencies } from "@/services";
 
 export default function Home({
   villa,
@@ -61,15 +63,36 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps({ locale }) {
+export async function getServerSideProps(context) {
+  // Get cookie
+  let currenciesResponse;
+  const cookies = nookies.get(context);
+
+  if (!cookies.currencies) {
+    const currenciesResponse = await getCurrencies();
+
+    if (currenciesResponse.statusCode == 200) {
+      // Set cookie
+      nookies.set(
+        context,
+        "currencies",
+        JSON.stringify(currenciesResponse.data),
+        {
+          maxAge: 1 * 24 * 60 * 60,
+          path: "/",
+        }
+      );
+    }
+  }
+
   // API çağrılarını paralel olarak başlat
-  const categories = await getCategoriesHome(locale);
+  const categories = await getCategoriesHome(context.locale);
 
   const [villa, aparts, activates, blogs] = await Promise.all([
     getVillasHome(8, 0, categories?.data[0]?.id),
     getHotels(0, 4),
-    getActivates(locale),
-    getBlogs(locale),
+    getActivates(context.locale),
+    getBlogs(context.locale),
   ]);
 
   return {
@@ -79,7 +102,7 @@ export async function getServerSideProps({ locale }) {
       blogs,
       aparts,
       activates,
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common"])),
     },
   };
 }

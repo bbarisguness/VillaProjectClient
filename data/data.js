@@ -151,22 +151,28 @@ export const priceTypes = [
   {
     type: 1,
     text: "₺",
-    tag: "TL"
+    tag: "TL",
+    key: "tl",
+    lang: "tr"
   },
   {
     type: 2,
     text: "$",
-    tag: "DOLAR"
+    tag: "DOLAR",
+    key: "usd",
   },
   {
     type: 3,
     text: "€",
-    tag: "EURO"
+    tag: "EURO",
+    key: "eur",
   },
   {
     type: 4,
     text: "£",
-    tag: "POUNT"
+    tag: "POUNT",
+    key: "gbp",
+    lang: "en"
   },
 ];
 

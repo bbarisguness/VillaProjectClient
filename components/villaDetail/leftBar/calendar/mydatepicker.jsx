@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./mydatepicker.module.css";
 import { useTranslation } from "react-i18next";
+import { calculatePriceType, convertToTurkishLira, moneyFormat } from "@/utils/globalUtils";
+import { parseCookies } from "nookies";
+import { priceTypes } from "@/data/data";
 
 //reservasyon tarihleri düşük aydan yükselen aya doğru gelmesi lazım
 export default function MyDatePicker({
@@ -10,6 +13,7 @@ export default function MyDatePicker({
   currentMounth,
   calendarPrices,
   priceTypeText,
+  priceType,
 }) {
   const { i18n, t } = useTranslation();
   const twoDifferentYearsWillBeListed = 0 - (currentMounth + 1);
@@ -46,6 +50,7 @@ export default function MyDatePicker({
   });
 
   const [ready, setReady] = useState(false);
+  const [currencies, setCurrencies] = useState(null);
   let days = [
     "Sunday",
     "Monday",
@@ -107,6 +112,8 @@ export default function MyDatePicker({
   }
 
   useEffect(() => {
+    const cookies = parseCookies();
+    setCurrencies(JSON.parse(cookies.currencies));
     setReady(true);
   }, []);
 
@@ -408,6 +415,30 @@ export default function MyDatePicker({
       return day++;
     };
 
+    const getCalendarPriceItem = (price) => {
+      let willReturnPrice = price;
+
+      if (priceType != 1 && currencies) {
+        //maxDeğer tl değil ise tl ye çevirildi
+        willReturnPrice = convertToTurkishLira(
+          willReturnPrice,
+          currencies?.[priceTypes?.find((item) => item?.type == priceType)?.key]
+        );
+
+        //tl ücreti ilgili kura çevir
+        if (i18n.language != "tr") {
+          willReturnPrice =
+            willReturnPrice /
+            currencies[
+              priceTypes.find((item) => item.lang == i18n.language)?.key
+            ];
+        }
+      }
+
+      
+      return moneyFormat(willReturnPrice, false);
+    };
+
     const getCalendarPrice = () => {
       const willPrintPrice = calendarPrices.findIndex((range) => {
         const start = new Date(range.startDate);
@@ -415,8 +446,8 @@ export default function MyDatePicker({
         return currentDate >= start && currentDate <= end;
       });
       return willPrintPrice != -1
-        ? priceTypeText +
-            calendarPrices[willPrintPrice].price
+        ? calculatePriceType(i18n.language) +
+            getCalendarPriceItem(calendarPrices[willPrintPrice].price)
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         : "";
@@ -515,13 +546,27 @@ export default function MyDatePicker({
                     </div>
                   </div>
                   <div className={styles.daysHeaderContainer}>
-                    <div className={`${styles["day-header"]}`}>{t("days.1")}</div>
-                    <div className={`${styles["day-header"]}`}>{t("days.2")}</div>
-                    <div className={`${styles["day-header"]}`}>{t("days.3")}</div>
-                    <div className={`${styles["day-header"]}`}>{t("days.4")}</div>
-                    <div className={`${styles["day-header"]}`}>{t("days.5")}</div>
-                    <div className={`${styles["day-header"]}`}>{t("days.6")}</div>
-                    <div className={`${styles["day-header"]}`}>{t("days.7")}</div>
+                    <div className={`${styles["day-header"]}`}>
+                      {t("days.1")}
+                    </div>
+                    <div className={`${styles["day-header"]}`}>
+                      {t("days.2")}
+                    </div>
+                    <div className={`${styles["day-header"]}`}>
+                      {t("days.3")}
+                    </div>
+                    <div className={`${styles["day-header"]}`}>
+                      {t("days.4")}
+                    </div>
+                    <div className={`${styles["day-header"]}`}>
+                      {t("days.5")}
+                    </div>
+                    <div className={`${styles["day-header"]}`}>
+                      {t("days.6")}
+                    </div>
+                    <div className={`${styles["day-header"]}`}>
+                      {t("days.7")}
+                    </div>
                   </div>
                 </div>
                 {getRows(index + currentMounth, new Date().getFullYear())}

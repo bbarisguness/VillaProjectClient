@@ -6,6 +6,7 @@ import {
 import { getCategories } from "@/services/category";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import nookies, { parseCookies } from "nookies";
 
 // villa detay
 import Link from "next/link";
@@ -13,18 +14,19 @@ import styles from "./page.module.css";
 import LightGallery from "lightgallery/react";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Seo from "@/components/seo";
 import Pagination from "@/components/pagination/Pagination";
 import { priceTypes } from "@/data/data";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
-import { capitalizeWords } from "@/utils/globalUtils";
+import { calculatePriceType, capitalizeWords } from "@/utils/globalUtils";
 import BottomMenu from "@/components/bottoMobileMenu";
 import Reservation from "@/components/villaDetail/rightBar/reservation/reservation";
 import DetailTitleBox from "@/components/villaDetail/detailTitleBox/detailTitleBox";
 import ProductImageBox from "@/components/villaDetail/productImageBox/productImageBox";
 import DetailDesc from "@/components/villaDetail/detailDesc/detailsDesc";
+import { getCurrencies } from "@/services";
 
 const VillaCard = dynamic(
   () => import("../../../components/index/villa/card/villaCard"),
@@ -112,10 +114,8 @@ export default function List({
   villaSlug,
   villaName,
 }) {
-  const { t } = useTranslation("common");
-  const currentPriceTypeText = priceTypes?.find(
-    (item) => item?.type == villaDetail?.data?.priceType
-  )?.text;
+  const { t, i18n } = useTranslation("common");
+  const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = villaDetail?.data?.categories
@@ -128,6 +128,12 @@ export default function List({
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const activePage = parseInt(router.query.p) || 1;
+  const [currencies, setCurrencies] = useState(null);
+
+  useEffect(() => {
+    const cookies = parseCookies();
+    setCurrencies(JSON.parse(cookies.currencies));
+  }, []);
 
   if (villa && slug.length == 1 && villa?.data?.length > 0) {
     return (
@@ -213,6 +219,7 @@ export default function List({
         >
           <DetailTitleBox
             t={t}
+            i18n={i18n}
             villaDetail={villaDetail}
             currentPriceTypeText={currentPriceTypeText}
           />
@@ -233,9 +240,10 @@ export default function List({
                   />
                   <PriceTable
                     t={t}
+                    i18n={i18n}
                     priceTypeNumber={villaDetail?.data?.priceType || 1}
                     data={villaDetail?.data?.priceTables}
-                    currencies={villaDetail?.data?.currencies}
+                    currencies={currencies}
                   />
                   <Calendar
                     t={t}
@@ -243,6 +251,7 @@ export default function List({
                     dates={villaDetail?.data?.reservationCalendars || []}
                     calendarPrices={villaDetail?.data?.prices || []}
                     priceTypeText={currentPriceTypeText}
+                    priceType={villaDetail?.data?.priceType}
                   />
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
@@ -250,6 +259,7 @@ export default function List({
                     <div className={styles.general}>
                       <Reservation
                         t={t}
+                        priceType={villaDetail?.data?.priceType}
                         priceTypeText={currentPriceTypeText}
                         villaId={villaDetail?.data?.id}
                         villaSlug={villaSlug}
@@ -354,9 +364,30 @@ export default function List({
   }
 }
 
-export async function getServerSideProps({ params, query, locale }) {
-  const slug = params?.slug;
-  const allCategories = getCategories(locale);
+export async function getServerSideProps(context) {
+  // Get cookie
+  let currenciesResponse;
+  const cookies = nookies.get(context);
+
+  if (!cookies.currencies) {
+    const currenciesResponse = await getCurrencies();
+
+    if (currenciesResponse.statusCode == 200) {
+      // Set cookie
+      nookies.set(
+        context,
+        "currencies",
+        JSON.stringify(currenciesResponse.data),
+        {
+          maxAge: 1 * 24 * 60 * 60,
+          path: "/",
+        }
+      );
+    }
+  }
+
+  const slug = context.params?.slug;
+  const allCategories = getCategories(context.locale);
 
   // İlgili kategori verisini bulmak
   const categoryPromise = allCategories.then(
@@ -365,11 +396,14 @@ export async function getServerSideProps({ params, query, locale }) {
   );
 
   const villaPromise = categoryPromise.then((category) =>
-    getAllVillaByCategoryId(category?.id, query?.p ? query?.p - 1 : 0)
+    getAllVillaByCategoryId(
+      category?.id,
+      context.query?.p ? context.query?.p - 1 : 0
+    )
   );
 
   const villaDetailPromise = categoryPromise.then((category) =>
-    category == true ? getVilla(slug[0], locale) : null
+    category == true ? getVilla(slug[0], context.locale) : null
   );
 
   const nearVillasPromise = villaDetailPromise.then((villaDetail) =>
@@ -401,7 +435,7 @@ export async function getServerSideProps({ params, query, locale }) {
       totalPage,
       allCategories: allCategoriesData,
       category,
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common"])),
     },
   };
 }

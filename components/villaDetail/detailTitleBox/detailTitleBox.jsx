@@ -1,11 +1,21 @@
+import { useEffect, useState } from "react";
 import styles from "./detailTitleBox.module.css";
-import { getPriceRange } from "@/utils/globalUtils";
+import { getPriceRange, moneyFormat } from "@/utils/globalUtils";
+import { parseCookies } from "nookies";
 
 export default function DetailTitleBox({
   villaDetail,
   currentPriceTypeText,
   t,
+  i18n,
 }) {
+  const [currencies, setCurrencies] = useState(null);
+
+  useEffect(() => {
+    const cookies = parseCookies();
+    setCurrencies(JSON.parse(cookies.currencies));
+  }, []);
+
   return (
     <div className={styles.detailTitleBox}>
       <div className={styles.container}>
@@ -49,7 +59,10 @@ export default function DetailTitleBox({
             <div className={styles.price}>
               {getPriceRange(
                 villaDetail?.data?.priceTables,
-                currentPriceTypeText
+                currentPriceTypeText,
+                villaDetail?.data?.priceType,
+                i18n,
+                currencies
               )}
             </div>
           </div>

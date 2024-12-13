@@ -15,6 +15,7 @@ export default function Calendar({
   dates,
   calendarPrices,
   priceTypeText,
+  priceType,
   t,
 }) {
   const [yearTab, setYearTab] = useState(new Date().getFullYear());
@@ -86,6 +87,7 @@ export default function Calendar({
                 dates={dates}
                 currentMounth={month}
                 priceTypeText={priceTypeText}
+                priceType={priceType}
               />
             </div>
           </div>
@@ -120,6 +122,7 @@ export default function Calendar({
             dates={dates}
             currentMounth={month}
             priceTypeText={priceTypeText}
+            priceType={priceType}
           />
         </div>
       </div>
