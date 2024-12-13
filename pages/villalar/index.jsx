@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 import { capitalizeWords } from "@/utils/globalUtils";
+import nookies from "nookies";
+import { getCurrencies } from "@/services";
 
 const VillaCard = dynamic(
   () => import("../../components/index/villa/card/villaCard"),
@@ -68,9 +70,33 @@ export default function List({ villas }) {
   );
 }
 
-export async function getServerSideProps({ query, locale }) {
-  const villas = await getVillas(query?.p ? query?.p - 1 : 0);
+export async function getServerSideProps(context) {
+  // Get cookie
+  let currenciesResponse;
+  const cookies = nookies.get(context);
+
+  if (!cookies.currencies) {
+    const currenciesResponse = await getCurrencies();
+
+    if (currenciesResponse.statusCode == 200) {
+      // Set cookie
+      nookies.set(
+        context,
+        "currencies",
+        JSON.stringify(currenciesResponse.data),
+        {
+          maxAge: 1 * 24 * 60 * 60,
+          path: "/",
+        }
+      );
+    }
+  }
+
+  const villas = await getVillas(context.query?.p ? context.query?.p - 1 : 0);
   return {
-    props: { villas, ...(await serverSideTranslations(locale, ["common"])) },
+    props: {
+      villas,
+      ...(await serverSideTranslations(context.locale, ["common"])),
+    },
   };
 }
