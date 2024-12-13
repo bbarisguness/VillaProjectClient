@@ -3,18 +3,25 @@ import styles from "./priceTable.module.css";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { getPriceTypeDetail } from "@/data/data";
-import { replaceLastDotWithComma } from "@/utils/globalUtils";
+import { moneyFormat, replaceLastDotWithComma } from "@/utils/globalUtils";
 import { priceTypes } from "@/data/data";
 
-export default function PriceTable({ data, priceTypeNumber, currencies, t, i18n }) {
+export default function PriceTable({
+  data,
+  priceTypeNumber,
+  currencies,
+  t,
+  selectedLanguage,
+}) {
+  const [priceTableActiveIndex, setPriceTableActiveIndex] = useState(
+    priceTypes.find((item) => item.lang == selectedLanguage).type
+  );
 
   useEffect(() => {
-    setPriceTableActiveIndex(priceTypes.find(item=> item.lang == i18n.language).type);
-  })
-  
-
-  const [priceTableActiveIndex, setPriceTableActiveIndex] =
-    useState(1);
+    setPriceTableActiveIndex(
+      priceTypes.find((item) => item.lang == selectedLanguage).type
+    );
+  }, [selectedLanguage]);
 
   const handlePriceTable = (index) => {
     setPriceTableActiveIndex(index);
@@ -56,9 +63,7 @@ export default function PriceTable({ data, priceTypeNumber, currencies, t, i18n 
     const convertedPrice = (price * baseCurrency) / selectedCurrency;
 
     return (
-      replaceLastDotWithComma(
-        convertedPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-      ) +
+      moneyFormat(convertedPrice, false) +
       " " +
       getPriceTypeDetail(priceTableActiveIndex)?.text
     );

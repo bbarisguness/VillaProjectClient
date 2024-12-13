@@ -240,10 +240,10 @@ export default function List({
                   />
                   <PriceTable
                     t={t}
-                    i18n={i18n}
                     priceTypeNumber={villaDetail?.data?.priceType || 1}
                     data={villaDetail?.data?.priceTables}
                     currencies={currencies}
+                    selectedLanguage={i18n.language}
                   />
                   <Calendar
                     t={t}
@@ -259,8 +259,8 @@ export default function List({
                     <div className={styles.turizmContainer}>
                       <Image
                         src="/images/tcTurizm.png"
-                        width={75}
-                        height={75}
+                        width={50}
+                        height={50}
                         alt="Picture of the author"
                       />
                       <div className={styles.turizmTitleAndNo}>

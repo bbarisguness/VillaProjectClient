@@ -183,10 +183,10 @@ export default function List({
                   />
                   <PriceTable
                     t={t}
-                    i18n={i18n}
                     priceTypeNumber={roomDetail?.data?.priceType || 1}
                     data={roomDetail?.data?.priceTables}
                     currencies={currencies}
+                    selectedLanguage={i18n.language}
                   />
                   <Calendar
                     t={t}

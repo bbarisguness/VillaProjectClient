@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./detailTitleBox.module.css";
-import { getPriceRange, moneyFormat } from "@/utils/globalUtils";
+import { getPriceRange } from "@/utils/globalUtils";
 import { parseCookies } from "nookies";
 
 export default function DetailTitleBox({

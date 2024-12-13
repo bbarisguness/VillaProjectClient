@@ -26,7 +26,7 @@ export function getPriceRange(priceTablesArray = [], currentPriceTypeText, price
             }
         }
 
-        return moneyFormat(min);
+        return moneyFormat(min, false);
     };
 
     const returnMaxPrice = () => {
@@ -52,7 +52,7 @@ export function getPriceRange(priceTablesArray = [], currentPriceTypeText, price
             }
         }
 
-        return moneyFormat(max);
+        return moneyFormat(max, false);
     };
 
 

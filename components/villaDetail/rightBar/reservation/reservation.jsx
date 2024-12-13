@@ -74,7 +74,7 @@ export default function Reservation({
       }
     }
 
-    return moneyFormat(min);
+    return moneyFormat(min, false);
   };
 
   useEffect(() => {

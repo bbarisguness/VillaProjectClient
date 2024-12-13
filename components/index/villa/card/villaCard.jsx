@@ -98,7 +98,7 @@ export default function VillaCard({
       }
     }
 
-    return moneyFormat(min);
+    return moneyFormat(min, false);
   };
 
   const returnMaxPrice = () => {
@@ -123,7 +123,7 @@ export default function VillaCard({
       }
     }
 
-    return moneyFormat(max);
+    return moneyFormat(max, false);
   };
 
   if (from == "newest" && !listPage) {

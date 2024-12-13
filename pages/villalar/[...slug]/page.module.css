@@ -218,22 +218,20 @@
 .villaDetail .villaDetailContentBox .villaDetailContent .right .turizmContainer {
   width: 100%;
   max-width: 400px;
-  border: 3px solid red;
+  border: 1px solid #D9D9E4;
   border-radius: 10px;
   margin-bottom: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
-  gap: 5px;
-  padding: 10px;
+  gap: 15px;
+  padding: 20px 0 20px 27px;
 }
 
 .villaDetail .villaDetailContentBox .villaDetailContent .right .turizmContainer .turizmTitleAndNo {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
 }
 
 .villaDetail .villaDetailContentBox .villaDetailContent .right .general {
@@ -305,6 +303,19 @@ section.villaDetail .customerCommentsBox .customerComments {
 
   .dateRange {
     left: -40px;
+  }
+
+  .villaDetail .villaDetailContentBox .villaDetailContent .right .turizmContainer {
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #D9D9E4;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0 20px 10px;
   }
 }
 
