@@ -328,7 +328,7 @@ img {
   position: relative;
 }
 
-.date-picker-reservation .react-datepicker-popper {
+.react-datepicker-popper {
   width: 100% !important;
   justify-content: center;
   align-items: center;
@@ -365,7 +365,7 @@ img {
     padding: 45px 0;
   }
 
-  .date-picker-reservation .react-datepicker-popper {
+  .react-datepicker-popper {
     width: 100% !important;
     justify-content: center;
     align-items: center;
@@ -463,7 +463,7 @@ img {
     padding: 15px;
   }
 
-  .date-picker-reservation .react-datepicker-popper {
+  .react-datepicker-popper {
     width: 100% !important;
     position: fixed !important;
     top: 0 !important;
