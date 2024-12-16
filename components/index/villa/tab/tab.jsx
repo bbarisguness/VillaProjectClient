@@ -45,7 +45,7 @@ export default function VillaTab({
                 ></i>
               </div>
               <div className={styles.title}>
-                {item?.categoryDetails[0]?.name}
+                {item?.name}
               </div>
             </span>
           </li>

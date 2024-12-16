@@ -21,7 +21,7 @@ import nookies from "nookies";
 //const VillaRent = lazy(() => import("@/components/index/villaRentInfo/villaRentInfo"));
 
 import { getVillasHome, getHotels } from "@/services/villa";
-import { getCategoriesHome } from "@/services/category";
+import { getCategories } from "@/services/category";
 import Seo from "@/components/seo";
 //import { getRegions } from "@/services/region";
 import { getBlogs } from "@/services/blog";
@@ -86,7 +86,7 @@ export async function getServerSideProps(context) {
   }
 
   // API çağrılarını paralel olarak başlat
-  const categories = await getCategoriesHome(context.locale);
+  const categories = await getCategories(context.locale);
 
   const [villa, aparts, activates, blogs] = await Promise.all([
     getVillasHome(8, 0, categories?.data[0]?.id),

@@ -90,7 +90,7 @@ export default function HamburgerMenu() {
                           onClick={closeMenu}
                           href={`/villalar/${item?.slug}`}
                         >
-                          {item?.categoryDetails[0]?.name}
+                          {item?.name}
                         </Link>
                       </li>
                     );

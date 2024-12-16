@@ -108,7 +108,7 @@ export default function HeaderBottom({ from }) {
                               href={`/villalar/${item?.slug}`}
                               className={styles.openMenu_Link}
                             >
-                              <span>{item?.categoryDetails[0]?.name}</span>
+                              <span>{item?.name}</span>
                             </Link>
                           </li>
                         );
