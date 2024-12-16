@@ -7,7 +7,7 @@ import { getVillasHome } from "@/services/villa";
 import { useTranslation } from "react-i18next";
 
 export default function Villa({ villas, category }) {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeCategoryId, setActiveCategoryId] = useState(
     category?.data[0]?.id
@@ -20,13 +20,13 @@ export default function Villa({ villas, category }) {
 
   useEffect(() => {
     async function getHomeVillas() {
-      const data = await getVillasHome(8, 0, activeCategoryId);
+      const data = await getVillasHome(8, 0, activeCategorySlug, i18n.language);
       setVillasData(data);
     }
     if (isTabChanged) {
       getHomeVillas();
     }
-  }, [activeCategoryId]);
+  }, [activeCategorySlug]);
 
   return (
     <div className={styles.villas}>
@@ -39,12 +39,10 @@ export default function Villa({ villas, category }) {
           <div className={styles.top}>
             <ul>
               <VillaTab
-                setTabIsChanged={setTabIsChanged}
+                activeCategorySlug={activeCategorySlug}
                 setActiveCategorySlug={setActiveCategorySlug}
-                setActiveCategoryId={setActiveCategoryId}
-                activeTabIndex={activeTabIndex}
-                setActiveTabIndex={setActiveTabIndex}
                 categories={category}
+                setTabIsChanged={setTabIsChanged}
               />
             </ul>
           </div>

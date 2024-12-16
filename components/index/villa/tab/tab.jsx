@@ -1,22 +1,12 @@
 import styles from "./tab.module.css";
 import { useState } from "react";
-import { useRouter } from "next/router";
 
 export default function VillaTab({
   categories,
-  activeTabIndex,
-  setActiveTabIndex,
   setActiveCategorySlug,
-  setActiveCategoryId,
+  activeCategorySlug,
   setTabIsChanged,
 }) {
-  const router = useRouter();
-  //console.log(categories);
-  const changeIndex = (index) => {
-    setActiveTabIndex(index);
-    setTabIsChanged(true);
-  };
-
   const [error, setError] = useState(null);
 
   if (error) {
@@ -29,13 +19,12 @@ export default function VillaTab({
         {categories.data.map((item, i) => (
           <li
             id={styles.villaTabLi}
-            className={activeTabIndex == i ? styles.active : null}
-            key={item.id}
+            className={activeCategorySlug == item.slug ? styles.active : null}
+            key={i}
           >
             <span
               onClick={() => {
-                changeIndex(i);
-                setActiveCategoryId(item?.id);
+                setTabIsChanged(true);
                 setActiveCategorySlug(item?.slug);
               }}
             >
@@ -44,9 +33,7 @@ export default function VillaTab({
                   style={{ backgroundImage: `url(/images/${item?.icon})` }}
                 ></i>
               </div>
-              <div className={styles.title}>
-                {item?.name}
-              </div>
+              <div className={styles.title}>{item?.name}</div>
             </span>
           </li>
         ))}

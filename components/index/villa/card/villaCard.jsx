@@ -77,7 +77,7 @@ export default function VillaCard({
   };
 
   const returnMinPrice = () => {
-    let min = Math.min(...data?.priceTables?.map((o) => o.price));
+    let min = data?.minPrice;
 
     if (data?.priceType != 1 && currencies) {
       //minDeğer tl değil ise tl ye çevirildi
@@ -87,22 +87,22 @@ export default function VillaCard({
           priceTypes?.find((item) => item?.type == data?.priceType)?.key
         ]
       );
+    }
 
-      //tl ücreti ilgili kura çevir
-      if (i18n.language != "tr") {
-        min =
-          min /
-          currencies[
-            priceTypes.find((item) => item.lang == i18n.language)?.key
-          ];
-      }
+    //tl ücreti ilgili kura çevir
+    if (i18n.language != "tr") {
+      min =
+        min /
+        currencies?.[
+          priceTypes.find((item) => item.lang == i18n.language)?.key
+        ];
     }
 
     return moneyFormat(min, false);
   };
 
   const returnMaxPrice = () => {
-    let max = Math.max(...data?.priceTables?.map((o) => o.price));
+    let max = data?.maxPrice;
 
     if (data?.priceType != 1 && currencies) {
       //maxDeğer tl değil ise tl ye çevirildi
@@ -112,15 +112,13 @@ export default function VillaCard({
           priceTypes?.find((item) => item?.type == data?.priceType)?.key
         ]
       );
+    }
 
-      //tl ücreti ilgili kura çevir
-      if (i18n.language != "tr") {
-        max =
-          max /
-          currencies[
-            priceTypes.find((item) => item.lang == i18n.language)?.key
-          ];
-      }
+    //tl ücreti ilgili kura çevir
+    if (i18n.language != "tr") {
+      max =
+        max /
+        currencies[priceTypes.find((item) => item.lang == i18n.language)?.key];
     }
 
     return moneyFormat(max, false);
@@ -145,7 +143,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={data?.villaDetails?.[0]?.name}
+                      alt={data?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -170,9 +168,9 @@ export default function VillaCard({
                     {"Anında Rezervasyon"}
                   </div>
                 )}
-                {data?.villaDetails[0]?.featureTextWhite != null && (
+                {data?.featureTextWhite != null && (
                   <div className={styles.cardFeatures3}>
-                    {data?.villaDetails[0].featureTextWhite}
+                    {data?.featureTextWhite}
                   </div>
                 )}
               </div>
@@ -240,7 +238,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={data?.villaDetails?.[0]?.name}
+                      alt={data?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -257,27 +255,29 @@ export default function VillaCard({
                     onClick={(e) => imageHandler(e, "next")}
                   ></button>
                 </div>
-                {data?.hotelDetails[0]?.featureTextBlue && (
+                {data?.featureTextWhite && (
                   <div className={styles.cardFeatures}>
-                    {data?.hotelDetails[0]?.featureTextBlue}
+                    {data?.featureTextWhite}
                   </div>
                 )}
-                {data?.hotelDetails[0]?.featureTextRed && (
+                {data?.featureTextRed && (
                   <div className={styles.cardFeatures2}>
-                    {data?.hotelDetails[0]?.featureTextRed}
+                    {data?.hotelDetails?.[0]?.featureTextRed}
                   </div>
                 )}
-                {data?.hotelDetails[0]?.featureTextWhite != null && (
+                {data?.featureTextWhite != null && (
                   <div className={styles.cardFeatures3}>
-                    {data?.hotelDetails[0].featureTextWhite}
+                    {data?.featureTextWhite}
                   </div>
                 )}
               </div>
               <div className={styles.textBox}>
-                <div className={styles.title}>{data.hotelDetails[0]?.name}</div>
+                <div className={styles.title}>
+                  {data?.name}
+                </div>
                 {data?.town ? (
                   <div className={styles.location}>
-                    {data?.town?.district?.name} / {data?.town?.name}
+                    {data?.district} / {data?.town}
                   </div>
                 ) : (
                   <></>
@@ -343,7 +343,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={data?.villaDetails?.[0]?.name}
+                      alt={data?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -368,9 +368,9 @@ export default function VillaCard({
                     {"Anında Rezervasyon"}
                   </div>
                 )}
-                {data?.roomDetails[0]?.featureTextWhite != null && (
+                {data?.featureTextWhite != null && (
                   <div className={styles.cardFeatures3}>
-                    {data?.roomDetails[0].featureTextWhite}
+                    {data?.featureTextWhite}
                   </div>
                 )}
               </div>
@@ -378,7 +378,7 @@ export default function VillaCard({
                 <div className={styles.title}>{data.roomDetails[0]?.name}</div>
                 {data?.town ? (
                   <div className={styles.location}>
-                    {data?.town?.district?.name} / {data?.town?.name}
+                    {data?.district} / {data?.town}
                   </div>
                 ) : (
                   <></>
@@ -445,7 +445,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={data?.villaDetails?.[0]?.name}
+                      alt={data?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -470,17 +470,17 @@ export default function VillaCard({
                     {"Anında Rezervasyon"}
                   </div>
                 )}
-                {data?.villaDetails[0]?.featureTextWhite != null && (
+                {data?.featureTextWhite != null && (
                   <div className={styles.cardFeatures3}>
-                    {data?.villaDetails[0].featureTextWhite}
+                    {data?.featureTextWhite}
                   </div>
                 )}
               </div>
               <div className={styles.textBox}>
-                <div className={styles.title}>{data.villaDetails[0]?.name}</div>
+                <div className={styles.title}>{data?.name}</div>
                 {data?.town ? (
                   <div className={styles.location}>
-                    {data?.town?.district?.name} / {data?.town?.name}
+                    {data?.district} / {data?.town}
                   </div>
                 ) : (
                   <></>
@@ -577,7 +577,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={data?.villaDetails?.[0]?.name}
+                      alt={data?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -602,34 +602,27 @@ export default function VillaCard({
                     {"Anında Rezervasyon"}
                   </div>
                 )}
-                {data?.villaDetails[0]?.featureTextWhite != null && (
+                {data?.featureTextWhite != null && (
                   <div className={styles.cardFeatures3}>
-                    {data?.villaDetails[0].featureTextWhite}
+                    {data?.featureTextWhite}
                   </div>
                 )}
               </div>
               <div className={styles.textBox}>
-                <div className={styles.title}>{data.villaDetails[0]?.name}</div>
+                <div className={styles.title}>{data?.name}</div>
                 {data?.town ? (
                   <div className={styles.location}>
-                    {data?.town?.district?.name} / {data?.town?.name}
+                    {data?.district} / {data?.town}
                   </div>
                 ) : (
                   <></>
                 )}
                 <div className={styles.priceTitle}>{t("dailyPriceRange")}</div>
-                {data?.priceTables?.length > 0 &&
-                (data?.price == "-" || data?.price == null) ? (
-                  <div className={styles.price}>
-                    {currentPriceTypeText}
-                    {returnMinPrice()} - {currentPriceTypeText}
-                    {returnMaxPrice()}
-                  </div>
-                ) : (
-                  <>
-                    <div className={styles.price}>{currentPriceTypeText}0</div>
-                  </>
-                )}
+                <div className={styles.price}>
+                  {currentPriceTypeText}
+                  {returnMinPrice()} - {currentPriceTypeText}
+                  {returnMaxPrice()}
+                </div>
                 {data?.price != "-" && data?.price ? (
                   <div className={styles.price}>
                     {Math.floor(data?.price?.replace(",", "."))}₺
@@ -679,7 +672,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={data?.villaDetails?.[0]?.name}
+                      alt={data?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -704,19 +697,19 @@ export default function VillaCard({
                     {"Anında Rezervasyon"}
                   </div>
                 )}
-                {data?.villaDetails[0]?.featureTextWhite != null && (
+                {data?.featureTextWhite != null && (
                   <div className={styles.cardFeatures3}>
-                    {data?.villaDetails[0].featureTextWhite}
+                    {data?.featureTextWhite}
                   </div>
                 )}
               </div>
               <div className={styles.textBox}>
                 <div className={styles.title}>
-                  {data?.villaDetails[0]?.name}
+                  {data?.name}
                 </div>
                 {data?.town ? (
                   <div className={styles.location}>
-                    {data?.town?.district?.name} / {data?.town?.name}
+                    {data?.district} / {data?.town}
                   </div>
                 ) : (
                   <></>
@@ -724,7 +717,7 @@ export default function VillaCard({
                 <div className={styles.shortDesc}>
                   <p style={{ color: "#02044A" }}>Açıklama</p>
                   <p style={{ color: "#525265" }}>
-                    {data?.villaDetails[0]?.descriptionShort}
+                    {data?.descriptionShort}
                   </p>
                 </div>
                 <div className={styles.features}>
@@ -776,7 +769,7 @@ export default function VillaCard({
                         "k_" +
                         photo.image
                       }
-                      alt={data?.villaDetails?.[0]?.name}
+                      alt={data?.name}
                       className={`${
                         activeImage === index ? styles.active : ""
                       }`}
@@ -801,17 +794,17 @@ export default function VillaCard({
                     {"Anında Rezervasyon"}
                   </div>
                 )}
-                {data?.villaDetails[0]?.featureTextWhite != null && (
+                {data?.featureTextWhite != null && (
                   <div className={styles.cardFeatures3}>
-                    {data?.villaDetails[0].featureTextWhite}
+                    {data?.featureTextWhite}
                   </div>
                 )}
               </div>
               <div className={styles.textBox}>
-                <div className={styles.title}>{data.villaDetails[0]?.name}</div>
+                <div className={styles.title}>{data?.name}</div>
                 {true ? (
                   <div className={styles.location}>
-                    {data?.town?.district?.name} / {data?.town?.name}
+                    {data?.district} / {data?.town}
                   </div>
                 ) : (
                   <></>

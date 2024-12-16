@@ -1,8 +1,7 @@
-const apiUrl = process.env.NEXT_PUBLIC_API_URL
-const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
+const apiUrl = "https://labirentapp.testgrande.com/api"
 
 async function getVillas(page = 1) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&CompanyId=${companyId}&Size=20&Page=${page}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&Size=20&Page=${page}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -10,7 +9,7 @@ async function getVillas(page = 1) {
 }
 
 async function getHotels(page = 0, size = 20) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=tr&CompanyId=${companyId}&Size=${size}&Page=${page}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=tr&Size=${size}&Page=${page}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -25,8 +24,8 @@ async function getHotel(hotelId) {
     return data
 }
 
-async function getAllVillaByCategoryId(categoryId, page = 0) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategoryId?Language=tr&CompanyId=${companyId}&CategoryId=${categoryId}&Size=20&Page=${page}`, {
+async function getAllVillaByCategorySlug(language, categorySlug, page = 0, size = 20) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategorySlug?Language=${language}&Slug=${categorySlug}&Page=${page}&Size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -34,15 +33,15 @@ async function getAllVillaByCategoryId(categoryId, page = 0) {
 }
 
 async function getVillasForSale(page = 0, size = 20) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSale?Language=tr&CompanyId=${companyId}&Page=${page}&Size=${size}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSale?Language=tr&Page=${page}&Size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
     return data
 }
 
-async function getVillasHome(size = 8, page = 0, categoryId) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategoryId?Language=tr&CompanyId=${companyId}&CategoryId=${categoryId}&Size=${size}&Page=${page}`, {
+async function getVillasHome(size = 8, page = 0, categorySlug, language) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategorySlug?Language=${language}&Slug=${categorySlug}&Page=${page}&Size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -116,7 +115,7 @@ async function getRandomFourVilla(data, currentVillaId) {
 }
 
 async function getNearVillas(townId, currentVillaId) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaNearby?CompanyId=${companyId}&Language=tr&TownId=${townId}&Size=4`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaNearby&Language=tr&TownId=${townId}&Size=4`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -124,7 +123,7 @@ async function getNearVillas(townId, currentVillaId) {
 }
 
 async function getVillasByFilter({ villaSearchText = "", checkIn = "", checkOut = "", person = 1, page = 0, size = 10 }) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch?CompanyId=${companyId}&Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}&Person=${person}&Pagination.page=${page}&Pagination.size=${size}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch&Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}&Person=${person}&Pagination.page=${page}&Pagination.size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -132,11 +131,11 @@ async function getVillasByFilter({ villaSearchText = "", checkIn = "", checkOut 
 }
 
 async function getVillasByName({ villaSearchText = "", checkIn = "", checkOut = "", person = 1, page = 0, size = 500 }) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch?CompanyId=${companyId}&Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}&Person=${person}&Pagination.page=${page}&Pagination.size=${size}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch&Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}&Person=${person}&Pagination.page=${page}&Pagination.size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
     return data
 }
 
-export { getVillas, getVilla, getNearVillas, getVillasByFilter, getVillasHome, getVillasForSale, getAllVillaByCategoryId, getHotels, getHotel, getRoom, createComment, getVillasByName }
+export { getVillas, getVilla, getNearVillas, getVillasByFilter, getVillasHome, getVillasForSale, getAllVillaByCategorySlug, getHotels, getHotel, getRoom, createComment, getVillasByName }

@@ -1,5 +1,5 @@
 import {
-  getAllVillaByCategoryId,
+  getAllVillaByCategorySlug,
   getVilla,
   getNearVillas,
 } from "@/services/villa";
@@ -114,6 +114,7 @@ export default function List({
   villaSlug,
   villaName,
 }) {
+  
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
@@ -152,11 +153,11 @@ export default function List({
                 <div className="top">
                   <div className="titleBox">
                     <div className="title">
-                      {category?.categoryDetails[0]?.name}
+                      {category?.name}
                     </div>
                     <div className="subTitle">
                       {t("thereAreFacilities", {
-                        facilityCount: villa?.totalCount,
+                        facilityCount: villa.pageInfo.totalRow,
                       })}
                     </div>
                   </div>
@@ -177,7 +178,7 @@ export default function List({
                 </div>
                 <Pagination
                   newActivePage={activePage}
-                  pageCount={Math.ceil(villa?.totalCount / 20)}
+                  pageCount={Math.ceil(villa.pageInfo.totalRow / 20)}
                 />
               </div>
             </div>
@@ -412,8 +413,9 @@ export async function getServerSideProps(context) {
   );
 
   const villaPromise = categoryPromise.then((category) =>
-    getAllVillaByCategoryId(
-      category?.id,
+    getAllVillaByCategorySlug(
+      context.locale,
+      category?.slug,
       context.query?.p ? context.query?.p - 1 : 0
     )
   );
