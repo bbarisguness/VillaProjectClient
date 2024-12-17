@@ -1,6 +1,6 @@
 import {
   getAllVillaByCategorySlug,
-  getVilla,
+  getVillaBySlug,
   getNearVillas,
 } from "@/services/villa";
 import { getCategories } from "@/services/category";
@@ -110,11 +110,9 @@ export default function List({
   imgs,
   totalPage,
   allCategories,
-  category,
   villaSlug,
   villaName,
 }) {
-  
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
@@ -152,9 +150,7 @@ export default function List({
               <div className="box">
                 <div className="top">
                   <div className="titleBox">
-                    <div className="title">
-                      {category?.name}
-                    </div>
+                    <div className="title">yok</div>
                     <div className="subTitle">
                       {t("thereAreFacilities", {
                         facilityCount: villa.pageInfo.totalRow,
@@ -202,11 +198,9 @@ export default function List({
                 </li>
                 {villaDetail?.data?.categories && (
                   <li className={styles.breadCrumbItem}>
-                    <Link href={`/villalar/${categorySlug}`}>
-                      {
-                        villaDetail?.data?.categories[0]?.categoryDetails[0]
-                          ?.name
-                      }
+                    <Link href={`/villalar/${categorySlug || "yok"}`}>
+                      {villaDetail?.data?.categories[0]?.categoryDetails[0]
+                        ?.name || "yok"}
                     </Link>
                   </li>
                 )}
@@ -421,14 +415,16 @@ export async function getServerSideProps(context) {
   );
 
   const villaDetailPromise = categoryPromise.then((category) =>
-    category == true ? getVilla(slug[0], context.locale) : null
+    category == true ? getVillaBySlug(slug[0], context.locale) : null
   );
 
-  const nearVillasPromise = villaDetailPromise.then((villaDetail) =>
-    villaDetail?.data != null
-      ? getNearVillas(villaDetail?.data?.town?.id, villaDetail.id)
-      : []
-  );
+  // const nearVillasPromise = villaDetailPromise.then((villaDetail) =>
+  //   villaDetail?.data != null
+  //     ? getNearVillas(villaDetail?.data?.town?.id, villaDetail.id)
+  //     : []
+  // );
+
+  const nearVillasPromise = [];
 
   // Paralel olarak verileri al
   const [allCategoriesData, villa, villaDetail, nearVillas] = await Promise.all(
@@ -445,7 +441,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       villaSlug: slug[0],
-      villaName: villaDetail?.data?.villaDetails[0]?.name || null,
+      villaName: villaDetail?.data?.name || null,
       villa,
       villaDetail,
       nearVillas,

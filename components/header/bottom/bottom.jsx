@@ -105,7 +105,7 @@ export default function HeaderBottom({ from }) {
                         return (
                           <li key={i} className={styles.openMenu_li}>
                             <Link
-                              href={`/villalar/${item?.slug}`}
+                              href={`/villalar/${item?.slug || "yok"}`}
                               className={styles.openMenu_Link}
                             >
                               <span>{item?.name}</span>

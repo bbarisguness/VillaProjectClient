@@ -88,7 +88,7 @@ export default function HamburgerMenu() {
                       <li key={i}>
                         <Link
                           onClick={closeMenu}
-                          href={`/villalar/${item?.slug}`}
+                          href={`/villalar/${item?.slug || "yok"}`}
                         >
                           {item?.name}
                         </Link>

@@ -64,7 +64,7 @@ export default function Villa({ villas, category }) {
                 <div className={styles.linkBox}>
                   <Link
                     className={styles.blueButton2}
-                    href={`/villalar/${activeCategorySlug}`}
+                    href={`/villalar/${activeCategorySlug || "yok"}`}
                   >
                     <span>{t("viewAll")}</span>
                   </Link>

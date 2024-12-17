@@ -130,7 +130,7 @@ export default function VillaCard({
         <div className={styles.testimonialItemContainer}>
           <div className={styles.column}>
             <Link
-              href={`/villalar/${data?.attributes?.categories?.data[0]?.attributes?.slug}/${data?.attributes?.slug}`}
+              href={`/villalar/${data?.attributes?.categories?.data[0]?.attributes?.slug || "yok"}/${data?.attributes?.slug || "yok"}`}
               rel="nofollow"
             >
               <div className={styles.imgBox}>
@@ -227,7 +227,7 @@ export default function VillaCard({
       return (
         <li id={styles.cardContainer}>
           <div className={styles.column}>
-            <Link href={`/apartlar/${data?.slug}`} rel="nofollow">
+            <Link href={`/apartlar/${data?.slug || "yok"}`} rel="nofollow">
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
@@ -332,7 +332,7 @@ export default function VillaCard({
       return (
         <li id={styles.cardContainer}>
           <div className={styles.column}>
-            <Link href={`/odalar/${data?.slug}`} rel="nofollow">
+            <Link href={`/odalar/${data?.slug || "yok"}`} rel="nofollow">
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
@@ -434,7 +434,7 @@ export default function VillaCard({
       return (
         <li id={styles.cardContainer}>
           <div className={styles.column}>
-            <Link href={`/villalar/${data?.slug}`} rel="nofollow">
+            <Link href={`/villalar/${data?.slug|| "yok"}`} rel="nofollow">
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
@@ -566,7 +566,7 @@ export default function VillaCard({
       return (
         <li id={styles.cardContainer}>
           <div className={styles.column}>
-            <Link href={`/villalar/${data?.slug}`} rel="nofollow">
+            <Link href={`/villalar/${data?.slug || "yok"}`} rel="nofollow">
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
@@ -661,7 +661,7 @@ export default function VillaCard({
       return (
         <li id={styles.cardContainer}>
           <div className={styles.column}>
-            <Link href={`/satilik-villalar/${data?.slug}`} rel="nofollow">
+            <Link href={`/satilik-villalar/${data?.slug || "yok"}`} rel="nofollow">
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
@@ -758,7 +758,7 @@ export default function VillaCard({
           id={styles.cardContainer}
         >
           <div className={styles.column}>
-            <Link href={`/villalar/${data?.slug}`} rel="nofollow">
+            <Link href={`/villalar/${data?.slug || "yok"}`} rel="nofollow">
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (

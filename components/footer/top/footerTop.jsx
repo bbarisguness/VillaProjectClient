@@ -186,7 +186,7 @@ export default function FooterTop({ regions }) {
                 <ul className={styles.footerMenu}>
                   {regions?.map((item, index) => (
                     <li key={item?.id || "regionItem" + index}>
-                      <Link href={`/bolgeler/${item?.slug}`}>
+                      <Link href={`/bolgeler/${item?.slug || "yok"}`}>
                         <span>
                           {item?.webPageDetails
                             ? item?.webPageDetails[0]?.title

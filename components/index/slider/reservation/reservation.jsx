@@ -361,7 +361,7 @@ export default function ReservationBox() {
                   <li key={index} style={{ display: "block" }}>
                     <Link
                       className={styles.villaLink}
-                      href={`/villalar/${item?.slug}`}
+                      href={`/villalar/${item?.slug || "yok"}`}
                     >
                       <div className={styles.title}>
                         {item?.villaDetails[0]?.name}

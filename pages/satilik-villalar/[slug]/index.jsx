@@ -1,6 +1,6 @@
 import Seo from "@/components/seo";
 import Gallery from "@/components/villaDetail/leftBar/gallery/gallery";
-import { getNearVillas, getVilla } from "@/services/villa";
+import { getNearVillas, getVillaBySlug } from "@/services/villa";
 import Link from "next/link";
 import React, { useState } from "react";
 import styles from "./page.module.css";
@@ -238,7 +238,7 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
 }
 export async function getServerSideProps({ params, locale }) {
   const slug = params?.slug;
-  const villaDetail = await getVilla(slug, locale);
+  const villaDetail = await getVillaBySlug(slug, locale);
   const nearVillas = await getNearVillas(villaDetail?.data?.town?.id);
   const imgs = villaDetail?.data?.photos;
   return {

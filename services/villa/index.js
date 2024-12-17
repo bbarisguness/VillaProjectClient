@@ -48,8 +48,8 @@ async function getVillasHome(size = 8, page = 0, categorySlug, language) {
     return data
 }
 
-async function getVilla(villaSlug, language = 'tr') {
-    const response = await fetch(`${apiUrl}/Clients/GetVilla?slug=${villaSlug}&Language=${language}`, {
+async function getVillaBySlug(villaSlug, language = 'tr') {
+    const response = await fetch(`${apiUrl}/Clients/GetVillaBySlug?Language=${language}&Slug=${villaSlug}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -138,4 +138,4 @@ async function getVillasByName({ villaSearchText = "", checkIn = "", checkOut = 
     return data
 }
 
-export { getVillas, getVilla, getNearVillas, getVillasByFilter, getVillasHome, getVillasForSale, getAllVillaByCategorySlug, getHotels, getHotel, getRoom, createComment, getVillasByName }
+export { getVillas, getVillaBySlug, getNearVillas, getVillasByFilter, getVillasHome, getVillasForSale, getAllVillaByCategorySlug, getHotels, getHotel, getRoom, createComment, getVillasByName }

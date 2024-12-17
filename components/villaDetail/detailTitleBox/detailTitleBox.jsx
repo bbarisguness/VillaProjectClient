@@ -22,33 +22,33 @@ export default function DetailTitleBox({
         <div className={styles.box}>
           <div className={styles.left}>
             <div className={styles.detailTitle}>
-              {villaDetail?.data?.villaDetails[0]?.name}
+              {villaDetail?.name}
             </div>
             <div className={styles.villaInformation}>
               <div className={styles.features}>
                 <div className={styles.colon}>
                   <i className={styles.pin_icon}></i>
                   <span>
-                    {villaDetail?.data?.town?.district?.name} /{" "}
-                    {villaDetail?.data?.town?.name}
+                    {villaDetail?.district} /{" "}
+                    {villaDetail?.town}
                   </span>
                 </div>
                 <div className={styles.colon}>
                   <i className={styles.person_icon}></i>
                   <span>
-                    {villaDetail?.data?.person} {t("people")}
+                    {villaDetail?.person} {t("people")}
                   </span>
                 </div>
                 <div className={styles.colon}>
                   <i className={styles.room_icon}></i>
                   <span>
-                    {villaDetail?.data?.room} {t("room")}
+                    {villaDetail?.room} {t("room")}
                   </span>
                 </div>
                 <div className={styles.colon}>
                   <i className={styles.bath_icon}></i>
                   <span>
-                    {villaDetail?.data?.bath} {t("bath")}
+                    {villaDetail?.bath} {t("bath")}
                   </span>
                 </div>
               </div>
