@@ -208,8 +208,8 @@ export default function List({
                     isDescOpen={isDescOpen}
                     setIsDescOpen={setIsDescOpen}
                   />
-                  <DynamicDistanceRulerComponent t={t} />
-                  <DynamicPriceTableComponent t={t} priceTypeNumber={villaDetail.data.priceType} currencies={currencies} selectedLanguage={i18n.language} />
+                  <DynamicDistanceRulerComponent t={t} villaSlug={villaSlug} />
+                  <DynamicPriceTableComponent villaSlug={villaSlug} t={t} priceTypeNumber={villaDetail.data.priceType} currencies={currencies} selectedLanguage={i18n.language} />
                   <Calendar
                     t={t}
                     ready={ready}

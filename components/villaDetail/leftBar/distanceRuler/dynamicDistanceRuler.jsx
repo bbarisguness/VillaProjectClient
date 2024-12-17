@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import DistanceRulerSkeleton from "./distanceRulerSkeleton";
 import DistanceRuler from "./distanceRuler";
 
-const DynamicDistanceRulerComponent = ({ t }) => {
+const DynamicDistanceRulerComponent = ({ t, villaSlug }) => {
   const [data, setData] = useState(null); // Veriyi tutar
   const [isLoading, setIsLoading] = useState(true); // Yükleme durumu
   const ref = useRef(null); // Intersection Observer için ref
@@ -31,7 +31,7 @@ const DynamicDistanceRulerComponent = ({ t }) => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://labirentapp.testgrande.com/api/Clients/GetAllDistanceRulerByVillaSlug?Slug=villa-istanbul&Language=tr`
+        `https://labirentapp.testgrande.com/api/Clients/GetAllDistanceRulerByVillaSlug?Slug=${villaSlug}&Language=tr`
       );
       const result = await response.json();
       setData(result);

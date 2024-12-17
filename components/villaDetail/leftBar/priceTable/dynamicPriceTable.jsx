@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import PriceTableSkeleton from "./PriceTableSkeleton";
 import PriceTable from "./priceTable";
 
-const DynamicPriceTableComponent = ({ villaSlug = "villa-istanbul", t, priceTypeNumber, currencies, selectedLanguage }) => {
+const DynamicPriceTableComponent = ({ villaSlug, t, priceTypeNumber, currencies, selectedLanguage }) => {
   const [data, setData] = useState(null); // Veriyi tutar
   const [isLoading, setIsLoading] = useState(true); // Yükleme durumu
   const ref = useRef(null); // Intersection Observer için ref
