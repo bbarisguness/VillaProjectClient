@@ -13,7 +13,7 @@ export default function DetailDesc({
       <div className={styles.villaDetailDesc}>
         <div
           dangerouslySetInnerHTML={{
-            __html: villaDetail?.descriptionLong,
+            __html: villaDetail?.data?.descriptionLong,
           }}
           style={{ whiteSpace: "pre-line" }}
           className={`${styles["desc"]} ${isDescOpen && styles["active"]}`}

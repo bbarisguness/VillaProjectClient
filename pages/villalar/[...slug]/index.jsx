@@ -113,6 +113,7 @@ export default function List({
   villaSlug,
   villaName,
 }) {
+  console.log(villaDetail)
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
@@ -183,6 +184,7 @@ export default function List({
       </>
     );
   } else if (slug.length == 1 && villaDetail?.data != null) {
+    //villa detay
     return (
       <>
         <Seo

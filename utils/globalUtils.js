@@ -2,7 +2,6 @@ import { priceTypes } from "@/data/data";
 
 //villa detay ve otel detay sayfasında sağ yukarda Gecelik En Düşük fiyatın altına gelen fiyat aralıkları(minimum ve maximum)
 export function getPriceRange(priceTablesArray = [], currentPriceTypeText, priceType, i18n, currencies) {
-
     const returnMinPrice = () => {
         let min = Math.min(...priceTablesArray?.map((o) => o.price));
 
@@ -15,15 +14,15 @@ export function getPriceRange(priceTablesArray = [], currentPriceTypeText, price
                     ?.key
                 ]
             );
+        }
 
-            //tl ücreti ilgili kura çevir
-            if (i18n.language != "tr") {
-                min =
-                    min /
-                    currencies[
-                    priceTypes.find((item) => item.lang == i18n.language)?.key
-                    ];
-            }
+        //tl ücreti ilgili kura çevir
+        if (i18n.language != "tr") {
+            min =
+                min /
+                currencies[
+                priceTypes.find((item) => item.lang == i18n.language)?.key
+                ];
         }
 
         return moneyFormat(min, false);
@@ -41,15 +40,15 @@ export function getPriceRange(priceTablesArray = [], currentPriceTypeText, price
                     ?.key
                 ]
             );
+        }
 
-            //tl ücreti ilgili kura çevir
-            if (i18n.language != "tr") {
-                max =
-                    max /
-                    currencies[
-                    priceTypes.find((item) => item.lang == i18n.language)?.key
-                    ];
-            }
+        //tl ücreti ilgili kura çevir
+        if (i18n.language != "tr") {
+            max =
+                max /
+                currencies[
+                priceTypes.find((item) => item.lang == i18n.language)?.key
+                ];
         }
 
         return moneyFormat(max, false);
@@ -115,7 +114,7 @@ export function moneyFormat(value, includeDecimals = true) {
     const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
     // Eğer includeDecimals false veya ondalık kısım 0 ise sadece tam sayı kısmını döndürün
-    if (!includeDecimals || decimalPart === "0") {  
+    if (!includeDecimals || decimalPart === "0") {
         return formattedInteger;
     }
 

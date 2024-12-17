@@ -22,33 +22,33 @@ export default function DetailTitleBox({
         <div className={styles.box}>
           <div className={styles.left}>
             <div className={styles.detailTitle}>
-              {villaDetail?.name}
+              {villaDetail?.data?.name}
             </div>
             <div className={styles.villaInformation}>
               <div className={styles.features}>
                 <div className={styles.colon}>
                   <i className={styles.pin_icon}></i>
                   <span>
-                    {villaDetail?.district} /{" "}
-                    {villaDetail?.town}
+                    {villaDetail?.data?.district} /{" "}
+                    {villaDetail?.data?.town}
                   </span>
                 </div>
                 <div className={styles.colon}>
                   <i className={styles.person_icon}></i>
                   <span>
-                    {villaDetail?.person} {t("people")}
+                    {villaDetail?.data?.person} {t("people")}
                   </span>
                 </div>
                 <div className={styles.colon}>
                   <i className={styles.room_icon}></i>
                   <span>
-                    {villaDetail?.room} {t("room")}
+                    {villaDetail?.data?.room} {t("room")}
                   </span>
                 </div>
                 <div className={styles.colon}>
                   <i className={styles.bath_icon}></i>
                   <span>
-                    {villaDetail?.bath} {t("bath")}
+                    {villaDetail?.data?.bath} {t("bath")}
                   </span>
                 </div>
               </div>
@@ -58,7 +58,7 @@ export default function DetailTitleBox({
             <div className={styles.priceType}>{t("lowestNightly")}</div>
             <div className={styles.price}>
               {getPriceRange(
-                villaDetail?.data?.priceTables,
+                [{price: villaDetail?.data?.minPrice}],
                 currentPriceTypeText,
                 villaDetail?.data?.priceType,
                 i18n,
