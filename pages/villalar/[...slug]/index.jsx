@@ -108,24 +108,14 @@ export default function List({
   villaDetail,
   nearVillas,
   imgs,
-  totalPage,
-  allCategories,
   villaSlug,
   villaName,
-  category
+  category,
 }) {
-  console.log(category)
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
   const slug = router?.query?.slug;
-  // const categorySlug = villaDetail?.data?.categories
-  //   ? allCategories?.data?.find(
-  //       (item) =>
-  //         item?.categoryDetails[0]?.name ==
-  //         villaDetail?.data?.categories[0]?.categoryDetails[0]?.name
-  //     )?.slug
-  //   : null;
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const activePage = parseInt(router.query.p) || 1;
@@ -421,20 +411,12 @@ export async function getServerSideProps(context) {
     category == true ? getVillaBySlug(slug[0], context.locale) : null
   );
 
-  // const nearVillasPromise = villaDetailPromise.then((villaDetail) =>
-  //   villaDetail?.data != null
-  //     ? getNearVillas(villaDetail?.data?.town?.id, villaDetail.id)
-  //     : []
-  // );
-
-  const nearVillasPromise = [];
-
   // Paralel olarak verileri al
-  const [allCategoriesData, villa, villaDetail, nearVillas] = await Promise.all(
-    [allCategories, villaPromise, villaDetailPromise, nearVillasPromise]
-  );
-
-  const totalPage = 1;
+  const [allCategoriesData, villa, villaDetail] = await Promise.all([
+    allCategories,
+    villaPromise,
+    villaDetailPromise,
+  ]);
   const imgs = villaDetail?.data?.photos || [];
   const category =
     villaDetail == null
@@ -447,10 +429,7 @@ export async function getServerSideProps(context) {
       villaName: villaDetail?.data?.name || null,
       villa,
       villaDetail,
-      nearVillas,
       imgs,
-      totalPage,
-      allCategories: allCategoriesData,
       category,
       ...(await serverSideTranslations(context.locale, ["common"])),
     },
