@@ -27,7 +27,11 @@ export default function List({ hotels }) {
                   <div className="title">
                     {capitalizeWords(t("headerApartmentsForRent"))}
                   </div>
-                  <div className="subTitle">{t("thereAreFacilities", { facilityCount: hotels?.totalCount})}</div>
+                  <div className="subTitle">
+                    {t("thereAreFacilities", {
+                      facilityCount: hotels?.totalCount,
+                    })}
+                  </div>
                 </div>
               </div>
               <div className="bottom">
@@ -58,7 +62,7 @@ export default function List({ hotels }) {
 }
 
 export async function getServerSideProps({ query, locale }) {
-  const hotels = await getHotels(query?.p ? query?.p - 1 : 0);
+  const hotels = await getHotels(query?.p ? query?.p - 1 : 0, 20, locale);
   return {
     props: { hotels, ...(await serverSideTranslations(locale, ["common"])) },
   };

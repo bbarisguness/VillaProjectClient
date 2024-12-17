@@ -90,7 +90,7 @@ export async function getServerSideProps(context) {
 
   const [villa, aparts, activates, blogs] = await Promise.all([
     getVillasHome(8, 0, categories?.data[0]?.slug),
-    getHotels(0, 4),
+    getHotels(0, 4, context.locale),
     getActivates(context.locale),
     getBlogs(context.locale),
   ]);

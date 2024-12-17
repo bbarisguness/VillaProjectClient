@@ -112,19 +112,20 @@ export default function List({
   allCategories,
   villaSlug,
   villaName,
+  category
 }) {
-  console.log(villaDetail)
+  console.log(category)
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
   const slug = router?.query?.slug;
-  const categorySlug = villaDetail?.data?.categories
-    ? allCategories?.data?.find(
-        (item) =>
-          item?.categoryDetails[0]?.name ==
-          villaDetail?.data?.categories[0]?.categoryDetails[0]?.name
-      )?.slug
-    : null;
+  // const categorySlug = villaDetail?.data?.categories
+  //   ? allCategories?.data?.find(
+  //       (item) =>
+  //         item?.categoryDetails[0]?.name ==
+  //         villaDetail?.data?.categories[0]?.categoryDetails[0]?.name
+  //     )?.slug
+  //   : null;
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
   const activePage = parseInt(router.query.p) || 1;
@@ -151,7 +152,7 @@ export default function List({
               <div className="box">
                 <div className="top">
                   <div className="titleBox">
-                    <div className="title">yok</div>
+                    <div className="title">{category?.name || "Yok"}</div>
                     <div className="subTitle">
                       {t("thereAreFacilities", {
                         facilityCount: villa.pageInfo.totalRow,
@@ -198,14 +199,14 @@ export default function List({
                 <li className={styles.breadCrumbItem}>
                   <Link href="/">{capitalizeWords(t("headerHomePage"))}</Link>
                 </li>
-                {villaDetail?.data?.categories && (
+                {/* {villaDetail?.data?.categories && (
                   <li className={styles.breadCrumbItem}>
                     <Link href={`/villalar/${categorySlug || "yok"}`}>
                       {villaDetail?.data?.categories[0]?.categoryDetails[0]
                         ?.name || "yok"}
                     </Link>
                   </li>
-                )}
+                )} */}
               </ul>
             </div>
           </div>
