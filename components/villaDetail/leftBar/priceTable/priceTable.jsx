@@ -130,10 +130,10 @@ export default function PriceTable({
                 </div>
                 <div className={styles.rightBox}>
                   <div className={styles.name}>
-                    {data?.priceTableDetails[0]?.title}
+                    {data?.title}
                   </div>
                   <div className={styles.desc}>
-                    {data?.priceTableDetails[0]?.description}
+                    {data?.description}
                   </div>
                   <div className={styles.price}>
                     {getPrice(data?.price)}

@@ -27,6 +27,7 @@ import ProductImageBox from "@/components/villaDetail/productImageBox/productIma
 import DetailDesc from "@/components/villaDetail/detailDesc/detailsDesc";
 import { getCurrencies } from "@/services";
 import Image from "next/image";
+import DynamicPriceTableComponent from "@/components/villaDetail/leftBar/priceTable/dynamicPriceTable";
 
 const VillaCard = dynamic(
   () => import("../../../components/index/villa/card/villaCard"),
@@ -62,13 +63,6 @@ const DistanceRuler = dynamic(
     import(
       "../../../components/villaDetail/leftBar/distanceRuler/distanceRuler"
     ),
-  {
-    ssr: true,
-  }
-);
-
-const PriceTable = dynamic(
-  () => import("../../../components/villaDetail/leftBar/priceTable/priceTable"),
   {
     ssr: true,
   }
@@ -112,6 +106,7 @@ export default function List({
   villaName,
   category,
 }) {
+  
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
@@ -226,13 +221,7 @@ export default function List({
                     data={villaDetail?.data?.distanceRulers}
                     t={t}
                   />
-                  <PriceTable
-                    t={t}
-                    priceTypeNumber={villaDetail?.data?.priceType || 1}
-                    data={villaDetail?.data?.priceTables}
-                    currencies={currencies}
-                    selectedLanguage={i18n.language}
-                  />
+                  <DynamicPriceTableComponent t={t} priceTypeNumber={villaDetail.data.priceType} currencies={currencies} selectedLanguage={i18n.language} />
                   <Calendar
                     t={t}
                     ready={ready}

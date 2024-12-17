@@ -20,8 +20,8 @@ export function getPriceRange(priceTablesArray = [], currentPriceTypeText, price
         if (i18n.language != "tr") {
             min =
                 min /
-                currencies[
-                priceTypes.find((item) => item.lang == i18n.language)?.key
+                currencies?.[
+                priceTypes?.find((item) => item.lang == i18n.language)?.key
                 ];
         }
 
@@ -46,8 +46,8 @@ export function getPriceRange(priceTablesArray = [], currentPriceTypeText, price
         if (i18n.language != "tr") {
             max =
                 max /
-                currencies[
-                priceTypes.find((item) => item.lang == i18n.language)?.key
+                currencies?.[
+                priceTypes?.find((item) => item.lang == i18n.language)?.key
                 ];
         }
 
