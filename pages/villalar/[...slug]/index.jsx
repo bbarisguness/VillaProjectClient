@@ -29,6 +29,8 @@ import { getCurrencies } from "@/services";
 import Image from "next/image";
 import DynamicPriceTableComponent from "@/components/villaDetail/leftBar/priceTable/dynamicPriceTable";
 import DynamicDistanceRulerComponent from "@/components/villaDetail/leftBar/distanceRuler/dynamicDistanceRuler";
+import Calendar from "@/components/villaDetail/leftBar/calendar/calendar";
+import DynamicCalendarComponent from "@/components/villaDetail/leftBar/calendar/dynamicCalendarComponent";
 
 const VillaCard = dynamic(
   () => import("../../../components/index/villa/card/villaCard"),
@@ -58,13 +60,6 @@ const VillaCard = dynamic(
 //     ssr: true,
 //   }
 // );
-
-const Calendar = dynamic(
-  () => import("../../../components/villaDetail/leftBar/calendar/calendar"),
-  {
-    ssr: true,
-  }
-);
 
 // const Reservation = dynamic(
 //   () =>
@@ -210,14 +205,7 @@ export default function List({
                   />
                   <DynamicDistanceRulerComponent t={t} villaSlug={villaSlug} />
                   <DynamicPriceTableComponent villaSlug={villaSlug} t={t} priceTypeNumber={villaDetail.data.priceType} currencies={currencies} selectedLanguage={i18n.language} />
-                  <Calendar
-                    t={t}
-                    ready={ready}
-                    dates={villaDetail?.data?.reservationCalendars || []}
-                    calendarPrices={villaDetail?.data?.prices || []}
-                    priceTypeText={currentPriceTypeText}
-                    priceType={villaDetail?.data?.priceType}
-                  />
+                  <DynamicCalendarComponent t={t} ready={ready} priceTypeText={currentPriceTypeText} priceType={villaDetail.data.priceType} />
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
                   <div className={styles.right}>
