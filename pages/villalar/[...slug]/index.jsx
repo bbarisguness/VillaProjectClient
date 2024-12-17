@@ -28,6 +28,7 @@ import DetailDesc from "@/components/villaDetail/detailDesc/detailsDesc";
 import { getCurrencies } from "@/services";
 import Image from "next/image";
 import DynamicPriceTableComponent from "@/components/villaDetail/leftBar/priceTable/dynamicPriceTable";
+import DynamicDistanceRulerComponent from "@/components/villaDetail/leftBar/distanceRuler/dynamicDistanceRuler";
 
 const VillaCard = dynamic(
   () => import("../../../components/index/villa/card/villaCard"),
@@ -57,16 +58,6 @@ const VillaCard = dynamic(
 //     ssr: true,
 //   }
 // );
-
-const DistanceRuler = dynamic(
-  () =>
-    import(
-      "../../../components/villaDetail/leftBar/distanceRuler/distanceRuler"
-    ),
-  {
-    ssr: true,
-  }
-);
 
 const Calendar = dynamic(
   () => import("../../../components/villaDetail/leftBar/calendar/calendar"),
@@ -217,10 +208,7 @@ export default function List({
                     isDescOpen={isDescOpen}
                     setIsDescOpen={setIsDescOpen}
                   />
-                  <DistanceRuler
-                    data={villaDetail?.data?.distanceRulers}
-                    t={t}
-                  />
+                  <DynamicDistanceRulerComponent t={t} />
                   <DynamicPriceTableComponent t={t} priceTypeNumber={villaDetail.data.priceType} currencies={currencies} selectedLanguage={i18n.language} />
                   <Calendar
                     t={t}
