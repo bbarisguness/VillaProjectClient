@@ -29,7 +29,7 @@ export default function List({ hotels }) {
                   </div>
                   <div className="subTitle">
                     {t("thereAreFacilities", {
-                      facilityCount: hotels?.totalCount,
+                      facilityCount: hotels?.pageInfo?.totalRow,
                     })}
                   </div>
                 </div>
@@ -51,7 +51,7 @@ export default function List({ hotels }) {
               </div>
               <Pagination
                 newActivePage={activePage}
-                pageCount={Math.ceil(hotels?.totalCount / 20)}
+                pageCount={Math.ceil(hotels?.pageInfo?.totalRow / 20)}
               />
             </div>
           </div>
