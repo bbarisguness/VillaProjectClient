@@ -8,6 +8,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 
 export default function Searchs({ getFilterVillas, totalPage }) {
+  
   const { t } = useTranslation("common");
   const router = useRouter();
   const activePage = parseInt(router?.query?.p) || 1;
@@ -30,7 +31,7 @@ export default function Searchs({ getFilterVillas, totalPage }) {
                   <div className="title">{t("searchResults")}</div>
                   <div className="subTitle">
                     {t("thereAreFacilities", {
-                      facilityCount: getFilterVillas?.totalCount,
+                      facilityCount: getFilterVillas?.pageInfo?.totalRow,
                     })}
                   </div>
                 </div>
@@ -82,7 +83,7 @@ export async function getServerSideProps({ query, locale }) {
     size: 12,
     page: parseInt(query?.p - 1) || 0,
   });
-  const totalPage = Math.ceil(getFilterVillas?.totalCount / 12);
+  const totalPage = Math.ceil(getFilterVillas?.pageInfo?.totalPage / 12);
   return {
     props: {
       getFilterVillas,
