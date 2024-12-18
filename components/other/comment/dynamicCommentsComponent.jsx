@@ -44,12 +44,11 @@ const DynamicCommentsComponent = ({ t, villaSlug }) => {
 
   return (
     <div ref={ref} style={{ minHeight: "200px" }}>
-      {/* {isLoading ? (
+      {isLoading ? (
         <CommentsSkeleton />
       ) : (
         <Comments commentData={data?.data} t={t} />
-      )} */}
-      <CommentsSkeleton />
+      )}
     </div>
   );
 };
