@@ -4,10 +4,7 @@ import { getBlogs } from "@/services/blog";
 import Seo from "@/components/seo";
 import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
-const BlogCard = dynamic(() => import("../../components/blog/blogCard"), {
-  ssr: false, // SSR olmadan yüklenmesi yeterli
-});
+import BlogCard from "@/components/blog/blogCard";
 
 export default function Blog({ blogs }) {
   const { t } = useTranslation("common");

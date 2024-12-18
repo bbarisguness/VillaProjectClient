@@ -4,6 +4,7 @@ import BlogCard from "./blogCard";
 import { useTranslation } from "react-i18next";
 
 export default function Blog({ blog }) {
+  
   const { t } = useTranslation("common");
   if (blog?.totalCount == 0) return null;
 
@@ -16,7 +17,7 @@ export default function Blog({ blog }) {
             <div className={styles.subTitle}>{t("indexBlogSubText")}</div>
           </div>
           <ul>
-            {blog.data.map((blog, index) => {
+            {blog?.data?.map((blog, index) => {
               //Anasayfa Blog başlığının altına 2 tane blog basar
               if (index >= 2) return;
               return <BlogCard t={t} key={index} data={blog} />;
