@@ -29,8 +29,8 @@ import { getCurrencies } from "@/services";
 import Image from "next/image";
 import DynamicPriceTableComponent from "@/components/villaDetail/leftBar/priceTable/dynamicPriceTable";
 import DynamicDistanceRulerComponent from "@/components/villaDetail/leftBar/distanceRuler/dynamicDistanceRuler";
-import Calendar from "@/components/villaDetail/leftBar/calendar/calendar";
 import DynamicCalendarComponent from "@/components/villaDetail/leftBar/calendar/dynamicCalendarComponent";
+import DynamicCommentsComponent from "@/components/other/comment/dynamicCommentsComponent";
 
 const VillaCard = dynamic(
   () => import("../../../components/index/villa/card/villaCard"),
@@ -69,13 +69,6 @@ const VillaCard = dynamic(
 //   }
 // );
 
-const Comments = dynamic(
-  () => import("../../../components/other/comment/Comments"),
-  {
-    ssr: true,
-  }
-);
-
 const CommentForm = dynamic(
   () => import("../../../components/other/commentForm/CommentForm"),
   {
@@ -92,7 +85,6 @@ export default function List({
   villaName,
   category,
 }) {
-  
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
@@ -204,8 +196,19 @@ export default function List({
                     setIsDescOpen={setIsDescOpen}
                   />
                   <DynamicDistanceRulerComponent t={t} villaSlug={villaSlug} />
-                  <DynamicPriceTableComponent villaSlug={villaSlug} t={t} priceTypeNumber={villaDetail.data.priceType} currencies={currencies} selectedLanguage={i18n.language} />
-                  <DynamicCalendarComponent t={t} ready={ready} priceTypeText={currentPriceTypeText} priceType={villaDetail.data.priceType} />
+                  <DynamicPriceTableComponent
+                    villaSlug={villaSlug}
+                    t={t}
+                    priceTypeNumber={villaDetail.data.priceType}
+                    currencies={currencies}
+                    selectedLanguage={i18n.language}
+                  />
+                  <DynamicCalendarComponent
+                    t={t}
+                    ready={ready}
+                    priceTypeText={currentPriceTypeText}
+                    priceType={villaDetail.data.priceType}
+                  />
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
                   <div className={styles.right}>
@@ -295,7 +298,7 @@ export default function List({
           <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
-                <Comments commentData={villaDetail?.data?.comments} t={t} />
+                <DynamicCommentsComponent t={t} villaSlug={villaSlug} />
                 <CommentForm t={t} />
               </div>
             </div>
