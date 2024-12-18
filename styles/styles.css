@@ -365,14 +365,14 @@ img {
     padding: 45px 0;
   }
 
-  .react-datepicker-popper {
+  /* .react-datepicker-popper {
     width: 100% !important;
     justify-content: center;
     align-items: center;
     display: block !important;
     top: 30px !important;
     z-index: 100 !important;
-  }
+  } */
 }
 
 .react-datepicker-wrapper {

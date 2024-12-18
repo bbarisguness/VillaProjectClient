@@ -164,80 +164,25 @@ export default function ReservationBox() {
     //   },
     // });
 
-    if (dateRange.length == 2 && filterText !== "" && numberOfAdults1 !== 0) {
+    const queryParams = { ...query };
+
+    if (dateRange.length === 2) {
+      queryParams.from = startDate;
+      queryParams.to = endDate;
+    }
+
+    if (filterText !== "") {
+      queryParams.name = filterText;
+    }
+
+    if (numberOfAdults1 !== 0) {
+      queryParams.person = numberOfAdults1;
+    }
+
+    if (Object.keys(queryParams).length > Object.keys(query).length) {
       router.replace({
         pathname: "/searchs",
-        query: {
-          ...query,
-          name: filterText,
-          from: startDate,
-          to: endDate,
-          person: numberOfAdults1,
-        },
-      });
-    } else if (
-      dateRange.length == 2 &&
-      filterText !== "" &&
-      numberOfAdults1 == 0
-    ) {
-      router.replace({
-        pathname: "/searchs",
-        query: {
-          ...query,
-          name: filterText,
-          from: startDate,
-          to: endDate,
-        },
-      });
-    } else if (
-      dateRange.length == 2 &&
-      numberOfAdults1 !== 0 &&
-      filterText == ""
-    ) {
-      router.replace({
-        pathname: "/searchs",
-        query: {
-          ...query,
-          from: startDate,
-          to: endDate,
-          person: numberOfAdults1,
-        },
-      });
-    } else if (
-      filterText !== "" &&
-      numberOfAdults1 !== 0 &&
-      dateRange.length !== 2
-    ) {
-      router.replace({
-        pathname: "/searchs",
-        query: { ...query, name: filterText, person: numberOfAdults1 },
-      });
-    } else if (
-      filterText !== "" &&
-      numberOfAdults1 == 0 &&
-      dateRange.length !== 2
-    ) {
-      router.replace({
-        pathname: "/searchs",
-        query: { ...query, name: filterText },
-      });
-    } else if (
-      dateRange.length == 2 &&
-      filterText == "" &&
-      numberOfAdults1 == 0
-    ) {
-      router.replace({
-        pathname: "/searchs",
-        query: { ...query, from: startDate, to: endDate },
-      });
-    } else if (
-      numberOfAdults1 !== 0 &&
-      dateRange.length !== 2 &&
-      filterText == ""
-    ) {
-      router.replace({
-        pathname: "/searchs",
-        query: { ...query, person: numberOfAdults1 },
+        query: queryParams,
       });
     } else {
       alert("Lütfen geçerli arama yapınız!");
@@ -363,9 +308,7 @@ export default function ReservationBox() {
                       className={styles.villaLink}
                       href={`/villalar/${item?.slug || "yok"}`}
                     >
-                      <div className={styles.title}>
-                        {item?.villaDetails[0]?.name}
-                      </div>
+                      <div className={styles.title}>{item?.name}</div>
                     </Link>
                   </li>
                 );

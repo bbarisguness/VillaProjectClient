@@ -65,7 +65,7 @@ export default function Page({ t }) {
                     onClick={() => navigateVilla(item?.slug)}
                     className={styles.villaItem}
                   >
-                    {item?.villaDetails?.[0]?.name}
+                    {item?.name}
                   </div>
                 ))}
             </div>

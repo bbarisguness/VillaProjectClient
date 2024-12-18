@@ -122,16 +122,16 @@ async function getNearVillas(townId, currentVillaId) {
     return await getRandomFourVilla(data, currentVillaId)
 }
 
-async function getVillasByFilter({ villaSearchText = "", checkIn = "", checkOut = "", person = 1, page = 0, size = 10 }) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch&Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}&Person=${person}&Pagination.page=${page}&Pagination.size=${size}`, {
+async function getVillasByFilter({ villaSearchText = "", checkIn = "", checkOut = "", person = 0, page = 0, size = 10 }) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch?Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}${person !== 0 ? `&Person=${person}` : ''}&Pagination.Page=${page}&Pagination.Size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
     return data
 }
 
-async function getVillasByName({ villaSearchText = "", checkIn = "", checkOut = "", person = 1, page = 0, size = 500 }) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch&Language=tr${checkIn !== '' ? `&CheckIn=${checkIn}` : ''}${checkOut !== '' ? `&CheckOut=${checkOut}` : ''}${villaSearchText !== '' ? `&Name=${villaSearchText}` : ''}&Person=${person}&Pagination.page=${page}&Pagination.size=${size}`, {
+async function getVillasByName({ villaSearchText = "", page = 0, size = 500 }) {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSearch?Language=tr&Name=${villaSearchText}&Pagination.Size=${size}&Pagination.Page=${page}`, {
         cache: 'no-store'
     })
     const data = await response.json()
