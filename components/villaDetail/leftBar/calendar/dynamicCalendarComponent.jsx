@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import CalendarSkeleton from "./calendarSkeleton";
 import Calendar from "./calendar";
+import styles from "./dynamicCalendar.module.css"
 
 const DynamicCalendarComponent = ({
   t,
@@ -48,7 +49,7 @@ const DynamicCalendarComponent = ({
   };
 
   return (
-    <div ref={ref} style={{ minHeight: "200px" }}>
+    <div ref={ref} className={styles.dynamicCalendarGlobalContainer}>
       {isLoading ? (
         <CalendarSkeleton />
       ) : (

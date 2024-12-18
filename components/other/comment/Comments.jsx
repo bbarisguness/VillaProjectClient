@@ -11,7 +11,6 @@ const VideoWithComment = dynamic(
 );
 
 export default function Comments({ commentData, t }) {
-  console.log(commentData)
   const [numberOfCommentsShown, setNumberOfCommentsShown] = useState(3);
   const [isShowingAllComments, setShowingAllComments] = useState(
     commentData?.length < 3 ? true : false
