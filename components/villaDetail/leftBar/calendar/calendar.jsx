@@ -10,7 +10,7 @@ const MyDatePicker = dynamic(() => import("./mydatepicker"), {
   ssr: true,
 });
 
-export default function Calendar({
+const Calendar = function Calendar({
   ready,
   dates,
   calendarPrices,
@@ -129,3 +129,5 @@ export default function Calendar({
     </>
   );
 }
+
+export default Calendar

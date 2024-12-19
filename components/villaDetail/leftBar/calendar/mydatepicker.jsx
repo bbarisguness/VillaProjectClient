@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./mydatepicker.module.css";
 import { useTranslation } from "react-i18next";
-import { calculatePriceType, convertToTurkishLira, moneyFormat } from "@/utils/globalUtils";
+import {
+  calculatePriceType,
+  convertToTurkishLira,
+  moneyFormat,
+} from "@/utils/globalUtils";
 import { parseCookies } from "nookies";
 import { priceTypes } from "@/data/data";
 
@@ -424,18 +428,17 @@ export default function MyDatePicker({
           willReturnPrice,
           currencies?.[priceTypes?.find((item) => item?.type == priceType)?.key]
         );
-
-        //tl ücreti ilgili kura çevir
-        if (i18n.language != "tr") {
-          willReturnPrice =
-            willReturnPrice /
-            currencies[
-              priceTypes.find((item) => item.lang == i18n.language)?.key
-            ];
-        }
       }
 
-      
+      //tl ücreti ilgili kura çevir
+      if (i18n.language != "tr") {
+        willReturnPrice =
+          willReturnPrice /
+          currencies[
+            priceTypes.find((item) => item.lang == i18n.language)?.key
+          ];
+      }
+
       return moneyFormat(willReturnPrice, false);
     };
 
@@ -592,13 +595,27 @@ export default function MyDatePicker({
                       </div>
                     </div>
                     <div className={styles.daysHeaderContainer}>
-                      <div className={`${styles["day-header"]}`}>{t("days.1")}</div>
-                      <div className={`${styles["day-header"]}`}>{t("days.2")}</div>
-                      <div className={`${styles["day-header"]}`}>{t("days.3")}</div>
-                      <div className={`${styles["day-header"]}`}>{t("days.4")}</div>
-                      <div className={`${styles["day-header"]}`}>{t("days.5")}</div>
-                      <div className={`${styles["day-header"]}`}>{t("days.6")}</div>
-                      <div className={`${styles["day-header"]}`}>{t("days.7")}</div>
+                      <div className={`${styles["day-header"]}`}>
+                        {t("days.1")}
+                      </div>
+                      <div className={`${styles["day-header"]}`}>
+                        {t("days.2")}
+                      </div>
+                      <div className={`${styles["day-header"]}`}>
+                        {t("days.3")}
+                      </div>
+                      <div className={`${styles["day-header"]}`}>
+                        {t("days.4")}
+                      </div>
+                      <div className={`${styles["day-header"]}`}>
+                        {t("days.5")}
+                      </div>
+                      <div className={`${styles["day-header"]}`}>
+                        {t("days.6")}
+                      </div>
+                      <div className={`${styles["day-header"]}`}>
+                        {t("days.7")}
+                      </div>
                     </div>
                   </div>
                   {getRows(index, new Date().getFullYear() + 1)}

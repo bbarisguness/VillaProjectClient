@@ -1,15 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import CalendarSkeleton from "./calendarSkeleton";
 import Calendar from "./calendar";
-import styles from "./dynamicCalendar.module.css"
+import styles from "./dynamicCalendar.module.css";
 
 const DynamicCalendarComponent = ({
   t,
   ready,
   priceTypeText,
-  priceType
+  priceType,
+  villaSlug,
+  selectedLanguage,
 }) => {
-  const [data, setData] = useState(null); // Veriyi tutar
+  const [calendarReservations, setCalendarReservationsData] = useState(null);
+  const [calendarPrices, setCalendarPrices] = useState(null);
   const [isLoading, setIsLoading] = useState(true); // Yükleme durumu
   const ref = useRef(null); // Intersection Observer için ref
 
@@ -36,11 +39,22 @@ const DynamicCalendarComponent = ({
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `https://labirentapp.testgrande.com/api/Clients/GetAllPriceTableByVillaSlug?Slug=${villaSlug}&Language=tr`
-      );
-      const result = await response.json();
-      setData(result);
+      const [reservationResponse, pricesResponse] = await Promise.all([
+        fetch(
+          `https://labirentapp.testgrande.com/api/Clients/GetReservationCalendarByVillaSlug?Slug=${villaSlug}&Language=${selectedLanguage}`
+        ),
+        fetch(
+          `https://labirentapp.testgrande.com/api/Clients/GetAllPriceDateByVillaSlug?Slug=${villaSlug}`
+        ),
+      ]);
+
+      const [reservationsResult, pricesResult] = await Promise.all([
+        reservationResponse.json(),
+        pricesResponse.json(),
+      ]);
+
+      setCalendarReservationsData(reservationsResult);
+      setCalendarPrices(pricesResult);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -56,8 +70,8 @@ const DynamicCalendarComponent = ({
         <Calendar
           t={t}
           ready={ready}
-          dates={data?.data?.reservationCalendars || []}
-          calendarPrices={data?.data?.prices || []}
+          dates={calendarReservations?.data || []}
+          calendarPrices={calendarPrices?.data || []}
           priceTypeText={priceTypeText}
           priceType={priceType}
         />

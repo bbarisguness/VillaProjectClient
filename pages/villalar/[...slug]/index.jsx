@@ -208,6 +208,8 @@ export default function List({
                     ready={ready}
                     priceTypeText={currentPriceTypeText}
                     priceType={villaDetail.data.priceType}
+                    villaSlug={villaSlug}
+                    selectedLanguage={i18n.language}
                   />
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
