@@ -238,7 +238,7 @@ export default function List({
                         villaId={villaDetail?.data?.id}
                         villaSlug={villaSlug}
                         villaName={villaName}
-                        prices={villaDetail?.data?.priceTables}
+                        prices={[{price: villaDetail?.data?.minPrice}, {price: villaDetail?.data?.maxPrice}]}
                         villaFirstPhoto={
                           villaDetail?.data?.photos
                             ? villaDetail?.data?.photos[0]?.image

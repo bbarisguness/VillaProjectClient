@@ -128,12 +128,12 @@ export default function List({
                     <div className={styles.general}>
                       <Reservation
                         t={t}
-                        priceType={roomDetail?.data?.priceTables}
+                        priceType={roomDetail?.data?.priceType}
                         priceTypeText={currentPriceTypeText}
                         roomId={roomDetail?.data?.id}
                         roomSlug={roomSlug}
                         villaName={villaName}
-                        prices={roomDetail?.data?.priceTables}
+                        prices={[{price: roomDetail?.data?.minPrice}, {price: roomDetail?.data?.maxPrice}]}
                         villaFirstPhoto={
                           roomDetail?.data?.photos[0]?.image || null
                         }

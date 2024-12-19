@@ -63,15 +63,14 @@ export default function Reservation({
         min,
         currencies?.[priceTypes?.find((item) => item?.type == priceType)?.key]
       );
-
-      //tl ücreti ilgili kura çevir
-      if (i18n.language != "tr") {
-        min =
-          min /
-          currencies[
-            priceTypes.find((item) => item.lang == i18n.language)?.key
-          ];
-      }
+    }
+    //tl ücreti ilgili kura çevir
+    if (i18n.language != "tr") {
+      min =
+        min /
+        currencies[
+          priceTypes.find((item) => item.lang == i18n.language)?.key
+        ];
     }
 
     return moneyFormat(min, false);
