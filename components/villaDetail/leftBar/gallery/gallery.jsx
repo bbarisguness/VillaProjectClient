@@ -10,9 +10,9 @@ import { memo } from "react";
 const Gallery = memo(function Gallery({ photos, from }) {
   const videoObject = photos?.find((item) => item?.videoLink != null);
   // 1. videoLink'i null olmayan kaydı bul ve diziden çıkar
-  const kayitIndex = photos.findIndex(
+  const kayitIndex = photos?.length > 0 ? photos.findIndex(
     (item) => item?.videoLink && item?.videoLink !== null
-  );
+  ) : -1;
   //video var ise
   if (kayitIndex !== -1) {
     const [kayit] = photos.splice(kayitIndex, 1); // Kayıt çıkarıldı
@@ -535,7 +535,7 @@ const Gallery = memo(function Gallery({ photos, from }) {
       );
     }
   } else {
-    return <>loading</>;
+    return;
   }
 });
 

@@ -2,6 +2,7 @@ import { priceTypes } from "@/data/data";
 
 //villa detay ve otel detay sayfasında sağ yukarda Gecelik En Düşük fiyatın altına gelen fiyat aralıkları(minimum ve maximum)
 export function getPriceRange(priceTablesArray = [], currentPriceTypeText, priceType, i18n, currencies) {
+    
     const returnMinPrice = () => {
         let min = Math.min(...priceTablesArray?.map((o) => o.price));
 

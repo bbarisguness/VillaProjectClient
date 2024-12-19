@@ -9,6 +9,7 @@ const DynamicCalendarComponent = ({
   priceTypeText,
   priceType,
   villaSlug,
+  roomSlug,
   selectedLanguage,
 }) => {
   const [calendarReservations, setCalendarReservationsData] = useState(null);
@@ -37,14 +38,38 @@ const DynamicCalendarComponent = ({
     };
   }, []);
 
+  const getReservationCalendarApiName = () => {
+    if (villaSlug) {
+      console.log("villaSlug ", villaSlug);
+      return "GetReservationCalendarByVillaSlug";
+    } else if (roomSlug) {
+      console.log("roomSlug ", roomSlug);
+      return "GetReservationCalendarByRoomSlug";
+    }
+  };
+
+  const getReservationPriceApiName = () => {
+    if (villaSlug) {
+      console.log("villaSlug ", villaSlug);
+      return "GetAllPriceDateByVillaSlug";
+    } else if (roomSlug) {
+      console.log("roomSlug ", roomSlug);
+      return "GetAllPriceDateByRoomSlug";
+    }
+  };
+
   const fetchData = async () => {
     try {
       const [reservationResponse, pricesResponse] = await Promise.all([
         fetch(
-          `https://labirentapp.testgrande.com/api/Clients/GetReservationCalendarByVillaSlug?Slug=${villaSlug}&Language=${selectedLanguage}`
+          `https://labirentapp.testgrande.com/api/Clients/${getReservationCalendarApiName()}?Slug=${
+            villaSlug || roomSlug
+          }&Language=${selectedLanguage}`
         ),
         fetch(
-          `https://labirentapp.testgrande.com/api/Clients/GetAllPriceDateByVillaSlug?Slug=${villaSlug}`
+          `https://labirentapp.testgrande.com/api/Clients/${getReservationPriceApiName()}?Slug=${
+            villaSlug || roomSlug
+          }`
         ),
       ]);
 
@@ -52,7 +77,7 @@ const DynamicCalendarComponent = ({
         reservationResponse.json(),
         pricesResponse.json(),
       ]);
-
+      
       setCalendarReservationsData(reservationsResult);
       setCalendarPrices(pricesResult);
     } catch (error) {

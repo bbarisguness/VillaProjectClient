@@ -21,9 +21,12 @@ import Pagination from "@/components/pagination/Pagination";
 import Comments from "@/components/other/comment/Comments";
 import CommentForm from "@/components/other/commentForm/CommentForm";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { capitalizeWords } from "@/utils/globalUtils";
+import { capitalizeWords, calculatePriceType } from "@/utils/globalUtils";
 import { useTranslation } from "react-i18next";
 import BottomMenu from "@/components/bottoMobileMenu";
+import DetailTitleBox from "@/components/villaDetail/detailTitleBox/detailTitleBox";
+import ProductImageBox from "@/components/villaDetail/productImageBox/productImageBox";
+import DetailDesc from "@/components/villaDetail/detailDesc/detailsDesc";
 
 export default function List({
   villa,
@@ -34,7 +37,8 @@ export default function List({
   villaId,
   villaName,
 }) {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
+  const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
   const slug = router?.query?.slug;
   const categorySlug = allCategories?.data?.find(
@@ -74,116 +78,21 @@ export default function List({
             </div>
           </div>
         </section> */}
-        <BottomMenu />
+        <BottomMenu t={t}/>
         <section
           className={`${styles["contentDetail"]} ${styles["villaDetail"]}`}
         >
-          <div className={styles.detailTitleBox}>
-            <div className={styles.container}>
-              <div className={styles.box}>
-                <div className={styles.left}>
-                  <div className={styles.detailTitle}>
-                    {villaDetail?.data?.hotelDetails[0]?.name}
-                  </div>
-                  <div className={styles.villaInformation}>
-                    <div className={styles.features}>
-                      <div className={styles.colon}>
-                        <i className={styles.pin_icon}></i>
-                        <span>
-                          {villaDetail?.data?.town?.district?.name} /{" "}
-                          {villaDetail?.data?.town?.name}
-                        </span>
-                      </div>
-                      <div className={styles.colon}>
-                        <i className={styles.person_icon}></i>
-                        <span>
-                          {villaDetail?.data?.person} {t("people")}
-                        </span>
-                      </div>
-                      <div className={styles.colon}>
-                        <i className={styles.room_icon}></i>
-                        <span>
-                          {villaDetail?.data?.room} {t("room")}
-                        </span>
-                      </div>
-                      <div className={styles.colon}>
-                        <i className={styles.bath_icon}></i>
-                        <span>
-                          {villaDetail?.data?.bath} {t("bath")}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <div className={styles.right}>
-                  <div className={styles.priceType}>Gecelik En Düşük</div>
-                  <div className={styles.price}>
-                    {" "}
-                    {Math.min(1000)
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL -{" "}
-                    {Math.max(2000)
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    TL
-                  </div>
-                </div> */}
-              </div>
-            </div>
-          </div>
-          <div className={styles.productImagesBox}>
-            <div className={styles.container}>
-              <div className={styles.productImages}>
-                <div className={styles.row}>
-                  <Gallery photos={imgs} from="hotelList" />
-                </div>
-              </div>
-            </div>
-          </div>
+          <DetailTitleBox t={t} i18n={i18n} villaDetail={villaDetail} currentPriceTypeText={currentPriceTypeText} />
+          <ProductImageBox imgs={villaDetail?.data?.photos} from="hotelList" />
           <div className={styles.villaDetailContentBox}>
             <div className={styles.container}>
               <div className={styles.villaDetailContent}>
                 <div className={styles.left}>
-                  <div className={styles.villaDetailTitle}>
-                    {t("facilityDetails")}
-                  </div>
-                  <div className={styles.villaDetailDesc}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          villaDetail?.data?.hotelDetails[0]?.descriptionLong,
-                      }}
-                      style={{ whiteSpace: "pre-line" }}
-                      className={`${styles["desc"]} ${
-                        isDescOpen && styles["active"]
-                      }`}
-                    ></div>
-                    <div
-                      className={`${styles["readMore"]} ${
-                        isDescOpen && styles["active"]
-                      }`}
-                    >
-                      <div className={styles.allButton}>
-                        <span
-                          onClick={() => setIsDescOpen(true)}
-                          className={styles.first}
-                        >
-                          {capitalizeWords(t("continued"))}...
-                        </span>
-                        <span
-                          onClick={() => setIsDescOpen(false)}
-                          className={styles.last}
-                        >
-                          {capitalizeWords(t("close"))}...
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <DistanceRuler
+                  <DetailDesc t={t} villaDetail={villaDetail} isDescOpen={isDescOpen} setIsDescOpen={setIsDescOpen}/>
+                  {/* <DistanceRuler
                     data={villaDetail?.data?.distanceRulers}
                     t={t}
-                  />
+                  /> */}
                   {villaDetail?.data?.rooms?.length > 0 && (
                     <div className={styles.apartments}>
                       <div className={styles.container}>
@@ -305,7 +214,7 @@ export async function getServerSideProps({ params, query, locale }) {
   return {
     props: {
       villaId: slug,
-      villaName: villaDetail?.data?.hotelDetails[0]?.name || null,
+      //villaName: villaDetail?.data?.hotelDetails[0]?.name || null,
       villaDetail,
       imgs,
       totalPage,

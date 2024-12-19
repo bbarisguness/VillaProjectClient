@@ -375,7 +375,7 @@ export default function VillaCard({
                 )}
               </div>
               <div className={styles.textBox}>
-                <div className={styles.title}>{data.roomDetails[0]?.name}</div>
+                <div className={styles.title}>{data?.name}</div>
                 {data?.town ? (
                   <div className={styles.location}>
                     {data?.district} / {data?.town}

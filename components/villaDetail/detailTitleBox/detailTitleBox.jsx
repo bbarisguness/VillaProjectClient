@@ -58,7 +58,7 @@ export default function DetailTitleBox({
             <div className={styles.priceType}>{t("lowestNightly")}</div>
             <div className={styles.price}>
               {getPriceRange(
-                [{price: villaDetail?.data?.minPrice}],
+                [{price: villaDetail?.data?.minPrice || 0 }, {price: villaDetail?.data?.maxPrice || 0 }],
                 currentPriceTypeText,
                 villaDetail?.data?.priceType,
                 i18n,

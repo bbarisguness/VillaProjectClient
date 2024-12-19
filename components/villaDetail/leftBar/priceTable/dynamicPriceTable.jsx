@@ -2,7 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import PriceTableSkeleton from "./PriceTableSkeleton";
 import PriceTable from "./priceTable";
 
-const DynamicPriceTableComponent = ({ villaSlug, t, priceTypeNumber, currencies, selectedLanguage }) => {
+const DynamicPriceTableComponent = ({
+  villaSlug,
+  roomSlug,
+  t,
+  priceTypeNumber,
+  currencies,
+  selectedLanguage,
+}) => {
   const [data, setData] = useState(null); // Veriyi tutar
   const [isLoading, setIsLoading] = useState(true); // Yükleme durumu
   const ref = useRef(null); // Intersection Observer için ref
@@ -28,10 +35,20 @@ const DynamicPriceTableComponent = ({ villaSlug, t, priceTypeNumber, currencies,
     };
   }, []);
 
+  const apiName = () => {
+    if (roomSlug) {
+      console.log("roomSlug ", roomSlug);
+      return "GetAllPriceTableByRoomSlug"
+    } else if (villaSlug) {
+      console.log("villaSlug ", villaSlug);
+      return "GetAllPriceTableByVillaSlug"
+    }
+  };
+
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://labirentapp.testgrande.com/api/Clients/GetAllPriceTableByVillaSlug?Slug=${villaSlug}&Language=tr`
+        `https://labirentapp.testgrande.com/api/Clients/${apiName()}?Slug=${villaSlug || roomSlug}&Language=tr`
       );
       const result = await response.json();
       setData(result);
@@ -47,7 +64,13 @@ const DynamicPriceTableComponent = ({ villaSlug, t, priceTypeNumber, currencies,
       {isLoading ? (
         <PriceTableSkeleton />
       ) : (
-        <PriceTable t={t} data={data?.data} priceTypeNumber={priceTypeNumber} currencies={currencies} selectedLanguage={selectedLanguage} />
+        <PriceTable
+          t={t}
+          data={data?.data}
+          priceTypeNumber={priceTypeNumber}
+          currencies={currencies}
+          selectedLanguage={selectedLanguage}
+        />
       )}
     </div>
   );

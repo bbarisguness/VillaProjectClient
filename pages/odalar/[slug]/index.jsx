@@ -10,10 +10,10 @@ import PriceTable from "@/components/villaDetail/leftBar/priceTable/priceTable";
 import LightGallery from "lightgallery/react";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Seo from "@/components/seo";
 import { priceTypes } from "@/data/data";
-import { getPriceRange } from "@/utils/globalUtils";
+import { calculatePriceType, getPriceRange } from "@/utils/globalUtils";
 // import Comments from "@/components/other/comment/Comments";
 import CommentForm from "@/components/other/commentForm/CommentForm";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -22,6 +22,12 @@ import { capitalizeWords } from "@/utils/globalUtils";
 import BottomMenu from "@/components/bottoMobileMenu";
 import nookies, { parseCookies } from "nookies";
 import { getCurrencies } from "@/services";
+import DetailTitleBox from "@/components/villaDetail/detailTitleBox/detailTitleBox";
+import ProductImageBox from "@/components/villaDetail/productImageBox/productImageBox";
+import DetailDesc from "@/components/villaDetail/detailDesc/detailsDesc";
+import DynamicDistanceRulerComponent from "@/components/villaDetail/leftBar/distanceRuler/dynamicDistanceRuler";
+import DynamicPriceTableComponent from "@/components/villaDetail/leftBar/priceTable/dynamicPriceTable";
+import DynamicCalendarComponent from "@/components/villaDetail/leftBar/calendar/dynamicCalendarComponent";
 
 export default function List({
   roomDetail,
@@ -32,9 +38,7 @@ export default function List({
   villaName,
 }) {
   const { t, i18n } = useTranslation("common");
-  const currentPriceTypeText = priceTypes?.find(
-    (item) => item?.type == roomDetail?.data?.priceType
-  )?.text;
+  const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
   const [ready, setReady] = useState(true);
   const [isDescOpen, setIsDescOpen] = useState(false);
@@ -77,125 +81,47 @@ export default function List({
         <section
           className={`${styles["contentDetail"]} ${styles["villaDetail"]}`}
         >
-          <div className={styles.detailTitleBox}>
-            <div className={styles.container}>
-              <div className={styles.box}>
-                <div className={styles.left}>
-                  <div className={styles.detailTitle}>
-                    {roomDetail?.data?.roomDetails[0]?.name}
-                  </div>
-                  <div className={styles.villaInformation}>
-                    <div className={styles.features}>
-                      <div className={styles.colon}>
-                        <i className={styles.pin_icon}></i>
-                        <span>
-                          {roomDetail?.data?.town?.district?.name} /{" "}
-                          {roomDetail?.data?.town?.name}
-                        </span>
-                      </div>
-                      <div className={styles.colon}>
-                        <i className={styles.person_icon}></i>
-                        <span>
-                          {roomDetail?.data?.person} {t("people")}
-                        </span>
-                      </div>
-                      <div className={styles.colon}>
-                        <i className={styles.room_icon}></i>
-                        <span>
-                          {roomDetail?.data?.rooms} {t("room")}
-                        </span>
-                      </div>
-                      <div className={styles.colon}>
-                        <i className={styles.bath_icon}></i>
-                        <span>
-                          {roomDetail?.data?.bath} {t("bath")}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.right}>
-                  <div className={styles.priceType}>{t("lowestNightly")}</div>
-                  <div className={styles.price}>
-                    {getPriceRange(
-                      roomDetail?.data?.priceTables,
-                      currentPriceTypeText,
-                      roomDetail?.data?.priceType,
-                      i18n,
-                      currencies
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.productImagesBox}>
-            <div className={styles.container}>
-              <div className={styles.productImages}>
-                <div className={styles.row}>
-                  <Gallery photos={imgs} from={"roomDetail"} />
-                </div>
-              </div>
-            </div>
-          </div>
+          <DetailTitleBox
+            villaDetail={roomDetail}
+            currentPriceTypeText={currentPriceTypeText}
+            i18n={i18n}
+            t={t}
+          />
+          <ProductImageBox from="roomDetail" imgs={roomDetail?.photos} />
           <div className={styles.villaDetailContentBox}>
             <div className={styles.container}>
               <div className={styles.villaDetailContent}>
                 <div className={styles.left}>
-                  <div className={styles.villaDetailTitle}>
-                    {t("facilityDetails")}
-                  </div>
-                  <div className={styles.villaDetailDesc}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          roomDetail?.data?.roomDetails[0]?.descriptionLong,
-                      }}
-                      style={{ whiteSpace: "pre-line" }}
-                      className={`${styles["desc"]} ${
-                        isDescOpen && styles["active"]
-                      }`}
-                    ></div>
-                    <div
-                      className={`${styles["readMore"]} ${
-                        isDescOpen && styles["active"]
-                      }`}
-                    >
-                      <div className={styles.allButton}>
-                        <span
-                          onClick={() => setIsDescOpen(true)}
-                          className={styles.first}
-                        >
-                          {capitalizeWords(t("continued"))}...
-                        </span>
-                        <span
-                          onClick={() => setIsDescOpen(false)}
-                          className={styles.last}
-                        >
-                          {capitalizeWords(t("close"))}...
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <DistanceRuler
-                    data={roomDetail?.data?.distanceRulers}
+                  <DetailDesc
                     t={t}
+                    villaDetail={roomDetail}
+                    isDescOpen={isDescOpen}
+                    setIsDescOpen={setIsDescOpen}
                   />
-                  <PriceTable
+                  <DynamicDistanceRulerComponent t={t} roomSlug={"room"} />
+                  <DynamicPriceTableComponent
+                    roomSlug={roomSlug}
                     t={t}
-                    priceTypeNumber={roomDetail?.data?.priceType || 1}
-                    data={roomDetail?.data?.priceTables}
+                    priceTypeNumber={roomDetail?.data?.priceType}
                     currencies={currencies}
                     selectedLanguage={i18n.language}
                   />
-                  <Calendar
+                  <DynamicCalendarComponent
+                    t={t}
+                    ready={ready}
+                    priceTypeText={currentPriceTypeText}
+                    priceType={roomDetail?.data?.priceType}
+                    roomSlug={roomSlug}
+                    selectedLanguage={i18n.language}
+                  />
+                  {/* <Calendar
                     t={t}
                     ready={ready}
                     dates={roomDetail?.data?.reservationCalendars || []}
                     calendarPrices={roomDetail?.data?.prices || []}
                     priceTypeText={currentPriceTypeText}
                     priceType={roomDetail?.data?.priceType}
-                  />
+                  /> */}
                 </div>
                 <div id="makeReservation" style={{ paddingTop: 20 }}>
                   <div className={styles.right}>
@@ -341,7 +267,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       roomSlug: slug,
-      villaName: roomDetail?.data?.roomDetails[0]?.name || "",
+      villaName: roomDetail?.data?.name || "",
       roomDetail,
       imgs,
       totalPage,

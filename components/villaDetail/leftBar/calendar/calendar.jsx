@@ -18,6 +18,7 @@ const Calendar = function Calendar({
   priceType,
   t,
 }) {
+  
   const [yearTab, setYearTab] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth());
   const [isModalOpen, setIsModalOpen] = useState(false);
