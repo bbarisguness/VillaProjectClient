@@ -38,17 +38,19 @@ const DynamicPriceTableComponent = ({
   const apiName = () => {
     if (roomSlug) {
       console.log("roomSlug ", roomSlug);
-      return "GetAllPriceTableByRoomSlug"
+      return "GetAllPriceTableByRoomSlug";
     } else if (villaSlug) {
       console.log("villaSlug ", villaSlug);
-      return "GetAllPriceTableByVillaSlug"
+      return "GetAllPriceTableByVillaSlug";
     }
   };
 
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://labirentapp.testgrande.com/api/Clients/${apiName()}?Slug=${villaSlug || roomSlug}&Language=tr`
+        `https://labirentapp.testgrande.com/api/Clients/${apiName()}?Slug=${
+          villaSlug || roomSlug
+        }&Language=tr`
       );
       const result = await response.json();
       setData(result);
@@ -60,7 +62,7 @@ const DynamicPriceTableComponent = ({
   };
 
   return (
-    <div ref={ref} style={{ minHeight: "200px" }}>
+    <div ref={ref} style={{ minHeight: "200px", display: data?.data?.length == 0 ? "none" : "block" }}>
       {isLoading ? (
         <PriceTableSkeleton />
       ) : (

@@ -55,7 +55,13 @@ const DynamicDistanceRulerComponent = ({ t, villaSlug, roomSlug }) => {
   };
 
   return (
-    <div ref={ref} style={{ minHeight: "200px" }}>
+    <div
+      ref={ref}
+      style={{
+        minHeight: "200px",
+        display: data?.data?.length == 0 ? "none" : "block",
+      }}
+    >
       {isLoading ? (
         <DistanceRulerSkeleton />
       ) : (
