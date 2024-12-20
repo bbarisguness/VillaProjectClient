@@ -24,7 +24,6 @@ export default function VillaCard({
   nightLength,
   activeTabIndex,
 }) {
-  //console.log(data)
   const router = useRouter();
   const { t, i18n } = useTranslation("common");
 
@@ -130,7 +129,9 @@ export default function VillaCard({
         <div className={styles.testimonialItemContainer}>
           <div className={styles.column}>
             <Link
-              href={`/villalar/${data?.attributes?.categories?.data[0]?.attributes?.slug || "yok"}/${data?.attributes?.slug || "yok"}`}
+              href={`/villalar/${
+                data?.attributes?.categories?.data[0]?.attributes?.slug || "yok"
+              }/${data?.attributes?.slug || "yok"}`}
               rel="nofollow"
             >
               <div className={styles.imgBox}>
@@ -272,9 +273,7 @@ export default function VillaCard({
                 )}
               </div>
               <div className={styles.textBox}>
-                <div className={styles.title}>
-                  {data?.name}
-                </div>
+                <div className={styles.title}>{data?.name}</div>
                 {data?.town ? (
                   <div className={styles.location}>
                     {data?.district} / {data?.town}
@@ -283,16 +282,11 @@ export default function VillaCard({
                   <></>
                 )}
                 <div className={styles.priceTitle}>{t("dailyPriceRange")}</div>
-                {data?.priceTables?.length > 0 &&
-                (data?.price == "-" || data?.price == null) ? (
-                  <div className={styles.price}>
-                    {currentPriceTypeText}
-                    {returnMinPrice()} - {currentPriceTypeText}
-                    {returnMaxPrice()}
-                  </div>
-                ) : (
-                  <div className={styles.price}>{currentPriceTypeText}0</div>
-                )}
+                <div className={styles.price}>
+                  {currentPriceTypeText}
+                  {returnMinPrice()} - {currentPriceTypeText}
+                  {returnMaxPrice()}
+                </div>
                 {data?.price != "-" && data?.price ? (
                   <div className={styles.price}>
                     {Math.floor(data?.price?.replace(",", "."))}₺
@@ -384,16 +378,11 @@ export default function VillaCard({
                   <></>
                 )}
                 <div className={styles.priceTitle}>{t("dailyPriceRange")}</div>
-                {data?.priceTables?.length > 0 &&
-                (data?.price == "-" || data?.price == null) ? (
-                  <div className={styles.price}>
-                    {currentPriceTypeText}
-                    {returnMinPrice()} - {currentPriceTypeText}
-                    {returnMaxPrice()}
-                  </div>
-                ) : (
-                  <div className={styles.price}>{currentPriceTypeText}0</div>
-                )}
+                <div className={styles.price}>
+                  {currentPriceTypeText}
+                  {returnMinPrice()} - {currentPriceTypeText}
+                  {returnMaxPrice()}
+                </div>
                 {data?.price != "-" && data?.price ? (
                   <div className={styles.price}>
                     {Math.floor(data?.price?.replace(",", "."))}₺
@@ -434,7 +423,7 @@ export default function VillaCard({
       return (
         <li id={styles.cardContainer}>
           <div className={styles.column}>
-            <Link href={`/villalar/${data?.slug|| "yok"}`} rel="nofollow">
+            <Link href={`/villalar/${data?.slug || "yok"}`} rel="nofollow">
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
@@ -661,7 +650,10 @@ export default function VillaCard({
       return (
         <li id={styles.cardContainer}>
           <div className={styles.column}>
-            <Link href={`/satilik-villalar/${data?.slug || "yok"}`} rel="nofollow">
+            <Link
+              href={`/satilik-villalar/${data?.slug || "yok"}`}
+              rel="nofollow"
+            >
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
@@ -704,9 +696,7 @@ export default function VillaCard({
                 )}
               </div>
               <div className={styles.textBox}>
-                <div className={styles.title}>
-                  {data?.name}
-                </div>
+                <div className={styles.title}>{data?.name}</div>
                 {data?.town ? (
                   <div className={styles.location}>
                     {data?.district} / {data?.town}
@@ -716,9 +706,7 @@ export default function VillaCard({
                 )}
                 <div className={styles.shortDesc}>
                   <p style={{ color: "#02044A" }}>Açıklama</p>
-                  <p style={{ color: "#525265" }}>
-                    {data?.descriptionShort}
-                  </p>
+                  <p style={{ color: "#525265" }}>{data?.descriptionShort}</p>
                 </div>
                 <div className={styles.features}>
                   <div className={styles.colon}>

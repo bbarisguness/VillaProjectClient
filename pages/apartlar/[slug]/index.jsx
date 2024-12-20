@@ -3,40 +3,28 @@ import { getHotel } from "@/services/villa";
 import { useRouter } from "next/router";
 
 // villa detay
-import Link from "next/link";
 import styles from "./page.module.css";
 // import FoodPackage from "@/components/villaDetail/rightBar/foodPackage/foodPackage";
 // import Reservation from "@/components/villaDetail/rightBar/reservation/reservation";
 // import Calendar from "@/components/villaDetail/leftBar/calendar/calendar";
-import DistanceRuler from "@/components/villaDetail/leftBar/distanceRuler/distanceRuler";
-import Gallery from "@/components/villaDetail/leftBar/gallery/gallery";
 // import PriceTable from "@/components/villaDetail/leftBar/priceTable/priceTable";
 // import LightGallery from "lightgallery/react";
 // import lgZoom from "lightgallery/plugins/zoom";
 // import lgVideo from "lightgallery/plugins/video";
 import { useState } from "react";
 import Seo from "@/components/seo";
-import Pagination from "@/components/pagination/Pagination";
 // import VideoWithComment from "@/components/villaDetail/VideoWithComment";
 import Comments from "@/components/other/comment/Comments";
 import CommentForm from "@/components/other/commentForm/CommentForm";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { capitalizeWords, calculatePriceType } from "@/utils/globalUtils";
+import { calculatePriceType } from "@/utils/globalUtils";
 import { useTranslation } from "react-i18next";
 import BottomMenu from "@/components/bottoMobileMenu";
 import DetailTitleBox from "@/components/villaDetail/detailTitleBox/detailTitleBox";
 import ProductImageBox from "@/components/villaDetail/productImageBox/productImageBox";
 import DetailDesc from "@/components/villaDetail/detailDesc/detailsDesc";
 
-export default function List({
-  villa,
-  villaDetail,
-  imgs,
-  totalPage,
-  allCategories,
-  villaId,
-  villaName,
-}) {
+export default function List({ villaDetail, imgs, allCategories }) {
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
@@ -78,17 +66,27 @@ export default function List({
             </div>
           </div>
         </section> */}
-        <BottomMenu t={t}/>
+        <BottomMenu t={t} />
         <section
           className={`${styles["contentDetail"]} ${styles["villaDetail"]}`}
         >
-          <DetailTitleBox t={t} i18n={i18n} villaDetail={villaDetail} currentPriceTypeText={currentPriceTypeText} />
-          <ProductImageBox imgs={villaDetail?.data?.photos} from="hotelList" />
+          <DetailTitleBox
+            t={t}
+            i18n={i18n}
+            villaDetail={villaDetail}
+            currentPriceTypeText={currentPriceTypeText}
+          />
+          <ProductImageBox imgs={imgs} from="hotelList" />
           <div className={styles.villaDetailContentBox}>
             <div className={styles.container}>
               <div className={styles.villaDetailContent}>
                 <div className={styles.left}>
-                  <DetailDesc t={t} villaDetail={villaDetail} isDescOpen={isDescOpen} setIsDescOpen={setIsDescOpen}/>
+                  <DetailDesc
+                    t={t}
+                    villaDetail={villaDetail}
+                    isDescOpen={isDescOpen}
+                    setIsDescOpen={setIsDescOpen}
+                  />
                   {/* <DistanceRuler
                     data={villaDetail?.data?.distanceRulers}
                     t={t}
@@ -208,16 +206,14 @@ export default function List({
 
 export async function getServerSideProps({ params, query, locale }) {
   const slug = params?.slug;
-  const totalPage = 1;
   const villaDetail = await getHotel(slug);
   const imgs = villaDetail?.data?.photos || [];
   return {
     props: {
-      villaId: slug,
+      //villaId: slug,
       //villaName: villaDetail?.data?.hotelDetails[0]?.name || null,
       villaDetail,
       imgs,
-      totalPage,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };
