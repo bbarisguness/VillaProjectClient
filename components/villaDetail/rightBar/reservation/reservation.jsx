@@ -68,9 +68,7 @@ export default function Reservation({
     if (i18n.language != "tr") {
       min =
         min /
-        currencies[
-          priceTypes.find((item) => item.lang == i18n.language)?.key
-        ];
+        currencies[priceTypes.find((item) => item.lang == i18n.language)?.key];
     }
 
     return moneyFormat(min, false);
@@ -141,8 +139,7 @@ export default function Reservation({
   async function handleClick() {
     if (dateRange[1] != null) {
       const isVillaAvailableResponse = await isVillaAvailable(
-        villaId ? 0 : 1,
-        villaId || roomId,
+        "test-villa",
         moment(dateRange[0]).format("YYYY-MM-DD").toString(),
         moment(dateRange[1]).format("YYYY-MM-DD").toString()
       );

@@ -1,13 +1,12 @@
 import { SendMail } from "@/utils/sendMail";
 import { dateToDotFormat } from "@/utils/date";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL
-const companyId = process.env.NEXT_PUBLIC_COMPANY_ID
+const apiUrl = "https://labirentapp.testgrande.com/api"
 
 //sonuc false dönerse villa müsait demek oluyor, true dönerse müsait değil
 //type 0 ise villa, 1 ise apart
-async function isVillaAvailable(type = 0, villaId, checkInDate, checkOutDate) {
-  const response = await fetch(`${apiUrl}/Clients/ReservationIsAvailible?${type == 0 ? 'VillaId' : 'RoomId'}=${villaId}&CheckIn=${checkInDate}&CheckOut=${checkOutDate}`, {
+async function isVillaAvailable(slug, checkInDate, checkOutDate) {
+  const response = await fetch(`${apiUrl}/Clients/ReservationIsAvailible?Slug=${slug}&CheckIn=${checkInDate}&CheckOut=${checkOutDate}`, {
     cache: "no-store",
   });
   const data = await response.json();
