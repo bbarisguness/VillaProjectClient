@@ -257,7 +257,7 @@ export default function List({
               </div>
             </div>
           </div>
-          <div className={styles.dualBoxes}>
+          {villaDetail?.data[0]?.attributes?.video && (<div className={styles.dualBoxes}>
             <div className={styles.container}>
               <div className={styles.row}>
                 <ul>
@@ -296,7 +296,7 @@ export default function List({
                 </ul>
               </div>
             </div>
-          </div>
+          </div>)}
           <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
