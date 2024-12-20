@@ -799,15 +799,11 @@ export default function VillaCard({
                 )}
                 <div className={styles.priceTitle}>{t("dailyPriceRange")}</div>
                 {/* {data.attributes.price_tables.data ? <div className={styles.price}>{data.attributes.price_tables?.data[0]?.attributes?.price} TL - {data.attributes.price_tables?.data[(data.attributes.price_tables.data.length - 1)]?.attributes?.price} TL</div> : <></>} */}
-                {data?.priceTables?.length > 0 ? (
-                  <div className={styles.price}>
-                    {currentPriceTypeText}
-                    {returnMinPrice()} - {currentPriceTypeText}
-                    {returnMaxPrice()}
-                  </div>
-                ) : (
-                  <div className={styles.price}>{currentPriceTypeText}0</div>
-                )}
+                <div className={styles.price}>
+                  {currentPriceTypeText}
+                  {returnMinPrice()} - {currentPriceTypeText}
+                  {returnMaxPrice()}
+                </div>
                 <div className={styles.features}>
                   <div className={styles.colon}>
                     <i className={styles.person_icon}></i>

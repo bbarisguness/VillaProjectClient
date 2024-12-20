@@ -87,9 +87,10 @@ export async function getServerSideProps(context) {
 
   // API çağrılarını paralel olarak başlat
   const categories = await getCategories(context.locale);
+  
 
   const [villa, aparts, activates, blogs] = await Promise.all([
-    getVillasHome(8, 0, categories?.data[0]?.slug),
+    getVillasHome(8, 0, categories?.data[0]?.slug, context.locale),
     getHotels(0, 4, context.locale),
     getActivates(context.locale),
     getBlogs(context.locale),
