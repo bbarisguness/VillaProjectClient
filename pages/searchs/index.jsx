@@ -67,8 +67,9 @@ export async function getServerSideProps({ query, locale }) {
 
   const sliceCheckInDate = checkIn.split("-");
   const sliceCheckOutDate = checkOut.split("-");
+
   const checkInFormat = `${sliceCheckInDate[2]}-${
-    sliceCheckOutDate[1] <= 9 ? "0" : ""
+    sliceCheckInDate[1] <= 9 ? "0" : ""
   }${sliceCheckInDate[1]}-${sliceCheckInDate[0]}`;
   const checkOutFormat = `${sliceCheckOutDate[2]}-${
     sliceCheckOutDate[1] <= 9 ? "0" : ""
@@ -82,7 +83,9 @@ export async function getServerSideProps({ query, locale }) {
     size: 20,
     page: parseInt(query?.p - 1) || 0,
   });
-  const totalPage = getFilterVillas?.pageInfo?.totalPage;
+
+  const totalPage = getFilterVillas?.pageInfo?.totalPage || 0;
+
   return {
     props: {
       getFilterVillas,
