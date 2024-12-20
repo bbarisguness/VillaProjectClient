@@ -1,7 +1,7 @@
 const apiUrl = "https://labirentapp.testgrande.com/api"
 
 async function getVillas(page = 1) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&Size=20&Page=${page}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&Pagination.Size=20&Pagination.Page=${page}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -9,7 +9,7 @@ async function getVillas(page = 1) {
 }
 
 async function getHotels(page = 0, size = 20, language = "tr") {
-    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=${language}&Size=${size}&Page=${page}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllHotel?Language=${language}&Pagination.Size=${size}&Pagination.Page=${page}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -25,7 +25,7 @@ async function getHotel(hotelId) {
 }
 
 async function getAllVillaByCategorySlug(language, categorySlug, page = 0, size = 20) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategorySlug?Language=${language}&Slug=${categorySlug}&Page=${page}&Size=${size}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategorySlug?Language=${language}&Slug=${categorySlug}&Pagination.Page=${page}&Pagination.Size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -33,7 +33,7 @@ async function getAllVillaByCategorySlug(language, categorySlug, page = 0, size 
 }
 
 async function getVillasForSale(page = 0, size = 20) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSale?Language=tr&Page=${page}&Size=${size}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaSale?Language=tr&Pagination.Page=${page}&Pagination.Size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -41,7 +41,7 @@ async function getVillasForSale(page = 0, size = 20) {
 }
 
 async function getVillasHome(size = 8, page = 0, categorySlug, language) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategorySlug?Language=${language}&Slug=${categorySlug}&Page=${page}&Size=${size}`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaByCategorySlug?Language=${language}&Slug=${categorySlug}&Pagination.Page=${page}&Pagination.Size=${size}`, {
         cache: 'no-store'
     })
     const data = await response.json()
@@ -115,7 +115,7 @@ async function getRandomFourVilla(data, currentVillaId) {
 }
 
 async function getNearVillas(townId, currentVillaId) {
-    const response = await fetch(`${apiUrl}/Clients/GetAllVillaNearby&Language=tr&TownId=${townId}&Size=4`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllVillaNearby&Language=tr&TownId=${townId}&Pagination.Size=4`, {
         cache: 'no-store'
     })
     const data = await response.json()
