@@ -8,7 +8,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 
 export default function Searchs({ getFilterVillas, totalPage }) {
-  
   const { t } = useTranslation("common");
   const router = useRouter();
   const activePage = parseInt(router?.query?.p) || 1;
@@ -80,10 +79,10 @@ export async function getServerSideProps({ query, locale }) {
     checkOut: checkOut != "" ? checkOutFormat : "",
     villaSearchText: name,
     person: person,
-    size: 12,
+    size: 20,
     page: parseInt(query?.p - 1) || 0,
   });
-  const totalPage = Math.ceil(getFilterVillas?.pageInfo?.totalPage / 12);
+  const totalPage = getFilterVillas?.pageInfo?.totalPage;
   return {
     props: {
       getFilterVillas,
