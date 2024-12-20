@@ -7,7 +7,7 @@ export default function RegionCard({ data }) {
       <Link href={`/${data.metaTitle == "Aktiviteler" ? "aktiviteler" : "bolgeler"}/${data?.slug || "yok"}`}>
         <div
           style={{
-            backgroundImage: `url(${process.env.NEXT_PUBLIC_WEBHOTOS_URL}/k_${data?.photos[0]?.image})`,
+            backgroundImage: `url(${process.env.NEXT_PUBLIC_WEBHOTOS_URL}k_${data?.photos[0]?.image})`,
           }}
           className={`${styles.imgBox}`}
         ></div>
