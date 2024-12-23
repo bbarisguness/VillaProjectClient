@@ -8,6 +8,7 @@ export default function DetailTitleBox({
   currentPriceTypeText,
   t,
   i18n,
+  from,
 }) {
   const [currencies, setCurrencies] = useState(null);
 
@@ -21,16 +22,13 @@ export default function DetailTitleBox({
       <div className={styles.container}>
         <div className={styles.box}>
           <div className={styles.left}>
-            <div className={styles.detailTitle}>
-              {villaDetail?.data?.name}
-            </div>
+            <div className={styles.detailTitle}>{villaDetail?.data?.name}</div>
             <div className={styles.villaInformation}>
               <div className={styles.features}>
                 <div className={styles.colon}>
                   <i className={styles.pin_icon}></i>
                   <span>
-                    {villaDetail?.data?.district} /{" "}
-                    {villaDetail?.data?.town}
+                    {villaDetail?.data?.district} / {villaDetail?.data?.town}
                   </span>
                 </div>
                 <div className={styles.colon}>
@@ -55,16 +53,26 @@ export default function DetailTitleBox({
             </div>
           </div>
           <div className={styles.right}>
-            <div className={styles.priceType}>{t("lowestNightly")}</div>
-            <div className={styles.price}>
-              {getPriceRange(
-                [{price: villaDetail?.data?.minPrice || 0 }, {price: villaDetail?.data?.maxPrice || 0 }],
-                currentPriceTypeText,
-                villaDetail?.data?.priceType,
-                i18n,
-                currencies
-              )}
-            </div>
+            {from == "saleVillas" && (
+              <div className={styles.price}>{t("forSale")}</div>
+            )}
+            {from != "saleVillas" && (
+              <>
+                <div className={styles.priceType}>{t("lowestNightly")}</div>
+                <div className={styles.price}>
+                  {getPriceRange(
+                    [
+                      { price: villaDetail?.data?.minPrice || 0 },
+                      { price: villaDetail?.data?.maxPrice || 0 },
+                    ],
+                    currentPriceTypeText,
+                    villaDetail?.data?.priceType,
+                    i18n,
+                    currencies
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

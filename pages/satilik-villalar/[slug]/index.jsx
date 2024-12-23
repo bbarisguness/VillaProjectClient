@@ -13,9 +13,19 @@ import lgVideo from "lightgallery/plugins/video";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 import { capitalizeWords } from "@/utils/globalUtils";
+import DetailTitleBox from "@/components/villaDetail/detailTitleBox/detailTitleBox";
+import ProductImageBox from "@/components/villaDetail/productImageBox/productImageBox";
+import DynamicDistanceRulerComponent from "@/components/villaDetail/leftBar/distanceRuler/dynamicDistanceRuler";
 
-export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
-  const { t } = useTranslation("common");
+export default function SaleDetail({
+  villaDetail,
+  nearVillas,
+  imgs,
+  villaSlug,
+}) {
+  console.log(villaDetail);
+
+  const { t, i18n } = useTranslation("common");
   const router = useRouter();
   const [isDescOpen, setIsDescOpen] = useState(false);
   if (villaDetail?.data != null) {
@@ -42,20 +52,20 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
         <section
           className={`${styles["contentDetail"]} ${styles["villaDetail"]}`}
         >
-          <div className={styles.detailTitleBox}>
+          {/* <div className={styles.detailTitleBox}>
             <div className={styles.container}>
               <div className={styles.box}>
                 <div className={styles.left}>
                   <div className={styles.detailTitle}>
-                    {villaDetail?.data?.villaDetails[0]?.name}
+                    {villaDetail?.data?.name}
                   </div>
                   <div className={styles.villaInformation}>
                     <div className={styles.features}>
                       <div className={styles.colon}>
                         <i className={styles.pin_icon}></i>
                         <span>
-                          {villaDetail?.data?.town?.district?.name} /{" "}
-                          {villaDetail?.data?.town?.name}
+                          {villaDetail?.data?.district} /{" "}
+                          {villaDetail?.data?.town}
                         </span>
                       </div>
                       <div className={styles.colon}>
@@ -84,8 +94,14 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                 </div>
               </div>
             </div>
-          </div>
-          <div className={styles.productImagesBox}>
+          </div> */}
+          <DetailTitleBox
+            i18n={i18n}
+            t={t}
+            villaDetail={villaDetail}
+            from="saleVillas"
+          />
+          {/* <div className={styles.productImagesBox}>
             <div className={styles.container}>
               <div className={styles.productImages}>
                 <div className={styles.row}>
@@ -93,7 +109,8 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          <ProductImageBox imgs={imgs} />
           <div className={styles.villaDetailContentBox}>
             <div className={styles.container}>
               <div className={styles.villaDetailContent}>
@@ -104,8 +121,7 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                   <div className={styles.villaDetailDesc}>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html:
-                          villaDetail?.data?.villaDetails[0]?.descriptionLong,
+                        __html: villaDetail?.data?.descriptionLong,
                       }}
                       style={{ whiteSpace: "pre-line" }}
                       className={`${styles["desc"]} ${
@@ -133,10 +149,11 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
                       </div>
                     </div>
                   </div>
-                  <DistanceRuler
+                  {/* <DistanceRuler
                     data={villaDetail?.data?.distanceRulers}
                     t={t}
-                  />
+                  /> */}
+                  <DynamicDistanceRulerComponent villaSlug={villaSlug} t={t} />
                   {/* <PriceTable
                                     data={villaDetail?.data[0]?.attributes?.price_tables?.data} t={t}
                                 />
@@ -239,13 +256,15 @@ export default function SaleDetail({ villaDetail, nearVillas, imgs }) {
 export async function getServerSideProps({ params, locale }) {
   const slug = params?.slug;
   const villaDetail = await getVillaBySlug(slug, locale);
-  const nearVillas = await getNearVillas(villaDetail?.data?.town?.id);
+  //const nearVillas = await getNearVillas(villaDetail?.data?.town?.id);
+  const nearVillas = [];
   const imgs = villaDetail?.data?.photos;
   return {
     props: {
       villaDetail,
       nearVillas,
       imgs,
+      villaSlug: slug,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

@@ -18,13 +18,13 @@ export default function DistanceRuler({ data, t }) {
                         <div className={styles.iconBox}>
                           <i
                             style={{
-                              backgroundImage: `url(/images/${data?.data?.icon}.png)`,
+                              backgroundImage: `url(/images/${data?.icon}.png)`,
                             }}
                           ></i>
                           <i
                             className={styles.two_i}
                             style={{
-                              backgroundImage: `url(/images/${data?.data?.icon}-hover.png)`,
+                              backgroundImage: `url(/images/${data?.icon}-hover.png)`,
                             }}
                           ></i>
                         </div>
