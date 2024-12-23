@@ -117,7 +117,7 @@ export default function VillaCard({
     if (i18n.language != "tr") {
       max =
         max /
-        currencies[priceTypes.find((item) => item.lang == i18n.language)?.key];
+        currencies?.[priceTypes.find((item) => item.lang == i18n.language)?.key];
     }
 
     return moneyFormat(max, false);
