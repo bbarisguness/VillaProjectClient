@@ -11,15 +11,31 @@ export default function HeaderTop() {
   const { pathname, query, asPath } = router;
 
   const otherLocales = (locales || []).filter(
-    (locale) => locale !== activeLocale
+    (locale) => locale !== activeLocale && locale !== "default"
   );
 
   const returnLanguageFlag = (language) => {
     if (language == "tr") {
-      return <Image className={styles.langFlag} alt="trLang" src="/images/tr.jpg" width={16} height={16} />;
+      return (
+        <Image
+          className={styles.langFlag}
+          alt="trLang"
+          src="/images/tr.jpg"
+          width={16}
+          height={16}
+        />
+      );
     } else if (language == "en") {
-      return <Image className={styles.langFlag} alt="enLang" src="/images/en.png" width={16} height={16} />;
-    }
+      return (
+        <Image
+          className={styles.langFlag}
+          alt="enLang"
+          src="/images/en.png"
+          width={16}
+          height={16}
+        />
+      );
+    } else return <></>;
   };
 
   return (
@@ -86,6 +102,7 @@ export default function HeaderTop() {
                     <li key={localeItem}>
                       <Link
                         href={{ pathname, query }}
+                        hrefLang={localeItem}
                         as={asPath}
                         locale={localeItem}
                         legacyBehavior
