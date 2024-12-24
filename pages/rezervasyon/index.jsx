@@ -74,11 +74,10 @@ export default function Reservation() {
     setreservationItems(localData);
     setIsVilla(localData?.villaSlug ? true : false);
 
-    //#region Burası test için yorum yapıldı aktif edilecek
-    // return () => {
-    //   localStorage.removeItem("reservation");
-    //   localStorage.removeItem("personInfo");
-    // };
+    return () => {
+      localStorage.removeItem("reservation");
+      localStorage.removeItem("personInfo");
+    };
   }, []);
 
   useEffect(() => {
@@ -906,24 +905,11 @@ export default function Reservation() {
                               {t("customerInformation")}
                             </span>
                             <span>
-                              {completedReservationData?.reservationInfos?.name}{" "}
-                              {
-                                completedReservationData?.reservationInfos
-                                  ?.surname
-                              }
+                              {localPersonInfoData?.data?.name}{" "}
+                              {localPersonInfoData?.data?.surname}
                             </span>
-                            <span>
-                              {
-                                completedReservationData?.reservationInfos
-                                  ?.email
-                              }
-                            </span>
-                            <span>
-                              {
-                                completedReservationData?.reservationInfos
-                                  ?.phone
-                              }
-                            </span>
+                            <span>{localPersonInfoData?.data?.email}</span>
+                            <span>{localPersonInfoData?.data?.phone}</span>
                           </div>
                         </div>
                         <div className={styles.reservationInfos}>
