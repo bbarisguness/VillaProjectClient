@@ -135,6 +135,16 @@ export default function Reservation({
   ));
 
   async function handleClick() {
+    // const countOfNight = Math.abs(
+    //   moment
+    //     .duration(
+    //       moment(dateRange[0], "YYYY-MM-DD").diff(
+    //         moment(dateRange[1], "YYYY-MM-DD")
+    //       )
+    //     )
+    //     .asDays()
+    // );
+
     if (dateRange[1] != null) {
       const isVillaAvailableResponse = await isVillaAvailable(
         villaSlug || roomSlug,
@@ -236,7 +246,7 @@ export default function Reservation({
                 onChange={(update) => {
                   setMinCalendarDate(
                     new Date(update[0]).setDate(
-                      new Date(update[0]).getDate() + 1
+                      new Date(update[0]).getDate() + 5
                     )
                   );
                   setDateRange(update);
