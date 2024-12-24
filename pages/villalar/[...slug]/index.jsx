@@ -85,6 +85,8 @@ export default function List({
   villaName,
   category,
 }) {
+  console.log(villaDetail);
+  
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();

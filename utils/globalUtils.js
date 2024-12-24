@@ -2,7 +2,7 @@ import { priceTypes } from "@/data/data";
 
 //villa detay ve otel detay sayfasında sağ yukarda Gecelik En Düşük fiyatın altına gelen fiyat aralıkları(minimum ve maximum)
 export function getPriceRange(priceTablesArray = [], currentPriceTypeText, priceType, i18n, currencies) {
-    
+
     const returnMinPrice = () => {
         let min = Math.min(...priceTablesArray?.map((o) => o.price));
 
@@ -135,4 +135,30 @@ export function calculatePriceType(language) {
 export function convertToTurkishLira(amount, cure) {
 
     return amount * cure
+}
+
+export function calculatePricetoTargetPriceType(price, priceType, currencies, lang) {
+    let returnPrice = price
+
+    //price'yi tl ye çevir
+    if (priceType != 1) {
+        returnPrice = convertToTurkishLira(
+            returnPrice,
+            currencies?.[
+            priceTypes?.find((item) => item?.type == priceType)
+                ?.key
+            ]
+        );
+    }
+
+    //tl ücreti ilgili kura çevir
+    if (lang != "tr") {
+        returnPrice =
+            returnPrice /
+            currencies?.[
+            priceTypes?.find((item) => item.lang == lang)?.key
+            ];
+    }
+
+    return returnPrice
 }

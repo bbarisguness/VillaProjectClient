@@ -66,7 +66,7 @@ export default function Reservation({
     if (i18n.language != "tr") {
       min =
         min /
-        currencies[priceTypes.find((item) => item.lang == i18n.language)?.key];
+        currencies?.[priceTypes.find((item) => item.lang == i18n.language)?.key];
     }
 
     return moneyFormat(min, false);
@@ -160,7 +160,7 @@ export default function Reservation({
           roomSlug,
           villaName,
           totalPrice: isVillaAvailableResponse?.data?.totalPrice,
-          priceType: isVillaAvailableResponse?.data?.priceType,
+          priceType,
           reservationItems: [],
           adult: numberOfAdults1,
           child: numberOfChild1,

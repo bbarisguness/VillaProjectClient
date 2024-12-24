@@ -13,8 +13,15 @@ import moment from "moment";
 import { priceTypes } from "@/data/data";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
-import { capitalizeWords } from "@/utils/globalUtils";
+import {
+  calculatePricetoTargetPriceType,
+  calculatePriceType,
+  capitalizeWords,
+  moneyFormat
+} from "@/utils/globalUtils";
 import { dateToDotFormat } from "@/utils/date";
+import nookies, { parseCookies } from "nookies";
+import { getCurrencies } from "@/services";
 
 export default function Reservation() {
   const { t, i18n } = useTranslation("common");
@@ -30,12 +37,10 @@ export default function Reservation() {
   const [isVilla, setIsVilla] = useState(false);
   const [isPageLoading, setLoading] = useState(true);
   const [reservationItems, setreservationItems] = useState([]);
+  const [currencies, setCurrencies] = useState(null);
 
   const [completedReservationData, setCompletedReservationData] = useState("");
-
-  const priceTypeText = priceTypes?.find(
-    (item) => item?.type == reservationItems?.priceType
-  )?.text;
+  const currentPriceTypeText = calculatePriceType(i18n.language);
   const [citys, setCitys] = useState(null);
   const [villa, setVilla] = useState([]);
   const turkishDays = [
@@ -61,10 +66,13 @@ export default function Reservation() {
     "Kasım",
     "Aralık",
   ];
-
   useEffect(() => {
+    const cookies = parseCookies();
+    setCurrencies(JSON.parse(cookies.currencies));
+
     setCitys(citiess.data);
     const localData = JSON.parse(localStorage.getItem("reservation")) || null;
+    console.log(localData);
 
     if (!localData) {
       router.push("/");
@@ -206,6 +214,15 @@ export default function Reservation() {
     }
     setIsDayReady(true);
   }
+
+  const Price = () => {
+    return calculatePricetoTargetPriceType(
+      reservationItems?.totalPrice,
+      reservationItems?.priceType,
+      currencies,
+      i18n.language
+    );
+  };
 
   if (reservationItems?.length > 0) {
     if (reservationItems[0].startDate) {
@@ -894,10 +911,8 @@ export default function Reservation() {
                             </span>
                             <span>
                               {t("price")}{" "}
-                              {reservationItems?.totalPrice
-                                .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                              {priceTypeText}
+                              {moneyFormat(Price())}
+                              {currentPriceTypeText}
                             </span>
                           </div>
                           <div className={styles.reservationInfos}>
@@ -1026,10 +1041,8 @@ export default function Reservation() {
                             {capitalizeWords(t("night"))}{" "}
                           </span>
                           <span>
-                            {[reservationItems?.totalPrice]
-                              .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                            {priceTypeText}
+                            {moneyFormat(Price())}
+                            {currentPriceTypeText}
                           </span>
                         </div>
                         {/* <div className={styles.priceBox}>
@@ -1041,32 +1054,23 @@ export default function Reservation() {
                         <div className={styles.priceBox}>
                           <span>{t("advancePayment")}</span>
                           <span>
-                            {((reservationItems?.totalPrice * 30) / 100)
-                              .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                            {priceTypeText}
+                            {moneyFormat(((Price() * 30) / 100))}
+                            {currentPriceTypeText}
                           </span>
                         </div>
                         <div className={styles.priceBox}>
                           <span>{t("paymentUponEntry")}</span>
                           <span>
-                            {(
-                              reservationItems?.totalPrice -
-                              (reservationItems?.totalPrice * 30) / 100
-                            )
-                              .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                            {priceTypeText}
+                            {moneyFormat((Price() - (Price() * 30) / 100))}
+                            {currentPriceTypeText}
                           </span>
                         </div>
                         <div className={styles.priceBox}>
                           <span>{t("total")}</span>
                           <span>
                             <strong>
-                              {[reservationItems?.totalPrice]
-                                .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                              {priceTypeText}
+                              {moneyFormat(Price())}
+                              {currentPriceTypeText}
                             </strong>
                           </span>
                         </div>
@@ -1083,6 +1087,29 @@ export default function Reservation() {
   );
 }
 
-export async function getStaticProps({ locale }) {
-  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
+export async function getStaticProps(context) {
+  // Get cookie
+  let currenciesResponse;
+  const cookies = nookies.get(context);
+
+  if (!cookies.currencies) {
+    const currenciesResponse = await getCurrencies();
+
+    if (currenciesResponse.statusCode == 200) {
+      // Set cookie
+      nookies.set(
+        context,
+        "currencies",
+        JSON.stringify(currenciesResponse.data),
+        {
+          maxAge: 1 * 24 * 60 * 60,
+          path: "/",
+        }
+      );
+    }
+  }
+
+  return {
+    props: { ...(await serverSideTranslations(context.locale, ["common"])) },
+  };
 }
