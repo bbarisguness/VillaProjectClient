@@ -235,7 +235,6 @@ export default function List({
                         t={t}
                         priceType={villaDetail?.data?.priceType}
                         priceTypeText={currentPriceTypeText}
-                        villaId={villaDetail?.data?.id}
                         villaSlug={villaSlug}
                         villaName={villaName}
                         prices={[{price: villaDetail?.data?.minPrice}, {price: villaDetail?.data?.maxPrice}]}
@@ -245,9 +244,9 @@ export default function List({
                             : null
                         }
                         region={
-                          villaDetail?.data?.town?.district?.name +
+                          villaDetail?.data?.district +
                           " / " +
-                          villaDetail?.data?.town?.name
+                          villaDetail?.data?.town
                         }
                       />
                       {/* <FoodPackage /> */}

@@ -19,8 +19,6 @@ const localeMap = {
 };
 
 export default function Reservation({
-  villaId,
-  roomId,
   villaSlug,
   roomSlug,
   prices,
@@ -139,17 +137,15 @@ export default function Reservation({
   async function handleClick() {
     if (dateRange[1] != null) {
       const isVillaAvailableResponse = await isVillaAvailable(
-        "test-villa",
+        villaSlug || roomSlug,
         moment(dateRange[0]).format("YYYY-MM-DD").toString(),
         moment(dateRange[1]).format("YYYY-MM-DD").toString()
       );
-      if (isVillaAvailableResponse?.data?.isAvailible == false) {
+      if (isVillaAvailableResponse?.data?.isAvailible) {
         //Villa müsait
         const villaReservationLocalData = {
           checkIn: moment(dateRange[0]).format("YYYY-MM-DD").toString(),
           checkOut: moment(dateRange[1]).format("YYYY-MM-DD").toString(),
-          villaId,
-          roomId,
           villaSlug,
           roomSlug,
           villaName,

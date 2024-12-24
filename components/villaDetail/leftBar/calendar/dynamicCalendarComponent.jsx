@@ -40,20 +40,16 @@ const DynamicCalendarComponent = ({
 
   const getReservationCalendarApiName = () => {
     if (villaSlug) {
-      console.log("villaSlug ", villaSlug);
       return "GetReservationCalendarByVillaSlug";
     } else if (roomSlug) {
-      console.log("roomSlug ", roomSlug);
       return "GetReservationCalendarByRoomSlug";
     }
   };
 
   const getReservationPriceApiName = () => {
     if (villaSlug) {
-      console.log("villaSlug ", villaSlug);
       return "GetAllPriceDateByVillaSlug";
     } else if (roomSlug) {
-      console.log("roomSlug ", roomSlug);
       return "GetAllPriceDateByRoomSlug";
     }
   };

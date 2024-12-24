@@ -30,7 +30,9 @@ export default function Reservation() {
   const [isVilla, setIsVilla] = useState(false);
   const [isPageLoading, setLoading] = useState(true);
   const [reservationItems, setreservationItems] = useState([]);
+
   const [completedReservationData, setCompletedReservationData] = useState("");
+
   const priceTypeText = priceTypes?.find(
     (item) => item?.type == reservationItems?.priceType
   )?.text;
@@ -69,14 +71,14 @@ export default function Reservation() {
     } else {
       setLoading(false);
     }
-
     setreservationItems(localData);
-    setIsVilla(localData?.villaId ? true : false);
+    setIsVilla(localData?.villaSlug ? true : false);
 
-    return () => {
-      localStorage.removeItem("reservation");
-      localStorage.removeItem("personInfo");
-    };
+    //#region Burası test için yorum yapıldı aktif edilecek
+    // return () => {
+    //   localStorage.removeItem("reservation");
+    //   localStorage.removeItem("personInfo");
+    // };
   }, []);
 
   useEffect(() => {
@@ -101,7 +103,6 @@ export default function Reservation() {
 
   useEffect(() => {
     if (reservationItems) {
-      //console.log(reservationItems)
       //console.log(`Veriler local storageye eklendikten sonra geçen süre : ${Math.floor(new Date().getTime() / 1000) - reservationItems[0].expiryDate} saniye`
       //1 saat sonra local storagedeki veriler otomatik olarak silinir ve anasayfaya yönlendirilir
       if (
@@ -255,21 +256,19 @@ export default function Reservation() {
 
     if (transferType == 1) {
       const availableResponse = await isVillaAvailable(
-        reservationData?.villaId ? 0 : 1,
-        values?.villaId ? values?.villaId : values?.roomId,
+        reservationData?.villaSlug || reservationData?.roomSlug,
         values.checkIn,
         values.checkOut
       );
 
-      if (availableResponse?.data?.isAvailible == false) {
+      if (availableResponse?.data?.isAvailible) {
         const createResponse = await createReservation(
-          reservationData?.villaId ? 0 : 1,
+          reservationData?.villaSlug ? 0 : 1,
           reservationData,
           personData?.data,
           values.villaName
         );
         if (createResponse?.statusCode == 200) {
-          //console.log(createResponse?.data);
           setActiveStep(2);
           setCompletedReservationData(createResponse?.data);
         } else {
@@ -279,13 +278,6 @@ export default function Reservation() {
         alert(t("facilityNotAvailableMessage"));
         router.back();
       }
-    } else {
-      // kredi kartı ile ödeme doğrula ve ardından rezervasyonu oluştur
-      // if(!paymetStatus)
-      // {
-      //     // kredi kartı ödeme hatası hiç bir yere gitme
-      // }
-      console.log(values);
     }
 
     //setActiveStep(2)
@@ -811,7 +803,9 @@ export default function Reservation() {
                               </div>
                             </li>
                           </ul>
-                          <div className={`${styles["linkBox"]} ${styles["BottomButton"]}`}>
+                          <div
+                            className={`${styles["linkBox"]} ${styles["BottomButton"]}`}
+                          >
                             <Link
                               onClick={(e) => {
                                 e.preventDefault();
@@ -857,7 +851,7 @@ export default function Reservation() {
                           backgroundPosition: "center",
                           borderRadius: 20,
                           backgroundImage: reservationItems?.villaFirstPhoto
-                            ? reservationItems?.villaId
+                            ? isVilla
                               ? `url(${
                                   process.env.NEXT_PUBLIC_APIPHOTOS_URL +
                                   "k_" +
@@ -962,7 +956,7 @@ export default function Reservation() {
                         className={styles.img}
                         style={{
                           backgroundImage: reservationItems?.villaFirstPhoto
-                            ? reservationItems?.villaId
+                            ? isVilla
                               ? `url(${
                                   process.env.NEXT_PUBLIC_APIPHOTOS_URL +
                                   "k_" +

@@ -30,10 +30,8 @@ const DynamicDistanceRulerComponent = ({ t, villaSlug, roomSlug }) => {
 
   const apiName = () => {
     if (roomSlug) {
-      console.log("roomSlug ", roomSlug);
       return "GetAllDistanceRulerByHotelSlug";
     } else if (villaSlug) {
-      console.log("villaSlug ", villaSlug);
       return "GetAllDistanceRulerByVillaSlug";
     }
   };

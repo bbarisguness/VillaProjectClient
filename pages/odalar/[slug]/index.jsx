@@ -130,7 +130,6 @@ export default function List({
                         t={t}
                         priceType={roomDetail?.data?.priceType}
                         priceTypeText={currentPriceTypeText}
-                        roomId={roomDetail?.data?.id}
                         roomSlug={roomSlug}
                         villaName={villaName}
                         prices={[{price: roomDetail?.data?.minPrice}, {price: roomDetail?.data?.maxPrice}]}

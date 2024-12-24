@@ -37,10 +37,8 @@ const DynamicPriceTableComponent = ({
 
   const apiName = () => {
     if (roomSlug) {
-      console.log("roomSlug ", roomSlug);
       return "GetAllPriceTableByRoomSlug";
     } else if (villaSlug) {
-      console.log("villaSlug ", villaSlug);
       return "GetAllPriceTableByVillaSlug";
     }
   };

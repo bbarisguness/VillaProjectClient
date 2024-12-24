@@ -22,8 +22,7 @@ async function createReservation(type = 0,
   // ReservationCreate.Begin
 
   const reservation = {
-    CompanyId: companyId,
-    [type == 0 ? 'VillaId' : 'RoomId']: type == 0 ? reservationData?.villaId : reservationData?.roomId,
+    Slug: reservationData?.villaSlug || reservationData?.roomSlug,
     CheckIn: reservationData.checkIn,
     CheckOut: reservationData.checkOut,
     IdNo: personData.idNo,
@@ -44,21 +43,11 @@ async function createReservation(type = 0,
     body: formData,
   });
 
-  // const response = await fetch(`${apiUrl}/Clients/ReservationCreate`, {
-  //   method: "POST",
-  //   body: JSON.stringify({
-  //     ...reservation
-  //   }),
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // });
-
   if (!response.ok) {
     return response.json()
   }
 
-  const mailResult = await SendMail('template_n90pb1d', { villaName: villaName, nameAndSurname: personData.name + ' ' + personData.surname, email: personData.email, phone: personData.phone, startDate: dateToDotFormat(reservationData.checkIn), endDate: dateToDotFormat(reservationData.checkOut), to_email: "bbarisguness@gmail.com" })
+  //const mailResult = await SendMail('template_n90pb1d', { villaName: villaName, nameAndSurname: personData.name + ' ' + personData.surname, email: personData.email, phone: personData.phone, startDate: dateToDotFormat(reservationData.checkIn), endDate: dateToDotFormat(reservationData.checkOut), to_email: "bbarisguness@gmail.com" })
   // ReservationCreate.End
 
   return response.json();
