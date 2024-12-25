@@ -193,14 +193,14 @@ export default function List({
               </div>
             </div>
           )}
-          <div className={styles.customerCommentsBox}>
+          {/* <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>
-                {/* <Comments /> */}
+                <Comments />
                 <CommentForm t={t} />
               </div>
             </div>
-          </div>
+          </div> */}
           {/* {nearVillas?.data?.length > 0 && (
             <div className={styles.apartments}>
               <div className={styles.container}>
