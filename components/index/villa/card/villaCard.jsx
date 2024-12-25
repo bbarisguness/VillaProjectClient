@@ -7,10 +7,12 @@ import { priceTypes } from "@/data/data";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import {
+  calculatePricetoTargetPriceType,
   calculatePriceType,
   convertToTurkishLira,
   moneyFormat,
 } from "@/utils/globalUtils";
+import { getPricesBySelectedDate } from "@/services/reservation";
 
 export default function VillaCard({
   data,
@@ -23,6 +25,9 @@ export default function VillaCard({
   categories,
   nightLength,
   activeTabIndex,
+  priceType,
+  checkIn,
+  checkOut,
 }) {
   const router = useRouter();
   const { t, i18n } = useTranslation("common");
@@ -33,6 +38,17 @@ export default function VillaCard({
   const [activeImage, setActiveImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [currencies, setCurrencies] = useState(null);
+  const [price, setPrice] = useState(0);
+
+  useEffect(() => {
+    const getPriceByDate = async () => {
+      const price = await getPricesBySelectedDate(data.slug, checkIn, checkOut);
+      setPrice(data.price);
+    };
+    if (nightLength != undefined) {
+      getPriceByDate();
+    }
+  });
 
   useEffect(() => {
     const cookies = parseCookies();
@@ -73,6 +89,17 @@ export default function VillaCard({
         setActiveImage(activeImage - 1);
       }
     }
+  };
+
+  const getPrice = () => {
+    return moneyFormat(
+      calculatePricetoTargetPriceType(
+        price,
+        priceType,
+        currencies,
+        i18n.language
+      )
+    );
   };
 
   const returnMinPrice = () => {
@@ -117,7 +144,9 @@ export default function VillaCard({
     if (i18n.language != "tr") {
       max =
         max /
-        currencies?.[priceTypes.find((item) => item.lang == i18n.language)?.key];
+        currencies?.[
+          priceTypes.find((item) => item.lang == i18n.language)?.key
+        ];
     }
 
     return moneyFormat(max, false);
@@ -475,20 +504,17 @@ export default function VillaCard({
                   <></>
                 )}
                 <div className={styles.priceTitle}>
-                  {data?.price != "-" && data?.price
+                  {nightLength != undefined
                     ? nightLength
                       ? `${t("totalCount")} (${nightLength}) ${t("night")}`
                       : t("totalCount")
                     : t("dailyPriceRange")}
                 </div>
 
-                {data?.price && data?.price !== "-" ? (
+                {nightLength != undefined ? (
                   <div className={styles.price}>
                     {currentPriceTypeText}
-                    {parseFloat(data?.price)
-                      .toFixed(0)
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    {getPrice()}
                   </div>
                 ) : data?.priceTables?.length > 0 ? (
                   <div className={styles.price}>

@@ -13,6 +13,14 @@ async function isVillaAvailable(slug, checkInDate, checkOutDate) {
   return data
 }
 
+async function getPricesBySelectedDate(slug, checkInDate, checkOutDate) {
+  const response = await fetch(`${apiUrl}/Clients/ReservationGetPrice?CheckIn=${checkInDate}&CheckOut=${checkOutDate}&Slug=${slug}`, {
+    cache: "no-store",
+  });
+  const data = await response.json();
+  return data
+}
+
 //type 0 ise villa, 1 ise apart
 async function createReservation(type = 0,
   reservationData,
@@ -61,4 +69,4 @@ async function searchReservation({ reservationNumber }) {
   return data
 }
 
-export { createReservation, searchReservation, isVillaAvailable };
+export { createReservation, searchReservation, isVillaAvailable, getPricesBySelectedDate };

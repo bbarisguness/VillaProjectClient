@@ -7,13 +7,19 @@ import moment from "moment";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 
-export default function Searchs({ getFilterVillas, totalPage }) {
+export default function Searchs({
+  getFilterVillas,
+  totalPage,
+  checkIn,
+  checkOut,
+}) {
   const { t } = useTranslation("common");
   const router = useRouter();
   const activePage = parseInt(router?.query?.p) || 1;
   const startDate = moment(router?.query?.from, "DD-MM-YYYY");
   const endDate = moment(router?.query?.to, "DD-MM-YYYY");
-  const nightLength = moment.duration(endDate.diff(startDate)).asDays();
+  const nightLength =
+    moment.duration(endDate.diff(startDate)).asDays() || undefined;
 
   return (
     <>
@@ -38,9 +44,12 @@ export default function Searchs({ getFilterVillas, totalPage }) {
               <div className="bottom">
                 <div className="row">
                   <ul>
-                    {getFilterVillas?.data.map((villa, index) => (
+                    {getFilterVillas?.data?.map((villa, index) => (
                       <VillaCard
-                        nightLength={nightLength || null}
+                        nightLength={nightLength}
+                        priceType={villa?.priceType}
+                        checkIn={checkIn}
+                        checkOut={checkOut}
                         from={"search"}
                         key={index}
                         data={villa}
@@ -68,12 +77,8 @@ export async function getServerSideProps({ query, locale }) {
   const sliceCheckInDate = checkIn.split("-");
   const sliceCheckOutDate = checkOut.split("-");
 
-  const checkInFormat = `${sliceCheckInDate[2]}-${
-    sliceCheckInDate[1] <= 9 ? "0" : ""
-  }${sliceCheckInDate[1]}-${sliceCheckInDate[0]}`;
-  const checkOutFormat = `${sliceCheckOutDate[2]}-${
-    sliceCheckOutDate[1] <= 9 ? "0" : ""
-  }${sliceCheckOutDate[1]}-${sliceCheckOutDate[0]}`;
+  const checkInFormat = `${sliceCheckInDate[2]}-${sliceCheckInDate[1]}-${sliceCheckInDate[0]}`;
+  const checkOutFormat = `${sliceCheckOutDate[2]}-${sliceCheckOutDate[1]}-${sliceCheckOutDate[0]}`;
 
   const getFilterVillas = await getVillasByFilter({
     checkIn: checkIn != "" ? checkInFormat : "",
@@ -92,6 +97,8 @@ export async function getServerSideProps({ query, locale }) {
       name,
       person,
       totalPage,
+      checkIn: checkInFormat,
+      checkOut: checkOutFormat,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };
