@@ -11,7 +11,7 @@ import { priceTypes } from "@/data/data";
 
 import { tr, enUS } from "date-fns/locale";
 import { convertToTurkishLira, moneyFormat } from "@/utils/globalUtils";
-import { parseCookies } from "nookies";
+import { parseCookies, destroyCookie } from "nookies";
 
 const localeMap = {
   tr,
@@ -77,6 +77,15 @@ export default function Reservation({
   useEffect(() => {
     const cookies = parseCookies();
     setCurrencies(JSON.parse(cookies.currencies));
+    if (cookies.selectedDates) {
+      setDateRange([
+        new Date(JSON.parse(cookies.selectedDates).checkIn),
+        new Date(JSON.parse(cookies.selectedDates).checkOut),
+      ]);
+      destroyCookie(null, "selectedDates", {
+        path: "/",
+      });
+    }
   }, []);
 
   useEffect(() => {

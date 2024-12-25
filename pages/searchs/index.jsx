@@ -77,8 +77,16 @@ export async function getServerSideProps({ query, locale }) {
   const sliceCheckInDate = checkIn.split("-");
   const sliceCheckOutDate = checkOut.split("-");
 
-  const checkInFormat = `${sliceCheckInDate[2]}-${sliceCheckInDate[1]}-${sliceCheckInDate[0]}`;
-  const checkOutFormat = `${sliceCheckOutDate[2]}-${sliceCheckOutDate[1]}-${sliceCheckOutDate[0]}`;
+  const checkInFormat = `${sliceCheckInDate[2]}-${
+    parseInt(sliceCheckInDate[1]) >= 10
+      ? sliceCheckInDate[1]
+      : 0 + sliceCheckInDate[1]
+  }-${sliceCheckInDate[0]}`;
+  const checkOutFormat = `${sliceCheckOutDate[2]}-${
+    parseInt(sliceCheckOutDate[1]) >= 10
+      ? sliceCheckOutDate[1]
+      : 0 + sliceCheckOutDate[1]
+  }-${sliceCheckOutDate[0]}`;
 
   const getFilterVillas = await getVillasByFilter({
     checkIn: checkIn != "" ? checkInFormat : "",

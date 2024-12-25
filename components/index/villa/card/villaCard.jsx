@@ -1,4 +1,4 @@
-import { parseCookies } from "nookies";
+import { parseCookies, setCookie } from "nookies";
 import styles from "./villaCard.module.css";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -43,7 +43,7 @@ export default function VillaCard({
   useEffect(() => {
     const getPriceByDate = async () => {
       const price = await getPricesBySelectedDate(data.slug, checkIn, checkOut);
-      setPrice(data.price);
+      setPrice(price.data.price);
     };
     if (nightLength != undefined) {
       getPriceByDate();
@@ -150,6 +150,13 @@ export default function VillaCard({
     }
 
     return moneyFormat(max, false);
+  };
+
+  const setCookieData = () => {
+    setCookie(null, "selectedDates", JSON.stringify({ checkIn, checkOut }), {
+      maxAge: 1 * 24 * 60 * 60,
+      path: "/",
+    });
   };
 
   if (from == "newest" && !listPage) {
@@ -452,7 +459,11 @@ export default function VillaCard({
       return (
         <li id={styles.cardContainer}>
           <div className={styles.column}>
-            <Link href={`/villalar/${data?.slug || "yok"}`} rel="nofollow">
+            <Link
+              onClick={setCookieData}
+              href={`/villalar/${data?.slug || "yok"}`}
+              rel="nofollow"
+            >
               <div className={styles.imgBox}>
                 <div className={styles.carouselBox}>
                   {photos?.map((photo, index) => (
