@@ -17,7 +17,7 @@ import {
   calculatePricetoTargetPriceType,
   calculatePriceType,
   capitalizeWords,
-  moneyFormat
+  moneyFormat,
 } from "@/utils/globalUtils";
 import { dateToDotFormat } from "@/utils/date";
 import nookies, { parseCookies } from "nookies";
@@ -848,7 +848,7 @@ export default function Reservation() {
                     </div>
                     <div className={styles.textBox}>
                       <div className={styles.title}>
-                        {t("thanks")}. {t("createdReservationMessage")}.
+                        {t("createdReservationMessage")}
                       </div>
                       <div className={styles.desc}>
                         {t("createdReservationDesc", {
@@ -856,7 +856,6 @@ export default function Reservation() {
                           entryDate: dateToDotFormat(reservationItems?.checkIn),
                           exitDate: dateToDotFormat(reservationItems?.checkOut),
                         })}
-                        .
                       </div>
                     </div>
                     <div className={styles.controls}>
@@ -882,17 +881,37 @@ export default function Reservation() {
                         }}
                       ></div>
                       <div className={styles.reservationInfosContainer}>
-                        <div className={styles.area1}>
-                          <div className={styles.reservationInfos}>
+                        <div className={styles.reservationInfos}>
+                          <div
+                            className={styles.resevationTitleAndNumberContainer}
+                          >
                             <span className={styles.title}>
-                              {t("reservationInfos")}
+                              {t("reservationNumber")}
                             </span>
-                            <span>
-                              {t("entrance")} {reservationItems?.checkIn}
+                            <span className={styles.twoDots}> : </span>
+                            <span className={styles.title}>
+                              {completedReservationData?.reservationNumber}
                             </span>
-                            <span>
-                              {t("exit")} {reservationItems?.checkOut}
-                            </span>
+                          </div>
+                        </div>
+
+                        <div className={styles.reservationInfos}>
+                          <span className={styles.title}>
+                            {t("reservationInfos")}
+                          </span>
+                          <div>
+                            <span>{t("entranceDate")}</span>
+                            <span> : </span>
+                            <span>{reservationItems?.checkIn}</span>
+                          </div>
+                          <div>
+                            <span>{t("exitDate")}</span>
+                            <span> : </span>
+                            <span>{reservationItems?.checkOut}</span>
+                          </div>
+                          <div>
+                            <span>{t("nightLength")}</span>
+                            <span> : </span>
                             <span>
                               {moment
                                 .duration(
@@ -906,43 +925,57 @@ export default function Reservation() {
                                     )
                                   )
                                 )
-                                .asDays()}{" "}
-                              {capitalizeWords(t("night"))}
+                                .asDays()}
+                              {" " + capitalizeWords(t("night"))}
                             </span>
+                          </div>
+                          <div>
+                            <span>{t("totalCount")}</span>
+                            <span> : </span>
                             <span>
-                              {t("price")}{" "}
                               {moneyFormat(Price())}
                               {currentPriceTypeText}
                             </span>
                           </div>
-                          <div className={styles.reservationInfos}>
-                            <span className={styles.title}>
-                              {t("customerInformation")}
+                        </div>
+                        <div className={styles.reservationInfos}>
+                          <span className={styles.title}>
+                            {t("customerInformation")}
+                          </span>
+                          <div>
+                            <span>
+                              {t("name")} {t("surname")}
                             </span>
+                            <span> : </span>
                             <span>
                               {localPersonInfoData?.data?.name}{" "}
                               {localPersonInfoData?.data?.surname}
                             </span>
-                            <span>{localPersonInfoData?.data?.email}</span>
+                          </div>
+                          <div>
+                            <span>{t("phone")}</span>
+                            <span> : </span>
                             <span>{localPersonInfoData?.data?.phone}</span>
                           </div>
                         </div>
-                        <div className={styles.reservationInfos}>
-                          <span className={styles.title}>
-                            {t("yourReservationNumber")}
-                          </span>
-                          <span className={styles.title}>
-                            {completedReservationData?.reservationNumber}
-                          </span>
-                          <Link
-                            style={{ textDecoration: "underline" }}
-                            href={`/${isVilla ? "villalar" : "odalar"}/${
-                              reservationItems?.villaSlug ||
-                              reservationItems?.roomSlug
-                            }`}
+
+                        <div
+                          className={`${styles["linkBox"]}`}
+                          style={{ justifyContent: "center", marginTop: 25 }}
+                        >
+                          <button
+                            onClick={() =>
+                              router.push(
+                                `/${isVilla ? "villalar" : "odalar"}/${
+                                  reservationItems?.villaSlug ||
+                                  reservationItems?.roomSlug
+                                }`
+                              )
+                            }
+                            className={styles.blueButtonArrow}
                           >
-                            {t("goToFacilityDetails")}
-                          </Link>
+                            <span>{t("facilityDetails")}</span>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -1054,14 +1087,14 @@ export default function Reservation() {
                         <div className={styles.priceBox}>
                           <span>{t("advancePayment")}</span>
                           <span>
-                            {moneyFormat(((Price() * 30) / 100))}
+                            {moneyFormat((Price() * 30) / 100)}
                             {currentPriceTypeText}
                           </span>
                         </div>
                         <div className={styles.priceBox}>
                           <span>{t("paymentUponEntry")}</span>
                           <span>
-                            {moneyFormat((Price() - (Price() * 30) / 100))}
+                            {moneyFormat(Price() - (Price() * 30) / 100)}
                             {currentPriceTypeText}
                           </span>
                         </div>
