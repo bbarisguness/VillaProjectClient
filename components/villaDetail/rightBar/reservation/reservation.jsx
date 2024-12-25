@@ -66,7 +66,9 @@ export default function Reservation({
     if (i18n.language != "tr") {
       min =
         min /
-        currencies?.[priceTypes.find((item) => item.lang == i18n.language)?.key];
+        currencies?.[
+          priceTypes.find((item) => item.lang == i18n.language)?.key
+        ];
     }
 
     return moneyFormat(min, false);
@@ -237,6 +239,7 @@ export default function Reservation({
             <i className={styles.loginDateIcon}></i>
             <div className="date-picker-reservation">
               <DatePicker
+                fixedHeight
                 ref={datepickerRef}
                 selectsRange={true}
                 startDate={startDate}
