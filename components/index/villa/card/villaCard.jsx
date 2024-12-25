@@ -705,7 +705,7 @@ export default function VillaCard({
                   <></>
                 )}
                 <div className={styles.shortDesc}>
-                  <p style={{ color: "#02044A" }}>Açıklama</p>
+                  <p style={{ color: "#02044A" }}>{t("description")}</p>
                   <p style={{ color: "#525265" }}>{data?.descriptionShort}</p>
                 </div>
                 <div className={styles.features}>
