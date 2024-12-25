@@ -24,7 +24,7 @@ export default function SalesList({ villasForSale, totalPage }) {
                 <div className="titleBox">
                   <div className="title">{t("villasForSale")}</div>
                   <div className="subTitle">
-                    {t("thereAreFacilities", { facilityCount: totalPage })}
+                    {t("thereAreFacilities", { facilityCount: villasForSale?.pageInfo?.totalRow })}
                   </div>
                 </div>
               </div>
@@ -44,7 +44,7 @@ export default function SalesList({ villasForSale, totalPage }) {
               </div>
               <Pagination
                 newActivePage={activePage}
-                pageCount={Math.ceil(villasForSale?.totalCount / 20) || 1}
+                pageCount={villasForSale?.pageInfo?.totalPage}
               />
             </div>
           </div>
