@@ -29,7 +29,7 @@ export default function Blog({ blogs }) {
                 <div className={styles.row}>
                   <ul>
                     {blogs?.data.map((item) => (
-                      <BlogCard key={item.id} item={item} />
+                      <BlogCard key={item.slug} item={item} />
                     ))}
                   </ul>
                 </div>

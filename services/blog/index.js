@@ -1,7 +1,7 @@
 const apiUrl = "https://labirentapp.testgrande.com/api"
 
 async function getBlogs(Language = 'tr') {
-    const response = await fetch(`${apiUrl}/Clients/GetAllWebPage?Language=${Language}&Slug=blogs`, {
+    const response = await fetch(`${apiUrl}/Clients/GetAllWebPage?Language=${Language}&Slug=bloglar`, {
         cache: 'no-store'
     })
     const data = await response.json()
