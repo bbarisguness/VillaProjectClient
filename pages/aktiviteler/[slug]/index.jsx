@@ -29,6 +29,8 @@ import { memo } from "react";
 // });
 
 export default function Aktivite({ activate }) {
+  console.log(activate);
+  
   const { t } = useTranslation("common");
   const router = useRouter();
   const renderHtmlContent = () => {
@@ -62,7 +64,7 @@ export default function Aktivite({ activate }) {
           <div className={styles.titleBox}>
             <div className={styles.container}>
               <h1 className={styles.title}>
-                {activate?.data?.webPageDetails[0]?.title}
+                {activate?.data?.webPageDetails?.[0]?.title}
               </h1>
             </div>
           </div>
