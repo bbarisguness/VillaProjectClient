@@ -31,7 +31,7 @@ const DynamicCommentsComponent = ({ t, villaSlug }) => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://labirentapp.testgrande.com/api/Clients/GetAllCommentByVillaSlug?Slug=${villaSlug}`
+        `${process.env.NEXT_PUBLIC_API_URL}/Clients/GetAllCommentByVillaSlug?Slug=${villaSlug}`
       );
       const result = await response.json();
       setData(result);
@@ -43,7 +43,13 @@ const DynamicCommentsComponent = ({ t, villaSlug }) => {
   };
 
   return (
-    <div ref={ref} style={{ minHeight: "200px", display: data?.data?.length == 0 ? "none" : "block" }}>
+    <div
+      ref={ref}
+      style={{
+        minHeight: "200px",
+        display: data?.data?.length == 0 ? "none" : "block",
+      }}
+    >
       {isLoading ? (
         <CommentsSkeleton />
       ) : (

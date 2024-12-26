@@ -1,4 +1,4 @@
-const apiUrl = "https://labirentapp.testgrande.com/api"
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 async function getBlogs(Language = 'tr') {
     const response = await fetch(`${apiUrl}/Clients/GetAllWebPage?Language=${Language}&Slug=bloglar`, {

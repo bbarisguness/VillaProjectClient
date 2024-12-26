@@ -1,4 +1,4 @@
-const apiUrl = "https://labirentapp.testgrande.com/api"
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 async function getRegions(language = 'tr') {
     const response = await fetch(`${apiUrl}/Clients/GetAllWebPage?Language=${language}&Slug=bolgeler`, {

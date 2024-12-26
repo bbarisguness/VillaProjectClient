@@ -1,4 +1,4 @@
-const apiUrl = "https://labirentapp.testgrande.com/api"
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 async function getVillas(page = 1) {
     const response = await fetch(`${apiUrl}/Clients/GetAllVilla?Language=tr&Pagination.Size=20&Pagination.Page=${page}`, {

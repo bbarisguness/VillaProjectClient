@@ -58,12 +58,12 @@ const DynamicCalendarComponent = ({
     try {
       const [reservationResponse, pricesResponse] = await Promise.all([
         fetch(
-          `https://labirentapp.testgrande.com/api/Clients/${getReservationCalendarApiName()}?Slug=${
+          `${process.env.NEXT_PUBLIC_API_URL}/Clients/${getReservationCalendarApiName()}?Slug=${
             villaSlug || roomSlug
           }&Language=${selectedLanguage}`
         ),
         fetch(
-          `https://labirentapp.testgrande.com/api/Clients/${getReservationPriceApiName()}?Slug=${
+          `${process.env.NEXT_PUBLIC_API_URL}/Clients/${getReservationPriceApiName()}?Slug=${
             villaSlug || roomSlug
           }`
         ),

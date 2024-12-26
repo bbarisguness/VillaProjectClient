@@ -85,8 +85,6 @@ export default function List({
   villaName,
   category,
 }) {
-  console.log(villaDetail);
-  
   const { t, i18n } = useTranslation("common");
   const currentPriceTypeText = calculatePriceType(i18n.language);
   const router = useRouter();
@@ -239,7 +237,10 @@ export default function List({
                         priceTypeText={currentPriceTypeText}
                         villaSlug={villaSlug}
                         villaName={villaName}
-                        prices={[{price: villaDetail?.data?.minPrice}, {price: villaDetail?.data?.maxPrice}]}
+                        prices={[
+                          { price: villaDetail?.data?.minPrice },
+                          { price: villaDetail?.data?.maxPrice },
+                        ]}
                         villaFirstPhoto={
                           villaDetail?.data?.photos
                             ? villaDetail?.data?.photos[0]?.image
@@ -258,11 +259,12 @@ export default function List({
               </div>
             </div>
           </div>
-          {villaDetail?.data[0]?.attributes?.video && (<div className={styles.dualBoxes}>
-            <div className={styles.container}>
-              <div className={styles.row}>
-                <ul>
-                  {/* <li>
+          {villaDetail?.data[0]?.attributes?.video && (
+            <div className={styles.dualBoxes}>
+              <div className={styles.container}>
+                <div className={styles.row}>
+                  <ul>
+                    {/* <li>
                                         <div className={styles.title}>Konum</div>
                                         <div className={styles.box} style={{ backgroundImage: `url(http://3.127.136.179:1337${villa?.attributes?.locationImage?.data?.attributes?.formats?.medium?.url})`, backgroundPosition: "center", backgroundSize: "100% 100%" }}>
                                             <div className={styles.linkBox} style={{ position: "relative", width: "50px", height: "50px", left: "15px", top: "15px" }}>
@@ -272,32 +274,33 @@ export default function List({
                                             </div>
                                         </div>
                                     </li> */}
-                  {villaDetail?.data[0]?.attributes?.video && (
-                    <li className={styles.popupImage}>
-                      <div className={styles.title}>Tanıtım Videosu</div>
-                      <div className={styles.box}>
-                        <LightGallery
-                          plugins={[lgZoom, lgVideo]}
-                          elementClassNames={styles.videoContainer}
-                        >
-                          <a data-src="https://www.youtube.com/embed/cFYXWYyYcB0">
-                            <div className={styles.imageBox}>
-                              <div
-                                className={styles.img}
-                                style={{
-                                  backgroundImage: `url(${imgs?.data[0]?.attributes?.photo?.data?.attributes?.url})`,
-                                }}
-                              ></div>
-                            </div>
-                          </a>
-                        </LightGallery>
-                      </div>
-                    </li>
-                  )}
-                </ul>
+                    {villaDetail?.data[0]?.attributes?.video && (
+                      <li className={styles.popupImage}>
+                        <div className={styles.title}>Tanıtım Videosu</div>
+                        <div className={styles.box}>
+                          <LightGallery
+                            plugins={[lgZoom, lgVideo]}
+                            elementClassNames={styles.videoContainer}
+                          >
+                            <a data-src="https://www.youtube.com/embed/cFYXWYyYcB0">
+                              <div className={styles.imageBox}>
+                                <div
+                                  className={styles.img}
+                                  style={{
+                                    backgroundImage: `url(${imgs?.data[0]?.attributes?.photo?.data?.attributes?.url})`,
+                                  }}
+                                ></div>
+                              </div>
+                            </a>
+                          </LightGallery>
+                        </div>
+                      </li>
+                    )}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>)}
+          )}
           <div className={styles.customerCommentsBox}>
             <div className={styles.container}>
               <div className={styles.customerComments}>

@@ -1,7 +1,7 @@
 //import { SendMail } from "@/utils/sendMail";
 //import { dateToDotFormat } from "@/utils/date";
 
-const apiUrl = "https://labirentapp.testgrande.com/api"
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 //sonuc false dönerse villa müsait demek oluyor, true dönerse müsait değil
 //type 0 ise villa, 1 ise apart

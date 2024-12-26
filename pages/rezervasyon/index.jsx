@@ -72,7 +72,6 @@ export default function Reservation() {
 
     setCitys(citiess.data);
     const localData = JSON.parse(localStorage.getItem("reservation")) || null;
-    console.log(localData);
 
     if (!localData) {
       router.push("/");

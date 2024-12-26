@@ -46,7 +46,7 @@ const DynamicPriceTableComponent = ({
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://labirentapp.testgrande.com/api/Clients/${apiName()}?Slug=${
+        `${process.env.NEXT_PUBLIC_API_URL}/Clients/${apiName()}?Slug=${
           villaSlug || roomSlug
         }&Language=tr`
       );

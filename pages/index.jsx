@@ -39,8 +39,6 @@ export default function Home({
   aparts,
   activates,
 }) {
-  console.log(villa);
-  
   return (
     <>
       <Seo
@@ -89,7 +87,6 @@ export async function getServerSideProps(context) {
 
   // API çağrılarını paralel olarak başlat
   const categories = await getCategories(context.locale);
-  
 
   const [villa, aparts, activates, blogs] = await Promise.all([
     getVillasHome(8, 0, categories?.data[0]?.slug, context.locale),
