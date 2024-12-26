@@ -153,10 +153,12 @@ export default function VillaCard({
   };
 
   const setCookieData = () => {
-    setCookie(null, "selectedDates", JSON.stringify({ checkIn, checkOut }), {
-      maxAge: 1 * 24 * 60 * 60,
-      path: "/",
-    });
+    if (checkIn != null && checkOut != null) {
+      setCookie(null, "selectedDates", JSON.stringify({ checkIn, checkOut }), {
+        maxAge: 1 * 24 * 60 * 60,
+        path: "/",
+      });
+    }
   };
 
   if (from == "newest" && !listPage) {

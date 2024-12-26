@@ -105,8 +105,8 @@ export async function getServerSideProps({ query, locale }) {
       name,
       person,
       totalPage,
-      checkIn: checkInFormat,
-      checkOut: checkOutFormat,
+      checkIn: checkIn != "" ? checkInFormat : null,
+      checkOut: checkOut != "" ? checkOutFormat : null,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };
